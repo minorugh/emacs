@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Port of the Read the Docs theme to Jekyll to use with GitHub Pages.">
+  <meta name="author" content="Carlos Pereira Atencio">
+  
+
+  <link rel="shortcut icon" href="http://localhost:4000/assets/img/favicon.ico">
+
+  <title>Local Development Index Page - Read The Docs Jekyll Theme</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/theme.css" />
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github-gist.min.css" />
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+            <a href="http://localhost:4000" class="icon icon-home"> Read The Docs Jekyll Theme</a>
+          <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="/search.html" method="get">
+    <input type="text" name="q" id="search-query" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <ul>
+  <li class="toctree-l1 current"><a href="#gnu-emacs-configuration">GNU Emacs configuration</a>
+    <ul>
+      <li class="toctree-l2"><a href="#1-はじめに">1. はじめに</a></li>
+      <li class="toctree-l2"><a href="#2-起動設定">2. 起動設定</a>
+        <ul>
+          <li class="toctree-l3"><a href="#21-early-init-el">2.1 early-init-el</a></li>
+          <li class="toctree-l3"><a href="#22-initel">2.2 init.el</a></li>
+          <li class="toctree-l3"><a href="#23-mini-initel">2.3 mini-init.el</a></li>
+          <li class="toctree-l3"><a href="#24-dashboard-バッファーを再生させる">2.4 Dashboard バッファーを再生させる</a></li>
+        </ul>
+      </li>
+      <li class="toctree-l2"><a href="#3-コア設定">3. コア設定</a>
+        <ul>
+          <li class="toctree-l3"><a href="#31-言語--文字コード">3.1 言語 / 文字コード</a></li>
+          <li class="toctree-l3"><a href="#32-日本語入力">3.2 日本語入力</a>
+            <ul>
+              <li class="toctree-l4"><a href="#321-emacsのときはインライン-ximを無効にする">3.2.1 Emacsのときはインライン XIMを無効にする</a></li>
+              <li class="toctree-l4"><a href="#322-mozc-句読点では即確定させる">3.2.2 [mozc] 句読点では即確定させる</a></li>
+              <li class="toctree-l4"><a href="#323-mozc-ユーザー辞書を複数端末で共有させる">3.2.3 [mozc] ユーザー辞書を複数端末で共有させる</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li class="toctree-l2"><a href="#4-カーソル移動">4. カーソル移動</a>
+        <ul>
+          <li class="toctree-l3"><a href="#41-ウインドウの移動">4.1 ウインドウの移動</a></li>
+          <li class="toctree-l3"><a href="#42-sequential-commandel-バッファー先頭末尾">4.2 [sequential-command.el] バッファー先頭・末尾</a></li>
+          <li class="toctree-l3"><a href="#43-expand-regionカーソル位置を起点に選択範囲を賢く広げる">4.3 [expand-region]カーソル位置を起点に選択範囲を賢く広げる</a></li>
+        </ul>
+      </li>
+      <li class="toctree-l2"><a href="#5-編集サポート">5. 編集サポート</a>
+        <ul>
+          <li class="toctree-l3"><a href="#51-selected-リージョン選択時のアクションを制御">5.1 [selected] リージョン選択時のアクションを制御</a></li>
+          <li class="toctree-l3"><a href="#52-selected-ime-のオンオフを自動制御する">5.2 [selected] IME のオン・オフを自動制御する</a></li>
+          <li class="toctree-l3"><a href="#53-darkroom-mode-執筆モード">5.3 [darkroom-mode] 執筆モード</a></li>
+          <li class="toctree-l3"><a href="#54-yatex-yatexで-tex編集">5.4 [yatex] YaTexで Tex編集</a></li>
+          <li class="toctree-l3"><a href="#55-swiper-を-migemo-化してローマ字入力で日本語を検索">5.5 swiper を migemo 化してローマ字入力で日本語を検索</a></li>
+          <li class="toctree-l3"><a href="#56-pinky-小指問題解消">5.6 pinky 小指問題解消</a></li>
+        </ul>
+      </li>
+      <li class="toctree-l2"><a href="#6-表示サポート">6. 表示サポート</a>
+        <ul>
+          <li class="toctree-l3"><a href="#61-cleanup-for-spaces">6.1 cleanup-for-spaces</a></li>
+          <li class="toctree-l3"><a href="#62-rainbow-mode">6.2 rainbow-mode</a></li>
+          <li class="toctree-l3"><a href="#63-custom-set-face">6.3 custom-set-face</a></li>
+        </ul>
+      </li>
+      <li class="toctree-l2"><a href="#7-hydra">7. Hydra</a>
+        <ul>
+          <li class="toctree-l3"><a href="#71-hydra-work-menu--hydra-quick-dired-コマンドメニュー">7.1 [hydra-work-menu / hydra-quick-dired] コマンドメニュー</a></li>
+          <li class="toctree-l3"><a href="#72-hydra-extention-その他の-hydra-設定">7.2 [hydra-extention] その他の Hydra 設定。</a></li>
+        </ul>
+      </li>
+      <li class="toctree-l2"><a href="#8-履歴--ファイル管理">8. 履歴 / ファイル管理</a>
+        <ul>
+          <li class="toctree-l3"><a href="#81-auto-save-buffer-enhanced-ファイルの自動保存">8.1 [auto-save-buffer-enhanced] ファイルの自動保存</a></li>
+          <li class="toctree-l3"><a href="#82-空になったファイルを自動的に削除">8.2 空になったファイルを自動的に削除</a></li>
+          <li class="toctree-l3"><a href="#83-undo-tree">8.3 [undo-tree]</a></li>
+        </ul>
+      </li>
+      <li class="toctree-l2"><a href="#9-開発サポート">9. 開発サポート</a>
+        <ul>
+          <li class="toctree-l3"><a href="#91-dotfiles">9.1 dotfiles</a></li>
+          <li class="toctree-l3"><a href="#92-magit">9.2 [magit]</a></li>
+          <li class="toctree-l3"><a href="#93-gist-from-buffer">9.3 gist-from-buffer</a></li>
+        </ul>
+      </li>
+      <li class="toctree-l2"><a href="#10-メモ環境">10. メモ環境</a>
+        <ul>
+          <li class="toctree-l3"><a href="#101-org-mode--howm-mode">10.1 Org Mode / Howm Mode</a></li>
+          <li class="toctree-l3"><a href="#102-open-junk-file">10.2 open-junk-file</a></li>
+          <li class="toctree-l3"><a href="#103-scratch-buffer">10.3 scratch buffer</a></li>
+        </ul>
+      </li>
+      <li class="toctree-l2"><a href="#11-σε-ｵﾚ-流-function-key-設定">11. σ(`ε´) ｵﾚ 流 Function Key 設定</a>
+        <ul>
+          <li class="toctree-l3"><a href="#f1-emacs-help">F1: emacs help</a></li>
+          <li class="toctree-l3"><a href="#f2-imenu-list-smart-toggle">F2: imenu-list-smart-toggle</a></li>
+          <li class="toctree-l3"><a href="#f3-filer-current-dir-open">F3: filer-current-dir-open</a></li>
+          <li class="toctree-l3"><a href="#f4-term-current-dir-open">F4: term-current-dir-open</a></li>
+          <li class="toctree-l3"><a href="#f5-quickrun">F5: quickrun</a></li>
+          <li class="toctree-l3"><a href="#f6-select-counsel-command">F6: select-counsel-command</a></li>
+          <li class="toctree-l3"><a href="#f7-calendar">F7: calendar</a></li>
+          <li class="toctree-l3"><a href="#f8-google-translate">F8: google-translate</a></li>
+          <li class="toctree-l3"><a href="#f9-display-line-numbers-mode">F9: display-line-numbers-mode</a></li>
+          <li class="toctree-l3"><a href="#f10-neotree-toggle">F10: neotree-toggle</a></li>
+          <li class="toctree-l3"><a href="#f11-toggle-frame-fullscreen">F11: toggle-frame-fullscreen</a></li>
+          <li class="toctree-l3"><a href="#f12-mydarkroom-toggle">F12: my:darkroom-toggle</a></li>
+        </ul>
+      </li>
+      <li class="toctree-l2"><a href="#12-フォント--配色関係">12. フォント / 配色関係</a>
+        <ul>
+          <li class="toctree-l3"><a href="#121-フォント設定">12.1 フォント設定</a></li>
+          <li class="toctree-l3"><a href="#112-volatile-highlightコピペした領域を強調">11.2 [volatile-highlight]コピペした領域を強調</a></li>
+        </ul>
+      </li>
+      <li class="toctree-l2"><a href="#13-ユーティリティー関数">13. ユーティリティー関数</a>
+        <ul>
+          <li class="toctree-l3"><a href="#61-emacs-lock-mode-scratch-バッファーを消さない">6.1 [emacs-lock-mode] scratch バッファーを消さない</a></li>
+          <li class="toctree-l3"><a href="#131-terminal-を-emacsから呼び出す">13.1 Terminal を Emacsから呼び出す</a></li>
+          <li class="toctree-l3"><a href="#132-thunar-を-emacsから呼び出す">13.2 Thunar を Emacsから呼び出す</a></li>
+          <li class="toctree-l3"><a href="#133-restart-emacs-emacsを再起動する">13.3 [restart-emacs] Emacsを再起動する</a></li>
+        </ul>
+      </li>
+      <li class="toctree-l2"><a href="#14-おわりに">14. おわりに</a></li>
+    </ul>
+  </li>
+</ul>
+
+    <p class="caption"><span class="caption-text">docs</span></p>
+                <ul>
+                    <li class="toctree-l1">
+                        <a class="reference internal" href="http://localhost:4000/docs/configuration/configyml.html">Theme Configuration</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1">
+                        <a class="reference internal" href="http://localhost:4000/docs/demo-pages/">Demo Pages Index</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1">
+                        <a class="reference internal" href="http://localhost:4000/docs/quickstart.html">🚀 Quick Start With GitHub Pages</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1">
+                        <a class="reference internal" href="http://localhost:4000/docs/configuration/frontmatter.html">Pages Configuration</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1">
+                        <a class="reference internal" href="http://localhost:4000/docs/jekyll.html">Install Theme In A Jekyll Project</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1">
+                        <a class="reference internal" href="http://localhost:4000/docs/demo-pages/test-page.html">Markdown Kitchen Sink Example</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1">
+                        <a class="reference internal" href="http://localhost:4000/docs/faqs.html">What is All This? (FAQs)</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1">
+                        <a class="reference internal" href="http://localhost:4000/docs/demo-pages/deepersection/test-page.html">A Page In A Deeper Section</a>
+                    </li>
+                </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="http://localhost:4000">Read The Docs Jekyll Theme</a>
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+        <li><a href="http://localhost:4000">Docs</a>&raquo;</li>
+        <li>Local Development Index Page</li>
+    <li class="wy-breadcrumbs-aside">
+        <a href="https://github.com/carlosperate/jekyll-theme-rtd/blob/master/index.md" class="icon icon-github" target="_blank"> Edit on GitHub</a>
+    </li>
+  </ul>
+    <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+        <a href="http://localhost:4000/docs/configuration/configyml.html" class="btn btn-neutral float-right" title="Theme Configuration">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              <h1 id="gnu-emacs-configuration">GNU Emacs configuration</h1>
+
+<h2 id="1-はじめに">1. はじめに</h2>
+<ul>
+  <li><a href="https://github.com/conao3/leaf.el">Leaf</a> に乗り換えたのを機に大幅に整理したので <a href="https://jamstackthemes.dev/theme/jekyll-rtd-theme/">jekyll-rtd-theme</a> でまとめました。</li>
+  <li>Emacsを含むすべての環境設定ファイルを <code class="highlighter-rouge">ditfiles</code> リポジトリに置いて Git管理し <a href="https://github.com/minorugh/dotfiles">GitHub</a> に公開しています。</li>
+  <li>設定ファイルは、メイン機とサブ機（いづれも Tinkpad）の複数端末で共有できるようにしています。</li>
+  <li>本ドキュメントは、<a href="https://twitter.com/takaxp">@takaxp</a> さんの <a href="https://takaxp.github.io/init.html">init.el</a> の記事から多くを吸収した模倣版です。</li>
+  <li>執筆用途に特化してカスタマイズしていますので、コンセプトやキーバイドなどは極めて邪道思想になっています。</li>
+  <li>Emacs設定ファイル本体も、<a href="https://github.com/minorugh/dotfiles/tree/master/.emacs.d">GitHub</a> に公開しています。</li>
+</ul>
+
+<p>八十路も近い老骨ながら、<a href="https://twitter.com/SolistWork">@masasam</a> さん、<a href="https://twitter.com/takaxp">@takaxp</a> さんのご指導を得て、盲目的なパッチワークから多少なりとも自力でカスタマイズできるまで進化できました。感謝！</p>
+
+<p>ファイル配置のデレクトリ構成は以下のとおりです。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/.emacs.d
+│
+├── el-get/
+├── elpa/
+├── info/
+├── inits/
+│   ├── 00_base.el
+│   ├── 01_dashboard.el
+│   ├── ...
+│   ├── 90_eshell.el
+│   └── 99_chromium.el
+├── snippets/
+├── tmp/
+├── early-init.el
+├── init.el
+└── mini-init.el
+
+</code></pre></div></div>
+
+<h2 id="2-起動設定">2. 起動設定</h2>
+<p>Emacs-27導入にあわせて <code class="highlighter-rouge">early-init.el</code> を設定しました。 手順は以下のとおり。</p>
+
+<ol>
+  <li><code class="highlighter-rouge">early-init.el</code> の読み込み</li>
+  <li><code class="highlighter-rouge">init.el</code> の読み込み</li>
+  <li><code class="highlighter-rouge">inits/</code> のファイル群を読み込み （init-loader 使用）</li>
+</ol>
+
+<p>init-loader を使うことの是非については諸説あるようですが、<a href="http://emacs.rubikitch.com/init-loader/">多くの恩恵</a>は捨て難く私には必須ツールです。</p>
+
+<h3 id="21-early-init-el">2.1 early-init-el</h3>
+
+<p>設定ファイル読み込み初期に起動画面がチラチラ変化するのを抑制しています。</p>
+
+<p>因果関係は不明ですが結果的に起動時間の短縮にも効果があるようです。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; Defer garbage collection further back in the startup process</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">gc-cons-threshold</span> <span class="nv">most-positive-fixnum</span><span class="p">)</span>
+
+<span class="c1">;; For slightly faster startup</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">package-enable-at-startup</span> <span class="no">nil</span><span class="p">)</span>
+
+<span class="c1">;; Always load newest byte code</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">load-prefer-newer</span> <span class="no">t</span><span class="p">)</span>
+
+<span class="c1">;; Inhibit resizing frame</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">frame-inhibit-implied-resize</span> <span class="no">t</span><span class="p">)</span>
+
+<span class="c1">;; Faster to disable these here (before they've been initialized)</span>
+<span class="p">(</span><span class="nb">push</span> <span class="o">'</span><span class="p">(</span><span class="nv">fullscreen</span> <span class="o">.</span> <span class="nv">maximized</span><span class="p">)</span> <span class="nv">default-frame-alist</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">push</span> <span class="o">'</span><span class="p">(</span><span class="nv">menu-bar-lines</span> <span class="o">.</span> <span class="mi">0</span><span class="p">)</span> <span class="nv">default-frame-alist</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">push</span> <span class="o">'</span><span class="p">(</span><span class="nv">tool-bar-lines</span> <span class="o">.</span> <span class="mi">0</span><span class="p">)</span> <span class="nv">default-frame-alist</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">push</span> <span class="o">'</span><span class="p">(</span><span class="nv">vertical-scroll-bars</span><span class="p">)</span> <span class="nv">default-frame-alist</span><span class="p">)</span>
+
+<span class="c1">;; Suppress flashing at startup</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">inhibit-redisplay</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">inhibit-message</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">'window-setup-hook</span>
+		  <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+			<span class="p">(</span><span class="k">setq</span> <span class="nv">inhibit-redisplay</span> <span class="no">nil</span><span class="p">)</span>
+			<span class="p">(</span><span class="k">setq</span> <span class="nv">inhibit-message</span> <span class="no">nil</span><span class="p">)</span>
+			<span class="p">(</span><span class="nv">redisplay</span><span class="p">)))</span>
+
+<span class="c1">;; Startup setting</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">inhibit-splash-screen</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">inhibit-startup-message</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">byte-compile-warnings</span> <span class="o">'</span><span class="p">(</span><span class="nv">cl-functions</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">custom-set-faces</span> <span class="o">'</span><span class="p">(</span><span class="nv">default</span> <span class="p">((</span><span class="no">t</span> <span class="p">(</span><span class="ss">:background</span> <span class="s">"#282a36"</span><span class="p">)))))</span>
+
+
+<span class="p">(</span><span class="nb">provide</span> <span class="ss">'early-init</span><span class="p">)</span>
+<span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span class="c1">;;; early-init.el ends here</span>
+</code></pre></div></div>
+
+<h3 id="22-initel">2.2 init.el</h3>
+
+<p>設定ファイル群は、init-loaderで読み込むようにしています。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">daemonp</span><span class="p">)</span> <span class="nv">noninteractive</span> <span class="nv">init-file-debug</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">old-file-name-handler-alist</span> <span class="nv">file-name-handler-alist</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">setq</span> <span class="nv">file-name-handler-alist</span> <span class="no">nil</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">'emacs-startup-hook</span>
+              <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+                <span class="s">"Recover file name handlers."</span>
+                <span class="p">(</span><span class="k">setq</span> <span class="nv">file-name-handler-alist</span>
+                      <span class="p">(</span><span class="nv">delete-dups</span> <span class="p">(</span><span class="nb">append</span> <span class="nv">file-name-handler-alist</span>
+                                           <span class="nv">old-file-name-handler-alist</span><span class="p">)))))))</span>
+
+<span class="c1">;; Defer garbage collection further back in the startup process</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">gc-cons-threshold</span> <span class="nv">most-positive-fixnum</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">'emacs-startup-hook</span>
+          <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+            <span class="s">"Recover GC values after startup."</span>
+            <span class="p">(</span><span class="k">setq</span> <span class="nv">gc-cons-threshold</span> <span class="mi">800000</span><span class="p">)))</span>
+
+<span class="c1">;; Package</span>
+<span class="p">(</span><span class="nv">eval-and-compile</span>
+  <span class="p">(</span><span class="nv">customize-set-variable</span>
+   <span class="ss">'package-archives</span> <span class="o">'</span><span class="p">((</span><span class="s">"org"</span> <span class="o">.</span> <span class="s">"https://orgmode.org/elpa/"</span><span class="p">)</span>
+					   <span class="p">(</span><span class="s">"melpa"</span> <span class="o">.</span> <span class="s">"https://melpa.org/packages/"</span><span class="p">)</span>
+                       <span class="p">(</span><span class="s">"gnu"</span> <span class="o">.</span> <span class="s">"https://elpa.gnu.org/packages/"</span><span class="p">)))</span>
+  <span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">package-installed-p</span> <span class="ss">'leaf</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">package-refresh-contents</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">package-install</span> <span class="ss">'leaf</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="nv">leaf</span> <span class="nv">leaf-keywords</span>
+	<span class="ss">:ensure</span> <span class="no">t</span>
+	<span class="ss">:init</span>
+	<span class="p">(</span><span class="nv">leaf</span> <span class="nv">hydra</span> <span class="ss">:ensure</span> <span class="no">t</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">leaf</span> <span class="nv">el-get</span> <span class="ss">:ensure</span> <span class="no">t</span><span class="p">)</span>
+	<span class="ss">:config</span>
+	<span class="p">(</span><span class="nv">leaf-keywords-init</span><span class="p">)))</span>
+
+
+<span class="c1">;; Load init files</span>
+<span class="p">(</span><span class="nv">leaf</span> <span class="nv">init-loader</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:custom</span> <span class="o">`</span><span class="p">((</span><span class="nv">custom-file</span> <span class="o">.</span> <span class="s">"~/.emacs.d/tmp/custom.el"</span><span class="p">)</span>
+			<span class="p">(</span><span class="nv">init-loader-show-log-after-init</span> <span class="o">.</span> <span class="ss">'error-only</span><span class="p">))</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">init-loader-load</span><span class="p">))</span>
+
+
+<span class="p">(</span><span class="nb">provide</span> <span class="ss">'init</span><span class="p">)</span>
+<span class="c1">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span class="c1">;;; init.el ends here</span>
+</code></pre></div></div>
+
+<h3 id="23-mini-initel">2.3 mini-init.el</h3>
+
+<p><a href="https://github.com/minorugh/dotfiles/blob/main/.emacs.d/mini-init.el">mini-init.el</a> は、最小限の emacs を起動させるための設定です。</p>
+
+<p>新しいパッケージや設定をテストしたり、エラー等で Emacsが起動しない場合に使用します。
+シェルから <code class="highlighter-rouge">eq</code> と入力することで起動することがでます。</p>
+
+<p>以下を <code class="highlighter-rouge">.zshrc</code> または <code class="highlighter-rouge">.bashrc</code> に書き込みます。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">alias </span>eq <span class="o">=</span> <span class="s1">'emacs -q -l ~/.emacs.d/mini-init.el'</span>
+</code></pre></div></div>
+
+<p>ファイルの PATH は、ご自分の環境に応じて修正が必要です。</p>
+
+<h3 id="24-dashboard-バッファーを再生させる">2.4 Dashboard バッファーを再生させる</h3>
+
+<p>Emacs 起動時の初期画面には、<code class="highlighter-rouge">Dashboard</code> を表示させています。</p>
+
+<p><img src="https://live.staticflickr.com/65535/51631946053_b9d848a357_b.jpg" alt="Dashboard by doom-themes" /></p>
+
+<p><code class="highlighter-rouge">open-Dashboard</code> でいつでも Dashboard画面を再表示させることができ、<code class="highlighter-rouge">quit-Dashboard</code> 直前に作業していたバッファー画面に戻ります。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">open-dashboard</span> <span class="p">()</span>
+  <span class="s">"Open the *dashboard* buffer and jump to the first widget."</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">length&gt;</span> <span class="p">(</span><span class="nv">window-list-1</span><span class="p">)</span>
+               <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nb">fboundp</span> <span class="ss">'treemacs-current-visibility</span><span class="p">)</span>
+                        <span class="p">(</span><span class="nb">eq</span> <span class="p">(</span><span class="nv">treemacs-current-visibility</span><span class="p">)</span> <span class="ss">'visible</span><span class="p">))</span>
+                   <span class="mi">2</span>
+                 <span class="mi">1</span><span class="p">))</span>
+      <span class="p">(</span><span class="k">setq</span> <span class="nv">dashboard-recover-layout-p</span> <span class="no">t</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">delete-other-windows</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">dashboard-refresh-buffer</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">dashboard-goto-recent-files</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">quit-dashboard</span> <span class="p">()</span>
+  <span class="s">"Quit dashboard window."</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">quit-window</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">dashboard-recover-layout-p</span>
+			 <span class="p">(</span><span class="nv">bound-and-true-p</span> <span class="nv">winner-mode</span><span class="p">))</span>
+    <span class="p">(</span><span class="nv">winner-undo</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">setq</span> <span class="nv">dashboard-recover-layout-p</span> <span class="no">nil</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<ul>
+  <li><a href="https://github.com/minorugh/dotfiles/blob/main/.emacs.d/inits/01_dashboard.el">Dashboard の詳細設定</a>は、ここを見て下さい。</li>
+</ul>
+
+<h2 id="3-コア設定">3. コア設定</h2>
+<p>Emacs を操作して文書編集する上で必要な設定。</p>
+
+<h3 id="31-言語--文字コード">3.1 言語 / 文字コード</h3>
+
+<p>シンプルにこれだけです。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">set-language-environment</span> <span class="s">"Japanese"</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">prefer-coding-system</span> <span class="ss">'utf-8</span><span class="p">)</span>
+</code></pre></div></div>
+<h3 id="32-日本語入力">3.2 日本語入力</h3>
+
+<p>Debian11 にインストールした Emacs上で <a href="https://packages.debian.org/ja/jessie/emacs-mozc">emacs-mozc</a> を使っています。</p>
+
+<h4 id="321-emacsのときはインライン-ximを無効にする">3.2.1 Emacsのときはインライン XIMを無効にする</h4>
+
+<p>Emacsをソースからビルドするときに <code class="highlighter-rouge">--without-xim</code> しなかったので、インライン XIMでも日本語入力ができてしまいます。
+特に使い分けする必要もなく紛らわしいので <code class="highlighter-rouge">.Xresources</code> で XIM無効化の設定をしました。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">!</span> ~/.Xresources
+<span class="o">!</span> Emacs XIMを無効化
+Emacs<span class="k">*</span>useXIM: <span class="nb">false</span>
+
+</code></pre></div></div>
+<h4 id="322-mozc-句読点では即確定させる">3.2.2 [mozc] 句読点では即確定させる</h4>
+<p>句読点などを入力したとき、わざわざ mozcに変換してもらう必要はないので以下を設定しておくことでワンアクションスピーディーになります。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">mozc</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:bind</span> <span class="p">((</span><span class="s">"&lt;hiragana-katakana&gt;"</span> <span class="o">.</span> <span class="nv">toggle-input-method</span><span class="p">)</span>
+		 <span class="p">(</span><span class="ss">:mozc-mode-map</span>
+		  <span class="p">(</span><span class="s">","</span> <span class="o">.</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span> <span class="p">(</span><span class="nv">mozc-insert-str</span> <span class="s">"、"</span><span class="p">)))</span>
+		  <span class="p">(</span><span class="s">"."</span> <span class="o">.</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span> <span class="p">(</span><span class="nv">mozc-insert-str</span> <span class="s">"。"</span><span class="p">)))</span>
+		  <span class="p">(</span><span class="s">"?"</span> <span class="o">.</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span> <span class="p">(</span><span class="nv">mozc-insert-str</span> <span class="s">"？"</span><span class="p">)))</span>
+		  <span class="p">(</span><span class="s">"!"</span> <span class="o">.</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span> <span class="p">(</span><span class="nv">mozc-insert-str</span> <span class="s">"！"</span><span class="p">)))))</span>
+  <span class="ss">:custom</span> <span class="o">`</span><span class="p">((</span><span class="nv">default-input-method</span> <span class="o">.</span> <span class="s">"japanese-mozc"</span><span class="p">)</span>
+			<span class="p">(</span><span class="nv">mozc-helper-program-name</span> <span class="o">.</span> <span class="s">"mozc_emacs_helper"</span><span class="p">)</span>
+			<span class="p">(</span><span class="nv">mozc-leim-title</span> <span class="o">.</span> <span class="s">"かな"</span><span class="p">))</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">mozc-insert-str</span> <span class="p">(</span><span class="nv">str</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">mozc-handle-event</span> <span class="ss">'enter</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">insert</span> <span class="nv">str</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">defadvice</span> <span class="nv">toggle-input-method</span> <span class="p">(</span><span class="nv">around</span> <span class="nv">toggle-input-method-around</span> <span class="nv">activate</span><span class="p">)</span>
+	<span class="s">"Input method function in key-chord.el not to be nil."</span>
+	<span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">input-method-function-save</span> <span class="nv">input-method-function</span><span class="p">))</span>
+	  <span class="nv">ad-do-it</span>
+	  <span class="p">(</span><span class="k">setq</span> <span class="nv">input-method-function</span> <span class="nv">input-method-function-save</span><span class="p">))))</span>
+</code></pre></div></div>
+
+<h4 id="323-mozc-ユーザー辞書を複数端末で共有させる">3.2.3 [mozc] ユーザー辞書を複数端末で共有させる</h4>
+
+<p>複数環境で Mozcユーザー辞書を共有できるようにしたいと思考中です。</p>
+
+<p>Mozc のファイル群を Dropbox に保存して、シンボリックを各端末に置くという方法で一応は動きますが、同時使用すると競合コピーが作られるので多少問題もあります。辞書の共有は、Google Drive がよいという情報もあるので、時間のあるときにゆっくり試してみます。</p>
+
+<h2 id="4-カーソル移動">4. カーソル移動</h2>
+<p>カーソルの移動は、原則デフォルトで使っていますが、以下の挙動だけ変更しています。</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>ウインドウ移動</td>
+      <td>C-q</td>
+    </tr>
+    <tr>
+      <td>バッファー先頭・末尾</td>
+      <td>C-a / C-e</td>
+    </tr>
+    <tr>
+      <td>編集点の移動</td>
+      <td>C-x C-x</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="41-ウインドウの移動">4.1 ウインドウの移動</h3>
+
+<p>私の場合、基本二分割以上の作業はしないので <code class="highlighter-rouge">C-q</code> だけで便利に使えるこの関数は宝物です。</p>
+
+<p>最初の <code class="highlighter-rouge">C-q</code> でに分割になり、二度目以降は <code class="highlighter-rouge">C-q</code> を押すたびに Window 移動します。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">other-window-or-split</span> <span class="p">()</span>
+  <span class="s">"If there is one window, open split window.
+If there are two or more windows, it will go to another window."</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">one-window-p</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">split-window-horizontally</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">other-window</span> <span class="mi">1</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">bind-key</span> <span class="s">"C-q"</span> <span class="ss">'other-window-or-split</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="42-sequential-commandel-バッファー先頭末尾">4.2 [sequential-command.el] バッファー先頭・末尾</h3>
+
+<p>地味なながら一度使うと便利すぎて止められません。</p>
+
+<p>Melpaから Installできますが、私は HKey氏の改良版を el-getで使っています。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">sequential-command</span>
+  <span class="ss">:doc</span> <span class="s">"https://bre.is/6Xu4fQs6"</span>
+  <span class="ss">:el-get</span> <span class="nv">HKey/sequential-command</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">leaf</span> <span class="nv">sequential-command-config</span>
+	<span class="ss">:hook</span> <span class="p">(</span><span class="nv">emacs-startup-hook</span> <span class="o">.</span> <span class="nv">sequential-command-setup-keys</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<h3 id="43-expand-regionカーソル位置を起点に選択範囲を賢く広げる">4.3 [expand-region]カーソル位置を起点に選択範囲を賢く広げる</h3>
+
+<p><code class="highlighter-rouge">er/expand-region</code> を呼ぶと、カーソル位置を起点として前後に選択範囲を広げてくれます。</p>
+
+<p>2回以上呼ぶとその回数だけ賢く選択範囲が広がりますが、2回目以降は設定したキーバインドの最後の一文字を連打すれば OKです。その場合、選択範囲を狭める時は - を押し， 0 を押せばリセットされます。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="p">(</span><span class="nv">leaf</span> <span class="nv">expand-region</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:bind</span> <span class="p">(</span><span class="s">"C-@"</span> <span class="o">.</span> <span class="nv">er/expand-region</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="5-編集サポート">5. 編集サポート</h2>
+<h3 id="51-selected-リージョン選択時のアクションを制御">5.1 [selected] リージョン選択時のアクションを制御</h3>
+
+<p>選択領域に対するスピードコマンドです。</p>
+
+<p>Emacsバッファーで領域を選択した後、バインドしたワンキーを入力するとコマンドが実行されます。
+コマンドの数が増えてきたら、ヘルプ代わりに使える <a href="https://github.com/takaxp/counsel-selected">counsel-selected</a> も便利そうです。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">selected</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:global-minor-mode</span> <span class="nv">selected-global-mode</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">bind-key</span> <span class="s">";"</span> <span class="ss">'comment-dwim</span> <span class="nv">selected-keymap</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">bind-key</span> <span class="s">"d"</span> <span class="ss">'clipboard-kill-region</span> <span class="nv">selected-keymap</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">bind-key</span> <span class="s">"f"</span> <span class="ss">'describe-function</span> <span class="nv">selected-keymap</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">bind-key</span> <span class="s">"v"</span> <span class="ss">'describe-variable</span> <span class="nv">selected-keymap</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">bind-key</span> <span class="s">"c"</span> <span class="ss">'clipboard-kill-ring-save</span> <span class="nv">selected-keymap</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">bind-key</span> <span class="s">"i"</span> <span class="ss">'iedit-mode</span> <span class="nv">selected-keymap</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">bind-key</span> <span class="s">"s"</span> <span class="ss">'swiper-thing-at-point</span> <span class="nv">selected-keymap</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">bind-key</span> <span class="s">"k"</span> <span class="ss">'my:koujien</span> <span class="nv">selected-keymap</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">bind-key</span> <span class="s">"e"</span> <span class="ss">'my:eijiro</span> <span class="nv">selected-keymap</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">bind-key</span> <span class="s">"w"</span> <span class="ss">'my:weblio</span> <span class="nv">selected-keymap</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">bind-key</span> <span class="s">"t"</span> <span class="ss">'google-translate-auto</span> <span class="nv">selected-keymap</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">bind-key</span> <span class="s">"g"</span> <span class="ss">'my:google</span> <span class="nv">selected-keymap</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>検索結果を browse-url で表示させるユーザーコマンドは、検索 urlのフォーマットとさえわかれば、パッケージツールに頼らずともお好みのマイコマンドを作成できます。</p>
+
+<p>以下は、google と Weblio串刺し検索の例です。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">cus-selected</span>
+  <span class="ss">:init</span>
+  <span class="c1">;; Control mozc when seleceted</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">my:activate-selected</span> <span class="p">()</span>
+	<span class="p">(</span><span class="nv">selected-global-mode</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">selected--on</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">remove-hook</span> <span class="ss">'activate-mark-hook</span> <span class="nf">#'</span><span class="nv">my:activate-selected</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">'activate-mark-hook</span> <span class="nf">#'</span><span class="nv">my:activate-selected</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">my:ime-on</span> <span class="p">()</span>
+	<span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+	<span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">null</span> <span class="nv">current-input-method</span><span class="p">)</span> <span class="p">(</span><span class="nv">toggle-input-method</span><span class="p">)))</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">my:ime-off</span> <span class="p">()</span>
+	<span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">inactivate-input-method</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="nb">defvar</span> <span class="nv">my:ime-flag</span> <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">add-hook</span>
+   <span class="ss">'activate-mark-hook</span>
+   <span class="nf">#'</span><span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+	   <span class="p">(</span><span class="k">setq</span> <span class="nv">my:ime-flag</span> <span class="nv">current-input-method</span><span class="p">)</span> <span class="p">(</span><span class="nv">my:ime-off</span><span class="p">)))</span>
+  <span class="p">(</span><span class="nv">add-hook</span>
+   <span class="ss">'deactivate-mark-hook</span>
+   <span class="nf">#'</span><span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+	   <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nb">null</span> <span class="nv">my:ime-flag</span><span class="p">)</span> <span class="p">(</span><span class="nv">my:ime-on</span><span class="p">))))</span>
+
+  <span class="c1">;; User-functions-for-selected</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">my:koujien</span> <span class="p">(</span><span class="nv">str</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">interactive</span> <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nv">my:get-region</span> <span class="no">nil</span><span class="p">)))</span>
+	<span class="p">(</span><span class="nv">browse-url</span> <span class="p">(</span><span class="nb">format</span> <span class="s">"https://sakura-paris.org/dict/広辞苑/prefix/%s"</span>
+						<span class="p">(</span><span class="nv">upcase</span> <span class="p">(</span><span class="nv">url-hexify-string</span> <span class="nv">str</span><span class="p">)))))</span>
+
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">my:weblio</span> <span class="p">(</span><span class="nv">str</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">interactive</span> <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nv">my:get-region</span> <span class="no">nil</span><span class="p">)))</span>
+	<span class="p">(</span><span class="nv">browse-url</span> <span class="p">(</span><span class="nb">format</span> <span class="s">"https://www.weblio.jp/content/%s"</span>
+						<span class="p">(</span><span class="nv">upcase</span> <span class="p">(</span><span class="nv">url-hexify-string</span> <span class="nv">str</span><span class="p">)))))</span>
+
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">my:eijiro</span> <span class="p">(</span><span class="nv">str</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">interactive</span> <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nv">my:get-region</span> <span class="no">nil</span><span class="p">)))</span>
+	<span class="p">(</span><span class="nv">browse-url</span> <span class="p">(</span><span class="nb">format</span> <span class="s">"https://eow.alc.co.jp/%s/UTF-8/"</span>
+						<span class="p">(</span><span class="nv">upcase</span> <span class="p">(</span><span class="nv">url-hexify-string</span> <span class="nv">str</span><span class="p">)))))</span>
+
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">my:google</span> <span class="p">(</span><span class="nv">str</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">interactive</span> <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nv">my:get-region</span> <span class="no">nil</span><span class="p">)))</span>
+	<span class="p">(</span><span class="nv">browse-url</span> <span class="p">(</span><span class="nb">format</span> <span class="s">"https://www.google.com/search?hl=ja&amp;q=%s"</span>
+						<span class="p">(</span><span class="nv">upcase</span> <span class="p">(</span><span class="nv">url-hexify-string</span> <span class="nv">str</span><span class="p">)))))</span>
+
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">my:get-region</span> <span class="p">(</span><span class="nv">r</span><span class="p">)</span>
+	<span class="s">"Get search word from region."</span>
+	<span class="p">(</span><span class="nv">buffer-substring-no-properties</span> <span class="p">(</span><span class="nv">region-beginning</span><span class="p">)</span> <span class="p">(</span><span class="nv">region-end</span><span class="p">))))</span>
+</code></pre></div></div>
+
+<h3 id="52-selected-ime-のオンオフを自動制御する">5.2 [selected] IME のオン・オフを自動制御する</h3>
+
+<p>selected.el は、うっかり IMEオンのまま選択領域に対するコマンドを選択すると、押下キーがバッファにそのまま入力されてしまいます。</p>
+
+<p>領域を選択し始める時に IMEをオフにして、コマンド発行後に IMEを元に戻すという例が、
+<a href="https://qiita.com/takaxp">@takaxp</a> さんの <a href="https://qiita.com/takaxp/items/00245794d46c3a5fcaa8">Qiitaの記事</a> にあったので、私の環境（emacs-mozc ）にあうように設定したら、すんなり動いてくれました。感謝！</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-activate-selected</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">selected-global-mode</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">selected--on</span><span class="p">)</span> <span class="c1">;; must call expclitly here</span>
+  <span class="p">(</span><span class="nv">remove-hook</span> <span class="ss">'activate-mark-hook</span> <span class="nf">#'</span><span class="nv">my-activate-selected</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">'activate-mark-hook</span> <span class="nf">#'</span><span class="nv">my-activate-selected</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">my:ime-on</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">null</span> <span class="nv">current-input-method</span><span class="p">)</span> <span class="p">(</span><span class="nv">toggle-input-method</span><span class="p">)))</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">my:ime-off</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">inactivate-input-method</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defvar</span> <span class="nv">my:ime-flag</span> <span class="no">nil</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span>
+ <span class="ss">'activate-mark-hook</span>
+ <span class="nf">#'</span><span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+	 <span class="p">(</span><span class="k">setq</span> <span class="nv">my:ime-flag</span> <span class="nv">current-input-method</span><span class="p">)</span> <span class="p">(</span><span class="nv">my:ime-off</span><span class="p">)))</span>
+<span class="p">(</span><span class="nv">add-hook</span>
+ <span class="ss">'deactivate-mark-hook</span>
+ <span class="nf">#'</span><span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+	 <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nb">null</span> <span class="nv">my:ime-flag</span><span class="p">)</span> <span class="p">(</span><span class="nv">my:ime-on</span><span class="p">))))</span>
+</code></pre></div></div>
+
+<h3 id="53-darkroom-mode-執筆モード">5.3 [darkroom-mode] 執筆モード</h3>
+<p><a href="https://github.com/joaotavora/darkroom">darkroom.el</a>  は、画面の余計な項目を最小限にして、文章の執筆に集中できるようにするパッケージです。</p>
+
+<p>タイトルバーやモードラインが一時的に削除されてフルスクリーンになり、テキストが拡大され、テキストがウィンドウの中央に配置されるように余白が調整されます。設定例では、さらに行番号表示を消し、行間を少し大きくしてより読みやすくしています。また、執筆モードで色修飾があるとかえって落ち着かないので強制的に text-modeにしています。</p>
+
+<p>[F12] キーで IN/OUT をトグルしています。
+darkroom-modeからでるとき text-modeに変える前のもとも major-modeに戻す必要が有るのですが、major-mode関数を操作する設定はすリスクが高そうだったので、一度 kill-bufferして再度読み込むようにしました。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">darkroom</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:bind</span> <span class="p">(</span><span class="s">"&lt;f12&gt;"</span> <span class="o">.</span> <span class="nv">my:darkroom-in</span><span class="p">)</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">my:darkroom-in</span> <span class="p">()</span>
+	<span class="s">"Enter the darkroom-mode to always text-mode."</span>
+	<span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">text-mode</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">display-line-numbers-mode</span> <span class="mi">0</span><span class="p">)</span>
+	<span class="p">(</span><span class="k">setq</span> <span class="nv">line-spacing</span> <span class="mf">0.4</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">darkroom-tentative-mode</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">bind-key</span> <span class="s">"&lt;f12&gt;"</span> <span class="ss">'my:darkroom-out</span> <span class="nv">darkroom-mode-map</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">my:darkroom-out</span> <span class="p">()</span>
+	<span class="s">"Leave the darkroom-mode."</span>
+	<span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">darkroom-tentative-mode</span> <span class="mi">0</span><span class="p">)</span>
+	<span class="p">(</span><span class="k">setq</span> <span class="nv">line-spacing</span> <span class="mf">0.1</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">display-line-numbers-mode</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">my:close-current-buffer</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">my:open-last-closed-buffer</span><span class="p">))</span>
+  <span class="ss">:init</span>
+  <span class="c1">;; Open last closed file</span>
+  <span class="c1">;; http://ergoemacs.org/emacs/elisp_close_buffer_open_last_closed.html</span>
+  <span class="p">(</span><span class="nb">defvar</span> <span class="nv">my:recently-closed-buffers</span> <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">my:close-current-buffer</span> <span class="p">()</span>
+	<span class="s">"Close the current buffer."</span>
+	<span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+	<span class="p">(</span><span class="k">setq</span> <span class="nv">my:recently-closed-buffers</span>
+		  <span class="p">(</span><span class="nb">cons</span> <span class="p">(</span><span class="nb">cons</span> <span class="p">(</span><span class="nv">buffer-name</span><span class="p">)</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">))</span> <span class="nv">my:recently-closed-buffers</span><span class="p">))</span>
+	<span class="p">(</span><span class="nv">kill-buffer</span> <span class="p">(</span><span class="nv">current-buffer</span><span class="p">)))</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">my:open-last-closed-buffer</span> <span class="p">()</span>
+	<span class="s">"Open the last closed buffer."</span>
+	<span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">find-file</span> <span class="p">(</span><span class="nb">cdr</span> <span class="p">(</span><span class="nb">pop</span> <span class="nv">my:recently-closed-buffers</span><span class="p">)))))</span>
+</code></pre></div></div>
+
+<h3 id="54-yatex-yatexで-tex編集">5.4 [yatex] YaTexで Tex編集</h3>
+
+<p>ごく一般的な設定例ですが、参考になるとしたら <a href="https://www.yatex.org/gitbucket/yuuji/yatex/blob/c45e2a0187b702c5e817bf3023816dde154f0de9/yatexprc.el">yatexprc</a> の <code class="highlighter-rouge">M-x YaTeX-lpr</code> を使って一気に PDF作成まで自動化している点でしょうか。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">yatex</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:mode</span> <span class="p">(</span><span class="s">"\\.tex\\'"</span> <span class="o">.</span> <span class="nv">yatex-mode</span><span class="p">)</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">tex-command</span> <span class="s">"platex"</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">dviprint-command-format</span> <span class="s">"dvpd.sh %s"</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">YaTeX-kanji-code</span> <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">YaTeX-latex-message-code</span> <span class="ss">'utf-8</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">YaTeX-default-pop-window-height</span> <span class="mi">15</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">leaf</span> <span class="nv">yatexprc</span>
+	<span class="ss">:bind</span> <span class="p">((</span><span class="s">"M-c"</span> <span class="o">.</span> <span class="nv">YaTeX-typeset-buffer</span><span class="p">)</span>
+		   <span class="p">(</span><span class="s">"M-l"</span> <span class="o">.</span> <span class="nv">YaTeX-lpr</span><span class="p">))))</span>
+</code></pre></div></div>
+<p><code class="highlighter-rouge">YaTeX-lpr</code> は、<code class="highlighter-rouge">dviprint-command-format</code> を呼び出すコマンドです。</p>
+
+<p>dviファイルから dvipdfmx で PDF作成したあと、PDFビューアーを起動させて表示させるところまでをバッチファイルに書き、PATHの通ったところに置きます。私は、<code class="highlighter-rouge">/usr/loca/bin</code> に置きました。</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nv">name</span><span class="o">=</span><span class="nv">$1</span>
+dvipdfmx <span class="nv">$1</span> <span class="o">&amp;&amp;</span> evince <span class="k">${</span><span class="nv">name</span><span class="p">%.*</span><span class="k">}</span>.pdf
+<span class="c"># Delete unnecessary files</span>
+<span class="nb">rm</span> <span class="k">*</span>.au<span class="k">*</span> <span class="k">*</span>.dv<span class="k">*</span> <span class="k">*</span>.lo<span class="k">*</span>
+</code></pre></div></div>
+<p>上記の例では、ビューアーに Linux の evince を設定していますが、mac でプレビューを使う場合は、下記のようになるかと思います。</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dvipdfmx <span class="nv">$1</span> <span class="o">&amp;&amp;</span> open <span class="nt">-a</span> Preview.app <span class="k">${</span><span class="nv">name</span><span class="p">%.*</span><span class="k">}</span>.pdf
+</code></pre></div></div>
+<h3 id="55-swiper-を-migemo-化してローマ字入力で日本語を検索">5.5 swiper を migemo 化してローマ字入力で日本語を検索</h3>
+
+<p><a href="https://github.com/momomo5717/avy-migemo">avy-migemo-e.g.swiper.el</a> を使って出来ていたのですが、２年ほど前から更新が止まってしまっていて動きません。</p>
+
+<p>つい最近、avy-migemo を使わない swiper-migemoを GitHubで見つけたので試した処、機嫌よく動いてくれています。
+Melpaにはアップされていないみたいなので el-get で取得しています。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="p">(</span><span class="nv">leaf</span> <span class="nv">swiper-migemo</span>
+	<span class="ss">:el-get</span> <span class="nv">tam17aki/swiper-migemo</span>
+	<span class="ss">:global-minor-mode</span> <span class="no">t</span><span class="p">)</span>
+</code></pre></div></div>
+<h3 id="56-pinky-小指問題解消">5.6 pinky 小指問題解消</h3>
+<p>Emacs Pinky 小指問題の解消が目的で作られたものが、<a href="https://solist.work/blog/posts/emacs-pinky-hydra/">Sollst Work Blog</a> にあったのでパクりました。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ソースコードを読んでいる時は Ctrlキーを押さないで作業できるようにしましょう。
+</code></pre></div></div>
+<p>hydraを使って実現しています。hydraが発動するとそれ以降は全てのショートカットキーを奪ってカスタマイズできます。
+以前、view-modeベースで vim like に使えるような設定も試していたのですが、こちらのほうが馴染みやすいです。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">key-chord-define-global</span>
+ <span class="s">"::"</span>
+ <span class="p">(</span><span class="nv">defhydra</span> <span class="nv">hydra-pinky</span>
+   <span class="p">(</span><span class="ss">:color</span> <span class="nv">red</span> <span class="ss">:hint</span> <span class="no">nil</span><span class="p">)</span>
+   <span class="s">"
+  :_SPC_._b_._a_._e_  :_h_._l_._j_._k_  :_0_._1_._o_._x_  :_-__.__+_  _d_iff:_n_._p_  buffer:_[__:__]_  _f_ile  _s_wiper"</span>
+   <span class="c1">;; move page</span>
+   <span class="p">(</span><span class="s">"h"</span> <span class="nv">backward-char</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"j"</span> <span class="nv">next-line</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"k"</span> <span class="nv">previous-line</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"l"</span> <span class="nv">forward-char</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"SPC"</span> <span class="nv">scroll-up-command</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"f"</span> <span class="nv">scroll-up-command</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"b"</span> <span class="nv">scroll-down-command</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"&lt;next&gt;"</span> <span class="nv">scroll-up-command</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"&lt;prior&gt;"</span> <span class="nv">scroll-down-command</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"g"</span> <span class="nv">beginning-of-buffer</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"G"</span> <span class="nv">end-of-buffer</span><span class="p">)</span>
+   <span class="c1">;; move line</span>
+   <span class="p">(</span><span class="s">"&lt;down&gt;"</span> <span class="nv">next-line</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"&lt;up&gt;"</span> <span class="nv">previous-line</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"&lt;right&gt;"</span> <span class="nv">forward-char</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"&lt;left&gt;"</span> <span class="nv">backward-char</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"a"</span> <span class="nv">seq-home</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"e"</span> <span class="nv">seq-end</span><span class="p">)</span>
+   <span class="c1">;; ("j" goto-line)</span>
+   <span class="p">(</span><span class="s">"&lt;down&gt;"</span> <span class="nv">next-line</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"&lt;up&gt;"</span> <span class="nv">previous-line</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"&lt;right&gt;"</span> <span class="nv">forward-char</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"&lt;left&gt;"</span> <span class="nv">backward-char</span><span class="p">)</span>
+   <span class="c1">;; window</span>
+   <span class="p">(</span><span class="s">"+"</span> <span class="nv">text-scale-increase</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"-"</span> <span class="nv">text-scale-decrease</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"."</span> <span class="p">(</span><span class="nv">text-scale-set</span> <span class="mi">0</span><span class="p">))</span>
+   <span class="p">(</span><span class="s">"0"</span> <span class="nv">delete-window</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"1"</span> <span class="nv">delete-other-windows</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"2"</span> <span class="nv">split-window-below</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"3"</span> <span class="nv">split-window-right</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"x"</span> <span class="nv">window-swap-states</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"o"</span> <span class="nv">other-window-or-split</span><span class="p">)</span>
+   <span class="c1">;; diff-hl</span>
+   <span class="p">(</span><span class="s">"d"</span> <span class="nv">vc-diff</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"n"</span> <span class="nv">diff-hl-next-hunk</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"p"</span> <span class="nv">diff-hl-previous-hunk</span><span class="p">)</span>
+   <span class="c1">;; buffer</span>
+   <span class="p">(</span><span class="s">":"</span> <span class="nv">counsel-switch-buffer</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"["</span> <span class="nv">winner-undo</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"]"</span> <span class="nv">winner-redo</span><span class="p">)</span>
+   <span class="c1">;; Others</span>
+   <span class="p">(</span><span class="s">"f"</span> <span class="nv">counsel-find-file</span><span class="p">)</span>
+   <span class="p">(</span><span class="s">"s"</span> <span class="nv">swiper</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<h2 id="6-表示サポート">6. 表示サポート</h2>
+
+<h3 id="61-cleanup-for-spaces">6.1 cleanup-for-spaces</h3>
+
+<p><code class="highlighter-rouge">whitespace</code> の設定はシンプルに <code class="highlighter-rouge">show-trailing-whitespace</code> のみとし、不用意に入ってしまったスペースを削除するための関数を設定しました。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">whitespace</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:bind</span> <span class="p">(</span><span class="s">"C-c C-c"</span> <span class="o">.</span> <span class="nv">my:cleanup-for-spaces</span><span class="p">)</span>
+  <span class="ss">:hook</span> <span class="p">(</span><span class="nv">prog-mode-hook</span> <span class="o">.</span> <span class="nv">my:enable-trailing-mode</span><span class="p">)</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">show-trailing-whitespace</span> <span class="no">nil</span><span class="p">)</span>
+  <span class="ss">:init</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">my:enable-trailing-mode</span> <span class="p">()</span>
+    <span class="s">"Show tail whitespace."</span>
+    <span class="p">(</span><span class="k">setq</span> <span class="nv">show-trailing-whitespace</span> <span class="no">t</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">my:cleanup-for-spaces</span> <span class="p">()</span>
+    <span class="s">"Remove contiguous line breaks at end of line + end of file."</span>
+    <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">delete-trailing-whitespace</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">save-excursion</span>
+      <span class="p">(</span><span class="nv">save-restriction</span>
+		<span class="p">(</span><span class="nv">widen</span><span class="p">)</span>
+		<span class="p">(</span><span class="nv">goto-char</span> <span class="p">(</span><span class="nv">point-max</span><span class="p">))</span>
+		<span class="p">(</span><span class="nv">delete-blank-lines</span><span class="p">)))))</span>
+
+</code></pre></div></div>
+
+<h3 id="62-rainbow-mode">6.2 rainbow-mode</h3>
+
+<p>rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラーコードから実際の色を表示するマイナーモードです。
+常時表示しているとうざいとケースのあるので、必要なときだけ使えるようにしています。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">rainbow-mode</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:bind</span> <span class="p">(</span><span class="s">"C-c r"</span> <span class="o">.</span> <span class="nv">rainbow-mode</span><span class="p">))</span>
+</code></pre></div></div>
+<h3 id="63-custom-set-face">6.3 custom-set-face</h3>
+<p>色設定が、あちこちに散らばっているとわかりにくので、まとめて設定するようにしています。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">custom-set-faces</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">lsp-face-highlight-read</span> <span class="p">((</span><span class="no">t</span> <span class="p">(</span><span class="ss">:background</span> <span class="s">"gray21"</span> <span class="ss">:underline</span> <span class="no">t</span><span class="p">))))</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">lsp-face-highlight-write</span> <span class="p">((</span><span class="no">t</span> <span class="p">(</span><span class="ss">:background</span> <span class="s">"gray21"</span> <span class="ss">:underline</span> <span class="no">t</span><span class="p">))))</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">markdown-code-face</span> <span class="p">((</span><span class="no">t</span> <span class="p">(</span><span class="ss">:inherit</span> <span class="no">nil</span><span class="p">))))</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">markdown-pre-face</span> <span class="p">((</span><span class="no">t</span> <span class="p">(</span><span class="ss">:inherit</span> <span class="nv">font-lock-constant-face</span><span class="p">))))</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">markup-meta-face</span> <span class="p">((</span><span class="no">t</span> <span class="p">(</span><span class="ss">:stipple</span> <span class="no">nil</span> <span class="ss">:foreground</span> <span class="s">"gray30"</span> <span class="ss">:inverse-video</span> <span class="no">nil</span> <span class="ss">:box</span> <span class="no">nil</span>
+								  <span class="ss">:strike-through</span> <span class="no">nil</span> <span class="ss">:overline</span> <span class="no">nil</span> <span class="ss">:underline</span> <span class="no">nil</span> <span class="ss">:slant</span> <span class="nv">normal</span>
+								  <span class="ss">:weight</span> <span class="nv">normal</span> <span class="ss">:height</span> <span class="mi">135</span> <span class="ss">:width</span> <span class="nv">normal</span> <span class="ss">:foundry</span> <span class="s">"unknown"</span> <span class="ss">:family</span> <span class="s">"Monospace"</span><span class="p">))))</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">symbol-overlay-default-face</span> <span class="p">((</span><span class="no">t</span> <span class="p">(</span><span class="ss">:background</span> <span class="s">"gray21"</span> <span class="ss">:underline</span> <span class="no">t</span><span class="p">))))</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">mozc-cand-posframe-normal-face</span> <span class="p">((</span><span class="no">t</span> <span class="p">(</span><span class="ss">:background</span> <span class="s">"#282D43"</span> <span class="ss">:foreground</span> <span class="s">"#C7C9D1"</span><span class="p">))))</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">mozc-cand-posframe-focused-face</span> <span class="p">((</span><span class="no">t</span> <span class="p">(</span><span class="ss">:background</span> <span class="s">"#393F60"</span> <span class="ss">:foreground</span> <span class="s">"#C7C9D1"</span><span class="p">))))</span>
+ <span class="o">'</span><span class="p">(</span><span class="nv">mozc-cand-posframe-footer-face</span> <span class="p">((</span><span class="no">t</span> <span class="p">(</span><span class="ss">:background</span> <span class="s">"#282D43"</span> <span class="ss">:foreground</span> <span class="s">"#454D73"</span><span class="p">)))))</span>
+<span class="p">(</span><span class="nv">put</span> <span class="ss">'dired-find-alternate-file</span> <span class="ss">'disabled</span> <span class="no">nil</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="7-hydra">7. Hydra</h2>
+
+<p><a href="https://github.com/abo-abo/hydra">hydra.el</a> は、連続して操作するときにプレフィクスキーをキャンセルさせるための elispです。</p>
+
+<p>日本では、<a href="http://sheephead.homelinux.org/2011/12/19/6930/">smartrep.el</a> が有名だったようですが、hydra.elも同様の機能を提供します。
+私はおもに8種の hydra を設定しています。それぞれを呼び出すための相関図は下記のとおりです。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──────────────────┐
+│ hydra-work-menu  │ ワークテーブル分岐
+└──────────────────┘
+￬￪ 相互に行き来できる
+┌──────────────────┐
+│ hydra-quick-menu │ よく使うコマンド群
+└──────────────────┘
+   │
+   ├── hydra-compile
+   ├── hydra-markdown
+   ├── hydra-package
+   ├── hydra-magit    &lt;&lt;- Dired からも呼び出せる
+   ├── hydra-browse   &lt;&lt;- Dashboard からも呼び出せる
+   └── hydra-pinky
+</code></pre></div></div>
+<h3 id="71-hydra-work-menu--hydra-quick-dired-コマンドメニュー">7.1 [hydra-work-menu / hydra-quick-dired] コマンドメニュー</h3>
+
+<p><a href="https://github.com/minorugh/dotfiles/blob/main/.emacs.d/inits/10_hydra-menu.el">hydra-work-menu</a> には、
+日記や俳句関係のシリーズ記事の追加、編集など、毎日頻繁に開くワークスペースへのショートカットを設定しています。</p>
+
+<p><img src="https://live.staticflickr.com/65535/50175364331_9fcf3c6c86_b.jpg" alt="hydra-work-menu" /></p>
+
+<p><a href="https://github.com/minorugh/dotfiles/blob/main/.emacs.d/inits/10_hydra-menu.el">hydra-quick-menu</a> の方には、
+編集作業で頻繁に使うツール群のほか、my:dired を開くためのショートカットも設定しています。</p>
+
+<p><img src="https://live.staticflickr.com/65535/50174826063_b4fa442b1e_b.jpg" alt="hydra-quick-menu" /></p>
+
+<p>この２つの hydra は、いわば私の秘書のような役割で、どちらからでも相互にトグルで呼び出せるようにしています。</p>
+
+<h3 id="72-hydra-extention-その他の-hydra-設定">7.2 [hydra-extention] その他の Hydra 設定。</h3>
+<p>hydra で工夫するといろんなコマンドのキーバインドを記憶する必要もなく GUI 感覚で操作できるので積極的に使っています。</p>
+
+<p>Qitta に詳しい記事を書いています。</p>
+
+<ul>
+  <li><a href="https://qiita.com/minoruGH/items/3776090fba46b1f9c228">Hydraで Emacsのキーバインド問題を解消</a></li>
+</ul>
+
+<h2 id="8-履歴--ファイル管理">8. 履歴 / ファイル管理</h2>
+
+<h3 id="81-auto-save-buffer-enhanced-ファイルの自動保存">8.1 [auto-save-buffer-enhanced] ファイルの自動保存</h3>
+
+<p><a href="https://github.com/kentaro/auto-save-buffers-enhanced">auto-save-buffer-enhanced.el</a> は、Emacs に本当の自動保存機能を提供します。</p>
+
+<p>Tramp-mode と併用すると emacs が固まってしまうことがあるようなので、 <code class="highlighter-rouge">auto-save-buffers-enhanced-exclude-regexps</code> を設定して trampでリモート編集時には auto-save-buffers を停止するようにしています。</p>
+
+<p>また、このパッケージには、scratchバッファーの内容も保存してくれるので併せ設定している。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">auto-save-buffers-enhanced</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">auto-save-buffers-enhanced-exclude-regexps</span> <span class="o">'</span><span class="p">(</span><span class="s">"^/ssh:"</span> <span class="s">"^/scp:"</span> <span class="s">"/sudo:"</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">auto-save-buffers-enhanced-quiet-save-p</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">auto-save-buffers-enhanced-save-scratch-buffer-to-file-p</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">auto-save-buffers-enhanced-file-related-with-scratch-buffer</span> <span class="s">"~/.emacs.d/tmp/scratch"</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">auto-save-buffers-enhanced</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">read-scratch-data</span> <span class="p">()</span>
+	<span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">file</span> <span class="s">"~/.emacs.d/tmp/scratch"</span><span class="p">))</span>
+	  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">file-exists-p</span> <span class="nv">file</span><span class="p">)</span>
+		<span class="p">(</span><span class="nv">set-buffer</span> <span class="p">(</span><span class="nv">get-buffer</span> <span class="s">"*scratch*"</span><span class="p">))</span>
+		<span class="p">(</span><span class="nv">erase-buffer</span><span class="p">)</span>
+		<span class="p">(</span><span class="nv">insert-file-contents</span> <span class="nv">file</span><span class="p">))))</span>
+  <span class="p">(</span><span class="nv">read-scratch-data</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="82-空になったファイルを自動的に削除">8.2 空になったファイルを自動的に削除</h3>
+
+<p>howm や org でメモをとるときに、ゴミファイルが残らないように時々メンテしています。ファイルを開いて中味を確認してから、一度閉じて dited で削除するというプロセスは手間がかかりすぎます。</p>
+
+<p>下記の設定をしておくと、<code class="highlighter-rouge">C-x h</code> で全選択して delete したあと <code class="highlighter-rouge">kill-buffer</code> することで自動的にファイルが削除されるので便利です。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">my:delete-file-if-no-contents</span> <span class="p">()</span>
+  <span class="s">"Automatic deletion for empty files (Valid in all modes)."</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nv">buffer-file-name</span> <span class="p">(</span><span class="nv">current-buffer</span><span class="p">))</span>
+			 <span class="p">(</span><span class="nb">=</span> <span class="p">(</span><span class="nv">point-min</span><span class="p">)</span> <span class="p">(</span><span class="nv">point-max</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nb">delete-file</span>
+     <span class="p">(</span><span class="nv">buffer-file-name</span> <span class="p">(</span><span class="nv">current-buffer</span><span class="p">)))))</span>
+<span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">not</span> <span class="p">(</span><span class="nv">memq</span> <span class="ss">'my:delete-file-if-no-contents</span> <span class="nv">after-save-hook</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">setq</span> <span class="nv">after-save-hook</span>
+		  <span class="p">(</span><span class="nb">cons</span> <span class="ss">'my:delete-file-if-no-contents</span> <span class="nv">after-save-hook</span><span class="p">)))</span>
+
+</code></pre></div></div>
+
+<h3 id="83-undo-tree">8.3 [undo-tree]</h3>
+<p><code class="highlighter-rouge">C-x -u</code> で <code class="highlighter-rouge">undo-tree-visualize</code> を呼ぶと tee の下に diff表示もしてくれるように設定しています。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">undo-tree</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:hook</span> <span class="p">((</span><span class="nv">prog-mode-hook</span> <span class="nv">text-mode-hook</span><span class="p">)</span> <span class="o">.</span> <span class="nv">undo-tree-mode</span><span class="p">)</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">bind-key*</span> <span class="s">"C-_"</span> <span class="ss">'undo-tree-undo</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">bind-key*</span> <span class="s">"C-\\"</span> <span class="ss">'undo-tree-undo</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">bind-key*</span> <span class="s">"C-/"</span> <span class="ss">'undo-tree-redo</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">bind-key*</span> <span class="s">"C-x u"</span> <span class="ss">'undo-tree-visualize</span><span class="p">)</span>
+  <span class="ss">:init</span>
+  <span class="p">(</span><span class="nv">make-variable-buffer-local</span> <span class="ss">'undo-tree-visualizer-diff</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">setq-default</span> <span class="nv">undo-tree-visualizer-diff</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">undo-tree-visualizer-timestamps</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">undo-tree-visualizer-diff</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">undo-tree-enable-undo-in-region</span> <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">undo-tree-auto-save-history</span> <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">undo-tree-history-directory-alist</span>
+		<span class="o">`</span><span class="p">((</span><span class="s">"."</span> <span class="o">.</span> <span class="o">,</span><span class="p">(</span><span class="nv">concat</span> <span class="nv">user-emacs-directory</span> <span class="s">"undo-tree-hist/"</span><span class="p">)))))</span>
+</code></pre></div></div>
+
+<h2 id="9-開発サポート">9. 開発サポート</h2>
+
+<h3 id="91-dotfiles">9.1 dotfiles</h3>
+<p>dotfilesとは、ホームディレクトリに置いてあるドット [.] から始まる設定ファイル（.bashrcとか）を管理しているリポジトリのことで、環境再構築に必要なシェルやエディタの設定からアプリケーションの設定まで幅広いものが置かれていて、当然ながら、[.emacs.d] の中身も含まれています。</p>
+
+<p><a href="https://minorugh.github.io/docs/dotfiles.html" class="btn">詳細はこちらにまとめました <i class="fa fa-arrow-circle-right"></i></a></p>
+
+<h3 id="92-magit">9.2 [magit]</h3>
+
+<p>magit status の画面は、デフォルトでは <code class="highlighter-rouge">other-window</code> に表示されますが、フルフレームで表示されるようにカスタマイズしています。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">setq</span> <span class="nv">magit-display-buffer-function</span> <span class="nf">#'</span><span class="nv">magit-display-buffer-fullframe-status-v1</span><span class="p">)</span>
+</code></pre></div></div>
+<h3 id="93-gist-from-buffer">9.3 gist-from-buffer</h3>
+<p>ターミナルからコマンドラインで使える <code class="highlighter-rouge">gist</code> を使って Emacsで開いているバッファーから <code class="highlighter-rouge">gist</code> できるように関数を作りました。
+<code class="highlighter-rouge">gist -o</code> とすることで結果の URLをブラウザで開いてくれるので便利です。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="p">(</span><span class="nb">defun</span> <span class="nv">gist-from-buffer</span> <span class="p">()</span>
+	<span class="s">"Gist from current buffer, then open chromium."</span>
+	<span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+	<span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">file</span> <span class="p">(</span><span class="nv">buffer-file-name</span> <span class="p">(</span><span class="nv">current-buffer</span><span class="p">))))</span>
+	  <span class="p">(</span><span class="nb">compile</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">"gist -o "</span> <span class="nv">file</span><span class="p">)))</span>
+	<span class="p">(</span><span class="nv">delete-other-windows</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="10-メモ環境">10. メモ環境</h2>
+
+<h3 id="101-org-mode--howm-mode">10.1 Org Mode / Howm Mode</h3>
+<p>私の場合、専門的なプログラミングもやらないし、現役引退の身なので GTDとかも必要ありません。Emacsはメモ書きに特化した使い方です。メモは全て howmを使って markdown記法で書いています。メモリストでカテゴリを分かりやすくするためのタグ付けをするのでメニュー機能として org-captureを使います。</p>
+
+<p>captureでメモ機能を発動させると画面が半分になるのがいやなので、最大化で開くようにしました。また、dashboard画面に簡単なタスクを表示するに org-agendaも使ーっています。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">howm</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:hook</span> <span class="p">(</span><span class="nv">emacs-startup-hook</span> <span class="o">.</span> <span class="nv">howm-mode</span><span class="p">)</span>
+  <span class="ss">:chord</span> <span class="p">(</span><span class="s">"@@"</span> <span class="o">.</span> <span class="nv">howm-list-all</span><span class="p">)</span>
+  <span class="ss">:init</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">howm-view-title-header</span> <span class="s">"#"</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">my:howm-create-file</span> <span class="p">()</span>
+    <span class="s">"Make howm create file with 'org-capture'."</span>
+    <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">format-time-string</span> <span class="s">"~/Dropbox/howm/%Y/%m/%Y%m%d%H%M.md"</span> <span class="p">(</span><span class="nv">current-time</span><span class="p">)))</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">bind-key</span> <span class="nv">[backtab]</span> <span class="ss">'howm-view-summary-previous-section</span> <span class="nv">howm-view-summary-mode-map</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">howm-directory</span> <span class="s">"~/Dropbox/howm"</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">howm-view-split-horizontally</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">howm-view-summary-persistent</span> <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">howm-normalizer</span> <span class="ss">'howm-sort-items-by-reverse-date</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">howm-user-font-lock-keywords</span>
+		<span class="o">'</span><span class="p">((</span><span class="s">"memo:"</span> <span class="o">.</span> <span class="p">(</span><span class="mi">0</span> <span class="ss">'gnus-group-mail-3</span><span class="p">))</span>
+		  <span class="p">(</span><span class="s">"note:"</span> <span class="o">.</span> <span class="p">(</span><span class="mi">0</span> <span class="ss">'epa-mark</span><span class="p">))</span>
+		  <span class="p">(</span><span class="s">"perl:"</span> <span class="o">.</span> <span class="p">(</span><span class="mi">0</span> <span class="ss">'diff-refine-added</span><span class="p">))</span>
+		  <span class="p">(</span><span class="s">"haiku:"</span> <span class="o">.</span> <span class="p">(</span><span class="mi">0</span> <span class="ss">'compilation-mode-line-exit</span><span class="p">))</span>
+		  <span class="p">(</span><span class="s">"emacs:"</span> <span class="o">.</span> <span class="p">(</span><span class="mi">0</span> <span class="ss">'compilation-info</span><span class="p">))</span>
+		  <span class="p">(</span><span class="s">"linux:"</span> <span class="o">.</span> <span class="p">(</span><span class="mi">0</span> <span class="ss">'compilation-error</span><span class="p">)))))</span>
+
+<span class="p">(</span><span class="nv">leaf</span> <span class="nv">org</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">bind-key</span> <span class="s">"C-c a"</span> <span class="ss">'org-agenda</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">bind-key</span> <span class="s">"C-c c"</span> <span class="ss">'org-capture</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">org-log-done</span> <span class="ss">'time</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">org-use-speed-commands</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">org-src-fontify-natively</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">org-agenda-files</span> <span class="o">'</span><span class="p">(</span><span class="s">"~/Dropbox/howm/org/task.org"</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">org-capture-templates</span>
+		<span class="o">'</span><span class="p">((</span><span class="s">"t"</span> <span class="s">" Task"</span> <span class="nv">entry</span> <span class="p">(</span><span class="nv">file+headline</span> <span class="s">"~/Dropbox/howm/org/task.org"</span> <span class="s">"Task"</span><span class="p">)</span>
+		   <span class="s">"** TODO %?\n SCHEDULED: %^t \n"</span> <span class="ss">:prepend</span> <span class="no">t</span><span class="p">)</span>
+		  <span class="p">(</span><span class="s">"m"</span> <span class="s">" Memo"</span> <span class="nv">plain</span> <span class="p">(</span><span class="nv">file</span> <span class="nv">my:howm-create-file</span><span class="p">)</span>
+		   <span class="s">"# memo: %?\n%U %i"</span><span class="p">)</span>
+		  <span class="p">(</span><span class="s">"n"</span> <span class="s">" Note"</span> <span class="nv">plain</span> <span class="p">(</span><span class="nv">file</span> <span class="nv">my:howm-create-file</span><span class="p">)</span>
+		   <span class="s">"# note: %?\n%U %i"</span><span class="p">)</span>
+		  <span class="p">(</span><span class="s">"p"</span> <span class="s">"★ Perl"</span> <span class="nv">plain</span> <span class="p">(</span><span class="nv">file</span> <span class="nv">my:howm-create-file</span><span class="p">)</span>
+		   <span class="s">"# Perl: %?\n%U %i\n\n&gt;&gt;&gt;\n\n```perl\n%i\n```"</span><span class="p">)</span>
+		  <span class="p">(</span><span class="s">"e"</span> <span class="s">"★ Emacs"</span> <span class="nv">plain</span> <span class="p">(</span><span class="nv">file</span> <span class="nv">my:howm-create-file</span><span class="p">)</span>
+		   <span class="s">"# emacs: %?\n%U %i\n\n```emacs-lisp\n%i\n```"</span><span class="p">)</span>
+		  <span class="p">(</span><span class="s">"l"</span> <span class="s">"★ Linux"</span> <span class="nv">plain</span> <span class="p">(</span><span class="nv">file</span> <span class="nv">my:howm-create-file</span><span class="p">)</span>
+		   <span class="s">"# linux: %?\n%U %i"</span><span class="p">)))</span>
+  <span class="ss">:init</span>
+  <span class="c1">;; Maximize the org-capture buffer</span>
+  <span class="p">(</span><span class="nb">defvar</span> <span class="nv">my:org-capture-before-config</span> <span class="no">nil</span>
+    <span class="s">"Window configuration before 'org-capture'."</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">defadvice</span> <span class="nv">org-capture</span> <span class="p">(</span><span class="nv">before</span> <span class="nv">save-config</span> <span class="nv">activate</span><span class="p">)</span>
+    <span class="s">"Save the window configuration before 'org-capture'."</span>
+    <span class="p">(</span><span class="k">setq</span> <span class="nv">my:org-capture-before-config</span> <span class="p">(</span><span class="nv">current-window-configuration</span><span class="p">)))</span>
+  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">'org-capture-mode-hook</span> <span class="ss">'delete-other-windows</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="102-open-junk-file">10.2 open-junk-file</h3>
+<p>junkファイルの保存も howmフォルダーに置くことで、howmの検索機能が利用できて便利です。また、直近の junkファイルを即開けるように open-last-junk-file を定義しました。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">open-junk-file</span> <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">open-junk-file-format</span> <span class="s">"~/Dropbox/howm/junk/%Y%m%d."</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">open-junk-file-find-file-function</span> <span class="ss">'find-file</span><span class="p">)</span>
+  <span class="ss">:init</span>
+  <span class="c1">;; https://qiita.com/zonkyy/items/eba6bc64f66d278f0032</span>
+  <span class="p">(</span><span class="nv">leaf</span> <span class="nv">em-glob</span>	<span class="ss">:require</span> <span class="no">t</span>
+	<span class="ss">:config</span>
+	<span class="p">(</span><span class="nb">defvar</span> <span class="nv">junk-file-dir</span> <span class="s">"~/Dropbox/howm/junk/"</span><span class="p">)</span>
+	<span class="p">(</span><span class="nb">defun</span> <span class="nv">open-last-junk-file</span> <span class="p">()</span>
+	  <span class="s">"Open last created junk-file."</span>
+	  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+	  <span class="p">(</span><span class="nv">find-file</span>
+	   <span class="p">(</span><span class="nb">car</span>
+		<span class="p">(</span><span class="nb">last</span> <span class="p">(</span><span class="nv">eshell-extended-glob</span>
+			   <span class="p">(</span><span class="nv">concat</span>
+				<span class="p">(</span><span class="nv">file-name-as-directory</span> <span class="nv">junk-file-dir</span><span class="p">)</span>
+				<span class="s">"*.*.*"</span><span class="p">))))))))</span>
+</code></pre></div></div>
+
+<h3 id="103-scratch-buffer">10.3 scratch buffer</h3>
+<p>メールや WEBなど全てを Emacsでという思想もありますが、窮屈なので私好みではありません。少し長めのメール文章などは、scratch バッファーに書いてコピペします。また、scratchを付箋代わりにも使うので、自動保存のために <code class="highlighter-rouge">persistent-scratch.el</code> を使います。</p>
+
+<p>scratchバッファーの永続化にはいろいろ Tipsもあるようですが、標準機能で簡単に設定できます。なんだかんだで便利な scratchなので toggle-scratch を設定して愛用しています。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; Set buffer that can not be killed</span>
+<span class="p">(</span><span class="nv">with-current-buffer</span> <span class="s">"*scratch*"</span>
+  <span class="p">(</span><span class="nv">emacs-lock-mode</span> <span class="ss">'kill</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">with-current-buffer</span> <span class="s">"*Messages*"</span>
+  <span class="p">(</span><span class="nv">emacs-lock-mode</span> <span class="ss">'kill</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nv">leaf</span> <span class="nv">persistent-scratch</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">persistent-scratch-setup-default</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nv">bind-key</span>
+ <span class="nv">[S-return]</span>
+ <span class="p">(</span><span class="nb">defun</span> <span class="nv">toggle-scratch</span> <span class="p">()</span>
+   <span class="s">"Toggle current buffer and *scratch* buffer."</span>
+   <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+   <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">not</span> <span class="p">(</span><span class="nb">string=</span> <span class="s">"*scratch*"</span> <span class="p">(</span><span class="nv">buffer-name</span><span class="p">)))</span>
+	   <span class="p">(</span><span class="k">progn</span>
+		 <span class="p">(</span><span class="k">setq</span> <span class="nv">toggle-scratch-prev-buffer</span> <span class="p">(</span><span class="nv">buffer-name</span><span class="p">))</span>
+		 <span class="p">(</span><span class="nv">switch-to-buffer</span> <span class="s">"*scratch*"</span><span class="p">))</span>
+	 <span class="p">(</span><span class="nv">switch-to-buffer</span> <span class="nv">toggle-scratch-prev-buffer</span><span class="p">))))</span>
+
+</code></pre></div></div>
+<h2 id="11-σε-ｵﾚ-流-function-key-設定">11. σ(`ε´) ｵﾚ 流 Function Key 設定</h2>
+
+<p>かなり我流かつ邪道的なキーバインドなので参考にはならないかと…。</p>
+
+<h3 id="f1-emacs-help">F1: emacs help</h3>
+
+<p>Emacs標準の helpキーなのでそのまま使います。</p>
+
+<p>which-key.el を導入することで各コマンドのガイドがミニバファーに表示されるので便利です。</p>
+
+<p><img src="https://live.staticflickr.com/65535/51419241903_d99af2153c_b.jpg" alt="Alt Text" /></p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">which-key</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">which-key-mode</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">which-key-max-description-length</span> <span class="mi">40</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">which-key-use-C-h-commands</span> <span class="no">t</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="f2-imenu-list-smart-toggle">F2: imenu-list-smart-toggle</h3>
+
+<p><code class="highlighter-rouge">counsel-css</code> と併用することで cssファイル編集時に重宝しています。</p>
+
+<p><img src="https://live.staticflickr.com/65535/51419973025_01d97fe83b_b.jpg" alt="Alt Text" /></p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">imenu-list</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:bind</span> <span class="p">(</span><span class="s">"&lt;f2&gt;"</span> <span class="o">.</span> <span class="nv">imenu-list-smart-toggle</span><span class="p">)</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">imenu-list-size</span> <span class="mi">30</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">imenu-list-position</span> <span class="ss">'left</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">imenu-list-focus-after-activation</span> <span class="no">t</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nv">leaf</span> <span class="nv">counsel-css</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">'css-mode-hook</span> <span class="nf">#'</span><span class="nv">counsel-css-imenu-setup</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="f3-filer-current-dir-open">F3: filer-current-dir-open</h3>
+<p>編集中のフィル（または dired）のカレントデレクトリで debianのファルマネージャー <code class="highlighter-rouge">nautilus</code> を開きます。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">filer-current-dir-open</span> <span class="p">()</span>
+  <span class="s">"Open filer in current dir."</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">shell-command</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">"nautilus "</span> <span class="nv">default-directory</span><span class="p">)))</span>
+<span class="p">(</span><span class="nv">bind-key</span> <span class="s">"&lt;f3&gt;"</span> <span class="ss">'filer-current-dir-open</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="f4-term-current-dir-open">F4: term-current-dir-open</h3>
+<p>編集中のフィル（または dired）のカレントデレクトリで debianのターミナル <code class="highlighter-rouge">gonome-terminal</code> を開きます。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">term-current-dir-open</span> <span class="p">()</span>
+  <span class="s">"Open terminal application in current dir."</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">dir</span> <span class="p">(</span><span class="nv">directory-file-name</span> <span class="nv">default-directory</span><span class="p">)))</span>
+	<span class="p">(</span><span class="nv">shell-command</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">"gnome-terminal --working-directory "</span> <span class="nv">dir</span><span class="p">))))</span>
+<span class="p">(</span><span class="nv">bind-key</span> <span class="s">"&lt;f4&gt;"</span> <span class="ss">'term-current-dir-open</span><span class="p">)</span>
+</code></pre></div></div>
+<p><code class="highlighter-rouge">eshell</code> も併用していて、同様に自動的にバッファーファイルのカレントで開くようにしています。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">eshell-on-current-buffer</span> <span class="p">()</span>
+  <span class="s">"Set the eshell directory to the current buffer."</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">path</span> <span class="p">(</span><span class="nv">file-name-directory</span> <span class="p">(</span><span class="nb">or</span>  <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">)</span> <span class="nv">default-directory</span><span class="p">))))</span>
+	<span class="p">(</span><span class="nv">with-current-buffer</span> <span class="s">"*eshell*"</span>
+	  <span class="p">(</span><span class="nv">cd</span> <span class="nv">path</span><span class="p">)</span>
+	  <span class="p">(</span><span class="nv">eshell-emit-prompt</span><span class="p">))))</span>
+</code></pre></div></div>
+
+<h3 id="f5-quickrun">F5: quickrun</h3>
+<p>open-junk-fileで作成したショートコードをバッファーで開いた状態で、即試運転できるすぐれものです。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">quickrun</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:bind</span> <span class="p">(</span><span class="s">"&lt;f5&gt;"</span> <span class="o">.</span> <span class="nv">quickrun</span><span class="p">))</span>
+</code></pre></div></div>
+<h3 id="f6-select-counsel-command">F6: select-counsel-command</h3>
+
+<p>counselのキーバンドはあまりに多すぎて覚えられません。</p>
+
+<p><code class="highlighter-rouge">Mx counsel "^counsel "</code> することでミニバファーに表示される一覧から選ぶと便利です。</p>
+
+<p><img src="https://live.staticflickr.com/65535/51418255432_9a79b6db79_b.jpg" alt="Alt Text" /></p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">select-counsel-command</span> <span class="p">()</span>
+  <span class="s">"Narrow the only counsel-command in `M-x'."</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">counsel-M-x</span> <span class="s">"^counsel "</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">bind-key</span> <span class="s">"&lt;f6&gt;"</span> <span class="ss">'select-counsel-command</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="f7-calendar">F7: calendar</h3>
+<p>作業中にカレンダーをチラ見したいときもあります。</p>
+
+<p>Calfwまでは必要ないので標準機能の calendarを使っています。F7を押すことで、表示/非表示をトグルします。
+<code class="highlighter-rouge">japanese-holidays</code> を installし [土日、今日] を強調させています。</p>
+
+<p><img src="https://live.staticflickr.com/65535/48659029836_932b26293e_b.jpg" alt="Alt Text" /></p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">eval-after-load</span> <span class="s">"calendar"</span>
+  <span class="p">(</span><span class="nv">leaf</span> <span class="nv">japanese-holidays</span>
+	<span class="ss">:ensure</span> <span class="no">t</span> <span class="ss">:require</span> <span class="no">t</span>
+	<span class="ss">:bind</span> <span class="p">((</span><span class="s">"&lt;f7&gt;"</span> <span class="o">.</span> <span class="nv">calendar</span><span class="p">)</span>
+		   <span class="p">(</span><span class="ss">:calendar-mode-map</span>
+			<span class="p">(</span><span class="s">"&lt;f7&gt;"</span> <span class="o">.</span> <span class="nv">quit-window</span><span class="p">)))</span>
+	<span class="ss">:config</span>
+	<span class="p">(</span><span class="k">setq</span> <span class="nv">calendar-holidays</span>
+		  <span class="p">(</span><span class="nb">append</span> <span class="nv">japanese-holidays</span> <span class="nv">holiday-local-holidays</span> <span class="nv">holiday-other-holidays</span><span class="p">))</span>
+	<span class="p">(</span><span class="k">setq</span> <span class="nv">calendar-mark-holidays-flag</span> <span class="no">t</span><span class="p">)</span> <span class="c1">; Show holidays on calendar</span>
+	<span class="p">(</span><span class="k">setq</span> <span class="nv">japanese-holiday-weekend</span> <span class="o">'</span><span class="p">(</span><span class="mi">0</span> <span class="mi">6</span><span class="p">)</span>     <span class="c1">; Show Saturdays and Sundays as holidays</span>
+		  <span class="nv">japanese-holiday-weekend-marker</span>     <span class="c1">; Saturday is displayed in light blue</span>
+		  <span class="o">'</span><span class="p">(</span><span class="nv">holiday</span> <span class="no">nil</span> <span class="no">nil</span> <span class="no">nil</span> <span class="no">nil</span> <span class="no">nil</span> <span class="nv">japanese-holiday-saturday</span><span class="p">))</span>
+	<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">'calendar-today-visible-hook</span> <span class="ss">'japanese-holiday-mark-weekend</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">'calendar-today-invisible-hook</span> <span class="ss">'japanese-holiday-mark-weekend</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">'calendar-today-visible-hook</span> <span class="ss">'calendar-mark-today</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<h3 id="f8-google-translate">F8: google-translate</h3>
+
+<p>Emacsの google-translateがときどき動かなくなることが多くなりました。</p>
+
+<p>やむなくプラウザに出力する <code class="highlighter-rouge">google-translate-region</code> という関数や WEBの翻訳ページを開くための <code class="highlighter-rouge">google-translate-web</code>  という簡単な関数を作りました。これらのコマンドをミニバッファーの一覧から選べるように <code class="highlighter-rouge">F8</code> に割り当てました。</p>
+
+<p><img src="https://live.staticflickr.com/65535/51424994862_f260aa163f_b.jpg" alt="Alt Text" /></p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">google-translate</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:bind</span> <span class="p">((</span><span class="s">"C-t"</span> <span class="o">.</span> <span class="nv">google-translate-auto</span><span class="p">)</span>
+		 <span class="p">(</span><span class="s">"&lt;f8&gt;"</span> <span class="o">.</span> <span class="nv">select-google-translate</span><span class="p">))</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">google-translate-auto</span> <span class="p">()</span>
+	<span class="s">"Automatically recognize and translate Japanese and English."</span>
+	<span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+	<span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">use-region-p</span><span class="p">)</span>
+		<span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nb">string</span> <span class="p">(</span><span class="nv">buffer-substring-no-properties</span> <span class="p">(</span><span class="nv">region-beginning</span><span class="p">)</span> <span class="p">(</span><span class="nv">region-end</span><span class="p">))))</span>
+		  <span class="p">(</span><span class="nv">deactivate-mark</span><span class="p">)</span>
+		  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">string-match</span> <span class="p">(</span><span class="nb">format</span> <span class="s">"\\`[%s]+\\'"</span> <span class="s">"[:ascii:]"</span><span class="p">)</span>
+							<span class="nb">string</span><span class="p">)</span>
+			  <span class="p">(</span><span class="nv">google-translate-translate</span>
+			   <span class="s">"en"</span> <span class="s">"ja"</span>
+			   <span class="nb">string</span><span class="p">)</span>
+			<span class="p">(</span><span class="nv">google-translate-translate</span>
+			 <span class="s">"ja"</span> <span class="s">"en"</span>
+			 <span class="nb">string</span><span class="p">)))</span>
+	  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nb">string</span> <span class="p">(</span><span class="nv">read-string</span> <span class="s">"Google Translate: "</span><span class="p">)))</span>
+		<span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">string-match</span>
+			 <span class="p">(</span><span class="nb">format</span> <span class="s">"\\`[%s]+\\'"</span> <span class="s">"[:ascii:]"</span><span class="p">)</span>
+			 <span class="nb">string</span><span class="p">)</span>
+			<span class="p">(</span><span class="nv">google-translate-translate</span>
+			 <span class="s">"en"</span> <span class="s">"ja"</span>
+			 <span class="nb">string</span><span class="p">)</span>
+		  <span class="p">(</span><span class="nv">google-translate-translate</span>
+		   <span class="s">"ja"</span> <span class="s">"en"</span>
+		   <span class="nb">string</span><span class="p">)))))</span>
+
+  <span class="c1">;; Fix error of "Failed to search TKK"</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">google-translate--get-b-d1</span> <span class="p">()</span>
+  	<span class="s">"Search TKK."</span>
+  	<span class="p">(</span><span class="nb">list</span> <span class="mi">427110</span> <span class="mi">1469889687</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">google-translate-region</span> <span class="p">()</span>
+	<span class="s">"Open google translate with chromium."</span>
+	<span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+	<span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">use-region-p</span><span class="p">)</span>
+		<span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nb">string</span> <span class="p">(</span><span class="nv">buffer-substring-no-properties</span> <span class="p">(</span><span class="nv">region-beginning</span><span class="p">)</span> <span class="p">(</span><span class="nv">region-end</span><span class="p">))))</span>
+		  <span class="p">(</span><span class="nv">deactivate-mark</span><span class="p">)</span>
+		  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">string-match</span> <span class="p">(</span><span class="nb">format</span> <span class="s">"\\`[%s]+\\'"</span> <span class="s">"[:ascii:]"</span><span class="p">)</span>
+							<span class="nb">string</span><span class="p">)</span>
+			  <span class="p">(</span><span class="nv">browse-url</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">"https://translate.google.com/?source=gtx#en/ja/"</span>
+								  <span class="p">(</span><span class="nv">url-hexify-string</span> <span class="nb">string</span><span class="p">)))</span>
+			<span class="p">(</span><span class="nv">browse-url</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">"https://translate.google.com/?source=gtx#ja/en/"</span>
+								<span class="p">(</span><span class="nv">url-hexify-string</span> <span class="nb">string</span><span class="p">)))))</span>
+	  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nb">string</span> <span class="p">(</span><span class="nv">read-string</span> <span class="s">"Google Translate: "</span><span class="p">)))</span>
+		<span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">string-match</span>
+			 <span class="p">(</span><span class="nb">format</span> <span class="s">"\\`[%s]+\\'"</span> <span class="s">"[:ascii:]"</span><span class="p">)</span>
+			 <span class="nb">string</span><span class="p">)</span>
+			<span class="p">(</span><span class="nv">browse-url</span>
+			 <span class="p">(</span><span class="nv">concat</span> <span class="s">"https://translate.google.com/?source=gtx#en/ja/"</span> <span class="p">(</span><span class="nv">url-hexify-string</span> <span class="nb">string</span><span class="p">)))</span>
+		  <span class="p">(</span><span class="nv">browse-url</span>
+		   <span class="p">(</span><span class="nv">concat</span> <span class="s">"https://translate.google.com/?source=gtx#ja/en/"</span> <span class="p">(</span><span class="nv">url-hexify-string</span> <span class="nb">string</span><span class="p">)))))))</span>
+
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">google-translate-web</span> <span class="p">()</span>
+	<span class="s">"Open Google-chrome for translate page."</span>
+	<span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">browse-url</span> <span class="s">"https://translate.google.co.jp/?hl=ja"</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">select-google-translate</span> <span class="p">()</span>
+	<span class="s">"Select google translat command."</span>
+	<span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">counsel-M-x</span> <span class="s">"google-translate "</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<h3 id="f9-display-line-numbers-mode">F9: display-line-numbers-mode</h3>
+<p>行番号表示をトグルします。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">display-line-numbers</span>
+  <span class="ss">:bind</span> <span class="p">(</span><span class="s">"&lt;f9&gt;"</span> <span class="o">.</span> <span class="nv">display-line-numbers-mode</span><span class="p">)</span>
+  <span class="ss">:hook</span> <span class="p">((</span><span class="nv">prog-mode-hook</span> <span class="nv">text-mode-hook</span><span class="p">)</span> <span class="o">.</span> <span class="nv">display-line-numbers-mode</span><span class="p">))</span>
+</code></pre></div></div>
+<h3 id="f10-neotree-toggle">F10: neotree-toggle</h3>
+
+<p>neotreeの表示をトグルします。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">neotree</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:bind</span> <span class="p">((</span><span class="s">"&lt;f10&gt;"</span> <span class="o">.</span> <span class="nv">neotree-find</span><span class="p">)</span>
+		 <span class="p">(</span><span class="ss">:neotree-mode-map</span>
+		  <span class="p">(</span><span class="s">"RET"</span> <span class="o">.</span> <span class="nv">neotree-enter-hide</span><span class="p">)</span>
+		  <span class="p">(</span><span class="s">"a"</span> <span class="o">.</span> <span class="nv">neotree-hidden-file-toggle</span><span class="p">)</span>
+		  <span class="p">(</span><span class="s">"&lt;left&gt;"</span> <span class="o">.</span> <span class="nv">neotree-select-up-node</span><span class="p">)</span>
+		  <span class="p">(</span><span class="s">"&lt;right&gt;"</span> <span class="o">.</span> <span class="nv">neotree-change-root</span><span class="p">)</span>
+		  <span class="p">(</span><span class="s">"&lt;f10&gt;"</span> <span class="o">.</span> <span class="nv">neotree-toggle</span><span class="p">)))</span>
+  <span class="ss">:init</span>
+  <span class="p">(</span><span class="nv">setq-default</span> <span class="nv">neo-keymap-style</span> <span class="ss">'concise</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">neo-create-file-auto-open</span> <span class="no">t</span><span class="p">)</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">doom-themes-neotree-config</span><span class="p">))</span>
+</code></pre></div></div>
+<h3 id="f11-toggle-frame-fullscreen">F11: toggle-frame-fullscreen</h3>
+<p>Emacsの標準機能なので、そのまま使います。</p>
+
+<p>普段あまり使いませんが、解像度の小さいサブ機（Thinkpad X250）で作業するときなどには有用です。</p>
+
+<h3 id="f12-mydarkroom-toggle">F12: my:darkroom-toggle</h3>
+
+<p>もっともよく使う執筆モードで、画面表示が以下のように変わります。</p>
+
+<ul>
+  <li>フルスクリーンモード</li>
+  <li>行番号表示を消す</li>
+  <li>行間を少し広くする（お好みで…）</li>
+</ul>
+
+<p><img src="https://live.staticflickr.com/65535/51419995320_384abc0671_b.jpg" alt="Alt Text" /></p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">darkroom</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:bind</span> <span class="p">(</span><span class="s">"&lt;f12&gt;"</span> <span class="o">.</span> <span class="nv">my:darkroom-mode-in</span><span class="p">)</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">my:darkroom-mode-in</span> <span class="p">()</span>
+	<span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">toggle-frame-fullscreen</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">display-line-numbers-mode</span> <span class="mi">0</span><span class="p">)</span>
+	<span class="p">(</span><span class="k">setq</span> <span class="nv">line-spacing</span> <span class="mf">0.4</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">darkroom-mode</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">bind-key</span> <span class="s">"&lt;f12&gt;"</span> <span class="ss">'my:darkroom-mode-out</span> <span class="nv">darkroom-mode-map</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">my:darkroom-mode-out</span> <span class="p">()</span>
+	<span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">darkroom-mode</span> <span class="mi">0</span><span class="p">)</span>
+	<span class="p">(</span><span class="k">setq</span> <span class="nv">line-spacing</span> <span class="mf">0.1</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">display-line-numbers-mode</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">toggle-frame-fullscreen</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<h2 id="12-フォント--配色関係">12. フォント / 配色関係</h2>
+
+<h3 id="121-フォント設定">12.1 フォント設定</h3>
+
+<p>メイン機（Thinkpad E590）とサブ機（Thinkpad X250）とで解像度が違うので設定を変えます。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">'default-frame-alist</span> <span class="o">'</span><span class="p">(</span><span class="nv">font</span> <span class="o">.</span> <span class="s">"Cica-18"</span><span class="p">))</span>
+<span class="c1">;; for sub-machine</span>
+<span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">string-match</span> <span class="s">"x250"</span> <span class="p">(</span><span class="nv">shell-command-to-string</span> <span class="s">"uname -n"</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">'default-frame-alist</span> <span class="o">'</span><span class="p">(</span><span class="nv">font</span> <span class="o">.</span> <span class="s">"Cica-15"</span><span class="p">)))</span>
+</code></pre></div></div>
+<h3 id="112-volatile-highlightコピペした領域を強調">11.2 [volatile-highlight]コピペした領域を強調</h3>
+<p>コピペした領域をフラッシングさせます。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">volatile-highlights</span> <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">volatile-highlights-mode</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">with-no-warnings</span>
+    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">fboundp</span> <span class="ss">'pulse-momentary-highlight-region</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">defun</span> <span class="nv">my-vhl-pulse</span> <span class="p">(</span><span class="nv">beg</span> <span class="nv">end</span> <span class="k">&amp;optional</span> <span class="nv">_buf</span> <span class="nv">face</span><span class="p">)</span>
+		<span class="s">"Pulse the changes."</span>
+		<span class="p">(</span><span class="nv">pulse-momentary-highlight-region</span> <span class="nv">beg</span> <span class="nv">end</span> <span class="nv">face</span><span class="p">))</span>
+      <span class="p">(</span><span class="nv">advice-add</span> <span class="nf">#'</span><span class="nv">vhl/.make-hl</span> <span class="ss">:override</span> <span class="nf">#'</span><span class="nv">my-vhl-pulse</span><span class="p">))))</span>
+</code></pre></div></div>
+
+<h2 id="13-ユーティリティー関数">13. ユーティリティー関数</h2>
+
+<h3 id="61-emacs-lock-mode-scratch-バッファーを消さない">6.1 [emacs-lock-mode] scratch バッファーを消さない</h3>
+
+<p>難しい関数を設定せずとも内蔵コマンドで簡単に実現できます。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; Set buffer that can not be killed</span>
+<span class="p">(</span><span class="nv">with-current-buffer</span> <span class="s">"*scratch*"</span>
+  <span class="p">(</span><span class="nv">emacs-lock-mode</span> <span class="ss">'kill</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">with-current-buffer</span> <span class="s">"*Messages*"</span>
+  <span class="p">(</span><span class="nv">emacs-lock-mode</span> <span class="ss">'kill</span><span class="p">))</span>
+</code></pre></div></div>
+<h3 id="131-terminal-を-emacsから呼び出す">13.1 Terminal を Emacsから呼び出す</h3>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">term-current-dir-open</span> <span class="p">()</span>
+  <span class="s">"Open terminal application in current dir."</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">dir</span> <span class="p">(</span><span class="nv">directory-file-name</span> <span class="nv">default-directory</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nb">compile</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">"gnome-terminal --working-directory "</span> <span class="nv">dir</span><span class="p">))))</span>
+<span class="p">(</span><span class="nv">bind-key</span> <span class="s">"&lt;f4&gt;"</span> <span class="ss">'term-current-dir-open</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="132-thunar-を-emacsから呼び出す">13.2 Thunar を Emacsから呼び出す</h3>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">filer-current-dir-open</span> <span class="p">()</span>
+  <span class="s">"Open filer in current dir."</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">compile</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">"Thunar "</span> <span class="nv">default-directory</span><span class="p">)))</span>
+<span class="p">(</span><span class="nv">bind-key</span> <span class="s">"&lt;f3&gt;"</span> <span class="ss">'filer-current-dir-open</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="133-restart-emacs-emacsを再起動する">13.3 [restart-emacs] Emacsを再起動する</h3>
+<p><code class="highlighter-rouge">C-x C-c</code> は、デフォルトで <code class="highlighter-rouge">(save-buffers-kill-emacs)</code> に割り当てられていますが、Emacsの再起動にリバインドしました。</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">leaf</span> <span class="nv">restart-emacs</span> <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:bind</span> <span class="p">((</span><span class="s">"C-x C-c"</span> <span class="o">.</span> <span class="nv">restart-emacs</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<h2 id="14-おわりに">14. おわりに</h2>
+
+<p>以上が私の init.el とその説明です。</p>
+
+<p>私の Emacsは、Webページのメンテナンスがメインで、プログラムミング・エディタというよりは、「賢くて多機能なワープロ」という存在です。ありえない…ような邪道キーバインドや未熟な点も多々ありますが、諸先輩に学びながら育てていきたいと願っています。</p>
+
+<div style="flort:left">
+&ensp;<a href="https://twitter.com/share" class="twitter-share-button" data-url="" data-via="minorugh" data-text="" data-lang="jp" data-count="horizontal">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</div>
+<blockquote class="twitter-tweet" lang="ja"><p lang="ja" dir="ltr"> <a href="https://twitter.com/minorugh/status/839117944260997120"></a>&lt;/blockquote&gt;
+
+
+</p></blockquote>
+
+
+            </div>
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="http://localhost:4000/docs/configuration/configyml.html" class="btn btn-neutral float-right" title="Theme Configuration">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+    <hr/>
+
+    <div role="contentinfo">
+      <p>
+          © Copyright 2022 Carlos Pereira Atencio.
+      </p>
+    </div>
+    Built with
+    <a href="https://jekyllrb.com" target="_blank">Jekyll</a>
+    using a <a href="https://github.com/carlosperate/jekyll-theme-rtd" target="_blank">theme</a>
+    based on <a href="https://sphinx-rtd-theme.readthedocs.io" target="_blank">Read the Docs</a>.
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <a href="https://github.com/carlosperate/jekyll-theme-rtd" class="fa fa-github" target="_blank" style="float: left; color: #fcfcfc"> GitHub</a>
+        <span style="margin-left: 15px"><a href="http://localhost:4000/docs/configuration/configyml.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    </span>
+</div>
+
+
+  <script>var base_url = '';</script>
+  <script src="http://localhost:4000/assets/js/jquery-2.1.1.min.js" defer></script>
+  <script src="http://localhost:4000/assets/js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="http://localhost:4000/assets/js/theme.js" defer></script>
+  <script type="text/javascript" defer>
+    hljs.initHighlightingOnLoad();
+    window.addEventListener('load', function() {
+      SphinxRtdTheme.Navigation.enable(true);
+    });
+  </script>
+  <!-- Build Date: 2022-08-13 08:35 -->
+</body>
+</html>
