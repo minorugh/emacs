@@ -292,9 +292,36 @@ Emacsバッファーで領域を選択した後、バインドしたワンキー
 		 ("g" . my:google)))
 ```
 
+### 5.2 [selected] browse-urlで検索サイトで開く
 検索結果を browse-url で表示させるユーザーコマンドは、検索 urlのフォーマットとさえわかれば、パッケージツールに頼らずともお好みのマイコマンドを作成できます。
 
-### 5.2 IME のオン・オフを自動制御する for selected
+```emacs-lisp
+(defun my:koujien (str)
+  (interactive (list (my:get-region nil)))
+  (browse-url (format "https://sakura-paris.org/dict/広辞苑/prefix/%s"
+                      (upcase (url-hexify-string str)))))
+
+(defun my:weblio (str)
+  (interactive (list (my:get-region nil)))
+  (browse-url (format "https://www.weblio.jp/content/%s"
+	                  (upcase (url-hexify-string str)))))
+
+(defun my:eijiro (str)
+  (interactive (list (my:get-region nil)))
+  (browse-url (format "https://eow.alc.co.jp/%s/UTF-8/"
+                      (upcase (url-hexify-string str)))))
+
+(defun my:google (str)
+	(interactive (list (my:get-region nil)))
+	(browse-url (format "https://www.google.com/search?hl=ja&q=%s"
+						(upcase (url-hexify-string str)))))
+
+(defun my:get-region (r)
+	"Get search word from region."
+	(buffer-substring-no-properties (region-beginning) (region-end)))
+```
+
+### 5.3 [selected] IME のオン・オフを自動制御する
 selectedコマンドを選択するときは、IMEをOffにしないといけないのですがこれを自動でさせます。
 
 領域を選択し始める時に IMEをオフにして、コマンド発行後に IMEを元に戻すという例が、
@@ -327,35 +354,10 @@ selectedコマンドを選択するときは、IMEをOffにしないといけな
   (add-hook
    'deactivate-mark-hook
    #'(lambda ()
-	   (unless (null my:ime-flag) (my:ime-on))))
-
-  ;; User-functions-for-selected
-  (defun my:koujien (str)
-	(interactive (list (my:get-region nil)))
-	(browse-url (format "https://sakura-paris.org/dict/広辞苑/prefix/%s"
-						(upcase (url-hexify-string str)))))
-
-  (defun my:weblio (str)
-	(interactive (list (my:get-region nil)))
-	(browse-url (format "https://www.weblio.jp/content/%s"
-						(upcase (url-hexify-string str)))))
-
-  (defun my:eijiro (str)
-	(interactive (list (my:get-region nil)))
-	(browse-url (format "https://eow.alc.co.jp/%s/UTF-8/"
-						(upcase (url-hexify-string str)))))
-
-  (defun my:google (str)
-	(interactive (list (my:get-region nil)))
-	(browse-url (format "https://www.google.com/search?hl=ja&q=%s"
-						(upcase (url-hexify-string str)))))
-
-  (defun my:get-region (r)
-	"Get search word from region."
-	(buffer-substring-no-properties (region-beginning) (region-end))))
+	   (unless (null my:ime-flag) (my:ime-on)))))
 ```
 
-### 5.3 [darkroom-mode] 執筆モード
+### 5.4 [darkroom-mode] 執筆モード
 [darkroom.el](https://github.com/joaotavora/darkroom)  は、画面の余計な項目を最小限にして、文章の執筆に集中できるようにするパッケージです。
 
 タイトルバーやモードラインが一時的に削除されてフルスクリーンになり、テキストが拡大され、テキストがウィンドウの中央に配置されるように余白が調整されます。[view-mode, diff-hl-mode, display-line-numbers-mode] をOffにし、行間も少し大きくしてより読みやすくしています。
@@ -392,7 +394,7 @@ darkroom-modeからでるときは、revert-buffer で再読込してもとに�
 	(interactive)
 	(revert-buffer t t)))
 ```
-### 5.4 [yatex] YaTexで Tex編集
+### 5.5 [yatex] YaTexで Tex編集
 [yatex](https://github.com/emacsmirror/yatex) は、Emacsの上で動作する LaTeX の入力支援環境です。
 
 ごく一般的な設定例ですが、参考になるとしたら [yatexprc](https://www.yatex.org/gitbucket/yuuji/yatex/blob/c45e2a0187b702c5e817bf3023816dde154f0de9/yatexprc.el) の `M-x YaTeX-lpr` を使って一気に PDF作成まで自動化している点でしょうか。
@@ -428,7 +430,7 @@ rm *.au* *.dv* *.lo*
 dvipdfmx $1 && open -a Preview.app ${name%.*}.pdf
 ```
 
-### 5.5 swiper を migemo 化してローマ字入力で日本語を検索
+### 5.6 swiper を migemo 化してローマ字入力で日本語を検索
 [avy-migemo-e.g.swiper.el](https://github.com/momomo5717/avy-migemo) を使って出来ていたのですが、２年ほど前から更新が止まってしまっていて動きません。
 
 つい最近、avy-migemo を使わない [swiper-migemo](https://github.com/tam17aki/swiper-migemo)を GitHubで見つけたので試した処、機嫌よく動いてくれています。
@@ -439,7 +441,7 @@ Melpaにはアップされていないみたいなので el-get で取得して�
 	:el-get tam17aki/swiper-migemo
 	:global-minor-mode t)
 ```
-### 5.6 pinky 小指問題解消
+### 5.7 pinky 小指問題解消
 Emacs Pinky 小指問題の解消が目的で作られたものが、[Sollst Work Blog](https://solist.work/blog/posts/emacs-pinky-hydra/) にあったのでパクりました。
 
 ```
