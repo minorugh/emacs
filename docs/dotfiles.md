@@ -42,7 +42,7 @@ dotfiles のうち GitHubに配置できないものは、Dropboxに置くよう
 2. 必ずしなければならない作業 → 自動化できないか考える 
 
 
-<a href="http://objectclub.jp/community/memorial/homepage3.nifty.com/masarl/article/nmake.html" class="btn btn-default btn-lg">石井 勝/ 自動化のための nmake 入門</a>
+* <a href="http://objectclub.jp/community/memorial/homepage3.nifty.com/masarl/article/nmake.html">石井 勝/ 自動化のための nmake 入門</a>
 
 dotfilesによる環境再構築を考える上で Makefileは必須のアイテムです。
 
