@@ -22,7 +22,7 @@
   "Open root dir."
   (interactive)
   (setq dired-listing-switches "-lgGhFA")
-  (find-file "src/github.com/minorugh/.emacs.d/hugo/"))
+  (find-file "src/github.com/minorugh/emacs.d/"))
 
 (defun my:github.io-dir ()
   "Open root dir."

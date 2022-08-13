@@ -66,7 +66,7 @@
    Work Menu
   ------^^^^^^^^^^^^^^^^^^^^^^^^^^----------------------------------------------------------------------------------------
   _d_:日記   _m_:毎日   _w_:毎週   _k_:兼題^^   _t_:定例   _s_:吟行^^   近詠:_n_   創作:_[_._]_   keep_;_   _h_:github.io
-  _a_:合評   _e_:hugo   _b_ackup   _g_ist:_L_   pass_x_c   repo:_@_^^   view:_:_   _p_rint:_r_g   _i_edit   _._:.emacs.d/
+  _a_:合評   _e_:hugo   _b_ackup   _g_ist:_L_   pass_x_c   repo:_@_^^   view:_:_   _p_rint:_r_g   _i_edit   _._:emacs.d/
 "
    ("p" ps-print-buffer)
    ("r" ps-print-region)

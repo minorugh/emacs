@@ -8,10 +8,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (leaf selected
   :ensure t
-  :hook ((after-init-hook . selected-global-mode)
-		 (activate-mark-hook . my:activate-selected)
-		 (activate-mark-hook . (lambda () (setq my:ime-flag current-input-method) (my:ime-off)))
-		 (deactivate-mark-hook . (lambda () (unless (null my:ime-flag) (my:ime-on)))))
+  :hook (after-init-hook . selected-global-mode)
   :bind (:selected-keymap
 		 (";" . comment-dwim)
 		 ("c" . clipboard-kill-ring-save)
@@ -21,7 +18,12 @@
 		 ("W" . my:weblio)
 		 ("k" . my:koujien)
 		 ("e" . my:eijiro)
-		 ("g" . my:google))
+		 ("g" . my:google)))
+
+(leaf *cus-selected
+  :hook ((activate-mark-hook . my:activate-selected)
+		 (activate-mark-hook . (lambda () (setq my:ime-flag current-input-method) (my:ime-off)))
+		 (deactivate-mark-hook . (lambda () (unless (null my:ime-flag) (my:ime-on)))))
   :init
   (defvar my:ime-flag nil)
   (defun my:activate-selected ()
@@ -38,8 +40,8 @@
   (defun my:ime-off ()
 	"IME off."
 	(interactive)
-	(deactivate-input-method))
-  )
+	(deactivate-input-method)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; user-dictionary-configurations

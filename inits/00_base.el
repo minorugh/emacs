@@ -37,6 +37,8 @@
     (tab-width . 4)
     ;; Limit the final word to a line break code (automatically correct)
     (require-final-newline . t)
+	;; Disallow adding new lines with newline at the end of the buffer
+	(next-line-add-newlines . nil)
     ;; Make it easy to see when it is the same name file
     (uniquify-buffer-name-style . 'post-forward-angle-brackets)
 
