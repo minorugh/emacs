@@ -178,41 +178,6 @@ alias eq = 'emacs -q -l ~/.emacs.d/mini-init.el'
 ファイルの PATH は、ご自分の環境に応じて修正が必要です。
 
 
-### 2.4 Dashboard バッファーを再生させる
-
-Emacs 起動時の初期画面には、`Dashboard` を表示させています。
-
-![Dashboard by doom-themes](https://live.staticflickr.com/65535/51631946053_b9d848a357_b.jpg)
-
-`open-Dashboard` でいつでも Dashboard画面を再表示させることができ、`quit-Dashboard` 直前に作業していたバッファー画面に戻ります。
-
-```emacs-lisp
-(defun open-dashboard ()
-  "Open the *dashboard* buffer and jump to the first widget."
-  (interactive)
-  (if (length> (window-list-1)
-               (if (and (fboundp 'treemacs-current-visibility)
-                        (eq (treemacs-current-visibility) 'visible))
-                   2
-                 1))
-      (setq dashboard-recover-layout-p t))
-  (delete-other-windows)
-  (dashboard-refresh-buffer)
-  (dashboard-goto-recent-files))
-
-(defun quit-dashboard ()
-  "Quit dashboard window."
-  (interactive)
-  (quit-window t)
-  (when (and dashboard-recover-layout-p
-			 (bound-and-true-p winner-mode))
-    (winner-undo)
-    (setq dashboard-recover-layout-p nil)))
-```
-
-- [Dashboard の詳細設定](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/inits/01_dashboard.el)は、ここを見て下さい。
-
-
 ## 3. コア設定
 Emacs を操作して文書編集する上で必要な設定。
 
