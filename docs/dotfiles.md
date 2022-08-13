@@ -33,7 +33,7 @@ dotfiles のうち GitHubに配置できないものは、Dropboxに置くよう
 
 ## 3. 自動化のためのMakefile
 
-敬愛する [石井 勝](http://objectclub.jp/community/memorial/homepage3.nifty.com/masarl/article/nmake.html) さんのWebページで下記の記述を見てとても感銘を受けました。
+敬愛する [石井 勝](https://www.youtube.com/watch?v=BT1OYy0QaOo) さんのWebページで下記の記述を見てとても感銘を受けました。
 
 
 ### [優れた技術者になる条件]
