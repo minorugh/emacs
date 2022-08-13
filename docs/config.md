@@ -295,20 +295,17 @@ Emacsバッファーで領域を選択した後、バインドしたワンキー
 ```emacs-lisp
 (leaf selected
   :ensure t
-  :global-minor-mode selected-global-mode
-  :config
-  (bind-key ";" 'comment-dwim selected-keymap)
-  (bind-key "d" 'clipboard-kill-region selected-keymap)
-  (bind-key "f" 'describe-function selected-keymap)
-  (bind-key "v" 'describe-variable selected-keymap)
-  (bind-key "c" 'clipboard-kill-ring-save selected-keymap)
-  (bind-key "i" 'iedit-mode selected-keymap)
-  (bind-key "s" 'swiper-thing-at-point selected-keymap)
-  (bind-key "k" 'my:koujien selected-keymap)
-  (bind-key "e" 'my:eijiro selected-keymap)
-  (bind-key "w" 'my:weblio selected-keymap)
-  (bind-key "t" 'google-translate-auto selected-keymap)
-  (bind-key "g" 'my:google selected-keymap))
+  :hook (after-init-hook . selected-global-mode)
+  :bind (:selected-keymap
+		 (";" . comment-dwim)
+		 ("c" . clipboard-kill-ring-save)
+		 ("s" . swiper-thing-at-point)
+		 ("t" . google-translate-auto)
+		 ("T" . chromium-translate)
+		 ("W" . my:weblio)
+		 ("k" . my:koujien)
+		 ("e" . my:eijiro)
+		 ("g" . my:google)))
 ```
 
 検索結果を browse-url で表示させるユーザーコマンドは、検索 urlのフォーマットとさえわかれば、パッケージツールに頼らずともお好みのマイコマンドを作成できます。
@@ -316,7 +313,10 @@ Emacsバッファーで領域を選択した後、バインドしたワンキー
 以下は、google と Weblio串刺し検索の例です。
 
 ```emacs-lisp
-(leaf cus-selected
+(leaf *cus-selected
+  :hook ((activate-mark-hook . my:activate-selected)
+		 (activate-mark-hook . (lambda () (setq my:ime-flag current-input-method) (my:ime-off)))
+		 (deactivate-mark-hook . (lambda () (unless (null my:ime-flag) (my:ime-on)))))
   :init
   ;; Control mozc when seleceted
   (defun my:activate-selected ()
