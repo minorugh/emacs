@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Index Page
-nav_order: 1
+sort: 1
 ---
 
 # GNU Emacs configuration
