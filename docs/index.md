@@ -1,8 +1,8 @@
----
-layout: default
-title: Index Page
-nav_order: 1
----
+<!-- --- -->
+<!-- layout: default -->
+<!-- title: Index Page -->
+<!-- nav_order: 1 -->
+<!-- --- -->
 
 # GNU Emacs configuration
 
