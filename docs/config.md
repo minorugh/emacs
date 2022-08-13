@@ -258,7 +258,7 @@ If there are two or more windows, it will go to another window."
 
 ### 4.2 [sequential-command.el] バッファー先頭・末尾
 
-地味なながら一度使うと便利すぎて止められません。
+[sequential-command](https://github.com/HKey/sequential-command) は、地味なながら一度使うと便利すぎて止められません。
 
 Melpaから Installできますが、私は HKey氏の改良版を el-getで使っています。
 
@@ -273,8 +273,7 @@ Melpaから Installできますが、私は HKey氏の改良版を el-getで使�
 
 ### 4.3 [expand-region]カーソル位置を起点に選択範囲を賢く広げる
 
-
-`er/expand-region` を呼ぶと、カーソル位置を起点として前後に選択範囲を広げてくれます。
+[expand-region](https://github.com/magnars/expand-region.el) は、カーソル位置を起点として前後に選択範囲を広げてくれます。
 
 2回以上呼ぶとその回数だけ賢く選択範囲が広がりますが、2回目以降は設定したキーバインドの最後の一文字を連打すれば OKです。その場合、選択範囲を狭める時は - を押し， 0 を押せばリセットされます。
 
@@ -288,7 +287,7 @@ Melpaから Installできますが、私は HKey氏の改良版を el-getで使�
 ## 5. 編集サポート
 ### 5.1 [selected] リージョン選択時のアクションを制御
 
-選択領域に対するスピードコマンドです。
+[selected](https://github.com/Kungsgeten/selected.el) は、選択領域に対するスピードコマンドです。
 
 Emacsバッファーで領域を選択した後、バインドしたワンキーを入力するとコマンドが実行されます。
 コマンドの数が増えてきたら、ヘルプ代わりに使える [counsel-selected](https://github.com/takaxp/counsel-selected) も便利そうです。
