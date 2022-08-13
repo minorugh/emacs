@@ -7,23 +7,36 @@ nav_order: 1
 
 
 ## 1. はじめに
-* [Leaf](https://github.com/conao3/leaf.el) に乗り換えたのを機に大幅に整理したので [jekyll-rtd-theme](https://jamstackthemes.dev/theme/jekyll-rtd-theme/) でまとめました。
-* Emacsを含むすべての環境設定ファイルを `ditfiles` リポジトリに置いて Git管理し [GitHub](https://github.com/minorugh/dotfiles) に公開しています。
-* 設定ファイルは、メイン機とサブ機（いづれも Tinkpad）の複数端末で共有できるようにしています。
-* 本ドキュメントは、[@takaxp](https://twitter.com/takaxp) さんの [init.el](https://takaxp.github.io/init.html) の記事から多くを吸収した模倣版です。
-* 執筆用途に特化してカスタマイズしていますので、コンセプトやキーバイドなどは極めて邪道思想になっています。
-* Emacs設定ファイル本体も、[GitHub](https://github.com/minorugh/dotfiles/tree/master/.emacs.d) に公開しています。
+* ここは [@minoruGH](https://twitter.com/minorugh)  の Emacs設定ファイルの一部を解説しているページです。
+* <https://github.com/minorugh/.emacs.d/> から
+hugo を使ってGithub pages にWebサイトを構築しています。
+* 本ドキュメントは、[@mugijiru](https://twitter.com/mugijiru) さんの [麦汁's Emacs Config](https://mugijiru.github.io/.emacs.d/) の記事を参考にした模倣版です。
+* 八十路も近い老骨ながら、[@masasam](https://twitter.com/SolistWork) さん、[@takaxp](https://twitter.com/takaxp) さんのご指導を得て、盲目的なパッチワークから多少なりとも自力でカスタマイズできるまで進化できました。感謝！
 
 
-八十路も近い老骨ながら、[@masasam](https://twitter.com/SolistWork) さん、[@takaxp](https://twitter.com/takaxp) さんのご指導を得て、盲目的なパッチワークから多少なりとも自力でカスタマイズできるまで進化できました。感謝！
+## 動作確認環境
 
-ファイル配置のデレクトリ構成は以下のとおりです。
-```
+以下の環境で使用しています。が、動作を保証するものではありません。
+
+* Debian 11.4  86_64 GNU/Linux
+* 自分でビルドした Emacs 27.2.50
+
+
+## 注意点
+
+
+執筆用途に特化してカスタマイズしていますので、コンセプトやキーバイドなどは極めて邪道思想になっています。
+
+まだ全ての設定を記載できていないので極一部の解説となります。
+
+## デレクトリ構成
+設定ファイル群は、下記の配置構成にしています。
+
+```text
 ~/.emacs.d
 │
 ├── el-get/
 ├── elpa/
-├── info/
 ├── inits/
 │   ├── 00_base.el
 │   ├── 01_dashboard.el
