@@ -97,7 +97,6 @@ init-loader を使うことの是非については諸説あるようですが�
 ```
 
 ### 2.2 init.el
-
 設定ファイル群は、init-loaderで読み込むようにしています。
 
 ```emacs-lisp
@@ -173,19 +172,17 @@ alias eq = 'emacs -q -l ~/.emacs.d/mini-init.el'
 Emacs を操作して文書編集する上で必要な設定。
 
 ### 3.1 言語 / 文字コード
-
 シンプルにこれだけです。
 
 ``` emacs-lisp
 (set-language-environment "Japanese")
 (prefer-coding-system 'utf-8)
 ```
-### 3.2 日本語入力
 
+### 3.2 日本語入力
 Debian11 にインストールした Emacs上で [emacs-mozc](https://packages.debian.org/ja/jessie/emacs-mozc) を使っています。
 
 #### 3.2.1 Emacsのときはインライン XIMを無効にする
-
 Emacsをソースからビルドするときに `--without-xim` しなかったので、インライン XIMでも日本語入力ができてしまいます。
 特に使い分けする必要もなく紛らわしいので `.Xresources` で XIM無効化の設定をしました。
 
@@ -221,17 +218,8 @@ Emacs*useXIM: false
 	  (setq input-method-function input-method-function-save))))
 ```
 
-#### 3.2.3 [mozc] ユーザー辞書を複数端末で共有させる
-
-複数環境で Mozcユーザー辞書を共有できるようにしたいと思考中です。
-
-Mozc のファイル群を Dropbox に保存して、シンボリックを各端末に置くという方法で一応は動きますが、同時使用すると競合コピーが作られるので多少問題もあります。辞書の共有は、Google Drive がよいという情報もあるので、時間のあるときにゆっくり試してみます。
-
-
 ## 4. カーソル移動
 カーソルの移動は、原則デフォルトで使っていますが、以下の挙動だけ変更しています。
-
-
 
 | ウインドウ移動           | C-q       |
 | バッファー先頭・末尾     | C-a / C-e |
@@ -239,7 +227,6 @@ Mozc のファイル群を Dropbox に保存して、シンボリックを各端
 
 
 ### 4.1 ウインドウの移動
-
 私の場合、基本二分割以上の作業はしないので `C-q` だけで便利に使えるこの関数は宝物です。
 
 最初の `C-q` でに分割になり、二度目以降は `C-q` を押すたびに Window 移動します。
@@ -257,7 +244,6 @@ If there are two or more windows, it will go to another window."
 
 
 ### 4.2 [sequential-command.el] バッファー先頭・末尾
-
 [sequential-command](https://github.com/HKey/sequential-command) は、地味なながら一度使うと便利すぎて止められません。
 
 Melpaから Installできますが、私は HKey氏の改良版を el-getで使っています。
@@ -272,13 +258,11 @@ Melpaから Installできますが、私は HKey氏の改良版を el-getで使�
 ```
 
 ### 4.3 [expand-region]カーソル位置を起点に選択範囲を賢く広げる
-
 [expand-region](https://github.com/magnars/expand-region.el) は、カーソル位置を起点として前後に選択範囲を広げてくれます。
 
 2回以上呼ぶとその回数だけ賢く選択範囲が広がりますが、2回目以降は設定したキーバインドの最後の一文字を連打すれば OKです。その場合、選択範囲を狭める時は - を押し， 0 を押せばリセットされます。
 
 ```emacs-lisp
-
 (leaf expand-region
   :ensure t
   :bind ("C-@" . er/expand-region))
@@ -368,36 +352,10 @@ Emacsバッファーで領域を選択した後、バインドしたワンキー
 ```
 
 ### 5.2 IME のオン・オフを自動制御する for selected
-
 selectedコマンドを選択するときは、IMEをOffにしないといけないのですがこれを自動でさせます。
 
 領域を選択し始める時に IMEをオフにして、コマンド発行後に IMEを元に戻すという例が、
 [@takaxp](https://qiita.com/takaxp) さんの [Qiitaの記事](https://qiita.com/takaxp/items/00245794d46c3a5fcaa8) にあったので、私の環境（emacs-mozc ）にあうように設定したら、すんなり動いてくれました。感謝！
-
-```emacs-lisp
-(defun my-activate-selected ()
-  (selected-global-mode 1)
-  (selected--on) ;; must call expclitly here
-  (remove-hook 'activate-mark-hook #'my-activate-selected))
-(add-hook 'activate-mark-hook #'my-activate-selected)
-
-(defun my:ime-on ()
-  (interactive)
-  (when (null current-input-method) (toggle-input-method)))
-(defun my:ime-off ()
-  (interactive)
-  (inactivate-input-method))
-
-(defvar my:ime-flag nil)
-(add-hook
- 'activate-mark-hook
- #'(lambda ()
-	 (setq my:ime-flag current-input-method) (my:ime-off)))
-(add-hook
- 'deactivate-mark-hook
- #'(lambda ()
-	 (unless (null my:ime-flag) (my:ime-on))))
-```
 
 
 ### 5.3 [darkroom-mode] 執筆モード
@@ -437,9 +395,7 @@ darkroom-modeからでるときは、revert-buffer で再読込してもとに�
 	(interactive)
 	(revert-buffer t t)))
 ```
-
 ### 5.4 [yatex] YaTexで Tex編集
-
 [yatex](https://github.com/emacsmirror/yatex) は、Emacsの上で動作する LaTeX の入力支援環境です。
 
 ごく一般的な設定例ですが、参考になるとしたら [yatexprc](https://www.yatex.org/gitbucket/yuuji/yatex/blob/c45e2a0187b702c5e817bf3023816dde154f0de9/yatexprc.el) の `M-x YaTeX-lpr` を使って一気に PDF作成まで自動化している点でしょうか。
@@ -462,7 +418,6 @@ darkroom-modeからでるときは、revert-buffer で再読込してもとに�
 
 dviファイルから dvipdfmx で PDF作成したあと、PDFビューアーを起動させて表示させるところまでをバッチファイルに書き、PATHの通ったところに置きます。私は、`/usr/loca/bin` に置きました。
 
-
 ```sh
 #!/bin/bash
 name=$1
@@ -477,7 +432,6 @@ dvipdfmx $1 && open -a Preview.app ${name%.*}.pdf
 ```
 
 ### 5.5 swiper を migemo 化してローマ字入力で日本語を検索
-
 [avy-migemo-e.g.swiper.el](https://github.com/momomo5717/avy-migemo) を使って出来ていたのですが、２年ほど前から更新が止まってしまっていて動きません。
 
 つい最近、avy-migemo を使わない [swiper-migemo](https://github.com/tam17aki/swiper-migemo)を GitHubで見つけたので試した処、機嫌よく動いてくれています。
