@@ -5,8 +5,8 @@ remote_theme: carlosperate/jekyll-theme-rtd
 # Theme settings:
 site_author: minorugh
 repo_url: "https://github.com/minorug/emacs.d"
-edit_on_github: true
-github_docs_folder: true
+edit_on_github: false
+github_docs_folder: false
 sticky_navigation: true
 prev_next_buttons_location: bottom
 search_enabled: false
