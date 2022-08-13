@@ -709,27 +709,16 @@ howm や org でメモをとるときに、ゴミファイルが残らないよ�
 
 ```
 
-### 8.3 [undo-tree]
-`C-x -u` で `undo-tree-visualize` を呼ぶと tee の下に diff表示もしてくれるように設定しています。
+### 8.3 [undo-fu]
+[undo-fu](https://github.com/emacsmirror/undo-fu)  はシンプルな undo/redo 機能を提供してくれるやつです。
+
+昔はもっと色々できる [undo-tree](https://github.com/apchamberlain/undo-tree.el)  を使っていたけどそっちにバグがあるっぽいので乗り換えました。
 
 ```emacs-lisp
-(leaf undo-tree
+(leaf undo-fu
   :ensure t
-  :hook ((prog-mode-hook text-mode-hook) . undo-tree-mode)
-  :config
-  (bind-key* "C-_" 'undo-tree-undo)
-  (bind-key* "C-\\" 'undo-tree-undo)
-  (bind-key* "C-/" 'undo-tree-redo)
-  (bind-key* "C-x u" 'undo-tree-visualize)
-  :init
-  (make-variable-buffer-local 'undo-tree-visualizer-diff)
-  (setq-default undo-tree-visualizer-diff t)
-  (setq undo-tree-visualizer-timestamps t)
-  (setq undo-tree-visualizer-diff t)
-  (setq undo-tree-enable-undo-in-region nil)
-  (setq undo-tree-auto-save-history nil)
-  (setq undo-tree-history-directory-alist
-		`(("." . ,(concat user-emacs-directory "undo-tree-hist/")))))
+  :bind (("C-_" . undo-fu-only-undo)
+		 ("C-/" . undo-fu-only-redo)))
 ```
 
 
