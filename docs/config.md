@@ -403,65 +403,60 @@ selectedコマンドを選択するときは、IMEをOffにしないといけな
 ### 5.3 [darkroom-mode] 執筆モード
 [darkroom.el](https://github.com/joaotavora/darkroom)  は、画面の余計な項目を最小限にして、文章の執筆に集中できるようにするパッケージです。
 
-タイトルバーやモードラインが一時的に削除されてフルスクリーンになり、テキストが拡大され、テキストがウィンドウの中央に配置されるように余白が調整されます。設定例では、さらに行番号表示を消し、行間を少し大きくしてより読みやすくしています。また、執筆モードで色修飾があるとかえって落ち着かないので強制的に text-modeにしています。
+タイトルバーやモードラインが一時的に削除されてフルスクリーンになり、テキストが拡大され、テキストがウィンドウの中央に配置されるように余白が調整されます。[view-mode, diff-hl-mode, display-line-numbers-mode] をOffにし、行間も少し大きくしてより読みやすくしています。
 
 [F12] キーで IN/OUT をトグルしています。
-darkroom-modeからでるとき text-modeに変える前のもとも major-modeに戻す必要が有るのですが、major-mode関数を操作する設定はすリスクが高そうだったので、一度 kill-bufferして再度読み込むようにしました。
+darkroom-modeからでるときは、revert-buffer で再読込してもとに戻しますが yes/noを聞いてくるのが煩わしいんのでno-confirm の関数を作りました。
 
 ```emacs-lisp
 (leaf darkroom
   :ensure t
-  :bind ("<f12>" . my:darkroom-in)
+  :bind (("<f12>" . my:darkroom-in)
+		 (:darkroom-mode-map
+		  ("<f12>" . my:darkroom-out)))
   :config
   (defun my:darkroom-in ()
-	"Enter the darkroom-mode to always text-mode."
+	"Enter to the `darkroom-mode'."
 	(interactive)
-	(text-mode)
+	(view-mode 0)
+	(diff-hl-mode 0)
 	(display-line-numbers-mode 0)
-	(setq line-spacing 0.4)
 	(darkroom-tentative-mode 1)
-	(bind-key "<f12>" 'my:darkroom-out darkroom-mode-map))
+	(setq line-spacing 0.4))
+
   (defun my:darkroom-out ()
-	"Leave the darkroom-mode."
+	"Returns from `darkroom-mode' to the previous state."
 	(interactive)
-	(darkroom-tentative-mode 0)
 	(setq line-spacing 0.1)
+	(darkroom-tentative-mode 0)
 	(display-line-numbers-mode 1)
-	(my:close-current-buffer)
-	(my:open-last-closed-buffer))
-  :init
-  ;; Open last closed file
-  ;; http://ergoemacs.org/emacs/elisp_close_buffer_open_last_closed.html
-  (defvar my:recently-closed-buffers nil)
-  (defun my:close-current-buffer ()
-	"Close the current buffer."
+	(revert-buffer-no-confirm))
+
+  (defun revert-buffer-no-confirm ()
+	"Revert buffer without confirmation."
 	(interactive)
-	(setq my:recently-closed-buffers
-		  (cons (cons (buffer-name) (buffer-file-name)) my:recently-closed-buffers))
-	(kill-buffer (current-buffer)))
-  (defun my:open-last-closed-buffer ()
-	"Open the last closed buffer."
-	(interactive)
-	(find-file (cdr (pop my:recently-closed-buffers)))))
+	(revert-buffer t t)))
 ```
 
 ### 5.4 [yatex] YaTexで Tex編集
+
+[yatex](https://github.com/emacsmirror/yatex) は、Emacsの上で動作する LaTeX の入力支援環境です。
 
 ごく一般的な設定例ですが、参考になるとしたら [yatexprc](https://www.yatex.org/gitbucket/yuuji/yatex/blob/c45e2a0187b702c5e817bf3023816dde154f0de9/yatexprc.el) の `M-x YaTeX-lpr` を使って一気に PDF作成まで自動化している点でしょうか。
 
 ```emacs-lisp
 (leaf yatex
   :ensure t
-  :mode ("\\.tex\\'" . yatex-mode)
+  :mode ("\\.tex\\'" "\\.sty\\'" "\\.cls\\'")
+  :custom `((tex-command . "platex")
+			(dviprint-command-format . "dvpd.sh %s")
+			(YaTeX-kanji-code . nil)
+			(YaTeX-latex-message-code . 'utf-8)
+			(YaTeX-default-pop-window-height . 15))
   :config
-  (setq tex-command "platex")
-  (setq dviprint-command-format "dvpd.sh %s")
-  (setq YaTeX-kanji-code nil)
-  (setq YaTeX-latex-message-code 'utf-8)
-  (setq YaTeX-default-pop-window-height 15)
   (leaf yatexprc
 	:bind (("M-c" . YaTeX-typeset-buffer)
-		   ("M-l" . YaTeX-lpr))))
+		   ("M-v" . YaTeX-lpr))))
 ```
 `YaTeX-lpr` は、`dviprint-command-format` を呼び出すコマンドです。
 
@@ -480,11 +475,12 @@ rm *.au* *.dv* *.lo*
 ```sh
 dvipdfmx $1 && open -a Preview.app ${name%.*}.pdf
 ```
+
 ### 5.5 swiper を migemo 化してローマ字入力で日本語を検索
 
 [avy-migemo-e.g.swiper.el](https://github.com/momomo5717/avy-migemo) を使って出来ていたのですが、２年ほど前から更新が止まってしまっていて動きません。
 
-つい最近、avy-migemo を使わない swiper-migemoを GitHubで見つけたので試した処、機嫌よく動いてくれています。
+つい最近、avy-migemo を使わない [swiper-migemo](https://github.com/tam17aki/swiper-migemo)を GitHubで見つけたので試した処、機嫌よく動いてくれています。
 Melpaにはアップされていないみたいなので el-get で取得しています。
 
 ```emacs-lisp
