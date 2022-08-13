@@ -151,7 +151,8 @@ init-loader を使うことの是非については諸説あるようですが�
 ;; Load init files
 (leaf init-loader
   :ensure t
-  :custom `((custom-file . "~/.emacs.d/tmp/custom.el")
+  :custom
+  `((custom-file . "~/.emacs.d/tmp/custom.el")
 			(init-loader-show-log-after-init . 'error-only))
   :config
   (init-loader-load))
