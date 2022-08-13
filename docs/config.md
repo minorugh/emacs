@@ -3,7 +3,7 @@ layout: default
 title: GNU Emacs configuration
 nav_order: 1
 ---
-<!-- # GNU Emacs configuration -->
+# GNU Emacs configuration
 
 
 ## 1. はじめに

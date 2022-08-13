@@ -1,5 +1,7 @@
 ---
-sort: 2
+layout: default
+title: Dotfiles
+nav_order: 2
 ---
 
 # Dotfiles

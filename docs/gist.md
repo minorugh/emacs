@@ -1,5 +1,7 @@
 ---
-sort: 3
+layout: default
+title: GitHub Gist
+nav_order: 3
 ---
 
 # Gist
