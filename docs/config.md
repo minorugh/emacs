@@ -8,8 +8,8 @@ nav_order: 1
 
 ## 1. はじめに
 * ここは [@minoruGH](https://twitter.com/minorugh)  の Emacs設定ファイルの一部を解説しているページです。
-* <https://github.com/minorugh/.emacs.d/> から
-hugo を使ってGithub pages にWebサイトを構築しています。
+* <https://github.com/minorugh/emacs.d/> から
+jekyll を使ってGithub pages にWebサイトを構築しています。
 * 本ドキュメントは、[@takaxp](https://twitter.com/takaxp) さんの [takaxp.github.io/](https://takaxp.github.io/init.html) の記事を参考にした模倣版です。
 * 八十路も近い老骨ながら、[@masasam](https://twitter.com/SolistWork) さん、[@takaxp](https://twitter.com/takaxp) さんのご指導を得て、盲目的なパッチワークから多少なりとも自力でカスタマイズできるまで進化できました。感謝！
 
