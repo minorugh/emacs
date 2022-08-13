@@ -430,7 +430,7 @@ rm *.au* *.dv* *.lo*
 dvipdfmx $1 && open -a Preview.app ${name%.*}.pdf
 ```
 
-### 5.6 swiper を migemo 化してローマ字入力で日本語を検索
+### 5.6 [swiper-migemo] swiperを migemo化してローマ字入力で日本語を検索
 [avy-migemo-e.g.swiper.el](https://github.com/momomo5717/avy-migemo) を使って出来ていたのですが、２年ほど前から更新が止まってしまっていて動きません。
 
 つい最近、avy-migemo を使わない [swiper-migemo](https://github.com/tam17aki/swiper-migemo)を GitHubで見つけたので試した処、機嫌よく動いてくれています。
@@ -586,7 +586,7 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
    ├── hydra-browse   <<- Dashboard からも呼び出せる
    └── hydra-pinky
 ```
-### 7.1 [hydra-work-menu / hydra-quick-dired] コマンドメニュー 
+### 7.1 [hydra-work-menu] 作業コマンドメニュー 
 
 [hydra-work-menu](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/inits/20_hydra-menu.el) には、
 日記や俳句関係のシリーズ記事の追加、編集など、毎日頻繁に開くワークスペースへのショートカットを設定しています。
@@ -599,11 +599,13 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
 ![hydra-quick-menu](https://live.staticflickr.com/65535/50174826063_b4fa442b1e_b.jpg) 
 
 
-
 この２つの hydra は、いわば私の秘書のような役割で、どちらからでも相互にトグルで呼び出せるようにしています。
 
-### 7.2 [hydra-extention] その他の Hydra 設定。
+### 7.2 その他の Hydra 設定。
 hydra で工夫するといろんなコマンドのキーバインドを記憶する必要もなく GUI 感覚で操作できるので積極的に使っています。
+
+* [hydra-make](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/inits/20_hydra-make.el) 
+* [hydra-misc](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/inits/20_hydra-misc.el)
 
 Qitta に詳しい記事を書いています。
 
