@@ -35,12 +35,12 @@ dotfiles のうち GitHubに配置できないものは、Dropboxに置くよう
 
 敬愛する [石井 勝](http://objectclub.jp/community/memorial/homepage3.nifty.com/masarl/article/nmake.html) さんのWebページで下記の記述を見てとても感銘を受けました。
 
-```
-[優れた技術者になる条件]
+
+### [優れた技術者になる条件]
 
 1. 同じことは2度しない（Once and Only Once） 
 2. 必ずしなければならない作業 → 自動化できないか考える 
-```
+
 
 <a href="http://objectclub.jp/community/memorial/homepage3.nifty.com/masarl/article/nmake.html" class="btn btn-default btn-lg">石井 勝/ 自動化のための nmake 入門</a>
 
