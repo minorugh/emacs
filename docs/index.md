@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Local Development Index Page
+title: Index Page
 nav_order: 1
 ---
 
