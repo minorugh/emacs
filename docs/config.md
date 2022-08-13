@@ -1162,7 +1162,7 @@ Emacsの標準機能なので、そのまま使います。
 
 ## 13. ユーティリティー関数
 
-### 6.1 [emacs-lock-mode] scratch バッファーを消さない
+### 6.1 Scratch バッファーを消さない
 
 難しい関数を設定せずとも内蔵コマンドで簡単に実現できます。
 
@@ -1174,6 +1174,10 @@ Emacsの標準機能なので、そのまま使います。
   (emacs-lock-mode 'kill))
 ```
 ### 13.1 Terminal を Emacsから呼び出す
+
+Emacsで開いているbufferのcurrent-dirでgonome-terminalを開く設定です。
+
+こちらを使うようになってからはeshellを使わななりました。
 
 ```emacs-lisp
 (defun term-current-dir-open ()
