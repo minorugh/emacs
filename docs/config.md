@@ -147,9 +147,8 @@ Emacs を操作して文書編集する上で必要な設定。
 ```
 
 ### 3.2 日本語入力
-Debian11 にインストールした Emacs上で [emacs-mozc](https://packages.debian.org/ja/jessie/emacs-mozc) を使っています。
+Debian11 にインストールした Emacs上で [emacs-mozc](https://wiki.debian.org/JapaneseEnvironment/Mozc) を使っています。
 
-#### 3.2.1 Emacsのときはインライン XIMを無効にする
 Emacsをソースからビルドするときに `--without-xim` しなかったので、インライン XIMでも日本語入力ができてしまいます。
 特に使い分けする必要もなく紛らわしいので `.Xresources` で XIM無効化の設定をしました。
 
@@ -159,7 +158,7 @@ Emacsをソースからビルドするときに `--without-xim` しなかった�
 Emacs*useXIM: false
 
 ```
-#### 3.2.2 [mozc] 句読点では即確定させる
+### 3.3 [mozc] 句読点では即確定させる
 句読点などを入力したとき、わざわざ mozcに変換してもらう必要はないので以下を設定しておくことでワンアクションスピーディーになります。
 
 ```emacs-lisp
@@ -183,6 +182,41 @@ Emacs*useXIM: false
 	(let ((input-method-function-save input-method-function))
 	  ad-do-it
 	  (setq input-method-function input-method-function-save))))
+```
+### 3.4 基本キーバインド
+ブラインドタッチができないので右手三本指＋小指で快適に操作出来るようにしてます。決してお薦めできる手法ではありませんが...
+
+Mac時代に慣れ親しんだ関係もあり、標準キーバインドの他に下記を追加しています。 
+
+* Super+c でコピー   (MacのCmd+c)
+* Super+v でペースト (Macの Cmd+v)
+
+kill-bufferは、いちいち確認されるのが煩わしいので、kill-this-bufferを愛用しています。
+```emacs-lisp
+(define-key (kbd "M-/" 'my:kill-region'))
+```
+
+`C-w` は、regionを選択していないときはカーソル行全体をkill-ringするようにしました。
+
+```emacs-lisp
+(defun my:kill-region ()
+  "If the region is active, to kill region.
+If the region is inactive, to kill whole line."
+  (interactive)
+  (if (use-region-p)
+	  (clipboard-kill-region (region-beginning) (region-end))
+    (kill-whole-line)))
+(define-key (kbd "C-w" 'my:kill-region'))
+```
+
+`C-x C-x` で直前の編集ポイントと現在のポイントとを行き来出来るようにしています。
+```emacs-lisp
+(defun my:exchange-point-and-mark ()
+  "No mark active `exchange-point-and-mark'."
+  (interactive)
+  (exchange-point-and-mark)
+  (deactivate-mark))		 
+(define-key (kbd "C-x C-x" 'my:kill-region'))
 ```
 
 ## 4. カーソル移動
