@@ -84,7 +84,6 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 手順は
 
 ### 2.4 init.el
 [init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el) には、Packageの初期化設定とinit-lorderの設定を書いています。 
-設定ファイル群は、init-loaderで読み込むようにしています。
 
 Magic File Name を一時的に無効にすることで、起動時間の短縮を図る設定をしています。GC設定とともに設定ファイル読み込み後に正常値に戻します。
 
