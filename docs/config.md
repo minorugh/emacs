@@ -67,7 +67,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 ### 2.3 [eary-init] チラツキを抑える
 設定ファイルの読み込み段階で画面がチラチラ変化するのを抑制しています。
 
-```emacs-lisp
+```elisp
 ;; Suppress flashing at startup
 (setq inhibit-redisplay t)
 (setq inhibit-message t)
