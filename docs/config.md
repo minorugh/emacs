@@ -307,14 +307,7 @@ Toggleで括弧の先頭と最後にポイント移動します。
 |矩形先頭に文字を挿入|	C-x r t |
 |矩形を空白に変換する|	C-x r c |
 
-Built-in の cua-base.el（CUA-mode）を使うと，矩形選択は，領域選択後 cua-toggle-rectangle-mark でもできる．また，矩形選択した後に， M-n を押すと，連番をふれる．開始値，増加値を入力してから，hoge%03d.pgm などとすれば，hoge001，hoge002，，，と入力される．これと，org-mode の表機能（ C-c | で選択部分を簡単に表にできる）を組み合わせれば，連番で数値をふったテーブルを容易に作れる．
-```emacs-lisp
-(when (require 'cua-base)
-  (cua-mode 1)
-  (setq cua-enable-cua-keys nil))
-```
-
-### 4.1 C-x C-x で直前の編集ポイントへ行き来
+### 5.2 C-x C-x で直前の編集ポイントへ行き来
 `C-u C-SPC` も使いますが、直前の編集ポイントと現在のポイントとを行き来出来る設定を重宝しています。
 ```emacs-lisp
 (defun my:exchange-point-and-mark ()
@@ -324,6 +317,13 @@ Built-in の cua-base.el（CUA-mode）を使うと，矩形選択は，領域選
   (deactivate-mark))		 
 (define-key (kbd "C-x C-x" 'my:kill-region'))
 ```
+
+### 5.3 markdownモード
+
+### 5.4 viewモード
+
+### 5.5 web/htmlモード
+
 ### 5.1 [selected] リージョン選択時のアクションを制御
 
 [selected](https://github.com/Kungsgeten/selected.el) は、選択領域に対するスピードコマンドです。
