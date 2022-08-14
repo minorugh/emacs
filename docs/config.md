@@ -48,8 +48,6 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 手順は
 2. `init.el` の読み込み
 3. `inits/` のファイル群を読み込み （init-loader 使用）
 
-init-loader を使うことの是非については諸説あるようですが、[多くの恩恵](http://emacs.rubikitch.com/init-loader/)は捨て難く私には必須ツールです。
-
 ### 2.1 early-init-el
 [early-init](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el) は、Emacs27から導入された早期初期化ファイルです。 
 
@@ -114,6 +112,8 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
 
 #### 2.2.2 [init-loader]初期設定ファイルを読み込む
 [init-loader](https://github.com/emacs-jp/init-loader/) は、設定ファイルのローダーです。 指定されたディレクトリから構成ファイルをロードします。これにより、構成を分類して複数のファイルに分けることができます。
+
+init-loader を使うことの是非については諸説あるようですが、[多くの恩恵](http://emacs.rubikitch.com/init-loader/)は捨て難く私には必須ツールです。
 
 ```emacs-lisp
 (leaf init-loader
