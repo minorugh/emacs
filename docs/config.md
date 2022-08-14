@@ -56,7 +56,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 手順は
 ### 2.2 [eary-init] 起動時間の短縮を図る
 いままでinit.elに記述していたこれらの設定は、eary-init.elへ移したほうが起動時間を短縮できます。
 
-```emacs-lisp
+```elisp
 (push '(fullscreen . maximized) default-frame-alist)
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
