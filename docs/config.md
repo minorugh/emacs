@@ -20,7 +20,7 @@ jekyll を使ってGithub pages にWebサイトを構築しています。
 * 自分でビルドした Emacs 27.2.50
 
 ### 1.2 デレクトリ構成
-設定ファイル群は、下記の配置にしています。
+設定ファイルの構成は、下記のとおりです。
 
 ```code
 ~/.emacs.d
@@ -42,7 +42,7 @@ jekyll を使ってGithub pages にWebサイトを構築しています。
 ```
 
 ## 2. 起動設定
-Emacs-27導入にあわせて `early-init.el` を設定しました。 手順は以下のとおり。
+Emacs-27導入にあわせて `early-init.el` を設定しました。 ブートシーケンスは以下のとおり。
 
 1. `early-init.el` の読み込み
 2. `init.el` の読み込み
@@ -64,9 +64,10 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 手順は
 ```
 
 ### 2.3 [eary-init] チラツキを抑える
-設定ファイル読み込み初期に起動画面がチラチラ変化するのを抑制しています。
+設定ファイルの読み込み段階で画面がチラチラ変化するのを抑制しています。
 
 ```emacs-lisp
+;; Suppress flashing at startup
 (setq inhibit-redisplay t)
 (setq inhibit-message t)
 (add-hook 'window-setup-hook
@@ -85,7 +86,9 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 手順は
 ### 2.4 init.el
 [init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el) には、Packageの初期化設定とinit-lorderの設定を書いています。 
 
-Magic File Name を一時的に無効にすることで、起動時間の短縮を図る設定をしています。GC設定とともに設定ファイル読み込み後に正常値に戻します。
+また、Magic File Name を一時的に無効にすることで、起動時間の短縮を図る設定をしています。
+
+GC設定とともに設定ファイル読み込み後に正常値に戻します。
 
 ```emacs-lisp
 (unless (or (daemonp) noninteractive init-file-debug)
@@ -107,9 +110,9 @@ Magic File Name を一時的に無効にすることで、起動時間の短縮�
 ```
 
 ### 2.5 [init-loader] 初期設定ファイルを読み込む
-[init-loader](https://github.com/emacs-jp/init-loader/) は、設定ファイルのローダーです。 指定されたディレクトリから構成ファイルをロードします。これにより、構成を分類して複数のファイルに分けることができます。
+[init-loader](https://github.com/emacs-jp/init-loader/) は、設定ファイル群のローダーです。 指定されたディレクトリから構成ファイルをロードします。これにより、構成を分類して複数のファイルに分けることができます。
 
-init-loader を使うことの是非については諸説あるようですが、[多くの恩恵](http://emacs.rubikitch.com/init-loader/)は捨て難く私には必須ツールです。
+init-loader を使うことの是非については諸説あるようですが、[多くの恩恵](http://emacs.rubikitch.com/init-loader/) は捨て難く私には必須ツールです。
 
 ```emacs-lisp
 (leaf init-loader
@@ -133,7 +136,6 @@ alias eq = 'emacs -q -l ~/.emacs.d/mini-init.el'
 ```
 
 ファイルの PATH は、ご自分の環境に応じて修正が必要です。
-
 
 ## 3. コア設定
 Emacs を操作して文書編集する上で必要な設定。
@@ -212,29 +214,23 @@ If the region is inactive, to kill whole line."
 (setq mouse-drag-copy-region t)
 ```
 ### 3.6 C-x C-c でEmacsを終了させないようにする
-Emacsを終了させる習慣はまずないので、よく使う再起動に変更しています。
+Emacsを終了させることはまずないので、再起動コマンドに変更しています。
 [restart-emacs](https://github.com/iqbalansari/restart-emacs) はMelpからインストールできます。
 ```emacs-lisp
 (leaf restart-emacs
   :ensure t
   :bind ("C-x C-c" . restart-emacs))
-
 ```
+
+### パッケージ管理
+MELPAをメインに管理しています。MELPAにないものはel-getでGitHubやEmacsWikiからインストールします。
+
+個人用に開発したものは、自分のGitHubリポジトリで管理しel-getで読み込んでいます。
 
 ## 4. カーソル移動
-デフォルトは覚えにくく且つ使いにくいので、素直に上下左右の矢印キーと`PgUp` `PgDn` を使っています。
+ブラインドタッチが使えないので、バッファー内の文字移動、行移動、スクロールは、素直に上下左右の矢印キーと`PgUp` `PgDn` を使っています。
 
-### 4.1 C-x C-x で直前の編集ポイントへ行き来
-`C-u C-SPC` も使いますが、直前の編集ポイントと現在のポイントとを行き来出来る設定を重宝しています。
-```emacs-lisp
-(defun my:exchange-point-and-mark ()
-  "No mark active `exchange-point-and-mark'."
-  (interactive)
-  (exchange-point-and-mark)
-  (deactivate-mark))		 
-(define-key (kbd "C-x C-x" 'my:kill-region'))
-```
-### 4.2 [sequential-command.el] バッファー内のカーソル移動
+### 4.1 [sequential-command.el] バッファー内のカーソル移動
 [sequential-command](https://github.com/HKey/sequential-command) は、バッファーの先頭と最終行への移動を簡単にしてくれます。
 
 * `C-a` を連続で打つことで行頭→ファイルの先頭→元の位置とカーソルが移動
@@ -242,7 +238,7 @@ Emacsを終了させる習慣はまずないので、よく使う再起動に変
 
 地味なながら一度使うと便利すぎて止められません。
 
-Melpaから Installできますが、私は HKey氏の改良版を el-getで使っています。
+MELPAから Installできますが、私は HKey氏の改良版を el-getで使っています。
 ```emacs-lisp
 (leaf sequential-command
   :doc "https://bre.is/6Xu4fQs6"
@@ -252,7 +248,7 @@ Melpaから Installできますが、私は HKey氏の改良版を el-getで使�
 	:hook (emacs-startup-hook . sequential-command-setup-keys)))
 ```
 
-### 4.3 ウインドウ間のカーソル移動
+### 4.2 ウインドウ間のカーソル移動
 `C-c o` でもいいですが，ワンアクションで移動できるほうが楽なので、次のように双方向で使えるように設定しています．
 
 画面分割されていないときは、左右分割して新しいウインドウに移動し、以後は双方向に移動します。
@@ -269,10 +265,12 @@ Melpaから Installできますが、私は HKey氏の改良版を el-getで使�
 (global-set-key (kbd "C-q") 'other-window-or-split)
 ```
 
-### 4.4 対応する括弧を選択（双方向）
-標準機能は使いにくいので、双方向で行き来できる `my:jump-brace` を定義しました。
+### 4.3 対応する括弧を選択
+* `C-M-SPC` (mark-sexp) は，カーソル位置から順方向に選択．
+* `C-M-U` (backward-up-list) は，一つ外のカッコの先頭にポイントを移す．
 
-view-modeでは、`%` にキーバインドしてvimのように使えるようにできるので便利です。
+上記標準機能は使いにくいので、Vimの `%` の機能を実現させるために `my:jump-brace` を定義しました。
+Toggleで括弧の先頭と最後にポイント移動します。
 ```emacs-lisp
 (defun my:jump-brace ()
  "Jump to the corresponding parenthesis."
@@ -282,10 +280,11 @@ view-modeでは、`%` にキーバインドしてvimのように使えるよう�
    (if (eq (char-syntax c) 40) (forward-list)
 	 (if (eq (char-syntax p) 41) (backward-list)
        (backward-up-list)))))
-(global-set-key (kbd "C-M-SPC") 'my:jump-brace)
+(global-set-key (kbd "C-M-9") 'my:jump-brace)
+(define-key view-mode-map (kbd "%") 'my:jump-brace)
 ```
 
-### 4.5 [expand-region]カーソル位置を起点に選択範囲を賢く広げる
+### 4.4 [expand-region]カーソル位置を起点に選択範囲を賢く広げる
 [expand-region](https://github.com/magnars/expand-region.el) は、カーソル位置を起点として前後に選択範囲を広げてくれます。
 
 2回以上呼ぶとその回数だけ賢く選択範囲が広がりますが、2回目以降は設定したキーバインドの最後の一文字を連打すれば OKです。その場合、選択範囲を狭める時は - を押し， 0 を押せばリセットされます。
@@ -297,6 +296,34 @@ view-modeでは、`%` にキーバインドしてvimのように使えるよう�
 ```
 
 ## 5. 編集サポート
+### 5.1 矩形編集/連番入力
+24.4 からは， rectangle-mark-mode が使えるようになり， C-x SPC を押下すると矩形モードに入り直感的に矩形選択ができる。
+
+標準の rect.el に以下の機能が実装されている。
+
+|矩形切り取り|	C-x r k |
+|矩形削除	 |  C-x r d |
+|矩形貼り付け|	C-x r y |
+|矩形先頭に文字を挿入|	C-x r t |
+|矩形を空白に変換する|	C-x r c |
+
+Built-in の cua-base.el（CUA-mode）を使うと，矩形選択は，領域選択後 cua-toggle-rectangle-mark でもできる．また，矩形選択した後に， M-n を押すと，連番をふれる．開始値，増加値を入力してから，hoge%03d.pgm などとすれば，hoge001，hoge002，，，と入力される．これと，org-mode の表機能（ C-c | で選択部分を簡単に表にできる）を組み合わせれば，連番で数値をふったテーブルを容易に作れる．
+```emacs-lisp
+(when (require 'cua-base)
+  (cua-mode 1)
+  (setq cua-enable-cua-keys nil))
+```
+
+### 4.1 C-x C-x で直前の編集ポイントへ行き来
+`C-u C-SPC` も使いますが、直前の編集ポイントと現在のポイントとを行き来出来る設定を重宝しています。
+```emacs-lisp
+(defun my:exchange-point-and-mark ()
+  "No mark active `exchange-point-and-mark'."
+  (interactive)
+  (exchange-point-and-mark)
+  (deactivate-mark))		 
+(define-key (kbd "C-x C-x" 'my:kill-region'))
+```
 ### 5.1 [selected] リージョン選択時のアクションを制御
 
 [selected](https://github.com/Kungsgeten/selected.el) は、選択領域に対するスピードコマンドです。
@@ -462,7 +489,7 @@ dvipdfmx $1 && open -a Preview.app ${name%.*}.pdf
 [avy-migemo-e.g.swiper.el](https://github.com/momomo5717/avy-migemo) を使って出来ていたのですが、２年ほど前から更新が止まってしまっていて動きません。
 
 つい最近、avy-migemo を使わない [swiper-migemo](https://github.com/tam17aki/swiper-migemo)を GitHubで見つけたので試した処、機嫌よく動いてくれています。
-Melpaにはアップされていないみたいなので el-get で取得しています。
+MELPAにはアップされていないみたいなので el-get で取得しています。
 
 ```emacs-lisp
   (leaf swiper-migemo
