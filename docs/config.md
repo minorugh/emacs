@@ -63,7 +63,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 手順は
 (push '(vertical-scroll-bars) default-frame-alist)
 ```
 
-### 2.3 [eary-init] 起動時のチラツキを抑える
+### 2.3 [eary-init] チラツキを抑える
 設定ファイル読み込み初期に起動画面がチラチラ変化するのを抑制しています。
 
 ```emacs-lisp
