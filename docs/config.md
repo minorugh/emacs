@@ -158,9 +158,8 @@ Emacsをソースからビルドするときに `--without-xim` しなかった�
 Emacs*useXIM: false
 
 ```
-### 3.3 [mozc] 句読点では即確定させる
-句読点などを入力したとき、わざわざ mozcに変換してもらう必要はないので以下を設定しておくことでワンアクションスピーディーになります。
 
+句読点などを入力したとき、わざわざ mozcに変換してもらう必要はないので以下を設定しておくことでワンアクションスピーディーになります。
 ```emacs-lisp
 (leaf mozc
   :ensure t
@@ -184,12 +183,10 @@ Emacs*useXIM: false
 	  (setq input-method-function input-method-function-save))))
 ```
 ### 3.4 基本キーバインド
-ブラインドタッチができないので右手三本指＋小指で快適に操作出来るようにしてます。決してお薦めできる手法ではありませんが...
-
 Mac時代に慣れ親しんだ関係もあり、標準キーバインドの他に下記を追加しています。 
 
-* Super+c でコピー   (MacのCmd+c)
-* Super+v でペースト (Macの Cmd+v)
+* `s-c` でコピー   (MacのCmd-c)
+* `s-v` でペースト (Macの Cmd-v)
 
 kill-bufferは、いちいち確認されるのが煩わしいので、kill-this-bufferを愛用しています。
 ```emacs-lisp
@@ -197,7 +194,6 @@ kill-bufferは、いちいち確認されるのが煩わしいので、kill-this
 ```
 
 `C-w` は、regionを選択していないときはカーソル行全体をkill-ringするようにしました。
-
 ```emacs-lisp
 (defun my:kill-region ()
   "If the region is active, to kill region.
