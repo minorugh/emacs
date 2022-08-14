@@ -53,7 +53,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 手順は
 
 このファイルはパッケージシステムとGUIの初期化前にロードされるので、フレームの外見やpackage-enable-at-startup、package-load-list、package-user-dirのようなパッケージ初期化プロセスに影響を与える変数をカスタマイズできます。
 
-#### 2.1.1 起動時間の短縮を図る
+### 2.2 [eary-init] 起動時間の短縮を図る
 いままでinit.elに記述していたこれらの設定は、eary-init.elへ移したほうが起動時間を短縮できます。
 
 ```emacs-lisp
@@ -63,7 +63,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 手順は
 (push '(vertical-scroll-bars) default-frame-alist)
 ```
 
-#### 2.1.2 起動時のチラツキを抑える
+### 2.3 [eary-init] 起動時のチラツキを抑える
 設定ファイル読み込み初期に起動画面がチラチラ変化するのを抑制しています。
 
 ```emacs-lisp
@@ -82,11 +82,11 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 手順は
 (custom-set-faces '(default ((t (:background "#282a36")))))
 ```
 
-### 2.2 init.el
+### 2.4 init.el
 [init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el) には、Packageの初期化設定とinit-lorderの設定を書いています。 
 設定ファイル群は、init-loaderで読み込むようにしています。
 
-#### 2.2.1 Magic File Name を一時的に無効にする
+### 2.5 [init] Magic File Name を一時的に無効にする
 起動時間の短縮を図る設定として定着してきたようです。
 
 GC設定とともに設定ファイル読み込み後に正常値に戻します。
@@ -110,7 +110,7 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
             (setq gc-cons-threshold 800000)))
 ```
 
-#### 2.2.2 [init-loader]初期設定ファイルを読み込む
+### 2.6 [init-loader] 初期設定ファイルを読み込む
 [init-loader](https://github.com/emacs-jp/init-loader/) は、設定ファイルのローダーです。 指定されたディレクトリから構成ファイルをロードします。これにより、構成を分類して複数のファイルに分けることができます。
 
 init-loader を使うことの是非については諸説あるようですが、[多くの恩恵](http://emacs.rubikitch.com/init-loader/)は捨て難く私には必須ツールです。
@@ -124,7 +124,7 @@ init-loader を使うことの是非については諸説あるようですが�
   (init-loader-load))
 ```
 
-### 2.3 mini-init.el
+### 2.7 mini-init.el
 [mini-init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/mini-init.el) は、最小限の emacs を起動させるための設定です。
 
 新しいパッケージや設定をテストしたり、エラー等で Emacsが起動しない場合に使用します。
