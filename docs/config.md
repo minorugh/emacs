@@ -274,16 +274,15 @@ Melpaから Installできますが、私は HKey氏の改良版を el-getで使�
 
 view-modeでは、`%` にキーバインドしてvimのように使えるようにできるので便利です。
 ```emacs-lisp
-  ;; Like as '%' of vim
-  (defun my:jump-brace ()
-	"Jump to the corresponding parenthesis."
-	(interactive)
-	(let ((c (following-char))
-		  (p (preceding-char)))
-	  (if (eq (char-syntax c) 40) (forward-list)
-		(if (eq (char-syntax p) 41) (backward-list)
-		  (backward-up-list)))))
-  (global-set-key (kbd "C-M-SPC") 'my:jump-brace)
+(defun my:jump-brace ()
+ "Jump to the corresponding parenthesis."
+ (interactive)
+ (let ((c (following-char))
+	 (p (preceding-char)))
+   (if (eq (char-syntax c) 40) (forward-list)
+	 (if (eq (char-syntax p) 41) (backward-list)
+       (backward-up-list)))))
+(global-set-key (kbd "C-M-SPC") 'my:jump-brace)
 ```
 
 ### 4.5 [expand-region]カーソル位置を起点に選択範囲を賢く広げる
