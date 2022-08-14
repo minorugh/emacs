@@ -10,7 +10,7 @@ nav_order: 1
 * ここは [@minoruGH](https://twitter.com/minorugh)  の Emacs設定ファイルの一部を解説しているページです。
 * <https://github.com/minorugh/emacs.d/> から
 jekyll を使ってGithub pages にWebサイトを構築しています。
-* 本ドキュメントは、[@takaxp](https://twitter.com/takaxp)さん作の [takaxp.github.io/](https://takaxp.github.io/init.html) の記事を参考にした模倣版です。
+* 本ドキュメントは、[@takaxp](https://twitter.com/takaxp)さんが公開されている [takaxp.github.io/](https://takaxp.github.io/init.html) の記事を参考にした模倣版です。
 * 執筆用途に特化してカスタマイズしていますので、コンセプトやキーバイドなどは極めて邪道思想になっています。
 
 ### 1.1 動作確認環境
