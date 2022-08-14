@@ -22,7 +22,7 @@ jekyll を使ってGithub pages にWebサイトを構築しています。
 ### 1.2 デレクトリ構成
 設定ファイル群は、下記の配置にしています。
 
-```text
+```code
 ~/.emacs.d
 │
 ├── el-get/
