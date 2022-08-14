@@ -190,7 +190,7 @@ Mac時代に慣れ親しんだ関係もあり、標準キーバインドの他�
 
 kill-bufferは、いちいち確認されるのが煩わしいので、kill-this-bufferを愛用しています。
 ```emacs-lisp
-(define-key (kbd "M-/" 'my:kill-region'))
+(global-set-key (kbd "M-/") 'my:kill-region')
 ```
 
 `C-w` は、regionを選択していないときはカーソル行全体をkill-ringするようにしました。
@@ -202,10 +202,30 @@ If the region is inactive, to kill whole line."
   (if (use-region-p)
 	  (clipboard-kill-region (region-beginning) (region-end))
     (kill-whole-line)))
-(define-key (kbd "C-w" 'my:kill-region'))
+(global-set-key (kbd "C-w") 'my:kill-region')
 ```
 
-`C-x C-x` で直前の編集ポイントと現在のポイントとを行き来出来るようにしています。
+### 3.5 マウスで選択した領域を自動コピー
+マウスで選択すると，勝手にペーストボードにデータが流れます．
+
+```emacs-lisp
+(setq mouse-drag-copy-region t)
+```
+### 3.6 C-x C-c でEmacsを終了させないようにする
+Emacsを終了させる習慣はまずないので、よく使う再起動に変更しています。
+[restart-emacs](https://github.com/iqbalansari/restart-emacs) はMelpからインストールできます。
+```emacs-lisp
+(leaf restart-emacs
+  :ensure t
+  :bind ("C-x C-c" . restart-emacs))
+
+```
+
+## 4. カーソル移動
+デフォルトは覚えにくく且つ使いにくいので、素直に上下左右の矢印キーと`PgUp` `PgDn` を使っています。
+
+### 4.1 C-x C-x で直前の編集ポイントへ行き来
+`C-u C-SPC` も使いますが、直前の編集ポイントと現在のポイントとを行き来出来る設定を重宝しています。
 ```emacs-lisp
 (defun my:exchange-point-and-mark ()
   "No mark active `exchange-point-and-mark'."
@@ -214,37 +234,15 @@ If the region is inactive, to kill whole line."
   (deactivate-mark))		 
 (define-key (kbd "C-x C-x" 'my:kill-region'))
 ```
+### 4.2 [sequential-command.el] バッファー内のカーソル移動
+[sequential-command](https://github.com/HKey/sequential-command) は、バッファーの先頭と最終行への移動を簡単にしてくれます。
 
-## 4. カーソル移動
-カーソルの移動は、原則デフォルトで使っていますが、以下の挙動だけ変更しています。
+* C-aを連続で打つことで行頭→ファイルの先頭→元の位置とカーソルが移動
+* C-eを連続で打つことで行末→ファイルの最終行→元の位置とカーソルが移動
 
-| ウインドウ移動           | C-q       |
-| バッファー先頭・末尾     | C-a / C-e |
-| 編集点の移動             | C-x C-x   |
-
-
-### 4.1 ウインドウの移動
-私の場合、基本二分割以上の作業はしないので `C-q` だけで便利に使えるこの関数は宝物です。
-
-最初の `C-q` でに分割になり、二度目以降は `C-q` を押すたびに Window 移動します。
-
-```emacs-lisp
-(defun other-window-or-split ()
-  "If there is one window, open split window.
-If there are two or more windows, it will go to another window."
-  (interactive)
-  (when (one-window-p)
-    (split-window-horizontally))
-  (other-window 1))
-(bind-key "C-q" 'other-window-or-split)
-```
-
-
-### 4.2 [sequential-command.el] バッファー先頭・末尾
-[sequential-command](https://github.com/HKey/sequential-command) は、地味なながら一度使うと便利すぎて止められません。
+地味なながら一度使うと便利すぎて止められません。
 
 Melpaから Installできますが、私は HKey氏の改良版を el-getで使っています。
-
 ```emacs-lisp
 (leaf sequential-command
   :doc "https://bre.is/6Xu4fQs6"
@@ -254,7 +252,24 @@ Melpaから Installできますが、私は HKey氏の改良版を el-getで使�
 	:hook (emacs-startup-hook . sequential-command-setup-keys)))
 ```
 
-### 4.3 [expand-region]カーソル位置を起点に選択範囲を賢く広げる
+### 4.3 ウインドウ間のカーソル移動
+C-c o でもいいですが，ワンアクションで移動できるようが楽です．次のように双方向で使えるように設定しています．
+
+画面分割されていないときは、左右分割して新しいウインドウに移動し、以後は双方向に移動します。
+
+```emacs-lisp
+  (defun other-window-or-split ()
+	"With turn on dimmer."
+	(interactive)
+	(when (one-window-p)
+	  (split-window-horizontally)
+	  (follow-mode 1)
+	  (dimmer-mode 1))
+	(other-window 1))
+(global-set-key (kbd "C-q") 'other-window-or-split)
+```
+
+### 4.4 [expand-region]カーソル位置を起点に選択範囲を賢く広げる
 [expand-region](https://github.com/magnars/expand-region.el) は、カーソル位置を起点として前後に選択範囲を広げてくれます。
 
 2回以上呼ぶとその回数だけ賢く選択範囲が広がりますが、2回目以降は設定したキーバインドの最後の一文字を連打すれば OKです。その場合、選択範囲を狭める時は - を押し， 0 を押せばリセットされます。

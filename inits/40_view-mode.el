@@ -134,6 +134,7 @@ If the region is inactive, to kill whole line."
 	  (if (eq (char-syntax c) 40) (forward-list)
 		(if (eq (char-syntax p) 41) (backward-list)
 		  (backward-up-list)))))
+  (global-set-key (kbd "C-M-SPC") 'my:jump-brace)
 
   (defun my:org-view-next-heading ()
 	"Org-view-next-heading."
