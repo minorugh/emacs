@@ -5,7 +5,7 @@ remote_theme: carlosperate/jekyll-theme-rtd
 
 # Theme settings:
 site_author: minoru yamada
-repo_url: "https://github.com/minorugh/emacs.d/config.html"
+repo_url: "https://github.com/minorugh/emacs.d/"
 edit_on_github: false
 github_docs_folder: true
 sticky_navigation: true
