@@ -253,23 +253,40 @@ Melpaから Installできますが、私は HKey氏の改良版を el-getで使�
 ```
 
 ### 4.3 ウインドウ間のカーソル移動
-C-c o でもいいですが，ワンアクションで移動できるようが楽です．次のように双方向で使えるように設定しています．
+C-c o でもいいですが，ワンアクションで移動できるほうが楽なので、次のように双方向で使えるように設定しています．
 
 画面分割されていないときは、左右分割して新しいウインドウに移動し、以後は双方向に移動します。
 
 ```emacs-lisp
-  (defun other-window-or-split ()
-	"With turn on dimmer."
-	(interactive)
-	(when (one-window-p)
-	  (split-window-horizontally)
-	  (follow-mode 1)
-	  (dimmer-mode 1))
-	(other-window 1))
+(defun other-window-or-split ()
+ "With turn on dimmer."
+ (interactive)
+ (when (one-window-p)
+	 (split-window-horizontally)
+	 (follow-mode 1)
+	 (dimmer-mode 1))
+   (other-window 1))
 (global-set-key (kbd "C-q") 'other-window-or-split)
 ```
 
-### 4.4 [expand-region]カーソル位置を起点に選択範囲を賢く広げる
+### 4.4 対応する括弧を選択（双方向）
+標準機能は使いにくいので、双方向で行き来できるmy:jump-braceを定義しました。
+
+view-modeでは、`%` にキーバインドしてvimのように使えるようにできるので便利です。
+```emacs-lisp
+  ;; Like as '%' of vim
+  (defun my:jump-brace ()
+	"Jump to the corresponding parenthesis."
+	(interactive)
+	(let ((c (following-char))
+		  (p (preceding-char)))
+	  (if (eq (char-syntax c) 40) (forward-list)
+		(if (eq (char-syntax p) 41) (backward-list)
+		  (backward-up-list)))))
+  (global-set-key (kbd "C-M-SPC") 'my:jump-brace)
+```
+
+### 4.5 [expand-region]カーソル位置を起点に選択範囲を賢く広げる
 [expand-region](https://github.com/magnars/expand-region.el) は、カーソル位置を起点として前後に選択範囲を広げてくれます。
 
 2回以上呼ぶとその回数だけ賢く選択範囲が広がりますが、2回目以降は設定したキーバインドの最後の一文字を連打すれば OKです。その場合、選択範囲を狭める時は - を押し， 0 を押せばリセットされます。
