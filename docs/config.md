@@ -10,7 +10,7 @@ nav_order: 1
 * ここは [@minoruGH](https://twitter.com/minorugh)  の Emacs設定ファイルの一部を解説しているページです。
 * <https://github.com/minorugh/emacs.d/> から
 jekyll を使ってGithub pages にWebサイトを構築しています。
-* 本ドキュメントは、[takaxp.github.io/](https://takaxp.github.io/init.html) の記事を参考にした模倣版です。
+* 本ドキュメントは、[@takaxp](https://twitter.com/takaxp)さん作の [takaxp.github.io/](https://takaxp.github.io/init.html) の記事を参考にした模倣版です。
 * 執筆用途に特化してカスタマイズしていますので、コンセプトやキーバイドなどは極めて邪道思想になっています。
 
 ### 1.1 動作確認環境
@@ -20,7 +20,7 @@ jekyll を使ってGithub pages にWebサイトを構築しています。
 * 自分でビルドした Emacs 27.2.50
 
 ### 1.2 デレクトリ構成
-設定ファイル群は、下記の配置構成にしています。
+設定ファイル群は、下記の配置にしています。
 
 ```text
 ~/.emacs.d
@@ -51,31 +51,24 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 手順は
 init-loader を使うことの是非については諸説あるようですが、[多くの恩恵](http://emacs.rubikitch.com/init-loader/)は捨て難く私には必須ツールです。
 
 ### 2.1 early-init-el
+[early-init](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el) は、Emacs27から導入された早期初期化ファイルです。 
 
-設定ファイル読み込み初期に起動画面がチラチラ変化するのを抑制しています。
+このファイルはパッケージシステムとGUIの初期化前にロードされるので、フレームの外見やpackage-enable-at-startup、package-load-list、package-user-dirのようなパッケージ初期化プロセスに影響を与える変数をカスタマイズできます。
 
-因果関係は不明ですが結果的に起動時間の短縮にも効果があるようです。
+#### 2.1.1 起動時間の短縮を図る
+いままでinit.elに記述していたこれらの設定は、eary-init.elへ移したほうが起動時間を短縮できます。
 
 ```emacs-lisp
-;; Defer garbage collection further back in the startup process
-(setq gc-cons-threshold most-positive-fixnum)
-
-;; For slightly faster startup
-(setq package-enable-at-startup nil)
-
-;; Always load newest byte code
-(setq load-prefer-newer t)
-
-;; Inhibit resizing frame
-(setq frame-inhibit-implied-resize t)
-
-;; Faster to disable these here (before they've been initialized)
 (push '(fullscreen . maximized) default-frame-alist)
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)
+```
 
-;; Suppress flashing at startup
+#### 2.1.2 起動時のチラツキを抑える
+設定ファイル読み込み初期に起動画面がチラチラ変化するのを抑制しています。
+
+```emacs-lisp
 (setq inhibit-redisplay t)
 (setq inhibit-message t)
 (add-hook 'window-setup-hook
@@ -89,15 +82,16 @@ init-loader を使うことの是非については諸説あるようですが�
 (setq inhibit-startup-message t)
 (setq byte-compile-warnings '(cl-functions))
 (custom-set-faces '(default ((t (:background "#282a36")))))
-
-
-(provide 'early-init)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; early-init.el ends here
 ```
 
 ### 2.2 init.el
+[init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el) には、Packageの初期化設定とinit-lorderの設定を書いています。 
 設定ファイル群は、init-loaderで読み込むようにしています。
+
+#### 2.2.1 Magic File Name を一時的に無効にする
+起動時間の短縮を図る設定として定着してきたようです。
+
+GC設定とともに設定ファイル読み込み後に正常値に戻します。
 
 ```emacs-lisp
 (unless (or (daemonp) noninteractive init-file-debug)
@@ -116,44 +110,21 @@ init-loader を使うことの是非については諸説あるようですが�
           (lambda ()
             "Recover GC values after startup."
             (setq gc-cons-threshold 800000)))
+```
 
-;; Package
-(eval-and-compile
-  (customize-set-variable
-   'package-archives '(("org" . "https://orgmode.org/elpa/")
-					   ("melpa" . "https://melpa.org/packages/")
-                       ("gnu" . "https://elpa.gnu.org/packages/")))
-  (package-initialize)
-  (unless (package-installed-p 'leaf)
-	(package-refresh-contents)
-	(package-install 'leaf))
+#### 2.2.2 [init-loader]初期設定ファイルを読み込む
+[init-loader](https://github.com/emacs-jp/init-loader/) は、設定ファイルのローダーです。 指定されたディレクトリから構成ファイルをロードします。これにより、構成を分類して複数のファイルに分けることができます。
 
-  (leaf leaf-keywords
-	:ensure t
-	:init
-	(leaf hydra :ensure t)
-	(leaf el-get :ensure t)
-	:config
-	(leaf-keywords-init)))
-
-
-;; Load init files
+```emacs-lisp
 (leaf init-loader
   :ensure t
-  :custom
-  `((custom-file . "~/.emacs.d/tmp/custom.el")
-			(init-loader-show-log-after-init . 'error-only))
   :config
+  (custom-set-variables
+   '(init-loader-show-log-after-init 'error-only))
   (init-loader-load))
-
-
-(provide 'init)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init.el ends here
 ```
 
 ### 2.3 mini-init.el
-
 [mini-init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/mini-init.el) は、最小限の emacs を起動させるための設定です。
 
 新しいパッケージや設定をテストしたり、エラー等で Emacsが起動しない場合に使用します。

@@ -8,7 +8,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (leaf viewer
   :ensure t
-  :hook ((prog-mode-hook . viewer-change-modeline-color-setup)
+  :hook ((view-mode-hook . viewer-change-modeline-color-setup)
 		 (find-file-hook . my:auto-view)
 		 (server-visit-hook . my:unlock-view-mode))
   :custom `((viewer-modeline-color-view . "#852941")
@@ -52,12 +52,11 @@
 	("," . hydra-view/body)))
   :init
   ;; Specific extension / directory
-  (defvar my:auto-view-regexp "\\.php\\|\\.pl\\|\\.el.gz?\\|\\.tar.gz?\\'")
+  (defvar my:auto-view-regexp "\\.pl\\|\\\.cgi\\|\\makefile\\|\\.mak\\|\\.css\\|\\.php\\|\\.el.gz?\\|\\.tar.gz?\\'")
 
   ;; Specific directory
   (defvar my:auto-view-dirs nil)
   (add-to-list 'my:auto-view-dirs "~/src/")
-  (add-to-list 'my:auto-view-dirs "~/Dropbox/GH/")
   (add-to-list 'my:auto-view-dirs "/scp:xsrv:/home/minorugh/")
 
   (defun my:auto-view ()

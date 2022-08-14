@@ -43,10 +43,11 @@
 ;; Load init files
 (leaf init-loader
   :ensure t
-  :custom `((custom-file . "~/.emacs.d/tmp/custom.el")
-			(init-loader-show-log-after-init . 'error-only))
   :config
-  (init-loader-load))
+  (custom-set-variables
+   '(init-loader-show-log-after-init 'error-only))
+  (init-loader-load)
+  (setq custom-file (locate-user-emacs-file "custom.el")))
 
 
 (provide 'init)

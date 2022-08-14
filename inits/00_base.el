@@ -41,7 +41,7 @@
 	(next-line-add-newlines . nil)
     ;; Make it easy to see when it is the same name file
     (uniquify-buffer-name-style . 'post-forward-angle-brackets)
-
+	;; Don't clear kill-ring when restart emacs
 	(savehist-additional-variables . '(kill-ring))
     ;; Use the X11 clipboard
     (select-enable-clipboard  . t))
@@ -140,3 +140,6 @@
 (provide '00_base)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 00_base.el ends here
+
+
+

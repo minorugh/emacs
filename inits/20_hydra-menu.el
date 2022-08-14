@@ -13,9 +13,9 @@
    (:hint nil :exit t)
    "
    Quick Menu
-  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^----------------------------------------------------------------------------------
-  Drop_b_ox  _e_macs.d^^  _i_nits  _x_srv.jp^^^^  G.H:_h_  root:_/_  _s_rc  _._files   howm:_@__,_   _m_d:_p_vie_w_
-  _r_estart  magit_[__]_  _t_ramp  _y_as:_n_:_v_  font_a_  _f_zilla  _o_rg  _<home>_   _c_ompile^^   make:_k_._g_
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^---------------------------------------------------------------------------------------------------
+  Drop_b_ox  _e_macs.d^^  _i_nits  _x_srv.jp^^^^  G.H:_h_  root:_/_  _s_rc  _._files   howm:_@__,_   _m_d:_p_vie_w_   ___:dele-windows
+  _r_estart  magit_[__]_  _t_ramp  _y_as:_n_:_v_  _p_ages  _f_zilla  _o_rg  _<home>_   _c_ompile^^   make:_k_._g_^^   _a_:font-awesome
 "
    ("a" counsel-fontawesome)
    ("z" eshell)
@@ -43,10 +43,11 @@
    ("k" my:make-k)
    ("g" my:make-git)
    ("/" my:root-dir)
-   ("_" delete-other-windows)
+   ("_" my:delete-other-windows)
    ("[" git-timemachine-toggle)
    ("]" magit-status)
    ("s" my:scr-dir)
+   ("j" my:emacs.d-dir)
    ("l" my:open-capture)
    (":" view-mode)
    ("f" filezilla)
@@ -64,9 +65,9 @@
    (:hint nil :exit t)
    "
    Work Menu
-  ------^^^^^^^^^^^^^^^^^^^^^^^^^^----------------------------------------------------------------------------------------
-  _d_:日記   _m_:毎日   _w_:毎週   _k_:兼題^^   _t_:定例   _s_:吟行^^   近詠:_n_   創作:_[_._]_   keep_;_   _h_:github.io
-  _a_:合評   _e_:hugo   _b_ackup   _g_ist:_L_   pass_x_c   repo:_@_^^   view:_:_   _p_rint:_r_g   _i_edit   _._:emacs.d/
+  ------^^^^^^^^^^^^^^^^^^^^^^^^^^-------------------------------------------------------------------------------------------
+  _d_:日記   _m_:毎日   _w_:毎週   _k_:兼題^^   _t_:定例   _s_:吟行^^   近詠:_n_   創作:_[_._]_   keep_;_   ___:dele-windows
+  _a_:合評   _e_:hugo   _b_ackup   _g_ist:_L_   pass_x_c   repo:_@_^^   view:_:_   _p_rint:_r_e   _i_edit   _._:github-pages
 "
    ("p" ps-print-buffer)
    ("r" ps-print-region)
@@ -98,7 +99,7 @@
    ("f" flymake-show-diagnostics-buffer)
    ("x" keepassxc)
    ("+" text-scale-adjust)
-   ("_" delete-other-windows)
+   ("_" my:delete-other-windows)
    ("]" my:haiku-note)
    ("[" my:haiku-note-post)
    (";" (browse-url "https://keep.google.com/u/0/"))
