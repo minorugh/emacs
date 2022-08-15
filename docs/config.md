@@ -366,8 +366,9 @@ MELPAにはないのでel-getでインストールします。
 
 ```elisp
 (leaf view
-  :hook ((find-file-hook . my:auto-view)
-		 (server-visit-hook . my:unlock-view-mode))
+  :hook
+  (find-file-hook . my:auto-view)
+  (server-visit-hook . my:unlock-view-mode)
   :bind
   (("S-<return>" . view-mode)
    (:view-mode-map
