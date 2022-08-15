@@ -342,6 +342,7 @@ Toggleで括弧の先頭と最後にポイント移動します。
 ```
 
 markdownファイルのプレビューには、[`emacs-livedown`](https://github.com/shime/emacs-livedown) を使っています。
+
 記事を書きながらライブでプレビュー出来るすぐれものです。
 
 Emacsからlivedownを使うためにはまず、npmがインストールされたノードがあることを確認します。
