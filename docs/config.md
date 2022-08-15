@@ -1084,6 +1084,7 @@ junkファイルの保存も howmフォルダーに置くことで、howmの検�
 下記のTipsを参考にして、直近の junkファイルを即開けるように `open-last-junk-file` を定義しました。
 
 * [`Emacs で作成した使い捨てファイルを簡単に開く`](htotps://qiita.com/zonkyy/items/eba6bc64f66d278f0032) 
+
 ```elisp
 (leaf em-glob
  :require t
