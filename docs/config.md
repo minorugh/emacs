@@ -400,12 +400,33 @@ dvipdfmx $1 && open -a Preview.app ${name%.*}.pdf
 
 ### 5.8 [yasunippet]Emacs用のテンプレートシステム
 
-### 5.9 [selected]リージョン選択時のアクションを制御
+### 5.9 [iedit]選択領域を別の文字列に置き換える
+[idet.el](https://github.com/victorhge/iedit) は、複数箇所を同時に編集するツールです。
+
+同じような機能のものは、複数あるようですが、わたしはこれを愛用しています。
+* [multi-cursors.el](https://github.com/magnars/multiple-cursors.el) 
+* [replace-from-region.el](https://www.emacswiki.org/emacs/replace-from-region.el) 
+* [anzu.el](https://github.com/emacsorphanage/anzu) 
+
+MELPAからpackage-installするだけで使えます。
+
+対象範囲を選択して `C-;` を押すとiedit-modeとなり、選択したキーワードが全てハイライト表示され、モードラインに押すとIedit:とキーワードの出現した回数が表示され、ミニバッファにもメッセージが表示されます。
+
+ここで、ハイライトされた部分を編集すると、他のハイライトも同時に編集されるようになります。編集後、もう一度 `C-;` を押すと確定されiedet-modeを抜けます。
+
+私の場合かなりの頻度で使うので、Emacsでは使うことのない `<insert>` にキーバインドしています。
+
+```elisp
+(leaf iedit
+  :ensure t
+  :bind ("<insert>" . iedit-mode))
+```
+
+### 5.10 [selected]リージョン選択時のアクションを制御
 [selected](https://github.com/Kungsgeten/selected.el) は、選択領域に対するスピードコマンドです。
 
 Emacsバッファーで領域を選択した後、バインドしたワンキーを入力するとコマンドが実行されます。
 コマンドの数が増えてきたら、ヘルプ代わりに使える [counsel-selected](https://github.com/takaxp/counsel-selected) も便利そうです。
-
 ```emacs-lisp
 (leaf selected
   :ensure t
