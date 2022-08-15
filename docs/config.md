@@ -327,10 +327,10 @@ Toggleで括弧の先頭と最後にポイント移動します。
 ### 5.6 [darkroom-mode]執筆モード
 [darkroom.el](https://github.com/joaotavora/darkroom)  は、画面の余計な項目を最小限にして、文章の執筆に集中できるようにするパッケージです。
 
-タイトルバーやモードラインが一時的に削除されてフルスクリーンになり、テキストが拡大され、テキストがウィンドウの中央に配置されるように余白が調整されます。[view-mode, diff-hl-mode, display-line-numbers-mode] をOffにし、行間も少し大きくしてより読みやすくしています。
+タイトルバーやモードラインが一時的に削除されてフルスクリーンになり、テキストが拡大され、テキストがウィンドウの中央に配置されるように余白が調整されます。`view-mode, diff-hl-mode, display-line-numbers-mode` をOffにし、行間も少し大きくしてより読みやすくしています。
 
 [F12] キーで IN/OUT をトグルしています。
-darkroom-modeからでるときは、revert-buffer で再読込してもとに戻しますが yes/noを聞いてくるのが煩わしいんのでno-confirm の関数を作りました。
+darkroom-modeからでるときは、revert-buffer で再読込してもとに戻しますが yes/noを聞いてくるのが煩わしいのでno-confirm の関数を作りました。
 
 ```emacs-lisp
 (leaf darkroom
@@ -443,7 +443,7 @@ Emacsバッファーで領域を選択した後、バインドしたワンキー
 		 ("g" . my:google)))
 ```
 
-### 5.10 [selected]browse-urlで検索サイトで開く
+### 5.11 [selected]browse-urlで検索サイトで開く
 検索結果を browse-url で表示させるユーザーコマンドは、検索 urlのフォーマットとさえわかれば、パッケージツールに頼らずともお好みのマイコマンドを作成できます。
 
 ```emacs-lisp
@@ -472,7 +472,7 @@ Emacsバッファーで領域を選択した後、バインドしたワンキー
 	(buffer-substring-no-properties (region-beginning) (region-end)))
 ```
 
-### 5.11 [selected]IME のオン・オフを自動制御する
+### 5.12 [selected]IME のオン・オフを自動制御する
 selectedコマンドを選択するときは、IMEをOffにしないといけないのですがこれを自動でさせます。
 
 領域を選択し始める時に IMEをオフにして、コマンド発行後に IMEを元に戻すという例が、
@@ -508,17 +508,20 @@ selectedコマンドを選択するときは、IMEをOffにしないといけな
 	   (unless (null my:ime-flag) (my:ime-on)))))
 ```
 
-### 5.12 [swiper-migemo] swiperを migemo化してローマ字入力で日本語を検索
+### 5.13 [swiper-migemo] swiperを migemo化してローマ字入力で日本語を検索
 [avy-migemo-e.g.swiper.el](https://github.com/momomo5717/avy-migemo) を使って出来ていたのですが、２年ほど前から更新が止まってしまっていて動きません。
 
 つい最近、avy-migemo を使わない [swiper-migemo](https://github.com/tam17aki/swiper-migemo)を GitHubで見つけたので試した処、機嫌よく動いてくれています。
 MELPAにはアップされていないみたいなので el-get で取得しています。
 
 ```emacs-lisp
-  (leaf swiper-migemo
-	:el-get tam17aki/swiper-migemo
-	:global-minor-mode t)
+(leaf swiper-migemo
+  :el-get tam17aki/swiper-migemo
+  :global-minor-mode t)
 ```
+
+### 5.14 [smartparent.el]対応する括弧の挿入をアシスト
+
 
 ## 6. 表示サポート
 
