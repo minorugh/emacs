@@ -51,7 +51,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 ```
 
 ### 2.1 early-init-el
-`[early-init](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el)` は、Emacs27から導入された早期初期化ファイルです。 
+[`early-init`](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el) は、Emacs27から導入された早期初期化ファイルです。 
 
 このファイルはパッケージシステムとGUIの初期化前にロードされるので、フレームの外見やpackage-enable-at-startup、package-load-list、package-user-dirのようなパッケージ初期化プロセスに影響を与える変数をカスタマイズできます。
 
