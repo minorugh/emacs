@@ -1010,7 +1010,7 @@ Emacsはメモ書きに特化した使い方なので、`Howm` を使って mark
 		  ("linux:" . (0 'compilation-error)))))
 ```
 
-### 10.3 Org Mode
+### 10.2 Org Mode
 dashboard画面に簡単なタスクを表示させるために `org-agenda` を使っています。
 
 ついでなので `org-capture` からHowmメモを発動できるようにTemplateを作りました。
@@ -1071,7 +1071,7 @@ dashboard画面に簡単なタスクを表示させるために `org-agenda` を
   (add-hook 'org-capture-mode-hook 'delete-other-windows))
 ```
 
-### 10.2 open-junk-file
+### 10.3 open-junk-file
 junkファイルの保存も howmフォルダーに置くことで、howmの検索機能が利用できて便利です。
 
 ```emacs-lisp
@@ -1100,7 +1100,7 @@ junkファイルの保存も howmフォルダーに置くことで、howmの検�
 			"*.*.*")))))))
 ```
 
-### 10.3 scratch buffer
+### 10.4 scratch buffer
 メールや WEBなど全てを Emacsでという思想もありますが、窮屈なので私好みではありません。少し長めのメール文章などは、scratch バッファーに書いてコピペします。また、scratchを付箋代わりにも使うので、自動保存のために `persistent-scratch.el` を使います。
 
 scratchバッファーの永続化にはいろいろ Tipsもあるようですが、標準機能で簡単に設定できます。なんだかんだで便利な scratchなので toggle-scratch を設定して愛用しています。
