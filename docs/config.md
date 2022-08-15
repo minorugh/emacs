@@ -862,7 +862,7 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
 (put 'dired-find-alternate-file 'disabled nil)
 ```
 
-## 7. Hydraで「鬼軍曹」から逃避
+## 7. Hydra Extensions
 ```note
 [hydra.el](https://github.com/abo-abo/hydra) を使うとよく使う機能をまとめてシンプルなキーバインドを割り当てることができます。
 
