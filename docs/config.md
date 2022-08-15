@@ -864,7 +864,7 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
 
 ## 7. Hydraで「鬼軍曹」から逃避
 ```note
-[`hydra.el`](https://github.com/abo-abo/hydra) を使うとよく使う機能をまとめてシンプルなキーバインドを割り当てることができます。
+[hydra.el](https://github.com/abo-abo/hydra) を使うとよく使う機能をまとめてシンプルなキーバインドを割り当てることができます。
 
 日本では、[smartrep.el](http://sheephead.homelinux.org/2011/12/19/6930/) が有名だったようですが、hydra.elも同様の機能を提供します。
 ```
