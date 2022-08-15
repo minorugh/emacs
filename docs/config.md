@@ -868,9 +868,25 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
 
 日本では、[smartrep.el](http://sheephead.homelinux.org/2011/12/19/6930/) が有名だったようですが、hydra.elも同様の機能を提供します。
 ```
-私はおもに8種の hydra を設定しています。それぞれを呼び出すための相関図は下記のとおりです。
+むかし、Emacsのキーバインドを強制する [鬼軍曹.el](https://github.com/k1LoW/emacs-drill-instructor) というパッケージがありました。
+その後、
+[`key-chord.el`]() や [`hydra.el`]() などが開発されてキーバインドの枯渇化が解消され、自由度が向上しました。
 
+
+私は下記の `hydra` を設定しています。
+
+* [hydra-work-menu](URL ) 
+* [hydra-quick-menu](URL ) 
+* [hydra-make](URL ) 
+* [hydra-package](URL ) 
+* [hydra-browse](URL ) 
+* [hydra-markdown](URL ) 
+* [hydra-view-mode](URL ) 
+
+
+また、それぞれ下記のような相関になっています。
 ```
+
 ┌──────────────────┐
 │ hydra-work-menu  │ ワークテーブル分岐
 └──────────────────┘
