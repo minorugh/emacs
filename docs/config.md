@@ -151,7 +151,7 @@ Emacs を操作して文書編集する上で必要な設定。
 (prefer-coding-system 'utf-8)
 ```
 
-### 3.2 日本語入力
+### 3.2 [emacs-mozc] 日本語入力
 Debian11 にインストールした Emacs上で [`emacs-mozc`](https://wiki.debian.org/JapaneseEnvironment/Mozc) を使っています。
 
 Emacsをソースからビルドするときに `--without-xim` しなかったので、インライン XIMでも日本語入力ができてしまいます。
@@ -187,6 +187,28 @@ Emacs*useXIM: false
 	  ad-do-it
 	  (setq input-method-function input-method-function-save))))
 ```
+
+文章編集中にShellコマンドの [`mozc-tool`](https://www.mk-mode.com/blog/2017/06/27/linux-mozc-tool-command/) を起動して即、単語登録できるようにしておくと機能的です。
+
+```elisp
+(leaf *cus-mozc-tool
+  :bind (("s-t" . my:mozc-dictionary-tool)
+		 ("s-d" . my:mozc-word-regist))
+  :init
+  (defun my:mozc-dictionary-tool ()
+	"Open `mozc-dictipnary-tool'."
+	(interactive)
+	(compile "/usr/lib/mozc/mozc_tool --mode=dictionary_tool")
+	(delete-other-windows))
+
+  (defun my:mozc-word-regist ()
+	"Open `mozc-word-regist'."
+	(interactive)
+	(compile "/usr/lib/mozc/mozc_tool --mode=word_register_dialog")
+	(delete-other-windows)))
+```
+
+
 ### 3.4 基本キーバインド
 Mac時代に慣れ親しんだ関係もあり、標準キーバインドの他に下記を追加しています。 
 
