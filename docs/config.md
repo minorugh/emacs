@@ -593,7 +593,7 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
 (put 'dired-find-alternate-file 'disabled nil)
 ```
 
-## 7. Hydra
+## 7. Hydraで「鬼軍曹」から逃避
 
 [hydra.el](https://github.com/abo-abo/hydra) は、連続して操作するときにプレフィクスキーをキャンセルさせるための elispです。
 
