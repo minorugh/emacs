@@ -42,11 +42,13 @@ jekyll を使ってGithub pages にWebサイトを構築しています。
 ```
 
 ## 2. 起動設定
+```note
 Emacs-27導入にあわせて `early-init.el` を設定しました。 ブートシーケンスは以下のとおり。
 
 1. `early-init.el` の読み込み
 2. `init.el` の読み込み
 3. `inits/` のファイル群を読み込み （init-loader 使用）
+```
 
 ### 2.1 early-init-el
 [early-init](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el) は、Emacs27から導入された早期初期化ファイルです。 
