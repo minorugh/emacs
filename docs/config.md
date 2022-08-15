@@ -863,13 +863,12 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
 ```
 
 ## 7. Hydraで「鬼軍曹」から逃避
-
+```note
 [hydra.el](https://github.com/abo-abo/hydra) は、連続して操作するときにプレフィクスキーをキャンセルさせるための elispです。
 
 日本では、[smartrep.el](http://sheephead.homelinux.org/2011/12/19/6930/) が有名だったようですが、hydra.elも同様の機能を提供します。
 私はおもに8種の hydra を設定しています。それぞれを呼び出すための相関図は下記のとおりです。
 
-```
 ┌──────────────────┐
 │ hydra-work-menu  │ ワークテーブル分岐
 └──────────────────┘
