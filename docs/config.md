@@ -51,7 +51,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 ```
 
 ### 2.1 early-init-el
-[`early-init`](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el) は、Emacs27から導入された早期初期化ファイルです。 
+[`early-init.el`](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el) は、Emacs27から導入された早期初期化ファイルです。 
 
 このファイルはパッケージシステムとGUIの初期化前にロードされるので、フレームの外見やpackage-enable-at-startup、package-load-list、package-user-dirのようなパッケージ初期化プロセスに影響を与える変数をカスタマイズできます。
 
@@ -86,7 +86,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 ```
 
 ### 2.4 init.el
-[init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el) には、Packageの初期化設定とinit-lorderの設定を書いています。 
+[`init.el`](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el) には、Packageの初期化設定とinit-lorderの設定を書いています。 
 
 また、Magic File Name を一時的に無効にすることで、起動時間の短縮を図る設定をしています。
 
@@ -112,9 +112,9 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
 ```
 
 ### 2.5 [init-loader] 初期設定ファイルを読み込む
-[init-loader](https://github.com/emacs-jp/init-loader/) は、設定ファイル群のローダーです。 指定されたディレクトリから構成ファイルをロードします。これにより、構成を分類して複数のファイルに分けることができます。
+[`init-loader`](https://github.com/emacs-jp/init-loader/) は、設定ファイル群のローダーです。 指定されたディレクトリから構成ファイルをロードします。これにより、構成を分類して複数のファイルに分けることができます。
 
-init-loader を使うことの是非については諸説あるようですが、[多くの恩恵](http://emacs.rubikitch.com/init-loader/) は捨て難く私には必須ツールです。
+init-loader を使うことの是非については諸説あるようですが、[`多くの恩恵`](http://emacs.rubikitch.com/init-loader/) は捨て難く私には必須ツールです。
 
 ```emacs-lisp
 (leaf init-loader
@@ -126,7 +126,7 @@ init-loader を使うことの是非については諸説あるようですが�
 ```
 
 ### 2.6 mini-init.el
-[mini-init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/mini-init.el) は、最小限の emacs を起動させるための設定です。
+[`mini-init.el`](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/mini-init.el) は、最小限の emacs を起動させるための設定です。
 
 新しいパッケージや設定をテストしたり、エラー等で Emacsが起動しない場合に使用します。
 シェルから `eq` と入力することで起動することがでます。
@@ -152,7 +152,7 @@ Emacs を操作して文書編集する上で必要な設定。
 ```
 
 ### 3.2 日本語入力
-Debian11 にインストールした Emacs上で [emacs-mozc](https://wiki.debian.org/JapaneseEnvironment/Mozc) を使っています。
+Debian11 にインストールした Emacs上で [`emacs-mozc`](https://wiki.debian.org/JapaneseEnvironment/Mozc) を使っています。
 
 Emacsをソースからビルドするときに `--without-xim` しなかったので、インライン XIMでも日本語入力ができてしまいます。
 特に使い分けする必要もなく紛らわしいので `.Xresources` で XIM無効化の設定をしました。
@@ -218,7 +218,7 @@ If the region is inactive, to kill whole line."
 ```
 ### 3.6 C-x C-c でEmacsを終了させないようにする
 Emacsを終了させることはまずないので、再起動コマンドに変更しています。
-[restart-emacs](https://github.com/iqbalansari/restart-emacs) はMelpからインストールできます。
+[`restart-emacs`](https://github.com/iqbalansari/restart-emacs) はMELPAからインストールできます。
 ```emacs-lisp
 (leaf restart-emacs
   :ensure t
@@ -236,7 +236,7 @@ MELPAをメインに管理しています。MELPAにないものはel-getでGitH
 ```
 
 ### 4.1 [sequential-command.el] バッファー内のカーソル移動
-[sequential-command](https://github.com/HKey/sequential-command) は、バッファーの先頭と最終行への移動を簡単にしてくれます。
+[`sequential-command`](https://github.com/HKey/sequential-command) は、バッファーの先頭と最終行への移動を簡単にしてくれます。
 
 * `C-a` を連続で打つことで行頭→ファイルの先頭→元の位置とカーソルが移動
 * `C-e` を連続で打つことで行末→ファイルの最終行→元の位置とカーソルが移動
@@ -290,7 +290,7 @@ Toggleで括弧の先頭と最後にポイント移動します。
 ```
 
 ### 4.4 [expand-region] カーソル位置を起点に選択範囲を賢く広げる
-[expand-region](https://github.com/magnars/expand-region.el) は、カーソル位置を起点として前後に選択範囲を広げてくれます。
+[`expand-region.el`](https://github.com/magnars/expand-region.el) は、カーソル位置を起点として前後に選択範囲を広げてくれます。
 
 2回以上呼ぶとその回数だけ賢く選択範囲が広がりますが、2回目以降は設定したキーバインドの最後の一文字を連打すれば OKです。その場合、選択範囲を狭める時は - を押し， 0 を押せばリセットされます。
 
@@ -333,7 +333,7 @@ Toggleで括弧の先頭と最後にポイント移動します。
 ### 5.5 web/htmlモード
 
 ### 5.6 [darkroom-mode] 執筆モード
-[darkroom.el](https://github.com/joaotavora/darkroom)  は、画面の余計な項目を最小限にして、文章の執筆に集中できるようにするパッケージです。
+[`darkroom.el`](https://github.com/joaotavora/darkroom)  は、画面の余計な項目を最小限にして、文章の執筆に集中できるようにするパッケージです。
 
 タイトルバーやモードラインが一時的に削除されてフルスクリーンになり、テキストが拡大され、テキストがウィンドウの中央に配置されるように余白が調整されます。`view-mode, diff-hl-mode, display-line-numbers-mode` をOffにし、行間も少し大きくしてより読みやすくしています。
 
@@ -371,9 +371,9 @@ darkroom-modeからでるときは、revert-buffer で再読込してもとに�
 ```
 
 ### 5.7 [yatex] YaTexで LaTex編集
-[yatex](https://github.com/emacsmirror/yatex) は、Emacsの上で動作する LaTeX の入力支援環境です。
+[`yatex.el`](https://github.com/emacsmirror/yatex) は、Emacsの上で動作する LaTeX の入力支援環境です。
 
-ごく一般的な設定例ですが、参考になるとしたら [yatexprc](https://www.yatex.org/gitbucket/yuuji/yatex/blob/c45e2a0187b702c5e817bf3023816dde154f0de9/yatexprc.el) の `M-x YaTeX-lpr` を使って一気に PDF作成まで自動化している点でしょうか。
+ごく一般的な設定例ですが、参考になるとしたら [`yatexprc.el`](https://www.yatex.org/gitbucket/yuuji/yatex/blob/c45e2a0187b702c5e817bf3023816dde154f0de9/yatexprc.el) の `M-x YaTeX-lpr` を使って一気に PDF作成まで自動化している点でしょうか。
 
 ```emacs-lisp
 (leaf yatex
@@ -409,12 +409,12 @@ dvipdfmx $1 && open -a Preview.app ${name%.*}.pdf
 ### 5.8 [yasunippet] Emacs用のテンプレートシステム
 
 ### 5.9 [iedit] 選択領域を別の文字列に置き換える
-[idet.el](https://github.com/victorhge/iedit) は、複数箇所を同時に編集するツールです。
+[`idet.el`](https://github.com/victorhge/iedit) は、複数箇所を同時に編集するツールです。
 
 同じような機能のものは、複数あるようですが、わたしはこれを愛用しています。
-* [multi-cursors.el](https://github.com/magnars/multiple-cursors.el) 
-* [replace-from-region.el](https://www.emacswiki.org/emacs/replace-from-region.el) 
-* [anzu.el](https://github.com/emacsorphanage/anzu) 
+* [`multi-cursors.el`](https://github.com/magnars/multiple-cursors.el) 
+* [`replace-from-region.el`](https://www.emacswiki.org/emacs/replace-from-region.el) 
+* [`anzu.el`](https://github.com/emacsorphanage/anzu) 
 
 MELPAからpackage-installするだけで使えます。
 
@@ -431,10 +431,10 @@ MELPAからpackage-installするだけで使えます。
 ```
 
 ### 5.10 [selected] リージョン選択時のアクションを制御
-[selected](https://github.com/Kungsgeten/selected.el) は、選択領域に対するスピードコマンドです。
+[`selected.el`](https://github.com/Kungsgeten/selected.el) は、選択領域に対するスピードコマンドです。
 
 Emacsバッファーで領域を選択した後、バインドしたワンキーを入力するとコマンドが実行されます。
-コマンドの数が増えてきたら、ヘルプ代わりに使える [counsel-selected](https://github.com/takaxp/counsel-selected) も便利そうです。
+コマンドの数が増えてきたら、ヘルプ代わりに使える [`counsel-selected`](https://github.com/takaxp/counsel-selected) も便利そうです。
 ```emacs-lisp
 (leaf selected
   :ensure t
@@ -484,7 +484,7 @@ Emacsバッファーで領域を選択した後、バインドしたワンキー
 selectedコマンドを選択するときは、IMEをOffにしないといけないのですがこれを自動でさせます。
 
 領域を選択し始める時に IMEをオフにして、コマンド発行後に IMEを元に戻すという例が、
-[@takaxp](https://qiita.com/takaxp) さんの [Qiitaの記事](https://qiita.com/takaxp/items/00245794d46c3a5fcaa8) にあったので、私の環境（emacs-mozc ）にあうように設定したら、すんなり動いてくれました。感謝！
+[`@takaxp`](https://qiita.com/takaxp) さんの [`Qiitaの記事`](https://qiita.com/takaxp/items/00245794d46c3a5fcaa8) にあったので、私の環境（emacs-mozc ）にあうように設定したら、すんなり動いてくれました。感謝！
 
 ```emacs-lisp
 (leaf *cus-selected
@@ -517,9 +517,9 @@ selectedコマンドを選択するときは、IMEをOffにしないといけな
 ```
 
 ### 5.13 [swiper-migemo] swiperを migemo化してローマ字入力で日本語を検索
-[avy-migemo-e.g.swiper.el](https://github.com/momomo5717/avy-migemo) を使って出来ていたのですが、２年ほど前から更新が止まってしまっていて動きません。
+[`avy-migemo-e.g.swiper.el`](https://github.com/momomo5717/avy-migemo) を使って出来ていたのですが、２年ほど前から更新が止まってしまっていて動きません。
 
-つい最近、avy-migemo を使わない [swiper-migemo](https://github.com/tam17aki/swiper-migemo)を GitHubで見つけたので試した処、機嫌よく動いてくれています。
+つい最近、avy-migemo を使わない [`swiper-migemo`](https://github.com/tam17aki/swiper-migemo)を GitHubで見つけたので試した処、機嫌よく動いてくれています。
 MELPAにはアップされていないみたいなので el-get で取得しています。
 
 ```emacs-lisp
