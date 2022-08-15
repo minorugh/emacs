@@ -980,10 +980,9 @@ magit status の画面は、デフォルトでは `other-window` に表示され
 
 ## 10. メモ環境
 
-### 10.1 Org Mode / Howm Mode
-私の場合、専門的なプログラミングもやらないし、現役引退の身なので GTDとかも必要ありません。Emacsはメモ書きに特化した使い方です。メモは全て howmを使って markdown記法で書いています。メモリストでカテゴリを分かりやすくするためのタグ付けをするのでメニュー機能として org-captureを使います。
-
-captureでメモ機能を発動させると画面が半分になるのがいやなので、最大化で開くようにしました。また、dashboard画面に簡単なタスクを表示するに org-agendaも使ーっています。
+### 10.1 Howm Mode
+私の場合、専門的なプログラミングもやらないし、余生の身なのでGTDとかも必要ありません。
+Emacsはメモ書きに特化した使い方なので、`Howm` を使って markdown記法で書いています。
 
 ```emacs-lisp
 (leaf howm
@@ -1009,28 +1008,59 @@ captureでメモ機能を発動させると画面が半分になるのがいや�
 		  ("haiku:" . (0 'compilation-mode-line-exit))
 		  ("emacs:" . (0 'compilation-info))
 		  ("linux:" . (0 'compilation-error)))))
+```
 
+### 10.3 Org Mode
+dashboard画面に簡単なタスクを表示させるために `org-agenda` を使っています。
+
+ついでなので `org-capture` からHowmメモを発動できるようにTemplateを作りました。
+ただ、captureからだと画面が半分になるのがいやなので、最大化で開くようにしています。
+
+```elisp
 (leaf org
+  :hook (emacs-startup-hook . (lambda () (require 'org-protocol)))
+  :chord (",," . org-capture)
+  :bind (("C-c a" . org-agenda)
+		 ("C-c c" . org-capture)
+		 ("C-c k" . org-capture-kill)
+		 ("C-c o" . org-open-at-point)
+		 ("C-c i" . org-edit-src-exit)
+		 (:org-mode-map
+		  ("C-c i" . org-edit-special)))
+  :custom `((org-log-done . 'org)
+			(timep-use-speed-commands . t)
+			(org-src-fontify-natively . t)
+			(org-startup-indented . t)
+			(org-hide-leading-stars . t)
+			(org-startup-folded . 'content)
+			(org-indent-mode-turns-on-hiding-stars . nil)
+			(org-indent-indentation-per-level . 4)
+			(org-startup-folded . 'content)
+			(org-agenda-files . '("~/Dropbox/org/task.org"))
+			(org-agenda-span . 30))
   :config
-  (bind-key "C-c a" 'org-agenda)
-  (bind-key "C-c c" 'org-capture)
-  (setq org-log-done 'time)
-  (setq org-use-speed-commands t)
-  (setq org-src-fontify-natively t)
-  (setq org-agenda-files '("~/Dropbox/howm/org/task.org"))
+  (defun my:howm-create-file ()
+    "Make howm create file with 'org-capture'."
+    (interactive)
+    (format-time-string "~/Dropbox/howm/%Y/%m/%Y%m%d%H%M.md" (current-time)))
+  ;; Caputure Settings
   (setq org-capture-templates
-		'(("t" " Task" entry (file+headline "~/Dropbox/howm/org/task.org" "Task")
-		   "** TODO %?\n SCHEDULED: %^t \n" :prepend t)
-		  ("m" " Memo" plain (file my:howm-create-file)
+		'(("m" " Memo with howm" plain (file my:howm-create-file)
 		   "# memo: %?\n%U %i")
-		  ("n" " Note" plain (file my:howm-create-file)
+		  ("n" " Note with howm" plain (file my:howm-create-file)
 		   "# note: %?\n%U %i")
-		  ("p" "★ Perl" plain (file my:howm-create-file)
-		   "# Perl: %?\n%U %i\n\n>>>\n\n```perl\n%i\n```")
-		  ("e" "★ Emacs" plain (file my:howm-create-file)
-		   "# emacs: %?\n%U %i\n\n```emacs-lisp\n%i\n```")
-		  ("l" "★ Linux" plain (file my:howm-create-file)
-		   "# linux: %?\n%U %i")))
+		  ("t" " Task" entry (file+headline "~/Dropbox/org/task.org" "TASK")
+		   "** TODO %?\n SCHEDULED: %^t \n" :empty-lines 1 :jump-to-captured 1)
+		  ("e" " Experiment Perl" entry (file+headline "~/Dropbox/org/experiment.org" "Experiment")
+		   "* %? %i\n#+BEGIN_SRC perl\n\n#+END_SRC\n\n%U")
+		  ("p" " Code capture" entry (file+headline "~/Dropbox/org/capture.org" "Code")
+		   "* %^{Title} \nSOURCE: %:link\nCAPTURED: %U\n\n#+BEGIN_SRC\n%i\n#+END_SRC\n" :prepend t)
+		  ("L" " Link capture" entry (file+headline "~/Dropbox/org/capture.org" "Link")
+		   "* [[%:link][%:description]] \nCAPTURED: %U\nREMARKS: %?" :prepend t)))
+  (setq org-refile-targets
+		'(("~/Dropbox/org/archives.org" :level . 1)
+		  ("~/Dropbox/org/remember.org" :level . 1)
+		  ("~/Dropbox/org/task.org" :level . 1)))
   :init
   ;; Maximize the org-capture buffer
   (defvar my:org-capture-before-config nil

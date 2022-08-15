@@ -50,7 +50,15 @@
 		'(("~/Dropbox/org/archives.org" :level . 1)
 		  ("~/Dropbox/org/remember.org" :level . 1)
 		  ("~/Dropbox/org/task.org" :level . 1)))
-  )
+  :init
+  ;; Maximize the org-capture buffer
+  (defvar my:org-capture-before-config nil
+    "Window configuration before 'org-capture'.")
+  (defadvice org-capture (before save-config activate)
+    "Save the window configuration before 'org-capture'."
+    (setq my:org-capture-before-config (current-window-configuration)))
+  (add-hook 'org-capture-mode-hook 'delete-other-windows))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Calendar configurations
