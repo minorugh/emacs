@@ -1042,27 +1042,32 @@ captureでメモ機能を発動させると画面が半分になるのがいや�
 ```
 
 ### 10.2 open-junk-file
-junkファイルの保存も howmフォルダーに置くことで、howmの検索機能が利用できて便利です。また、直近の junkファイルを即開けるように open-last-junk-file を定義しました。
+junkファイルの保存も howmフォルダーに置くことで、howmの検索機能が利用できて便利です。
 
 ```emacs-lisp
 (leaf open-junk-file :ensure t
   :config
   (setq open-junk-file-format "~/Dropbox/howm/junk/%Y%m%d.")
-  (setq open-junk-file-find-file-function 'find-file)
-  :init
-  ;; https://qiita.com/zonkyy/items/eba6bc64f66d278f0032
-  (leaf em-glob	:require t
-	:config
-	(defvar junk-file-dir "~/Dropbox/howm/junk/")
-	(defun open-last-junk-file ()
-	  "Open last created junk-file."
-	  (interactive)
-	  (find-file
-	   (car
-		(last (eshell-extended-glob
-			   (concat
-				(file-name-as-directory junk-file-dir)
-				"*.*.*"))))))))
+  (setq open-junk-file-find-file-function 'find-file))
+```
+
+下記のTipsを参考にして、直近の junkファイルを即開けるように `open-last-junk-file` を定義しました。
+
+* [`Emacs で作成した使い捨てファイルを簡単に開く`](htotps://qiita.com/zonkyy/items/eba6bc64f66d278f0032) 
+```elisp
+(leaf em-glob
+ :require t
+ :config
+ (defvar junk-file-dir "~/Dropbox/howm/junk/")
+ (defun open-last-junk-file ()
+   "Open last created junk-file."
+   (interactive)
+   (find-file
+    (car
+	    (last (eshell-extended-glob
+	   	   (concat
+   			(file-name-as-directory junk-file-dir)
+			"*.*.*")))))))
 ```
 
 ### 10.3 scratch buffer

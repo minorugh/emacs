@@ -13,9 +13,9 @@
    (:hint nil :exit t)
    "
    Quick Menu
-  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^---------------------------------------------------------------------------------------------------
-  Drop_b_ox  _e_macs.d^^  _i_nits  _x_srv.jp^^^^  G.H:_h_  root:_/_  _s_rc  _._files   howm:_@__,_   _m_d:_p_vie_w_   ___:dele-windows
-  _r_estart  magit_[__]_  _t_ramp  _y_as:_n_:_v_  _p_ages  _f_zilla  _o_rg  _<home>_   _c_ompile^^   make:_k_._g_^^   _a_:font-awesome
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^--------------------------------------------------------------------------------------------------
+  Drop_b_ox  _e_macs.d^^  _i_nits  _x_srv.jp^^^^  GH:_h_  root:_/_  _s_rc  _._files   howm:_@__,_   _m_d:_p_vie_w_   ___:dele-windows
+  _r_estart  magit_[__]_  _t_ramp  _y_as:_n_:_v_  _j_unk  _f_zilla  _o_rg  _<home>_   _c_ompile^^   make:_k_._g_^^   _a_:font-awesome
 "
    ("a" counsel-fontawesome)
    ("z" eshell)
@@ -40,6 +40,7 @@
    ("-" my:github-show)
    ("@" howm-list-all)
    ("," howm-remember)
+   ("j" open-junk-file)
    ("k" my:make-k)
    ("g" my:make-git)
    ("/" my:root-dir)
@@ -47,7 +48,6 @@
    ("[" git-timemachine-toggle)
    ("]" magit-status)
    ("s" my:scr-dir)
-   ("j" my:emacs.d-dir)
    ("l" my:open-capture)
    (":" view-mode)
    ("f" filezilla)
