@@ -6,13 +6,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; View mode configurations
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(leaf viewer
-  :ensure t
-  :hook ((view-mode-hook . viewer-change-modeline-color-setup)
-		 (find-file-hook . my:auto-view)
+(leaf view
+  :hook ((find-file-hook . my:auto-view)
 		 (server-visit-hook . my:unlock-view-mode))
-  :custom `((viewer-modeline-color-view . "#852941")
-			(viewer-modeline-color-unwritable . "#2F6828"))
   :bind
   (("S-<return>" . view-mode)
    (:view-mode-map
@@ -52,11 +48,12 @@
 	("," . hydra-view/body)))
   :init
   ;; Specific extension / directory
-  (defvar my:auto-view-regexp "\\.pl\\|\\\.cgi\\|\\makefile\\|\\.mak\\|\\.css\\|\\.php\\|\\.el.gz?\\|\\.tar.gz?\\'")
+  (defvar my:auto-view-regexp "\\.php\\|\\.pl\\|\\.el.gz?\\|\\.tar.gz?\\'")
 
   ;; Specific directory
   (defvar my:auto-view-dirs nil)
   (add-to-list 'my:auto-view-dirs "~/src/")
+  (add-to-list 'my:auto-view-dirs "~/Dropbox/GH/")
   (add-to-list 'my:auto-view-dirs "/scp:xsrv:/home/minorugh/")
 
   (defun my:auto-view ()
@@ -72,7 +69,14 @@
   (defun my:unlock-view-mode ()
 	"Unlock view mode with git commit."
 	(when (string-match "COMMIT_EDITMSG" buffer-file-name)
-	  (view-mode 0))))
+	  (view-mode 0)))
+
+  ;; Change-modeline-color
+  (leaf viewer
+	:ensure t
+	:hook (view-mode-hook . viewer-change-modeline-color-setup)
+	:custom `((viewer-modeline-color-view . "#852941")
+			  (viewer-modeline-color-unwritable . "#2F6828"))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
