@@ -864,11 +864,13 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
 
 ## 7. Hydraで「鬼軍曹」から逃避
 ```note
-[hydra.el](https://github.com/abo-abo/hydra) は、連続して操作するときにプレフィクスキーをキャンセルさせるための elispです。
+[`hydra.el`](https://github.com/abo-abo/hydra) を使うとよく使う機能をまとめてシンプルなキーバインドを割り当てることができます。
 
 日本では、[smartrep.el](http://sheephead.homelinux.org/2011/12/19/6930/) が有名だったようですが、hydra.elも同様の機能を提供します。
+```
 私はおもに8種の hydra を設定しています。それぞれを呼び出すための相関図は下記のとおりです。
 
+```
 ┌──────────────────┐
 │ hydra-work-menu  │ ワークテーブル分岐
 └──────────────────┘
@@ -882,11 +884,11 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
    ├── hydra-package
    ├── hydra-magit    <<- Dired からも呼び出せる
    ├── hydra-browse   <<- Dashboard からも呼び出せる
-   └── hydra-pinky
+   └── hydra-view-mode
 ```
-### 7.1 [hydra-menu] 作業コマンドメニュー 
 
-[hydra-work-menu](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-menu.el#L57) には、
+### 7.1 [hydra-menu] 作業コマンドメニュー 
+[`hydra-work-menu](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-menu.el#L57) には、
 ブログ記事のほかWEB日記や俳句関係のシリーズ記事の追加、編集など、毎日頻繁に開くワークスペースへのショートカットを設定しています。
 
 ![hydra-work-menu](https://live.staticflickr.com/65535/50175364331_9fcf3c6c86_b.jpg) 
