@@ -1101,7 +1101,7 @@ junkファイルの保存も howmフォルダーに置くことで、howmの検�
 			"*.*.*")))))))
 ```
 
-### 10.4 scratch buffer
+### 10.4 toggle scratch
 なんだかんだで便利な `scratch` なので `toggle-scratch` を設定して愛用しています。
 
 編集中のバッファーとscratchバッファーとをToggle表示します。
