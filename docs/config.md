@@ -329,7 +329,7 @@ Toggleで括弧の先頭と最後にポイント移動します。
 ### 5.3 markdownモード
 [`markdown-mode.el`](https://github.com/jrblevin/markdown-mode) は、Markdown形式のテキストを編集するための主要なモードです。
 
-昨今は、`org-mode` の方が人気があるようですが、私の場合は、[Howm](https://howm.osdn.jp/index-j.html) でメモを書き、 [Hugo](https://github.com/gohugoio/hugo)でブログを書くので物書き環境はmarkdown-modeをメインにしています。
+昨今は、`org-mode` の方が人気があるようですが、私の場合は、[Howm](https://howm.osdn.jp/index-j.html) でメモを書き、 [Hugo](https://github.com/gohugoio/hugo)でブログを書くので物書き環境は`markdown-mode` をメインにしています。
 
 ```emacs-lisp
 (leaf markdown-mode
