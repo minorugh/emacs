@@ -342,19 +342,16 @@ Toggleで括弧の先頭と最後にポイント移動します。
 ```
 
 markdownファイルのプレビューには、[`emacs-livedown`](https://github.com/shime/emacs-livedown) を使っています。
-
 記事を書きながらライブでプレビュー出来るすぐれものです。
 
-Emacsからlivedownを使うためにはまず、npmがインストールされたノードがあることを確認します。
-
-次に、livedownをインストールします。
+npmがインストールされたnodeが入っていことを確認してからlivedownをインストールします。
 ```shell
 $ npm install -g livedown
 ```
 
-MacとLinuxでしか試していないのですが、WSLでも動くのではないかと思います。
+次にEmacsの設定を書きます。
+MELPAにはないのでel-getでインストールします。
 
-最後にEmacsの設定を書きます。
 ```emacs-lisp
 (leaf emacs-livedown
  :el-get shime/emacs-livedown
