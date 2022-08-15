@@ -1102,9 +1102,7 @@ junkファイルの保存も howmフォルダーに置くことで、howmの検�
 ```
 
 ### 10.4 scratch buffer
-メールや WEBなど全てを Emacsでという思想もありますが、窮屈なので私好みではありません。少し長めのメール文章などは、scratch バッファーに書いてコピペします。また、scratchを付箋代わりにも使うので、自動保存のために `persistent-scratch.el` を使います。
-
-scratchバッファーの永続化にはいろいろ Tipsもあるようですが、標準機能で簡単に設定できます。なんだかんだで便利な scratchなので toggle-scratch を設定して愛用しています。
+scratchバッファーの永続化にはいろいろ Tipsもあるようですが、標準機能で簡単に設定できます。
 
 ```emacs-lisp
 ;; Set buffer that can not be killed
@@ -1112,30 +1110,28 @@ scratchバッファーの永続化にはいろいろ Tipsもあるようです�
   (emacs-lock-mode 'kill))
 (with-current-buffer "*Messages*"
   (emacs-lock-mode 'kill))
+```
 
-(leaf persistent-scratch
-  :ensure t
-  :config
-  (persistent-scratch-setup-default))
+なんだかんだで便利な scratchなので `toggle-scratch` を設定して愛用しています。
 
-(bind-key
- [S-return]
- (defun toggle-scratch ()
-   "Toggle current buffer and *scratch* buffer."
-   (interactive)
-   (if (not (string= "*scratch*" (buffer-name)))
-	   (progn
+編集中のバッファーとscratchバッファーとをToggle表示します。
+
+```elisp
+(defun toggle-scratch ()
+ "Toggle current buffer and *scratch* buffer."
+ (interactive)
+ (if (not (string= "*scratch*" (buffer-name)))
+         (progn
 		 (setq toggle-scratch-prev-buffer (buffer-name))
 		 (switch-to-buffer "*scratch*"))
-	 (switch-to-buffer toggle-scratch-prev-buffer))))
-
+	 (switch-to-buffer toggle-scratch-prev-buffer)))
 ```
+
 ## 11. σ(`ε´) ｵﾚ 流 Function Key 設定
 
 かなり我流かつ邪道的なキーバインドなので参考にはならないかと…。
 
 ### F1: emacs help
-
 Emacs標準の helpキーなのでそのまま使います。
 
 which-key.el を導入することで各コマンドのガイドがミニバファーに表示されるので便利です。
