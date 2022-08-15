@@ -875,13 +875,13 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
 
 私は下記の `hydra` を設定しています。
 
-* [hydra-work-menu](URL ) 
-* [hydra-quick-menu](URL ) 
-* [hydra-make](URL ) 
-* [hydra-package](URL ) 
-* [hydra-browse](URL ) 
-* [hydra-markdown](URL ) 
-* [hydra-view-mode](URL ) 
+* [hydra-work-menu](https://live.staticflickr.com/65535/50175364331_9fcf3c6c86_b.jpg) 
+* [hydra-quick-menu](https://live.staticflickr.com/65535/50174826063_b4fa442b1e_b.jpg) 
+* [hydra-make](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-make.el#L5) 
+* [hydra-package](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-misc.el#L6) 
+* [hydra-browse](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-misc.el#L33) 
+* [hydra-markdown](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/40_markdown.el#L18) 
+* [hydra-view-mode](https://github.com/minorugh/dotfiles/blob/88667e20b779d8dfd8d73895538299d6f7feaba8/.emacs.d/inits/40_view-mode.el#L83) 
 
 
 また、それぞれ下記のような相関になっています。
@@ -920,12 +920,9 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
 ### 7.2 その他の Hydra 設定。
 hydra で工夫するといろんなコマンドのキーバインドを記憶する必要もなく GUI 感覚で操作できるので積極的に使っています。
 
-* [hydra-make](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/inits/20_hydra-make.el) 
-* [hydra-misc](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/inits/20_hydra-misc.el)
-
 Qitta に詳しい記事を書いています。
 
-- [Hydraで Emacsのキーバインド問題を解消](https://qiita.com/minoruGH/items/3776090fba46b1f9c228)
+* [Hydraで Emacsのキーバインド問題を解消](https://qiita.com/minoruGH/items/3776090fba46b1f9c228)
 
 
 ## 8. 履歴 / ファイル管理
