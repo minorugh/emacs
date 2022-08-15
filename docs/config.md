@@ -357,8 +357,8 @@ MacとLinuxでしか試していないのですが、WSLでも動くのではな
 ```emacs-lisp
 (leaf emacs-livedown
  :el-get shime/emacs-livedown
- :bind (("C-c p" . livedown-preview)
-        ("C-c k" . livedown-kill)))
+ :bind (("C-c C-c p" . livedown-preview)
+        ("C-c C-c k" . livedown-kill)))
 ```
 
 ### 5.4 viewモード
