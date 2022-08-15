@@ -9,18 +9,28 @@
 (leaf mozc
   :ensure t
   :hook (after-init-hook . mozc-mode)
-  :bind (("<hiragana-katakana>" . toggle-input-method)
-		 ("s-t" . my:mozc-dictionary-tool)
-		 ("s-d" . my:mozc-word-regist)
-		 (:mozc-mode-map
-		  ("," . (lambda () (interactive) (mozc-insert-str "、")))
-		  ("." . (lambda () (interactive) (mozc-insert-str "。")))
-		  ("?" . (lambda () (interactive) (mozc-insert-str "？")))
-		  ("!" . (lambda () (interactive) (mozc-insert-str "！")))))
+  :bind ("<hiragana-katakana>" . toggle-input-method)
+  (:mozc-mode-map
+   ("," . (lambda () (interactive) (mozc-insert-str "、")))
+   ("." . (lambda () (interactive) (mozc-insert-str "。")))
+   ("?" . (lambda () (interactive) (mozc-insert-str "？")))
+   ("!" . (lambda () (interactive) (mozc-insert-str "！"))))
   :custom `((default-input-method . "japanese-mozc")
 			(mozc-helper-program-name . "mozc_emacs_helper")
 			(mozc-leim-title . "あ"))
   :init
+  (defadvice toggle-input-method (around toggle-input-method-around activate)
+	"Input method function in key-chord.el not to be nil."
+	(let ((input-method-function-save input-method-function))
+	  ad-do-it
+	  (setq input-method-function input-method-function-save)))
+
+  (defun mozc-insert-str (str)
+	"STR Immediately confirmed by punctuation."
+	(interactive)
+	(mozc-handle-event 'enter)
+	(insert str))
+
   (leaf mozc-cursor-color
 	:el-get minorugh/mozc-cursor-color
 	:hook (after-init-hook . mozc-cursor-color-setup))
@@ -29,34 +39,29 @@
 	:ensure t :after mozc :require t
 	:custom	(mozc-candidate-style . 'posframe)
 	:init
-	(leaf posframe :ensure t))
+	(leaf posframe :ensure t)))
 
-  (leaf pangu-spacing
-	:ensure t :after mozc
-	:hook ((markdown-mode-hook text-mode-hook) . pangu-spacing-mode)
-	:config
-	(setq pangu-spacing-include-regexp
-		  (rx (or (and (or (group-n 3 (any "。，！？；：「」（）、"))
-						   (group-n 1 (or (category japanese))))))
-			  (group-n 2 (in "a-zA-Z"))))))
+
+;; Add space between full-width and half-width
+(leaf pangu-spacing
+  :ensure t :after mozc
+  :hook ((markdown-mode-hook text-mode-hook) . pangu-spacing-mode)
+  :config
+  (setq pangu-spacing-include-regexp
+		(rx (or (and (or (group-n 3 (any "。，！？；：「」（）、"))
+						 (group-n 1 (or (category japanese))))))
+			(group-n 2 (in "a-zA-Z")))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Custom configurations
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(with-eval-after-load 'mozc
-  (defun mozc-insert-str (str)
-	"STR Immediately confirmed by punctuation."
-	(interactive)
-	(mozc-handle-event 'enter)
-	(insert str))
-
-  (defadvice toggle-input-method (around toggle-input-method-around activate)
-	"Input method function in key-chord.el not to be nil."
-	(let ((input-method-function-save input-method-function))
-	  ad-do-it
-	  (setq input-method-function input-method-function-save)))
-
+(leaf *cus-mozc-tool
+  :bind (("s-t" . my:mozc-dictionary-tool)
+		 ("s-d" . my:mozc-word-regist)
+		 ;; ("s-h" . my:mozc-hand-writing)
+		 ("s-h" . chromium-tegaki))
+  :init
   (defun select-mozc-tool ()
 	"Select mozc-tool."
 	(interactive)

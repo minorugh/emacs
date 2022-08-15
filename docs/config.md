@@ -225,7 +225,7 @@ Emacsを終了させることはまずないので、再起動コマンドに変
   :bind ("C-x C-c" . restart-emacs))
 ```
 
-### パッケージ管理
+### 3.7 パッケージ管理
 MELPAをメインに管理しています。MELPAにないものはel-getでGitHubやEmacsWikiからインストールします。
 
 個人用に開発したものは、自分のGitHubリポジトリで管理しel-getで読み込んでいます。
