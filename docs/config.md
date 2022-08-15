@@ -868,40 +868,6 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
 
 日本では、[smartrep.el](http://sheephead.homelinux.org/2011/12/19/6930/) が有名だったようですが、hydra.elも同様の機能を提供します。
 ```
-むかし、Emacsのキーバインドを強制する [鬼軍曹.el](https://github.com/k1LoW/emacs-drill-instructor) というパッケージがありました。
-その後、
-[`key-chord.el`]() や [`hydra.el`]() などが開発されてキーバインドの枯渇化が解消され、自由度が向上しました。
-
-
-私は下記の `hydra` を設定しています。
-
-* [hydra-work-menu](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-menu.el#L57) 
-* [hydra-quick-menu](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-menu.el#L5) 
-* [hydra-make](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-make.el#L5) 
-* [hydra-package](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-misc.el#L6) 
-* [hydra-browse](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-misc.el#L33) 
-* [hydra-markdown](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/40_markdown.el#L18) 
-* [hydra-view-mode](https://github.com/minorugh/dotfiles/blob/88667e20b779d8dfd8d73895538299d6f7feaba8/.emacs.d/inits/40_view-mode.el#L83) 
-
-
-また、それぞれ下記のような相関になっています。
-```
-
-┌──────────────────┐
-│ hydra-work-menu  │ ワークテーブル分岐
-└──────────────────┘
-￬￪ 相互に行き来できる
-┌──────────────────┐
-│ hydra-quick-menu │ よく使うコマンド群
-└──────────────────┘
-   │
-   ├── hydra-compile
-   ├── hydra-markdown
-   ├── hydra-package
-   ├── hydra-magit    <<- Dired からも呼び出せる
-   ├── hydra-browse   <<- Dashboard からも呼び出せる
-   └── hydra-view-mode
-```
 
 ### 7.1 [hydra-menu] 作業選択メニュー 
 [`hydra-work-menu`](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-menu.el#L57) には、
@@ -919,6 +885,12 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
 
 ### 7.2 その他の Hydra 設定。
 hydra で工夫するといろんなコマンドのキーバインドを記憶する必要もなく GUI 感覚で操作できるので積極的に使っています。
+
+* [hydra-make](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-make.el#L5) 
+* [hydra-package](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-misc.el#L6) 
+* [hydra-browse](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-misc.el#L33) 
+* [hydra-markdown](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/40_markdown.el#L18) 
+* [hydra-view-mode](https://github.com/minorugh/dotfiles/blob/88667e20b779d8dfd8d73895538299d6f7feaba8/.emacs.d/inits/40_view-mode.el#L83) 
 
 Qitta に詳しい記事を書いています。
 
