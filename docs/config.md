@@ -53,7 +53,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 
 このファイルはパッケージシステムとGUIの初期化前にロードされるので、フレームの外見やpackage-enable-at-startup、package-load-list、package-user-dirのようなパッケージ初期化プロセスに影響を与える変数をカスタマイズできます。
 
-### 2.2 [eary-init]起動時間の短縮を図る
+### 2.2 [eary-init] 起動時間の短縮を図る
 いままでinit.elに記述していたこれらの設定は、eary-init.elへ移したほうが起動時間を短縮できます。
 
 ```elisp
@@ -63,7 +63,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 (push '(vertical-scroll-bars) default-frame-alist)
 ```
 
-### 2.3 [eary-init]チラツキを抑える
+### 2.3 [eary-init] チラツキを抑える
 設定ファイルの読み込み段階で画面がチラチラ変化するのを抑制しています。
 
 ```elisp
@@ -109,7 +109,7 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
             (setq gc-cons-threshold 800000)))
 ```
 
-### 2.5 [init-loader]初期設定ファイルを読み込む
+### 2.5 [init-loader] 初期設定ファイルを読み込む
 [init-loader](https://github.com/emacs-jp/init-loader/) は、設定ファイル群のローダーです。 指定されたディレクトリから構成ファイルをロードします。これにより、構成を分類して複数のファイルに分けることができます。
 
 init-loader を使うことの是非については諸説あるようですが、[多くの恩恵](http://emacs.rubikitch.com/init-loader/) は捨て難く私には必須ツールです。
@@ -230,7 +230,7 @@ MELPAをメインに管理しています。MELPAにないものはel-getでGitH
 ## 4. カーソル移動
 ブラインドタッチが使えないので、バッファー内の文字移動、行移動、スクロールは、素直に上下左右の矢印キーと`PgUp` `PgDn` を使っています。
 
-### 4.1 [sequential-command.el]バッファー内のカーソル移動
+### 4.1 [sequential-command.el] バッファー内のカーソル移動
 [sequential-command](https://github.com/HKey/sequential-command) は、バッファーの先頭と最終行への移動を簡単にしてくれます。
 
 * `C-a` を連続で打つことで行頭→ファイルの先頭→元の位置とカーソルが移動
@@ -284,7 +284,7 @@ Toggleで括弧の先頭と最後にポイント移動します。
 (define-key view-mode-map (kbd "%") 'my:jump-brace)
 ```
 
-### 4.4 [expand-region]カーソル位置を起点に選択範囲を賢く広げる
+### 4.4 [expand-region] カーソル位置を起点に選択範囲を賢く広げる
 [expand-region](https://github.com/magnars/expand-region.el) は、カーソル位置を起点として前後に選択範囲を広げてくれます。
 
 2回以上呼ぶとその回数だけ賢く選択範囲が広がりますが、2回目以降は設定したキーバインドの最後の一文字を連打すれば OKです。その場合、選択範囲を狭める時は - を押し， 0 を押せばリセットされます。
@@ -324,7 +324,7 @@ Toggleで括弧の先頭と最後にポイント移動します。
 
 ### 5.5 web/htmlモード
 
-### 5.6 [darkroom-mode]執筆モード
+### 5.6 [darkroom-mode] 執筆モード
 [darkroom.el](https://github.com/joaotavora/darkroom)  は、画面の余計な項目を最小限にして、文章の執筆に集中できるようにするパッケージです。
 
 タイトルバーやモードラインが一時的に削除されてフルスクリーンになり、テキストが拡大され、テキストがウィンドウの中央に配置されるように余白が調整されます。`view-mode, diff-hl-mode, display-line-numbers-mode` をOffにし、行間も少し大きくしてより読みやすくしています。
@@ -362,7 +362,7 @@ darkroom-modeからでるときは、revert-buffer で再読込してもとに�
 	(revert-buffer t t)))
 ```
 
-### 5.7 [yatex]YaTexで LaTex編集
+### 5.7 [yatex] YaTexで LaTex編集
 [yatex](https://github.com/emacsmirror/yatex) は、Emacsの上で動作する LaTeX の入力支援環境です。
 
 ごく一般的な設定例ですが、参考になるとしたら [yatexprc](https://www.yatex.org/gitbucket/yuuji/yatex/blob/c45e2a0187b702c5e817bf3023816dde154f0de9/yatexprc.el) の `M-x YaTeX-lpr` を使って一気に PDF作成まで自動化している点でしょうか。
@@ -398,9 +398,9 @@ rm *.au* *.dv* *.lo*
 dvipdfmx $1 && open -a Preview.app ${name%.*}.pdf
 ```
 
-### 5.8 [yasunippet]Emacs用のテンプレートシステム
+### 5.8 [yasunippet] Emacs用のテンプレートシステム
 
-### 5.9 [iedit]選択領域を別の文字列に置き換える
+### 5.9 [iedit] 選択領域を別の文字列に置き換える
 [idet.el](https://github.com/victorhge/iedit) は、複数箇所を同時に編集するツールです。
 
 同じような機能のものは、複数あるようですが、わたしはこれを愛用しています。
@@ -422,7 +422,7 @@ MELPAからpackage-installするだけで使えます。
   :bind ("<insert>" . iedit-mode))
 ```
 
-### 5.10 [selected]リージョン選択時のアクションを制御
+### 5.10 [selected] リージョン選択時のアクションを制御
 [selected](https://github.com/Kungsgeten/selected.el) は、選択領域に対するスピードコマンドです。
 
 Emacsバッファーで領域を選択した後、バインドしたワンキーを入力するとコマンドが実行されます。
@@ -443,7 +443,7 @@ Emacsバッファーで領域を選択した後、バインドしたワンキー
 		 ("g" . my:google)))
 ```
 
-### 5.11 [selected]browse-urlで検索サイトで開く
+### 5.11 [selected] browse-urlで検索サイトで開く
 検索結果を browse-url で表示させるユーザーコマンドは、検索 urlのフォーマットとさえわかれば、パッケージツールに頼らずともお好みのマイコマンドを作成できます。
 
 ```emacs-lisp
@@ -472,7 +472,7 @@ Emacsバッファーで領域を選択した後、バインドしたワンキー
 	(buffer-substring-no-properties (region-beginning) (region-end)))
 ```
 
-### 5.12 [selected]IME のオン・オフを自動制御する
+### 5.12 [selected] IME のオン・オフを自動制御する
 selectedコマンドを選択するときは、IMEをOffにしないといけないのですがこれを自動でさせます。
 
 領域を選択し始める時に IMEをオフにして、コマンド発行後に IMEを元に戻すという例が、
@@ -520,7 +520,7 @@ MELPAにはアップされていないみたいなので el-get で取得して�
   :global-minor-mode t)
 ```
 
-### 5.14 [smartparent.el]対応する括弧の挿入をアシスト
+### 5.14 [smartparent.el] 対応する括弧の挿入をアシスト
 
 
 ## 6. 表示サポート
@@ -678,7 +678,7 @@ howm や org でメモをとるときに、ゴミファイルが残らないよ�
 
 ```
 
-### 8.3 [undo-fu]
+### 8.3 [undo-fu] シンプルな undo/redo を提供
 [undo-fu](https://github.com/emacsmirror/undo-fu)  はシンプルな undo/redo 機能を提供してくれるやつです。
 
 昔はもっと色々できる [undo-tree](https://github.com/apchamberlain/undo-tree.el)  を使っていたけどそっちにバグがあるっぽいので乗り換えました。
