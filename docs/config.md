@@ -323,10 +323,43 @@ Toggleで括弧の先頭と最後にポイント移動します。
   (interactive)
   (exchange-point-and-mark)
   (deactivate-mark))		 
-(define-key (kbd "C-x C-x" 'my:kill-region'))
+(global-set-key (kbd "C-x C-x" 'my:kill-region'))
 ```
 
 ### 5.3 markdownモード
+[`markdown-mode.el`](https://github.com/jrblevin/markdown-mode) は、Markdown形式のテキストを編集するための主要なモードです。
+
+昨今は、`org-mode` の方が人気があるようですが、[Howm](https://howm.osdn.jp/index-j.html) でメモを書き、 [Hugo](https://github.com/gohugoio/hugo)でブログを書くので物書き環境はmarkdown-modeをメインにしています。
+
+```emacs-lisp
+(leaf markdown-mode
+  :ensure t
+  :mode ("\\.md\\'")
+  :custom
+  `((markdown-italic-underscore . t)
+    (markdown-asymmetric-header . t)
+	(markdown-fontify-code-blocks-natively . t))
+```
+
+markdownファイルのプレビューには、[`emacs-livedown`](https://github.com/shime/emacs-livedown) を使っています。
+記事を書きながらライブでプレビュー出来るすぐれものです。
+
+Emacsからlivedownを使うためにはまず、npmがインストールされたノードがあることを確認します。
+
+次に、livedownをインストールします。
+```shell
+$ npm install -g livedown
+```
+
+MacとLinuxでしか試していないのですが、WSLでも動くのではないかと思います。
+
+最後にEmacsの設定を書きます。
+```emacs-lisp
+(leaf emacs-livedown
+ :el-get shime/emacs-livedown
+ :bind (("C-c p" . livedown-preview)
+        ("C-c k" . livedown-kill)))
+```
 
 ### 5.4 viewモード
 

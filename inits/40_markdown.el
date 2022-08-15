@@ -10,7 +10,6 @@
   :ensure t
   :mode ("\\.md\\'")
   :chord (:markdown-mode-map
-		  ;; ("mm" . markdown-toggle-markup-hiding)
 		  (".." . hydra-markdown/body))
   :custom
   `((markdown-italic-underscore . t)
