@@ -1102,17 +1102,7 @@ junkファイルの保存も howmフォルダーに置くことで、howmの検�
 ```
 
 ### 10.4 scratch buffer
-scratchバッファーの永続化にはいろいろ Tipsもあるようですが、標準機能で簡単に設定できます。
-
-```emacs-lisp
-;; Set buffer that can not be killed
-(with-current-buffer "*scratch*"
-  (emacs-lock-mode 'kill))
-(with-current-buffer "*Messages*"
-  (emacs-lock-mode 'kill))
-```
-
-なんだかんだで便利な scratchなので `toggle-scratch` を設定して愛用しています。
+なんだかんだで便利な `scratch` なので `toggle-scratch` を設定して愛用しています。
 
 編集中のバッファーとscratchバッファーとをToggle表示します。
 
