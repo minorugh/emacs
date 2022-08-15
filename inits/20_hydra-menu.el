@@ -13,9 +13,9 @@
    (:hint nil :exit t)
    "
    Quick Menu
-  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^--------------------------------------------------------------------------------------------------
-  Drop_b_ox  _e_macs.d^^  _i_nits  _x_srv.jp^^^^  GH:_h_  root:_/_  _s_rc  _._files   howm:_@__,_   _m_d:_p_vie_w_   ___:dele-windows
-  _r_estart  magit_[__]_  _t_ramp  _y_as:_n_:_v_  _j_unk  _f_zilla  _o_rg  _<home>_   _c_ompile^^   make:_k_._g_^^   _a_:font-awesome
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-------------------------------------------------------------------------------------------
+  _d_ropbox  _e_macs.d^^  _i_nits  _x_srv.jp^^^^  GH:_h_  root:_/_  _s_rc  _._files   howm:_@__,_   _m_d:_p_view   _f_:zilla
+  _r_estart  magit_[__]_  _t_ramp  _y_as:_n_:_v_  _j_unk  _b_rowse  _o_rg  _<home>_   _c_ompile^^   make:_k_._g_   _a_wesome
 "
    ("a" counsel-fontawesome)
    ("z" eshell)
@@ -23,7 +23,7 @@
    ("t" counsel-tramp)
    ("q" my:tramp-quit)
    ("<home>" my:home-dir)
-   ("b" my:dropbox)
+   ("d" my:dropbox)
    ("." my:dotfiles-dir)
    ("i" my:inits-dir)
    ("e" my:emacs-dir)
@@ -36,11 +36,13 @@
    ("m" hydra-markdown/body)
    ("p" livedown-preview)
    ("w" livedown-kill)
+   ("b" hydra-browse/body)
    ("c" hydra-make/body)
    ("-" my:github-show)
    ("@" howm-list-all)
    ("," howm-remember)
    ("j" open-junk-file)
+   ("J" open-last-junk-file)
    ("k" my:make-k)
    ("g" my:make-git)
    ("/" my:root-dir)
@@ -65,9 +67,9 @@
    (:hint nil :exit t)
    "
    Work Menu
-  ------^^^^^^^^^^^^^^^^^^^^^^^^^^-------------------------------------------------------------------------------------------
-  _d_:日記   _m_:毎日   _w_:毎週   _k_:兼題^^   _t_:定例   _s_:吟行^^   近詠:_n_   創作:_[_._]_   keep_;_   ___:dele-windows
-  _a_:合評   _e_:hugo   _b_ackup   _g_ist:_L_   pass_x_c   repo:_@_^^   view:_:_   _p_rint:_r_e   _i_edit   _._:github-pages
+  ------^^^^^^^^^^^^^^^^^^^^^^^^---------------------------------------------------------------------------
+  _d_:日記   _m_:毎日   _w_:毎週   _k_:兼題^^   _t_:定例   _s_:吟行^^   近詠:_n_   創作:_[_._]_   keep:_;_
+  _a_:合評   _e_:hugo   _b_ackup   _g_ist:_L_   pass_x_c   repo:_@_^^   view:_:_   _p_rint:_r_e   Pages_._
 "
    ("p" ps-print-buffer)
    ("r" ps-print-region)

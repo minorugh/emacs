@@ -40,7 +40,7 @@
 		   "# note: %?\n%U %i")
 		  ("t" " Task" entry (file+headline "~/Dropbox/org/task.org" "TASK")
 		   "** TODO %?\n SCHEDULED: %^t \n" :empty-lines 1 :jump-to-captured 1)
-		  ("e" " Experiment Perl" entry (file+headline "~/Dropbox/org/experiment.org" "Experiment")
+		  ("e" " Experiment" entry (file+headline "~/Dropbox/org/experiment.org" "Experiment")
 		   "* %? %i\n#+BEGIN_SRC perl\n\n#+END_SRC\n\n%U")
 		  ("p" " Code capture" entry (file+headline "~/Dropbox/org/capture.org" "Code")
 		   "* %^{Title} \nSOURCE: %:link\nCAPTURED: %U\n\n#+BEGIN_SRC\n%i\n#+END_SRC\n" :prepend t)

@@ -12,7 +12,7 @@
   (hydra-make
    (:hint nil :exit t)
    "
-     make:_k_  _u_psftp  _m_ove  _d_raft  _b_klog  _g_it  _p_ush _s_ort  _c_lean  _e_rror 🐾
+     make:_k_  _u_psftp  _m_ove  _d_raft  _b_klog  _g_it  _s_ort  _c_lean  🐾
 "
    ("k" my:make-k)
    ("u" my:make-upsftp)
@@ -20,10 +20,8 @@
    ("d" my:make-draft)
    ("b" my:make-bklog)
    ("g" my:make-git)
-   ("p" my:make-push)
    ("s" my:make-sort)
    ("c" my:make-clean)
-   ("e" next-error)
    ("<muhenkan>" nil))
   :init
   (setq compilation-always-kill t)
@@ -70,11 +68,6 @@
   "Make git."
   (interactive)
   (compile "make git"))
-
-(defun my:make-push ()
-  "Make push."
-  (interactive)
-  (compile "make push"))
 
 (defun my:make-sort ()
   "Make sort for filelist."

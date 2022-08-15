@@ -87,6 +87,7 @@
   "Open `org-capture' file."
   (interactive)
   (find-file "~/Dropbox/org/capture.org")
+  (view-mode 1)
   (goto-char (point-min)))
 
 (defun my:diary ()

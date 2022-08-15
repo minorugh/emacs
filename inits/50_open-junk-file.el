@@ -16,6 +16,7 @@
 ;; https://qiita.com/zonkyy/items/eba6bc64f66d278f0032
 (leaf em-glob
   :require t
+  :after open-junk-file
   :config
   (defvar junk-file-dir "~/Dropbox/howm/junk/")
   (defun open-last-junk-file ()

@@ -903,7 +903,7 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
    └── hydra-view-mode
 ```
 
-### 7.1 [hydra-menu] 作業コマンドメニュー 
+### 7.1 [hydra-menu] 作業選択メニュー 
 [`hydra-work-menu](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-menu.el#L57) には、
 ブログ記事のほかWEB日記や俳句関係のシリーズ記事の追加、編集など、毎日頻繁に開くワークスペースへのショートカットを設定しています。
 
