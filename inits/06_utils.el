@@ -157,10 +157,6 @@
 	  ps-print-footer nil)
 
 
-(when (require 'cua-base)
-  (cua-mode 1)
-  (setq cua-enable-cua-keys nil))
-
 
 (provide '06_utils)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

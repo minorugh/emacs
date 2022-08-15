@@ -5,7 +5,6 @@ nav_order: 1
 ---
 # GNU Emacs configuration
 
-
 ## 1. はじめに
 ```note
 * ここは [@minoruGH](https://twitter.com/minorugh)  の Emacs設定ファイルの一部を解説しているページです。
@@ -54,7 +53,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 
 このファイルはパッケージシステムとGUIの初期化前にロードされるので、フレームの外見やpackage-enable-at-startup、package-load-list、package-user-dirのようなパッケージ初期化プロセスに影響を与える変数をカスタマイズできます。
 
-### 2.2 [eary-init] 起動時間の短縮を図る
+### 2.2 [eary-init]起動時間の短縮を図る
 いままでinit.elに記述していたこれらの設定は、eary-init.elへ移したほうが起動時間を短縮できます。
 
 ```elisp
@@ -64,7 +63,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 (push '(vertical-scroll-bars) default-frame-alist)
 ```
 
-### 2.3 [eary-init] チラツキを抑える
+### 2.3 [eary-init]チラツキを抑える
 設定ファイルの読み込み段階で画面がチラチラ変化するのを抑制しています。
 
 ```elisp
@@ -110,7 +109,7 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
             (setq gc-cons-threshold 800000)))
 ```
 
-### 2.5 [init-loader] 初期設定ファイルを読み込む
+### 2.5 [init-loader]初期設定ファイルを読み込む
 [init-loader](https://github.com/emacs-jp/init-loader/) は、設定ファイル群のローダーです。 指定されたディレクトリから構成ファイルをロードします。これにより、構成を分類して複数のファイルに分けることができます。
 
 init-loader を使うことの是非については諸説あるようですが、[多くの恩恵](http://emacs.rubikitch.com/init-loader/) は捨て難く私には必須ツールです。
@@ -231,7 +230,7 @@ MELPAをメインに管理しています。MELPAにないものはel-getでGitH
 ## 4. カーソル移動
 ブラインドタッチが使えないので、バッファー内の文字移動、行移動、スクロールは、素直に上下左右の矢印キーと`PgUp` `PgDn` を使っています。
 
-### 4.1 [sequential-command.el] バッファー内のカーソル移動
+### 4.1 [sequential-command.el]バッファー内のカーソル移動
 [sequential-command](https://github.com/HKey/sequential-command) は、バッファーの先頭と最終行への移動を簡単にしてくれます。
 
 * `C-a` を連続で打つことで行頭→ファイルの先頭→元の位置とカーソルが移動
@@ -325,95 +324,7 @@ Toggleで括弧の先頭と最後にポイント移動します。
 
 ### 5.5 web/htmlモード
 
-### 5.1 [selected] リージョン選択時のアクションを制御
-
-[selected](https://github.com/Kungsgeten/selected.el) は、選択領域に対するスピードコマンドです。
-
-Emacsバッファーで領域を選択した後、バインドしたワンキーを入力するとコマンドが実行されます。
-コマンドの数が増えてきたら、ヘルプ代わりに使える [counsel-selected](https://github.com/takaxp/counsel-selected) も便利そうです。
-
-```emacs-lisp
-(leaf selected
-  :ensure t
-  :hook (after-init-hook . selected-global-mode)
-  :bind (:selected-keymap
-		 (";" . comment-dwim)
-		 ("c" . clipboard-kill-ring-save)
-		 ("s" . swiper-thing-at-point)
-		 ("t" . google-translate-auto)
-		 ("T" . chromium-translate)
-		 ("W" . my:weblio)
-		 ("k" . my:koujien)
-		 ("e" . my:eijiro)
-		 ("g" . my:google)))
-```
-
-### 5.2 [selected] browse-urlで検索サイトで開く
-検索結果を browse-url で表示させるユーザーコマンドは、検索 urlのフォーマットとさえわかれば、パッケージツールに頼らずともお好みのマイコマンドを作成できます。
-
-```emacs-lisp
-(defun my:koujien (str)
-  (interactive (list (my:get-region nil)))
-  (browse-url (format "https://sakura-paris.org/dict/広辞苑/prefix/%s"
-                      (upcase (url-hexify-string str)))))
-
-(defun my:weblio (str)
-  (interactive (list (my:get-region nil)))
-  (browse-url (format "https://www.weblio.jp/content/%s"
-	                  (upcase (url-hexify-string str)))))
-
-(defun my:eijiro (str)
-  (interactive (list (my:get-region nil)))
-  (browse-url (format "https://eow.alc.co.jp/%s/UTF-8/"
-                      (upcase (url-hexify-string str)))))
-
-(defun my:google (str)
-	(interactive (list (my:get-region nil)))
-	(browse-url (format "https://www.google.com/search?hl=ja&q=%s"
-						(upcase (url-hexify-string str)))))
-
-(defun my:get-region (r)
-	"Get search word from region."
-	(buffer-substring-no-properties (region-beginning) (region-end)))
-```
-
-### 5.3 [selected] IME のオン・オフを自動制御する
-selectedコマンドを選択するときは、IMEをOffにしないといけないのですがこれを自動でさせます。
-
-領域を選択し始める時に IMEをオフにして、コマンド発行後に IMEを元に戻すという例が、
-[@takaxp](https://qiita.com/takaxp) さんの [Qiitaの記事](https://qiita.com/takaxp/items/00245794d46c3a5fcaa8) にあったので、私の環境（emacs-mozc ）にあうように設定したら、すんなり動いてくれました。感謝！
-
-```emacs-lisp
-(leaf *cus-selected
-  :hook ((activate-mark-hook . my:activate-selected)
-		 (activate-mark-hook . (lambda () (setq my:ime-flag current-input-method) (my:ime-off)))
-		 (deactivate-mark-hook . (lambda () (unless (null my:ime-flag) (my:ime-on)))))
-  :init
-  ;; Control mozc when seleceted
-  (defun my:activate-selected ()
-	(selected-global-mode 1)
-	(selected--on)
-	(remove-hook 'activate-mark-hook #'my:activate-selected))
-  (add-hook 'activate-mark-hook #'my:activate-selected)
-  (defun my:ime-on ()
-	(interactive)
-	(when (null current-input-method) (toggle-input-method)))
-  (defun my:ime-off ()
-	(interactive)
-	(inactivate-input-method))
-
-  (defvar my:ime-flag nil)
-  (add-hook
-   'activate-mark-hook
-   #'(lambda ()
-	   (setq my:ime-flag current-input-method) (my:ime-off)))
-  (add-hook
-   'deactivate-mark-hook
-   #'(lambda ()
-	   (unless (null my:ime-flag) (my:ime-on)))))
-```
-
-### 5.4 [darkroom-mode] 執筆モード
+### 5.6 [darkroom-mode]執筆モード
 [darkroom.el](https://github.com/joaotavora/darkroom)  は、画面の余計な項目を最小限にして、文章の執筆に集中できるようにするパッケージです。
 
 タイトルバーやモードラインが一時的に削除されてフルスクリーンになり、テキストが拡大され、テキストがウィンドウの中央に配置されるように余白が調整されます。[view-mode, diff-hl-mode, display-line-numbers-mode] をOffにし、行間も少し大きくしてより読みやすくしています。
@@ -450,7 +361,8 @@ darkroom-modeからでるときは、revert-buffer で再読込してもとに�
 	(interactive)
 	(revert-buffer t t)))
 ```
-### 5.5 [yatex] YaTexで Tex編集
+
+### 5.7 [yatex]YaTexで LaTex編集
 [yatex](https://github.com/emacsmirror/yatex) は、Emacsの上で動作する LaTeX の入力支援環境です。
 
 ごく一般的な設定例ですが、参考になるとしたら [yatexprc](https://www.yatex.org/gitbucket/yuuji/yatex/blob/c45e2a0187b702c5e817bf3023816dde154f0de9/yatexprc.el) の `M-x YaTeX-lpr` を使って一気に PDF作成まで自動化している点でしょうか。
@@ -486,7 +398,96 @@ rm *.au* *.dv* *.lo*
 dvipdfmx $1 && open -a Preview.app ${name%.*}.pdf
 ```
 
-### 5.6 [swiper-migemo] swiperを migemo化してローマ字入力で日本語を検索
+### 5.8 [yasunippet]Emacs用のテンプレートシステム
+
+### 5.9 [selected]リージョン選択時のアクションを制御
+[selected](https://github.com/Kungsgeten/selected.el) は、選択領域に対するスピードコマンドです。
+
+Emacsバッファーで領域を選択した後、バインドしたワンキーを入力するとコマンドが実行されます。
+コマンドの数が増えてきたら、ヘルプ代わりに使える [counsel-selected](https://github.com/takaxp/counsel-selected) も便利そうです。
+
+```emacs-lisp
+(leaf selected
+  :ensure t
+  :hook (after-init-hook . selected-global-mode)
+  :bind (:selected-keymap
+		 (";" . comment-dwim)
+		 ("c" . clipboard-kill-ring-save)
+		 ("s" . swiper-thing-at-point)
+		 ("t" . google-translate-auto)
+		 ("T" . chromium-translate)
+		 ("W" . my:weblio)
+		 ("k" . my:koujien)
+		 ("e" . my:eijiro)
+		 ("g" . my:google)))
+```
+
+### 5.10 [selected]browse-urlで検索サイトで開く
+検索結果を browse-url で表示させるユーザーコマンドは、検索 urlのフォーマットとさえわかれば、パッケージツールに頼らずともお好みのマイコマンドを作成できます。
+
+```emacs-lisp
+(defun my:koujien (str)
+  (interactive (list (my:get-region nil)))
+  (browse-url (format "https://sakura-paris.org/dict/広辞苑/prefix/%s"
+                      (upcase (url-hexify-string str)))))
+
+(defun my:weblio (str)
+  (interactive (list (my:get-region nil)))
+  (browse-url (format "https://www.weblio.jp/content/%s"
+	                  (upcase (url-hexify-string str)))))
+
+(defun my:eijiro (str)
+  (interactive (list (my:get-region nil)))
+  (browse-url (format "https://eow.alc.co.jp/%s/UTF-8/"
+                      (upcase (url-hexify-string str)))))
+
+(defun my:google (str)
+	(interactive (list (my:get-region nil)))
+	(browse-url (format "https://www.google.com/search?hl=ja&q=%s"
+						(upcase (url-hexify-string str)))))
+
+(defun my:get-region (r)
+	"Get search word from region."
+	(buffer-substring-no-properties (region-beginning) (region-end)))
+```
+
+### 5.11 [selected]IME のオン・オフを自動制御する
+selectedコマンドを選択するときは、IMEをOffにしないといけないのですがこれを自動でさせます。
+
+領域を選択し始める時に IMEをオフにして、コマンド発行後に IMEを元に戻すという例が、
+[@takaxp](https://qiita.com/takaxp) さんの [Qiitaの記事](https://qiita.com/takaxp/items/00245794d46c3a5fcaa8) にあったので、私の環境（emacs-mozc ）にあうように設定したら、すんなり動いてくれました。感謝！
+
+```emacs-lisp
+(leaf *cus-selected
+  :hook ((activate-mark-hook . my:activate-selected)
+		 (activate-mark-hook . (lambda () (setq my:ime-flag current-input-method) (my:ime-off)))
+		 (deactivate-mark-hook . (lambda () (unless (null my:ime-flag) (my:ime-on)))))
+  :init
+  ;; Control mozc when seleceted
+  (defun my:activate-selected ()
+	(selected-global-mode 1)
+	(selected--on)
+	(remove-hook 'activate-mark-hook #'my:activate-selected))
+  (add-hook 'activate-mark-hook #'my:activate-selected)
+  (defun my:ime-on ()
+	(interactive)
+	(when (null current-input-method) (toggle-input-method)))
+  (defun my:ime-off ()
+	(interactive)
+	(inactivate-input-method))
+
+  (defvar my:ime-flag nil)
+  (add-hook
+   'activate-mark-hook
+   #'(lambda ()
+	   (setq my:ime-flag current-input-method) (my:ime-off)))
+  (add-hook
+   'deactivate-mark-hook
+   #'(lambda ()
+	   (unless (null my:ime-flag) (my:ime-on)))))
+```
+
+### 5.12 [swiper-migemo] swiperを migemo化してローマ字入力で日本語を検索
 [avy-migemo-e.g.swiper.el](https://github.com/momomo5717/avy-migemo) を使って出来ていたのですが、２年ほど前から更新が止まってしまっていて動きません。
 
 つい最近、avy-migemo を使わない [swiper-migemo](https://github.com/tam17aki/swiper-migemo)を GitHubで見つけたので試した処、機嫌よく動いてくれています。
@@ -496,68 +497,6 @@ MELPAにはアップされていないみたいなので el-get で取得して�
   (leaf swiper-migemo
 	:el-get tam17aki/swiper-migemo
 	:global-minor-mode t)
-```
-### 5.7 pinky 小指問題解消
-Emacs Pinky 小指問題の解消が目的で作られたものが、[Sollst Work Blog](https://solist.work/blog/posts/emacs-pinky-hydra/) にあったのでパクりました。
-
-```
-ソースコードを読んでいる時は Ctrlキーを押さないで作業できるようにしましょう。
-```
-hydraを使って実現しています。hydraが発動するとそれ以降は全てのショートカットキーを奪ってカスタマイズできます。
-以前、view-modeベースで vim like に使えるような設定も試していたのですが、こちらのほうが馴染みやすいです。
-
-```emacs-lisp
-(key-chord-define-global
- "::"
- (defhydra hydra-pinky
-   (:color red :hint nil)
-   "
-  :_SPC_._b_._a_._e_  :_h_._l_._j_._k_  :_0_._1_._o_._x_  :_-__.__+_  _d_iff:_n_._p_  buffer:_[__:__]_  _f_ile  _s_wiper"
-   ;; move page
-   ("h" backward-char)
-   ("j" next-line)
-   ("k" previous-line)
-   ("l" forward-char)
-   ("SPC" scroll-up-command)
-   ("f" scroll-up-command)
-   ("b" scroll-down-command)
-   ("<next>" scroll-up-command)
-   ("<prior>" scroll-down-command)
-   ("g" beginning-of-buffer)
-   ("G" end-of-buffer)
-   ;; move line
-   ("<down>" next-line)
-   ("<up>" previous-line)
-   ("<right>" forward-char)
-   ("<left>" backward-char)
-   ("a" seq-home)
-   ("e" seq-end)
-   ;; ("j" goto-line)
-   ("<down>" next-line)
-   ("<up>" previous-line)
-   ("<right>" forward-char)
-   ("<left>" backward-char)
-   ;; window
-   ("+" text-scale-increase)
-   ("-" text-scale-decrease)
-   ("." (text-scale-set 0))
-   ("0" delete-window)
-   ("1" delete-other-windows)
-   ("2" split-window-below)
-   ("3" split-window-right)
-   ("x" window-swap-states)
-   ("o" other-window-or-split)
-   ;; diff-hl
-   ("d" vc-diff)
-   ("n" diff-hl-next-hunk)
-   ("p" diff-hl-previous-hunk)
-   ;; buffer
-   (":" counsel-switch-buffer)
-   ("[" winner-undo)
-   ("]" winner-redo)
-   ;; Others
-   ("f" counsel-find-file)
-   ("s" swiper)))
 ```
 
 ## 6. 表示サポート
