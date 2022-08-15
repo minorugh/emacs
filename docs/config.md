@@ -361,7 +361,21 @@ MELPAにはないのでel-getでインストールします。
 
 ### 5.4 viewモード
 
+
 ### 5.5 web/htmlモード
+HTML編集をするなら[web-mode](https://github.com/fxbois/web-mode) がお勧めなのですが、私の場合あまり使っていません。
+
+textファイルからコンパイラを通してHTMLを生成したり、markdownで書いてHTMLに変換するというケースが多く、無地のファイルからHTMLタグを書き始めると言うとがないからです。出来上がったHTMLを部分的に変更したり...という程度の使い方です。
+
+```elisp
+(leaf web-mode
+  :ensure t
+  :mode ("\\.js?\\'" "\\.html?\\'" "\\.php?\\'")
+  :custom
+  `((web-mode-markup-indent-offset . 2)
+	(web-mode-css-indent-offset . 2)
+	(web-mode-code-indent-offset . 2)))
+```
 
 ### 5.6 [darkroom-mode] 執筆モード
 [`darkroom.el`](https://github.com/joaotavora/darkroom)  は、画面の余計な項目を最小限にして、文章の執筆に集中できるようにするパッケージです。
@@ -438,6 +452,27 @@ dvipdfmx $1 && open -a Preview.app ${name%.*}.pdf
 ```
 
 ### 5.8 [yasunippet] Emacs用のテンプレートシステム
+テンプレート挿入機能を提供してくれるやつです。
+```elisp
+(leaf yasnippet
+  :ensure t
+  :hook (after-init-hook . yas-global-mode)
+  :config
+  (leaf yasnippet-snippets :ensure t))
+```
+
+以下の設定を追加すると[`company-mode`](https://github.com/company-mode/company-mode) と連携してとても使いやすくなる。
+```elisp
+(defvar company-mode/enable-yas t
+  "Enable yasnippet for all backends.")
+(defun company-mode/backend-with-yas (backend)
+  (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+	  backend
+	(append (if (consp backend) backend (list backend))
+    	    '(:with company-yasnippet))))
+(setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+(global-set-key (kbd "C-<tab>" 'company-yasunippets))
+```
 
 ### 5.9 [iedit] 選択領域を別の文字列に置き換える
 [`idet.el`](https://github.com/victorhge/iedit) は、複数箇所を同時に編集するツールです。
