@@ -207,7 +207,15 @@ Emacs*useXIM: false
 	(compile "/usr/lib/mozc/mozc_tool --mode=word_register_dialog")
 	(delete-other-windows)))
 ```
+### 3.3 フォント設定
+メイン機（Thinkpad E590）とサブ機（Thinkpad X250）とで解像度が違うので設定を変えます。
 
+```emacs-lisp
+(add-to-list 'default-frame-alist '(font . "Cica-18"))
+;; for sub-machine
+(when (string-match "x250" (shell-command-to-string "uname -n"))
+  (add-to-list 'default-frame-alist '(font . "Cica-15")))
+```
 
 ### 3.4 基本キーバインド
 Mac時代に慣れ親しんだ関係もあり、標準キーバインドの他に下記を追加しています。 
@@ -810,8 +818,22 @@ MELPAにはアップされていないみたいなので el-get で取得して�
 		(delete-blank-lines)))))
 
 ```
+### 6.2 [volatile-highlight]コピペした領域を強調
+コピペした領域をフラッシングさせます。
 
-### 6.2 rainbow-mode
+```emacs-lisp
+(leaf volatile-highlights :ensure t
+  :config
+  (volatile-highlights-mode)
+  (with-no-warnings
+    (when (fboundp 'pulse-momentary-highlight-region)
+      (defun my-vhl-pulse (beg end &optional _buf face)
+		"Pulse the changes."
+		(pulse-momentary-highlight-region beg end face))
+      (advice-add #'vhl/.make-hl :override #'my-vhl-pulse))))
+```
+
+### 6.3 rainbow-mode
 
 rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラーコードから実際の色を表示するマイナーモードです。
 常時表示しているとうざいとケースのあるので、必要なときだけ使えるようにしています。
@@ -821,7 +843,7 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
   :ensure t
   :bind ("C-c r" . rainbow-mode))
 ```
-### 6.3 custom-set-face
+### 6.4 custom-set-face
 色設定が、あちこちに散らばっているとわかりにくので、まとめて設定するようにしています。
 
 ```emacs-lisp
@@ -1386,37 +1408,9 @@ Emacsの標準機能なので、そのまま使います。
 	(toggle-frame-fullscreen)))
 ```
 
+## 12. ユーティリティー関数
 
-## 12. フォント / 配色関係
-
-### 12.1 フォント設定
-
-メイン機（Thinkpad E590）とサブ機（Thinkpad X250）とで解像度が違うので設定を変えます。
-
-```emacs-lisp
-(add-to-list 'default-frame-alist '(font . "Cica-18"))
-;; for sub-machine
-(when (string-match "x250" (shell-command-to-string "uname -n"))
-  (add-to-list 'default-frame-alist '(font . "Cica-15")))
-```
-### 11.2 [volatile-highlight]コピペした領域を強調
-コピペした領域をフラッシングさせます。
-
-```emacs-lisp
-(leaf volatile-highlights :ensure t
-  :config
-  (volatile-highlights-mode)
-  (with-no-warnings
-    (when (fboundp 'pulse-momentary-highlight-region)
-      (defun my-vhl-pulse (beg end &optional _buf face)
-		"Pulse the changes."
-		(pulse-momentary-highlight-region beg end face))
-      (advice-add #'vhl/.make-hl :override #'my-vhl-pulse))))
-```
-
-## 13. ユーティリティー関数
-
-### 6.1 Scratch バッファーを消さない
+### 13.1 Scratch バッファーを消さない
 
 難しい関数を設定せずとも内蔵コマンドで簡単に実現できます。
 
@@ -1427,7 +1421,7 @@ Emacsの標準機能なので、そのまま使います。
 (with-current-buffer "*Messages*"
   (emacs-lock-mode 'kill))
 ```
-### 13.1 Terminal を Emacsから呼び出す
+### 13.2 Terminal を Emacsから呼び出す
 
 Emacsで開いているbufferのcurrent-dirでgonome-terminalを開く設定です。
 
@@ -1442,7 +1436,7 @@ Emacsで開いているbufferのcurrent-dirでgonome-terminalを開く設定で�
 (bind-key "<f4>" 'term-current-dir-open)
 ```
 
-### 13.2 Thunar を Emacsから呼び出す
+### 13.3 Thunar を Emacsから呼び出す
 
 ```emacs-lisp
 (defun filer-current-dir-open ()
@@ -1452,15 +1446,8 @@ Emacsで開いているbufferのcurrent-dirでgonome-terminalを開く設定で�
 (bind-key "<f3>" 'filer-current-dir-open)
 ```
 
-### 13.3 [restart-emacs] Emacsを再起動する
-`C-x C-c` は、デフォルトで `(save-buffers-kill-emacs)` に割り当てられていますが、Emacsの再起動にリバインドしました。
 
-```emacs-lisp
-(leaf restart-emacs :ensure t
-  :bind (("C-x C-c" . restart-emacs)))
-```
-
-## 14. おわりに
+## 13. おわりに
 
 以上が私の init.el とその説明です。
 
@@ -1470,5 +1457,4 @@ Emacsで開いているbufferのcurrent-dirでgonome-terminalを開く設定で�
 &ensp;<a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ .Permalink }}" data-via="minorugh" data-text="{{ .Params.Title }}" data-lang="jp" data-count="horizontal">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </div>
 <blockquote class="twitter-tweet" lang="ja"><p lang="ja" dir="ltr"> <a href="https://twitter.com/minorugh/status/839117944260997120"></a></blockquote>
-
 
