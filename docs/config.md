@@ -125,7 +125,7 @@ init-loader を使うことの是非については諸説あるようですが�
   (init-loader-load))
 ```
 
-### 2.7 mini-init.el
+### 2.7 [mini-init.el] テスト用初期化ファイル
 [`mini-init.el`](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/mini-init.el) は、最小限の emacs を起動させるための設定です。
 
 新しいパッケージや設定をテストしたり、エラー等で Emacsが起動しない場合に使用します。
