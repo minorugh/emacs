@@ -19,7 +19,7 @@
 	(diff-hl-mode 0)
 	(display-line-numbers-mode 0)
 	(darkroom-tentative-mode 1)
-	(setq line-spacing .4))
+	(setq-local line-spacing .4))
 
   (defun my:darkroom-out ()
 	"Returns from `darkroom-mode' to the previous state."

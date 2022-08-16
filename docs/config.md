@@ -1445,7 +1445,12 @@ Linu / Mac / WSL 共通で `Cica` を使っています。
 `my:linespacing` はシンプルに、 `global` ではなく `local` 変数の `line-spacing` を書き換えます。
 `(minibufferp)` で括っているのは、ミニバッファの行間を `my:linespacing` に左右されずに制御するためです。
 
-`darkroom` の設定では、更に行間を大きくするように設定していますが、`dark-room` からでるときに `my:linespacing` に戻しています。
+`darkroom-mode` では、
+
+```elisp
+(setq-local line-spacing 0.4)
+```
+と行間を大きくするように設定していますが、`dark-room` からでるときに `my:linespacing` に戻しています。
 
 ```elisp
 (defun my:linespacing ()
@@ -1453,6 +1458,15 @@ Linu / Mac / WSL 共通で `Cica` を使っています。
     (setq-local line-spacing 0.2)))
 (add-hook 'buffer-list-update-hook #'my:linespacing)
 ```
+### 12.4 背景を黒系統にする
+Emacs初期化ファイル読み込み中は一瞬白背景になるのが嫌なので、`eary-init` に黒背景を設定しました。
+
+```elisp
+(custom-set-faces '(default ((t (:background "#282a36")))))
+```
+採用している `doom-dracura-theme` と同じ黒背景をります。
+
+
 
 ## 13. ユーティリティー関数
 
