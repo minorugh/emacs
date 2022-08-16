@@ -992,7 +992,6 @@ magit status の画面は、デフォルトでは `other-window` に表示され
 ```note
 私の場合、専門的なプログラミングもやらないし、リタイアした身なのでGTDとかも必要ありません。
 Emacsはメモ書きに特化した使い方なので、markdown記法をメインにしています。
-
 ```
 ### 10.1 Howm Mode
 Howm-menuは使わないので `howm-list-all` 画面をメモ作業のポータルとして使っています。
