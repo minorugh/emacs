@@ -1020,11 +1020,34 @@ Built-in の `paren.el` が利用できる。
   :bind ("C-c r" . rainbow-mode))
 ```
 
-### 6.16 [nyan-mode]
+### 6.16 [dimmer.el] 現在のバッファ以外の輝度を落とす
 
-### 6.17 [dimmer.el]
+```elisp
+(leaf dimmer
+  :ensure t
+  :chord (".." . my:toggle-dimmer)
+  :config
+  (defvar my:dimmer-mode 1)
+  (setq dimmer-buffer-exclusion-regexps '("^ \\*which-key\\|^ \\*LV\\|^ \\*.*posframe.*buffer.*\\*$"))
+  (setq dimmer-fraction 0.6)
 
-### 6.18 [swiper.el] 文字列探索とプレビューを同時に行う
+  (defun my:toggle-dimmer ()
+	(interactive)
+	(unless (one-window-p)
+	  (if (setq my:dimmer-mode (not my:dimmer-mode))
+		  (dimmer-on) (dimmer-off))))
+
+  (defun dimmer-off ()
+	(dimmer-process-all)
+	(dimmer-mode -1))
+
+  (defun dimmer-on ()
+	(when my:dimmer-mode
+	  (dimmer-mode 1)
+	  (dimmer-process-all))))
+```
+
+### 6.17 [swiper.el] 文字列探索とプレビューを同時に行う
 `swiper-ting-at-piont` は賢くて便利なのですが、`iserch` の感覚で使うときには迷惑なときもあります。
 
 リージョン選択していないときは、`swiper` として機能するように関数を設定し `C-s` にバインドしています。
@@ -1037,25 +1060,6 @@ If the region isn't selected, `swiper'."
   (if (not (use-region-p))
       (swiper)
     (swiper-thing-at-point)))
-```
-
-### 6.19 custom-set-face
-色設定が、あちこちに散らばっているとわかりにくので、まとめて設定するようにしています。
-
-```emacs-lisp
-(custom-set-faces
- '(lsp-face-highlight-read ((t (:background "gray21" :underline t))))
- '(lsp-face-highlight-write ((t (:background "gray21" :underline t))))
- '(markdown-code-face ((t (:inherit nil))))
- '(markdown-pre-face ((t (:inherit font-lock-constant-face))))
- '(markup-meta-face ((t (:stipple nil :foreground "gray30" :inverse-video nil :box nil
-								  :strike-through nil :overline nil :underline nil :slant normal
-								  :weight normal :height 135 :width normal :foundry "unknown" :family "Monospace"))))
- '(symbol-overlay-default-face ((t (:background "gray21" :underline t))))
- '(mozc-cand-posframe-normal-face ((t (:background "#282D43" :foreground "#C7C9D1"))))
- '(mozc-cand-posframe-focused-face ((t (:background "#393F60" :foreground "#C7C9D1"))))
- '(mozc-cand-posframe-footer-face ((t (:background "#282D43" :foreground "#454D73")))))
-(put 'dired-find-alternate-file 'disabled nil)
 ```
 
 ## 7. Hydra / コマンドディスパッチャ
