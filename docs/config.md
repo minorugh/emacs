@@ -1018,11 +1018,7 @@ Howm-menuは使わないので `howm-list-all` を初期画面として使って
   (setq howm-normalizer 'howm-sort-items-by-reverse-date)
   (setq howm-user-font-lock-keywords
 		'(("memo:" . (0 'gnus-group-mail-3))
-		  ("note:" . (0 'epa-mark))
-		  ("perl:" . (0 'diff-refine-added))
-		  ("haiku:" . (0 'compilation-mode-line-exit))
-		  ("emacs:" . (0 'compilation-info))
-		  ("linux:" . (0 'compilation-error)))))
+		  ("note:" . (0 'epa-mark)))))
 ```
 
 ### 10.2 Org Mode
