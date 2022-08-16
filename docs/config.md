@@ -922,7 +922,7 @@ Built-in の `paren.el` が利用できる。
 ### 6.6 [all-the-icons.el] フォントでアイコン表示
 `all-the-icons.el` を使うとバッファ内やモードライン、ミニバッファでアイコンを表示できるようになります。
 
-* [domtronn/all-the-icons.el: A utility package to collect various Icon Fonts and propertize them within Emacs.](https://github.com/domtronn/all-the-icons.el)
+[domtronn/all-the-icons.el: A utility package to collect various Icon Fonts and propertize them within Emacs.](https://github.com/domtronn/all-the-icons.el)
 
 初めて使うときはパッケージを使えるようにした後 `M-x all-the-icons-install-fonts` すると自動的にフォントがインストールされますが、設定で自動化しました。
 
