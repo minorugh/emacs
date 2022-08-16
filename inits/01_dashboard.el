@@ -26,6 +26,9 @@
   (leaf page-break-lines :ensure t)
   :config
   ;; Set the title
+  ;; (set-fontset-font "fontset-default"
+  ;; 					(cons page-break-lines-char page-break-lines-char)
+  ;; 					(face-attribute 'default :family))
   (setq dashboard-banner-logo-title
 		(concat "GNU Emacs " emacs-version " kernel "
 				(car (split-string (shell-command-to-string "uname -r")))  " Debian "
