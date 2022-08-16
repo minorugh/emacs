@@ -994,7 +994,9 @@ magit status の画面は、デフォルトでは `other-window` に表示され
 Emacsはメモ書きに特化した使い方なので、markdown記法をメインにしています。
 ```
 ### 10.1 Howm Mode
-Howm-menuは使わないので `howm-list-all` 画面をメモ作業のポータルとして使っています。
+Howm-menuは使わないので `howm-list-all` を初期画面として使っています。
+
+この画面からでも [新規(c)][検索(s)]ほか一連のhowmコマンドは全て使えます。
 
 ```emacs-lisp
 (leaf howm
