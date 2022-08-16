@@ -7,7 +7,7 @@
 ;; Basic configurations
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (leaf *basic-configurations
-  :hook (after-init-hook . my:default-mode)
+  :hook (after-init-hook . my:default-mode-hook)
   :custom
   `(;; Faster rendering by not corresponding to right-to-left language
     (bidi-display-reordering . nil)
@@ -55,7 +55,7 @@
   (defalias 'yes-or-no-p 'y-or-n-p)
 
   ;; Set default modes for startup hook
-  (defun my:default-mode ()
+  (defun my:default-mode-hook ()
 	(interactive)
 	(recentf-mode 1)
 	(save-place-mode 1)

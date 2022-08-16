@@ -46,8 +46,10 @@
 
 (leaf smartparens
   :ensure t
-  :hook ((after-init-hook . smartparens-global-mode)
-		 (prog-mode-hook . turn-on-smartparens-mode)))
+  :require smartparens-config
+  :hook (prog-mode-hook . turn-on-smartparens-mode)
+  :config
+  (smartparens-global-mode t))
 
 
 (leaf rainbow-delimiters

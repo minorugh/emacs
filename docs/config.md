@@ -815,11 +815,15 @@ MELPAにはアップされていないみたいなので el-get で取得して�
 ```
 
 ### 5.13 [smartparent] 対応する括弧の挿入をアシスト
+[smartparens.el](https://github.com/Fuco1/smartparens) の設定がいまいちよくわからず、とりあえず次のように設定して今のところ機嫌よく働いている。 
+
 ```elisp
 (leaf smartparens
   :ensure t
-  :hook ((after-init-hook . smartparens-global-mode)
-		 (prog-mode-hook . turn-on-smartparens-mode)))
+  :require smartparens-config
+  :hook (prog-mode-hook . turn-on-smartparens-mode)
+  :config
+  (smartparens-global-mode t))
 ```
 
 ### 5.14 [fontawesome] fontawesome utility
@@ -1127,6 +1131,7 @@ magit status の画面は、デフォルトでは `other-window` に表示され
 	  (compile (concat "gist -o " file)))
 	(delete-other-windows))
 ```
+### 9.4 [eagy-hugo]
 
 ## 10. メモ環境
 ```note
