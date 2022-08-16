@@ -1,8 +1,8 @@
 title: minoru's Emacs Configuration
 description: Port of the Read the Docs theme to Jekyll to use with GitHub Pages.
-# remote_theme: readthedocs/sphinx-rtd-theme
+remote_theme: readthedocs/sphinx-rtd-theme
 # remote_theme: rundocs/jekyll-rtd-theme
-remote_theme: carlosperate/jekyll-theme-rtd
+# remote_theme: carlosperate/jekyll-theme-rtd
 
 # Theme settings:
 site_author: minoru yamada
