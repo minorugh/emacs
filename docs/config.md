@@ -84,11 +84,11 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 (setq byte-compile-warnings '(cl-functions))
 (custom-set-faces '(default ((t (:background "#282a36")))))
 ```
+### 2.4 [leaf.el] でラクラクinit.el整理
+`use-package` から `leaf` に乗り換えました。
 
-### 2.4 init.el
-[`init.el`](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el) には、Packageの初期化設定とinit-lorderの設定を書いています。 
-
-また、Magic File Name を一時的に無効にすることで、起動時間の短縮を図る設定をしています。
+### 2.5 [init.el] 起動時間の短縮を図る
+Magic File Name を一時的に無効にすることで、起動時間の短縮を図る設定をしています。
 
 GC設定とともに設定ファイル読み込み後に正常値に戻します。
 
@@ -111,7 +111,7 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
             (setq gc-cons-threshold 800000)))
 ```
 
-### 2.5 [init-loader] 初期設定ファイルを読み込む
+### 2.6 [init-loader] 初期設定ファイルを読み込む
 [`init-loader`](https://github.com/emacs-jp/init-loader/) は、設定ファイル群のローダーです。 指定されたディレクトリから構成ファイルをロードします。これにより、構成を分類して複数のファイルに分けることができます。
 
 init-loader を使うことの是非については諸説あるようですが、[`多くの恩恵`](http://emacs.rubikitch.com/init-loader/) は捨て難く私には必須ツールです。
@@ -125,7 +125,7 @@ init-loader を使うことの是非については諸説あるようですが�
   (init-loader-load))
 ```
 
-### 2.6 mini-init.el
+### 2.7 mini-init.el
 [`mini-init.el`](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/mini-init.el) は、最小限の emacs を起動させるための設定です。
 
 新しいパッケージや設定をテストしたり、エラー等で Emacsが起動しない場合に使用します。
@@ -279,8 +279,8 @@ Emacsを終了させることはまずないので、再起動コマンドに変
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 ```
 
-### 3.9 パッケージ管理
-MELPAをメインに管理しています。MELPAにないものはel-getでGitHubやEmacsWikiからインストールします。
+### 3.9 [el-get] パッケージ管理
+MELPAをメインに管理していますが、MELPAにないものはel-getでGitHubやEmacsWikiからインストールします。
 
 個人用に開発したものは、自分のGitHubリポジトリで管理しel-getで読み込んでいます。
 
