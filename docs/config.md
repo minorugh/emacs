@@ -989,15 +989,19 @@ magit status の画面は、デフォルトでは `other-window` に表示され
 
 
 ## 10. メモ環境
+```note
+私の場合、専門的なプログラミングもやらないし、リタイアした身なのでGTDとかも必要ありません。
+Emacsはメモ書きに特化した使い方なので、markdown記法をメインにしています。
 
+```
 ### 10.1 Howm Mode
-私の場合、専門的なプログラミングもやらないし、余生の身なのでGTDとかも必要ありません。
-Emacsはメモ書きに特化した使い方なので、`Howm` を使って markdown記法で書いています。
+Howm-menuは使わないので `howm-list-all` 画面をメモ作業のポータルとして使っています。
 
 ```emacs-lisp
 (leaf howm
   :ensure t
-  :hook (emacs-startup-hook . howm-mode)
+  :hook ((emacs-startup-hook . howm-mode)
+         ())
   :chord ("@@" . howm-list-all)
   :init
   (setq howm-view-title-header "#")
@@ -1023,8 +1027,8 @@ Emacsはメモ書きに特化した使い方なので、`Howm` を使って mark
 ### 10.2 Org Mode
 dashboard画面に簡単なタスクを表示させるために `org-agenda` を使っています。
 
-ついでなので `org-capture` からHowmメモを発動できるようにTemplateを作りました。
-ただ、captureからだと画面が半分になるのがいやなので、最大化で開くようにしています。
+ついでなので `org-capture` からHowm-createを発動できるように`org-capture-template` を作りました。
+ただ、`org-capture` からだと画面が半分になるのがいやなので、最大化で開くようにしています。
 
 ```elisp
 (leaf org
