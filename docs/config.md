@@ -1112,8 +1112,7 @@ junkファイルの保存も howmフォルダーに置くことで、howmの検�
 ```
 
 ### 10.4 Scratchを付箋として使う
-作業中の短期的なメモはもっと気軽に使いたいですね。
-そこで、`*scratch*` バッファーを付箋メモ用途に使えるように設定してみた。
+作業中の短期的なメモを気軽に使うために `*scratch*`バッファーを付箋メモに使えるように設定してみた。
 
 Emacsを再起動すると`*scratch*` の内容は消えてしまうのでこれを自動保存させる必要があります。
 [`auto-save-buffers-enhanced`](http://emacs.rubikitch.com/auto-save-buffers-enhanced/) に `*scratch*` バッファー自動保存機能があるので、私はこれを併用しています。
