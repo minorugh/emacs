@@ -786,6 +786,8 @@ MELPAにはアップされていないみたいなので el-get で取得して�
 ### 5.14 [smartparent.el] 対応する括弧の挿入をアシスト
 
 
+
+
 ## 6. 表示サポート
 ```note
 ここでは Emacs の UI を変更するようなものを載せている。
@@ -1125,7 +1127,7 @@ junkファイルの保存も howmフォルダーに置くことで、howmの検�
 	 (switch-to-buffer toggle-scratch-prev-buffer)))
 ```
 
-## 11. σ(`ε´) ｵﾚ 流 Function Key 設定
+## 11. フレーム / ウインドウ制御
 
 かなり我流かつ邪道的なキーバインドなので参考にはならないかと…。
 
@@ -1393,8 +1395,9 @@ Emacsの標準機能なので、そのまま使います。
 	(display-line-numbers-mode 1)
 	(toggle-frame-fullscreen)))
 ```
+## 12. フォント / 配色関連
 
-## 12. ユーティリティー関数
+## 13. ユーティリティー関数
 
 ### 13.1 Scratch バッファーを消さない
 
@@ -1433,7 +1436,7 @@ Emacsで開いているbufferのcurrent-dirでgonome-terminalを開く設定で�
 ```
 
 
-## 13. おわりに
+## 14. おわりに
 
 以上が私の init.el とその説明です。
 
