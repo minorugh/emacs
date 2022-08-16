@@ -1111,7 +1111,7 @@ junkファイルの保存も howmフォルダーに置くことで、howmの検�
 			"*.*.*")))))))
 ```
 
-### 10.4 toggle scratch
+### 10.4 Scratchを付箋として使う
 なんだかんだで便利な `scratch` なので `toggle-scratch` を設定して愛用しています。
 
 編集中のバッファーとscratchバッファーとをToggle表示します。
