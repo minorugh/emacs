@@ -1025,11 +1025,9 @@ Built-in の `paren.el` が利用できる。
 ### 6.17 [dimmer.el]
 
 ### 6.18 [swiper.el] 文字列探索とプレビューを同時に行う
-`swiper` が定着してから `iserch` は使わなくなりました。 
-
 `swiper-ting-at-piont` は賢くて便利なのですが、`iserch` の感覚で使うときには迷惑なときもあります。
 
-`swiper-region` は、リージョン選択していないときは、`swiper` として機能しますので、`C-s` にバインドしています。
+リージョン選択していないときは、`swiper` として機能するように関数を設定し `C-s` にバインドしています。
 
 ```elisp
 (defun swiper-region ()
