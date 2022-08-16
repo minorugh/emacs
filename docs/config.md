@@ -998,7 +998,7 @@ hydra で工夫するといろんなコマンドのキーバインドを記憶�
 [hydra-markdown](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/40_markdown.el#L18) 
 : markdown-mode のコマンド選択メニュー
 
-[hydra-view-mode](https://github.com/minorugh/dotfiles/blob/88667e20b779d8dfd8d73895538299d6f7feaba8/.emacs.d/inits/40_view-mode.el#L83) 
+[hydra-view-mode](https://github.com/minorugh/dotfiles/blob/cc6011493073431405797954c05948ad2ca08289/.emacs.d/inits/40_view-mode.el#L160) 
 : view-modeキーバインドのヘルプを兼ねています。
 
 Qitta に詳しい記事を書いています。
