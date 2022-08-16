@@ -983,14 +983,23 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
 
 この２つの hydra は、いわば私の秘書のような役割で、どちらからでも相互にトグルで呼び出せるようにしています。
 
-### 7.2 その他の Hydra 設定。
+### 7.2 その他の Hydra 設定
 hydra で工夫するといろんなコマンドのキーバインドを記憶する必要もなく GUI 感覚で操作できるので積極的に使っています。
 
-* [hydra-make](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-make.el#L5) 
-* [hydra-package](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-misc.el#L6) 
-* [hydra-browse](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-misc.el#L33) 
-* [hydra-markdown](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/40_markdown.el#L18) 
-* [hydra-view-mode](https://github.com/minorugh/dotfiles/blob/88667e20b779d8dfd8d73895538299d6f7feaba8/.emacs.d/inits/40_view-mode.el#L83) 
+[hydra-make](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-make.el#L5) 
+: makeコマンドの選択メニュー
+
+[hydra-package](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-misc.el#L6) 
+: パッケジユーティリティーの選択メニュー
+
+[hydra-browse](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-misc.el#L33) 
+: お気に入りサイトの選択メニュー
+
+[hydra-markdown](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/40_markdown.el#L18) 
+: markdown-mode のコマンド選択メニュー
+
+[hydra-view-mode](https://github.com/minorugh/dotfiles/blob/88667e20b779d8dfd8d73895538299d6f7feaba8/.emacs.d/inits/40_view-mode.el#L83) 
+: view-modeキーバインドのヘルプを兼ねています。
 
 Qitta に詳しい記事を書いています。
 
