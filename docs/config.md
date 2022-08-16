@@ -1027,10 +1027,9 @@ Built-in の `paren.el` が利用できる。
 ### 6.18 [swiper.el] 文字列探索とプレビューを同時に行う
 `swiper` が定着してから `iserch` は使わなくなりました。 
 
-最新版で追加された `swiper-ting-at-piont` は賢くて便利なのですが、`iserch` の感覚で使うときには迷惑なときもあります。
+`swiper-ting-at-piont` は賢くて便利なのですが、`iserch` の感覚で使うときには迷惑なときもあります。
 
-`swiper-region` は、リージョン選択していないときは、検索語入力待ちになりますので、`C-s` にバインドします。
-`swiper-thing-at-point` を使いたいときもあるので、`C-r` にバインドしています。
+`swiper-region` は、リージョン選択していないときは、`swiper` として機能しますので、`C-s` にバインドしています。
 
 ```elisp
 (defun swiper-region ()
@@ -1040,9 +1039,6 @@ If the region isn't selected, `swiper'."
   (if (not (use-region-p))
       (swiper)
     (swiper-thing-at-point)))
-
-(glonal-set-key (kbd "C-r") 'swiper-thing-at-point)
-(global-set-key (kbd "C-s") 'swiper-region)
 ```
 
 ### 6.19 custom-set-face
