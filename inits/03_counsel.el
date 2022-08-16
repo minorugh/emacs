@@ -40,7 +40,7 @@
   :config
   (defun swiper-region ()
 	"If region is selected, `swiper-thing-at-point'.
-If the region isn't selected, `swiper'."
+  If the region isn't selected, `swiper'."
 	(interactive)
 	(if (not (use-region-p))
 		(swiper)

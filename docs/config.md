@@ -910,7 +910,7 @@ Built-in の `paren.el` が利用できる。
 ```
 
 ### 6.5 [which-key] キーバインドの選択肢をポップアップする
-`guide-key.el` の後発。ディスパッチャが見やすく直感的でとても使いやすい。
+`guide-key.el` の後発、ディスパッチャが見やすく直感的でとても使いやすい。
 
 ```elisp
 (leaf which-key
@@ -924,7 +924,7 @@ Built-in の `paren.el` が利用できる。
 
 [domtronn/all-the-icons.el: A utility package to collect various Icon Fonts and propertize them within Emacs.](https://github.com/domtronn/all-the-icons.el)
 
-初めて使うときはパッケージを使えるようにした後 `M-x all-the-icons-install-fonts` すると自動的にフォントがインストールされますが、設定で自動化しました。
+初めて使うときはパッケージを使えるようにした後、`M-x all-the-icons-install-fonts` すると自動的にフォントがインストールされます。以下の設定では自動化しています。
 
 ```elisp
 (leaf all-the-icons
@@ -937,17 +937,47 @@ Built-in の `paren.el` が利用できる。
 ```
 
 ### 6.7 [all-the-icons-dired]
-`dired` でファイルのアイコンを表示します。all-the-icons をインストール後に， M-x all-the-icons-install-fonts を忘れずに実行する必要があります． neotree の設定は別セクションに記載しています．
+`dired` でファイルのアイコンを表示します。Emacs27以降、MELPA版は白色にしか表示されないので [jtbm37/all-the-icons-dired](https://github.com/jtbm37/all-the-icons-dired) をel-getでインストールしています。
 
+`neotree` の設定は別セクションに記載しています。
 
+```elisp
+(leaf all-the-icons-dired
+  :el-get jtbm37/all-the-icons-dired
+  :after doom-modeline
+  :hook (dired-mode-hook . all-the-icons-dired-mode))
+```
 
 ### 6.8 [all-the-icons-ivy-rich]
 
+```elisp
+(leaf all-the-icons-ivy-rich
+  :ensure t
+  :hook (after-init-hook . all-the-icons-ivy-rich-mode))
+```
+
 ### 6.9 [all-the-icons-ibuffer]
+
+```elisp
+(leaf all-the-icons-ibuffer
+  :ensure t
+  :hook (ibuffer-mode-hook . all-the-icons-ibuffer-mode))
+```
 
 ### 6.10 [ivy-rich]
 
+```elisp
+(leaf ivy-rich :ensure t
+  :hook (after-init-hook . ivy-rich-mode))
+```
+
 ### 6.11 [amx]
+
+```elisp
+ (leaf amx	:ensure t
+	:custom	`((amx-save-file . ,"~/.emacs.d/tmp/amx-items")
+			  (amx-history-length . 20)))
+```
 
 ### 6.12 [imenu-list] サイドバー的にファイル内容の目次要素を表示
 [@takaxpさんの改良版/imenu-list](https://github.com/takaxp/imenu-list) を使ってます。 
@@ -994,7 +1024,28 @@ Built-in の `paren.el` が利用できる。
 
 ### 6.17 [dimmer.el]
 
-### 6.15 custom-set-face
+### 6.18 [swiper.el] 文字列探索とプレビューを同時に行う
+`swiper` が定着してから `iserch` は使わなくなりました。 
+
+最新版で追加された `swiper-ting-at-piont` は賢くて便利なのですが、`iserch` の感覚で使うときには迷惑なときもあります。
+
+`swiper-region` は、リージョン選択していないときは、検索語入力待ちになりますので、`C-s` にバインドします。
+`swiper-thing-at-point` を使いたいときもあるので、`C-r` にバインドしています。
+
+```elisp
+(defun swiper-region ()
+  "If region is selected, `swiper-thing-at-point'. 
+If the region isn't selected, `swiper'."
+  (interactive)
+  (if (not (use-region-p))
+      (swiper)
+    (swiper-thing-at-point)))
+
+(glonal-set-key (kbd "C-r") 'swiper-thing-at-point)
+(global-set-key (kbd "C-s") 'swiper-region)
+```
+
+### 6.19 custom-set-face
 色設定が、あちこちに散らばっているとわかりにくので、まとめて設定するようにしています。
 
 ```emacs-lisp
