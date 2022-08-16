@@ -962,7 +962,7 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
 (put 'dired-find-alternate-file 'disabled nil)
 ```
 
-## 7. Hydra でコマンドディスパッチャを構築
+## 7. Hydra / コマンドディスパッチャ
 ```note
 [hydra.el](https://github.com/abo-abo/hydra) を使うとよく使う機能をまとめてシンプルなキーバインドを割り当てることができます。
 
