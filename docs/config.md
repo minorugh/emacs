@@ -1115,9 +1115,10 @@ junkファイルの保存も howmフォルダーに置くことで、howmの検�
 永続的なメモはHownやOrg-captureで書いているのですが、作業中の短期的なメモはもっと気軽に使いたいですね。
 そこで、`*scratch*` バッファーを付箋メモ用途に使えるように設定してみた。
 
-Emacsを再起動すると`*scratch*` の内容は消えてしまうのでこれを自動保存できるようにします。
+Emacsを再起動すると`*scratch*` の内容は消えてしまうのでこれを自動保存させる必要があります。
+[`auto-save-buffers-enhanced`](http://emacs.rubikitch.com/auto-save-buffers-enhanced/) に `*scratch*` バッファー自動保存機能があるので、私はこれを併用しています。
 
-[`auto-save-buffers-enhanced`](http://emacs.rubikitch.com/auto-save-buffers-enhanced/) に `*scratch*` バッファー自動保存機能があるのでこれを併用します。専用のパッケージもあるようです。
+専用のパッケージもあるようです。
 
 * [`persistent-scratch.el:*scratch*バッファを永続化・自動保存・復元する`](http://emacs.rubikitch.com/persistent-scratch/) 
 
@@ -1143,7 +1144,6 @@ Emacsを再起動すると`*scratch*` の内容は消えてしまうのでこれ
 ```
 
 作業中のバッファーから`*scratch*` バッファーを呼びだすには [`scratch-pop.el`](http://emacs.rubikitch.com/scratch-pop/) が便利ですが、いまいち使い勝手が良くないので `toggle-scratch` を定義して愛用しています。
-
 編集中のバッファーとscratchバッファーとをToggle表示します。
 
 ```elisp
