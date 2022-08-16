@@ -343,7 +343,25 @@ Toggleで括弧の先頭と最後にポイント移動します。
 (define-key view-mode-map (kbd "%") 'my:jump-brace)
 ```
 
-### 4.4 [expand-region] カーソル位置を起点に選択範囲を賢く広げる
+### 4.4 マーク箇所を遡る
+`C-u C-SPC` で辿れるようになります。
+```elisp
+(setq set-mark-command-repeat-pop t)
+(setq mark-ring-max 32)
+(setq global-mark-ring-max 64)
+```
+`C-u C-SPC` も使いますが、直前の編集ポイントと現在のポイントとを行き来出来る設定を重宝しています。
+
+```emacs-lisp
+(defun my:exchange-point-and-mark ()
+  "No mark active `exchange-point-and-mark'."
+  (interactive)
+  (exchange-point-and-mark)
+  (deactivate-mark))		 
+(global-set-key (kbd "C-x C-x" 'my:kill-region'))
+```
+
+### 4.5 [expand-region] カーソル位置を起点に選択範囲を賢く広げる
 [`expand-region.el`](https://github.com/magnars/expand-region.el) は、カーソル位置を起点として前後に選択範囲を広げてくれます。
 
 2回以上呼ぶとその回数だけ賢く選択範囲が広がりますが、2回目以降は設定したキーバインドの最後の一文字を連打すれば OKです。その場合、選択範囲を狭める時は - を押し， 0 を押せばリセットされます。
@@ -369,18 +387,7 @@ Toggleで括弧の先頭と最後にポイント移動します。
 |矩形先頭に文字を挿入|	C-x r t |
 |矩形を空白に変換する|	C-x r c |
 
-### 5.2 C-x C-x で直前の編集ポイントへ行き来
-`C-u C-SPC` も使いますが、直前の編集ポイントと現在のポイントとを行き来出来る設定を重宝しています。
-```emacs-lisp
-(defun my:exchange-point-and-mark ()
-  "No mark active `exchange-point-and-mark'."
-  (interactive)
-  (exchange-point-and-mark)
-  (deactivate-mark))		 
-(global-set-key (kbd "C-x C-x" 'my:kill-region'))
-```
-
-### 5.3 markdownモード
+### 5.2 markdownモード
 [`markdown-mode.el`](https://github.com/jrblevin/markdown-mode) は、Markdown形式のテキストを編集するための主要なモードです。
 
 昨今は、`org-mode` の方が人気があるようですが、私の場合は、[Howm](https://howm.osdn.jp/index-j.html) でメモを書き、 [Hugo](https://github.com/gohugoio/hugo)でブログを書くので物書き環境は`markdown-mode` をメインにしています。
@@ -413,7 +420,7 @@ MELPAにはないのでel-getでインストールします。
         ("C-c C-c k" . livedown-kill)))
 ```
 
-### 5.4 viewモード
+### 5.3 viewモード
 特定の拡張子に対して常に view モードで開きたいときやgzされた elisp ソースを見るときに [view-mode](https://www.emacswiki.org/emacs/ViewMode) を使います。
 
 下記の設定では、`my:auto-view-dirs` に追加したディレクトリのファイルを開くと `view-mode` が常に有効になります．
@@ -573,7 +580,7 @@ If the region is inactive, to kill whole line."
 	  (previous-line))))
 ```
 
-### 5.5 web/htmlモード
+### 5.4 web/htmlモード
 HTML編集をするなら[web-mode](https://github.com/fxbois/web-mode) がお勧めなのですが、私の場合あまり使っていません。
 
 textファイルからコンパイラを通してHTMLを生成したり、markdownで書いてHTMLに変換するというケースが多く、無地のファイルからHTMLタグを書き始めると言うとがないからです。
@@ -590,7 +597,7 @@ textファイルからコンパイラを通してHTMLを生成したり、markdo
 	(web-mode-code-indent-offset . 2)))
 ```
 
-### 5.6 [darkroom-mode] 執筆モード
+### 5.5 [darkroom-mode] 執筆モード
 [`darkroom.el`](https://github.com/joaotavora/darkroom)  は、画面の余計な項目を最小限にして、文章の執筆に集中できるようにするパッケージです。
 
 タイトルバーやモードラインが一時的に削除されてフルスクリーンになり、テキストが拡大され、テキストがウィンドウの中央に配置されるように余白が調整されます。`view-mode, diff-hl-mode, display-line-numbers-mode` をOffにし、行間も少し大きくしてより読みやすくしています。
@@ -628,7 +635,7 @@ darkroom-modeからでるときは、revert-buffer で再読込してもとに�
 	(revert-buffer t t)))
 ```
 
-### 5.7 [yatex] YaTexで LaTex編集
+### 5.6 [yatex] YaTexで LaTex編集
 [`yatex.el`](https://github.com/emacsmirror/yatex) は、Emacsの上で動作する LaTeX の入力支援環境です。
 
 ごく一般的な設定例ですが、参考になるとしたら [`yatexprc.el`](https://www.yatex.org/gitbucket/yuuji/yatex/blob/c45e2a0187b702c5e817bf3023816dde154f0de9/yatexprc.el) の `M-x YaTeX-lpr` を使って一気に PDF作成まで自動化している点でしょうか。
@@ -664,7 +671,7 @@ rm *.au* *.dv* *.lo*
 dvipdfmx $1 && open -a Preview.app ${name%.*}.pdf
 ```
 
-### 5.8 [yasunippet] Emacs用のテンプレートシステム
+### 5.7 [yasunippet] Emacs用のテンプレートシステム
 テンプレート挿入機能を提供してくれるやつです。
 ```elisp
 (leaf yasnippet
@@ -687,7 +694,7 @@ dvipdfmx $1 && open -a Preview.app ${name%.*}.pdf
 (global-set-key (kbd "C-<tab>" 'company-yasunippets))
 ```
 
-### 5.9 [iedit] 選択領域を別の文字列に置き換える
+### 5.8 [iedit] 選択領域を別の文字列に置き換える
 [`idet.el`](https://github.com/victorhge/iedit) は、複数箇所を同時に編集するツールです。
 
 同じような機能のものは、複数あるようですが、わたしはこれを愛用しています。
@@ -709,7 +716,7 @@ MELPAからpackage-installするだけで使えます。
   :bind ("<insert>" . iedit-mode))
 ```
 
-### 5.10 [selected] リージョン選択時のアクションを制御
+### 5.9 [selected] リージョン選択時のアクションを制御
 [`selected.el`](https://github.com/Kungsgeten/selected.el) は、選択領域に対するスピードコマンドです。
 
 Emacsバッファーで領域を選択した後、バインドしたワンキーを入力するとコマンドが実行されます。
@@ -730,7 +737,7 @@ Emacsバッファーで領域を選択した後、バインドしたワンキー
 		 ("g" . my:google)))
 ```
 
-### 5.11 [selected] browse-urlで検索サイトで開く
+### 5.10 [selected] browse-urlで検索サイトで開く
 検索結果を browse-url で表示させるユーザーコマンドは、検索 urlのフォーマットとさえわかれば、パッケージツールに頼らずともお好みのマイコマンドを作成できます。
 
 ```emacs-lisp
@@ -759,7 +766,7 @@ Emacsバッファーで領域を選択した後、バインドしたワンキー
 	(buffer-substring-no-properties (region-beginning) (region-end)))
 ```
 
-### 5.12 [selected] IME のオン・オフを自動制御する
+### 5.11 [selected] IME のオン・オフを自動制御する
 selectedコマンドを選択するときは、IMEをOffにしないといけないのですがこれを自動でさせます。
 
 領域を選択し始める時に IMEをオフにして、コマンド発行後に IMEを元に戻すという例が、
@@ -795,7 +802,7 @@ selectedコマンドを選択するときは、IMEをOffにしないといけな
 	   (unless (null my:ime-flag) (my:ime-on)))))
 ```
 
-### 5.13 [swiper-migemo] swiperを migemo化してローマ字入力で日本語を検索
+### 5.12 [swiper-migemo] swiperを migemo化してローマ字入力で日本語を検索
 [`avy-migemo-e.g.swiper.el`](https://github.com/momomo5717/avy-migemo) を使って出来ていたのですが、２年ほど前から更新が止まってしまっていて動きません。
 
 つい最近、avy-migemo を使わない [`swiper-migemo`](https://github.com/tam17aki/swiper-migemo)を GitHubで見つけたので試した処、機嫌よく動いてくれています。
@@ -807,8 +814,7 @@ MELPAにはアップされていないみたいなので el-get で取得して�
   :global-minor-mode t)
 ```
 
-### 5.14 [smartparent] 対応する括弧の挿入をアシスト
-
+### 5.13 [smartparent] 対応する括弧の挿入をアシスト
 ```elisp
 (leaf smartparens
   :ensure t
@@ -820,8 +826,19 @@ MELPAにはアップされていないみたいなので el-get で取得して�
 ```note
 ここでは Emacs の UI を変更するようなものを載せている。
 ```
+### 6.1 対応するカッコをハイライトする
+Built-in の `paren.el` が利用できる。
 
-### 6.1 [whitespace]cleanup-for-spaces
+```elisp
+(leaf paren
+  :hook (after-init-hook . show-paren-mode)
+  :custom
+  `((show-paren-style . 'parenthesis)
+	(show-paren-when-point-inside-paren . t)
+	(show-paren-when-point-in-periphery . t)))
+```
+
+### 6.2 [whitespace]cleanup-for-spaces
 
 `whitespace` の設定はシンプルに `show-trailing-whitespace` のみとし、不用意に入ってしまったスペースを削除するための関数を設定しました。
 
@@ -846,10 +863,72 @@ MELPAにはアップされていないみたいなので el-get で取得して�
 		(widen)
 		(goto-char (point-max))
 		(delete-blank-lines)))))
-
 ```
 
-### 6.3 rainbow-mode
+### 6.3 [diff-hl] 編集差分をフレーム端で視覚化
+編集差分の視覚化は、元々 `git-gutter` が提供している機能です。しかし有効にするとフレームの幅が若干広がってしまうなどの不便さがあったので `diff-hl` に乗り換えました。
+
+```elisp
+(leaf diff-hl
+  :ensure t
+  :hook ((after-init-hook . global-diff-hl-mode)
+         (after-init-hook . diff-hl-margin-mode)))
+```
+### 6.4 [japanese-holidays] カレンダーをカラフルにする
+ビルドインの `holidays` と `japanese-holidays.el`を使います。土日祝日に色を着けます。土曜日と日曜祝日で異なる配色にできます。
+
+```elisp
+(leaf calendar
+  :leaf-defer t
+  :bind (("<f7>" . calendar)
+		 (:calendar-mode-map
+		  ("<f7>" . calendar-exit)))
+  :config
+  (leaf japanese-holidays
+	:ensure t
+	:require t
+	:hook ((calendar-today-visible-hook . japanese-holiday-mark-weekend)
+		   (calendar-today-invisible-hook . japanese-holiday-mark-weekend)
+		   (calendar-today-visible-hook . calendar-mark-today))
+	:config
+	(setq calendar-holidays
+		  (append japanese-holidays holiday-local-holidays holiday-other-holidays))
+	(setq calendar-mark-holidays-flag t)))
+```
+
+### 6.5 [which-key] キーバインドの選択肢をポップアップする
+`guide-key.el` の後発。ディスパッチャが見やすく直感的でとても使いやすい。
+
+```elisp
+(leaf which-key
+  :ensure t
+  :hook (after-init-hook . which-key-mode)
+  :custom (which-key-max-description-length . 40))
+```
+
+### 6.6 [all-the-icons.el] フォントでアイコン表示
+all-the-icons.el を使うと，バッファ内やモードライン，ミニバッファでアイコンを表示できるようになります．
+
+domtronn/all-the-icons.el: A utility package to collect various Icon Fonts and propertize them within Emacs.
+
+パッケージを使えるようにした後， M-x all-the-icons-install-fonts すると自動的にフォントがインストールされます．必要に応じて fc-cache -f -v を発行すればフォントが使えるようになります．
+### 6.7 [all-the-icons-dired]
+
+### 6.8 [all-the-icons-ivy-rich]
+
+### 6.9 [all-the-icons-ibuffer]
+
+### 6.10 [ivy-rich]
+
+### 6.11 [amx]
+
+### 6.12 [imenu-list]
+
+### 6.13 [prescient.el]
+
+### 6.14 [fontawesome]
+
+### 6.15 [rainbow-mode]
 
 rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラーコードから実際の色を表示するマイナーモードです。
 常時表示しているとうざいとケースのあるので、必要なときだけ使えるようにしています。
@@ -859,7 +938,12 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
   :ensure t
   :bind ("C-c r" . rainbow-mode))
 ```
-### 6.4 custom-set-face
+
+### 6.16 [nyan-mode]
+
+### 6.17 [dimmer.el]
+
+### 6.15 custom-set-face
 色設定が、あちこちに散らばっているとわかりにくので、まとめて設定するようにしています。
 
 ```emacs-lisp
@@ -878,7 +962,7 @@ rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラー�
 (put 'dired-find-alternate-file 'disabled nil)
 ```
 
-## 7. Hydra
+## 7. Hydra でコマンドディスパッチャを構築
 ```note
 [hydra.el](https://github.com/abo-abo/hydra) を使うとよく使う機能をまとめてシンプルなキーバインドを割り当てることができます。
 
