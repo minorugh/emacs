@@ -1081,7 +1081,7 @@ dashboard画面に簡単なタスクを表示させるために `org-agenda` を
   (add-hook 'org-capture-mode-hook 'delete-other-windows))
 ```
 
-### 10.3 open-junk-file
+### 10.3 Open-junk-file
 junkファイルの保存も howmフォルダーに置くことで、howmの検索機能が利用できて便利です。
 
 ```emacs-lisp
