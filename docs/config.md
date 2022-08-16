@@ -1611,16 +1611,16 @@ Emacsの標準機能なので、そのまま使います。
 ```
 ## 12. フォント / 配色関連
 
-### 12.1 フォント設定
-Linu / Mac / WSL 共通で `Cica` を使っています。
+### 12.1 カーソル行に色をつける
+ビルトインの `hl-line` を使います.
 
-メイン機（Thinkpad E590）とサブ機（Thinkpad X250）とで解像度が違うので設定を変えます。
+* http://murakan.cocolog-nifty.com/blog/2009/01/emacs-tips-1d45.html 
+* https://www.emacswiki.org/emacs/highlight-current-line.el
 
-```emacs-lisp
-(add-to-list 'default-frame-alist '(font . "Cica-18"))
-;; for sub-machine
-(when (string-match "x250" (shell-command-to-string "uname -n"))
-  (add-to-list 'default-frame-alist '(font . "Cica-15")))
+機能別に`hl-line` のon/off や色を変えたりという設定もできますが、私の場合は、シンプルに `global` 設定して色は `theme` に依存というスタイルです。
+
+```elisp
+(global-hl-line-mode 1)
 ```
 
 ### 12.2 カーソルの点滅を制御
@@ -1633,8 +1633,46 @@ Linu / Mac / WSL 共通で `Cica` を使っています。
 (setq blink-cursor-delay 10)
 (add-hook 'emacs-startup-hook . blink-cursor-mode)
 ```
+### 12.3 フォント設定
+GUI / CUI 共通で `Cica` を使っています。
 
-### 12.3 行間を制御する
+Cicaフォントは、Hack、DejaVu Sans Mono、Rounded Mgen+、Noto Emoji等のフォントを組み合わせて調整をした、日本語の等幅フォントです。
+
+* [プログラミング用日本語等幅フォント Cica](https://github.com/miiton/Cica)
+
+#### 12.3.1 Cicaフォントのインストール
+Linux 環境でのインストールの方法です。
+
+[フォントのダウンロードページ](https://github.com/miiton/Cica/releases/tag/v5.0.3)から、絵文字ありまたは絵文字なしのどちらかをダウンロードします。今回は絵文字あり ([Cica_v5.0.3_with_emoji.zip](https://github.com/miiton/Cica/releases/download/v5.0.3/Cica_v5.0.3_without_emoji.zip)) をダウンロードします。
+
+zipファイルを展開します。
+
+```shell
+$ unzip Cica_v5.0.1_with_emoji.zip
+```
+LICENSE.txtを確認し、ファイルを `/usr/local/share/fonts/` または `~/.fonts/` にコピーします。
+ここでは `/usr/local/share/fonts/` にコピーし、フォントキャッシュを反映させます。
+
+```shell
+$ sudo cp Cica-{Bold,BoldItalic,Regular,RegularItalic}.ttf /usr/local/share/fonts/
+$ sudo fc-cache -vf
+$ fc-list | grep Cica
+/usr/local/share/fonts/Cica-Bold.ttf: Cica:style=Bold
+/usr/local/share/fonts/Cica-RegularItalic.ttf: Cica:style=Italic
+/usr/local/share/fonts/Cica-BoldItalic.ttf: Cica:style=Bold Italic
+/usr/local/share/fonts/Cica-Regular.ttf: Cica:style=Regular
+```
+#### 12.3.2 Cicaの設定
+メイン機（Thinkpad E590）とサブ機（Thinkpad X250）とで解像度が違うので表示確認しながらそれぞれに適した値を決めます。
+
+```emacs-lisp
+(add-to-list 'default-frame-alist '(font . "Cica-18"))
+;; for sub-machine
+(when (string-match "x250" (shell-command-to-string "uname -n"))
+  (add-to-list 'default-frame-alist '(font . "Cica-15")))
+```
+
+### 12.4 行間を制御する
 `line-spacing` 行間を制御する変数です。バッファローカルな変数なので、ミニバッファも含めて、各バッファの行間を個別に制御できます。
 
 [@takaxpさんのブログ記事](https://pxaka.tokyo/blog/2019/emacs-buffer-list-update-hook/) のによると、`global` で `0.3` 以下に設定すると 
@@ -1656,15 +1694,14 @@ Linu / Mac / WSL 共通で `Cica` を使っています。
 ```
 と行間を大きくするように設定していますが、`dark-room` からでるときに `my:linespacing` に戻しています。
 
-### 12.4 背景を黒系統にする
-Emacs初期化ファイル読み込み中は一瞬白背景になるのが嫌なので、`eary-init` に黒背景を設定しました。
+### 12.5 起動時の背景をテーマに合わせる
+私はダークテーマを使っているのですがEmacs初期化ファイル読み込み中は一瞬白背景になるのが嫌なので、`eary-init` にテーマと同じ黒背景を設定しています。
 
 ```elisp
 (custom-set-faces '(default ((t (:background "#282a36")))))
 ```
-採用している `doom-dracura-theme` と同じ黒背景をります。
 
-### 12.5 [volatile-highlights] コピペした領域を強調
+### 12.4 [volatile-highlights] コピペした領域を強調
 コピペ直後の数秒に限定してコピペした領域をフラッシングさせます。
 
 ```elisp
@@ -1679,9 +1716,9 @@ Emacs初期化ファイル読み込み中は一瞬白背景になるのが嫌な
 	(advice-add #'vhl/.make-hl :override #'my:vhl-pulse)))
 ```
 
-### 12.6 rainbow-mode
+### 12.6 [rainbow-mode.el] 配色のリアルタイム確認
 `rainbow-mode.el` は `red`, `green` などの色名や `#aabbcc` といったカラーコードから実際の色を表示するマイナーモードです。
-常時表示しているとうざいときもあるので、`global` に設定しないで必要なときだけ使えるようにしています。
+常時表示しているとうざいときもあるので、`global` 設定しないで必要なときだけ使えるようにしています。
 
 ```emacs-lisp
 (leaf rainbow-mode
@@ -1690,7 +1727,7 @@ Emacs初期化ファイル読み込み中は一瞬白背景になるのが嫌な
 ```
 
 ### 12.7 custom-set-face
-色設定が、あちこちに散らばっているとわかりにくので、まとめて設定するようにしています。
+色設定が、あちこちに散らばっているとわかりにくので、`custom-set-face` で変更したものは、一箇所にまとめて設定するようにしています。
 
 ```emacs-lisp
 (custom-set-faces
