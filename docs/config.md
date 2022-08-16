@@ -1119,7 +1119,7 @@ Emacsを再起動すると`*scratch*` の内容は消えてしまうのでこれ
 
 専用のパッケージもあるようです。
 
-* [`persistent-scratch.el:*scratch*バッファを永続化・自動保存・復元する`](http://emacs.rubikitch.com/persistent-scratch/) 
+* [persistent-scratch.el:*scratch*バッファを永続化・自動保存・復元する](http://emacs.rubikitch.com/persistent-scratch/) 
 
 ```elisp
 (leaf auto-save-buffers-enhanced
