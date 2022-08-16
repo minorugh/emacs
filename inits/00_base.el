@@ -35,17 +35,21 @@
     (delete-by-moving-to-trash . t)
     ;; Tab width default
     (tab-width . 4)
-    ;; Limit the final word to a line break code (automatically correct)
-    (require-final-newline . t)
+	;; Limit the final word to a line break code (automatically correct)
+	(require-final-newline . t)
 	;; Disallow adding new lines with newline at the end of the buffer
 	(next-line-add-newlines . nil)
-    ;; Make it easy to see when it is the same name file
-    (uniquify-buffer-name-style . 'post-forward-angle-brackets)
+	;; Make it easy to see when it is the same name file
+	(uniquify-buffer-name-style . 'post-forward-angle-brackets)
 	;; Don't clear kill-ring when restart emacs
 	(savehist-additional-variables . '(kill-ring))
-    ;; Use the X11 clipboard
-    (select-enable-clipboard  . t))
+	;; Use the X11 clipboard
+	(select-enable-clipboard  . t))
   :init
+  (defun my:linespacing ()
+	(unless (minibufferp)
+      (setq-local line-spacing 0.1)))
+  (add-hook 'buffer-list-update-hook #'my:linespacing)
   ;; defalias
   (defalias 'exit 'save-buffers-kill-emacs)
   (defalias 'yes-or-no-p 'y-or-n-p)
@@ -112,29 +116,34 @@
 	(url-configuration-directory . "~/.emacs.d/tmp/url")
 	(bookmark-file . "~/.emacs.d/tmp/bookmarks"))
   :init
+  ;; Control cursor blinking
+  (setq blink-cursor-blinks 0)
+  (setq blink-cursor-interval 0.3)
+  (setq blink-cursor-delay 10)
+  (add-hook 'emacs-startup-hook 'blink-cursor-mode)
   ;; Display buffer name in title bar
   (setq frame-title-format (format "emacs@%s : %%b" (system-name)))
 
   ;; Overwrite `C-w' to the whole-line-or-region
   (defun my:kill-region ()
-    "If the region is active, to kill region.
+	"If the region is active, to kill region.
   If the region is inactive, to kill whole line."
-    (interactive)
-    (if (use-region-p)
+	(interactive)
+	(if (use-region-p)
 		(clipboard-kill-region (region-beginning) (region-end))
       (kill-whole-line)))
 
   (defun my:exchange-point-and-mark ()
-    "No mark active `exchange-point-and-mark'."
-    (interactive)
-    (exchange-point-and-mark)
-    (deactivate-mark))
+	"No mark active `exchange-point-and-mark'."
+	(interactive)
+	(exchange-point-and-mark)
+	(deactivate-mark))
 
   ;; Set buffer that can not be killed
   (with-current-buffer "*scratch*"
-    (emacs-lock-mode 'kill))
+	(emacs-lock-mode 'kill))
   (with-current-buffer "*Messages*"
-    (emacs-lock-mode 'kill)))
+	(emacs-lock-mode 'kill)))
 
 
 (provide '00_base)

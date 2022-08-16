@@ -18,7 +18,7 @@
   :custom `((default-input-method . "japanese-mozc")
 			(mozc-helper-program-name . "mozc_emacs_helper")
 			(mozc-leim-title . "あ"))
-  :init
+  :config
   (defadvice toggle-input-method (around toggle-input-method-around activate)
 	"Input method function in key-chord.el not to be nil."
 	(let ((input-method-function-save input-method-function))
@@ -30,7 +30,7 @@
 	(interactive)
 	(mozc-handle-event 'enter)
 	(insert str))
-
+  :init
   (leaf mozc-cursor-color
 	:el-get minorugh/mozc-cursor-color
 	:hook (after-init-hook . mozc-cursor-color-setup))

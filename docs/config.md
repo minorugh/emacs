@@ -207,17 +207,7 @@ Emacs*useXIM: false
 	(compile "/usr/lib/mozc/mozc_tool --mode=word_register_dialog")
 	(delete-other-windows)))
 ```
-### 3.3 フォント設定
-メイン機（Thinkpad E590）とサブ機（Thinkpad X250）とで解像度が違うので設定を変えます。
-
-```emacs-lisp
-(add-to-list 'default-frame-alist '(font . "Cica-18"))
-;; for sub-machine
-(when (string-match "x250" (shell-command-to-string "uname -n"))
-  (add-to-list 'default-frame-alist '(font . "Cica-15")))
-```
-
-### 3.4 基本キーバインド
+### 3.3 基本キーバインド
 Mac時代に慣れ親しんだ関係もあり、標準キーバインドの他に下記を追加しています。 
 
 * `s-c` でコピー   (MacのCmd-c)
@@ -240,13 +230,13 @@ If the region is inactive, to kill whole line."
 (global-set-key (kbd "C-w") 'my:kill-region')
 ```
 
-### 3.5 マウスで選択した領域を自動コピー
+### 3.4 マウスで選択した領域を自動コピー
 マウスで選択すると，勝手にペーストボードにデータが流れます．
 
 ```emacs-lisp
 (setq mouse-drag-copy-region t)
 ```
-### 3.6 C-x C-c でEmacsを終了させないようにする
+### 3.5 C-x C-c でEmacsを終了させないようにする
 Emacsを終了させることはまずないので、再起動コマンドに変更しています。
 [`restart-emacs`](https://github.com/iqbalansari/restart-emacs) はMELPAからインストールできます。
 ```emacs-lisp
@@ -255,7 +245,7 @@ Emacsを終了させることはまずないので、再起動コマンドに変
   :bind ("C-x C-c" . restart-emacs))
 ```
 
-### 3.7 パッケージ管理
+### 3.6 パッケージ管理
 MELPAをメインに管理しています。MELPAにないものはel-getでGitHubやEmacsWikiからインストールします。
 
 個人用に開発したものは、自分のGitHubリポジトリで管理しel-getで読み込んでいます。
@@ -1422,6 +1412,47 @@ Emacsの標準機能なので、そのまま使います。
 	(toggle-frame-fullscreen)))
 ```
 ## 12. フォント / 配色関連
+
+### 12.1 フォント設定
+Linu / Mac / WSL 共通で `Cica` を使っています。
+
+メイン機（Thinkpad E590）とサブ機（Thinkpad X250）とで解像度が違うので設定を変えます。
+
+```emacs-lisp
+(add-to-list 'default-frame-alist '(font . "Cica-18"))
+;; for sub-machine
+(when (string-match "x250" (shell-command-to-string "uname -n"))
+  (add-to-list 'default-frame-alist '(font . "Cica-15")))
+```
+
+### 12.2 カーソルの点滅を制御
+
+以下の例では、入力が止まってから 10 秒後に 0.3 秒間隔で点滅します。次に入力が始まるまで点滅が続きます．
+
+```elisp
+(setq blink-cursor-blinks 0)
+(setq blink-cursor-interval 0.3)
+(setq blink-cursor-delay 10)
+(add-hook 'emacs-startup-hook . blink-cursor-mode)
+```
+
+### 12.3 行間を制御する
+`line-spacing` 行間を制御する変数です。バッファローカルな変数なので、ミニバッファも含めて、各バッファの行間を個別に制御できます。
+
+[@takaxpさんのブログ記事](https://pxaka.tokyo/blog/2019/emacs-buffer-list-update-hook/) の情報に寄ると、`global` で `0.3` 以下に設定すると 
+`nil` に戻せないという不具合があるとのことで、そのままTipsをパクって以下のように設定をしました。
+
+`my:linespacing` はシンプルに、 `global` ではなく `local` 変数の `line-spacing` を書き換えます。
+`(minibufferp)` で括っているのは、ミニバッファの行間を `my:linespacing` に左右されずに制御するためです。
+
+`darkroom` の設定では、更に行間を大きくするように設定していますが、`dark-room` からでるときに `my:linespacing` に戻しています。
+
+```elisp
+(defun my:linespacing ()
+  (unless (minibufferp)
+    (setq-local line-spacing 0.2)))
+(add-hook 'buffer-list-update-hook #'my:linespacing)
+```
 
 ## 13. ユーティリティー関数
 
