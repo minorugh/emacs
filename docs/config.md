@@ -920,13 +920,26 @@ Built-in の `paren.el` が利用できる。
 ```
 
 ### 6.6 [all-the-icons.el] フォントでアイコン表示
-all-the-icons.el を使うと，バッファ内やモードライン，ミニバッファでアイコンを表示できるようになります．
+`all-the-icons.el` を使うとバッファ内やモードライン、ミニバッファでアイコンを表示できるようになります。
 
-domtronn/all-the-icons.el: A utility package to collect various Icon Fonts and propertize them within Emacs.
+* [domtronn/all-the-icons.el: A utility package to collect various Icon Fonts and propertize them within Emacs.](https://github.com/domtronn/all-the-icons.el)
 
-パッケージを使えるようにした後， M-x all-the-icons-install-fonts すると自動的にフォントがインストールされます．必要に応じて fc-cache -f -v を発行すればフォントが使えるようになります．
+初めて使うときはパッケージを使えるようにした後 `M-x all-the-icons-install-fonts` すると自動的にフォントがインストールされますが、設定で自動化しました。
+
+```elisp
+(leaf all-the-icons
+  :ensure t
+  :after doom-modeline
+  :custom (all-the-icons-scale-factor . 0.9)
+  :config
+  (unless (member "all-the-icons" (font-family-list))
+	(all-the-icons-install-fonts t)))
+```
 
 ### 6.7 [all-the-icons-dired]
+`dired` でファイルのアイコンを表示します。all-the-icons をインストール後に， M-x all-the-icons-install-fonts を忘れずに実行する必要があります． neotree の設定は別セクションに記載しています．
+
+
 
 ### 6.8 [all-the-icons-ivy-rich]
 
