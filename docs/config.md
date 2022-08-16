@@ -1142,7 +1142,7 @@ Emacsを再起動しても`*scratch*` バッファーの内容が消えないよ
   (read-scratch-data))
 ```
 
-作業中のバッファーから`*scratch*` バッファーを呼びだすには [`scratch-pop.el`](http://emacs.rubikitch.com/scratch-pop/) が便利ですが、いまいち使い勝手が良くないので `toggle-scratch` を定義して愛用しています。
+作業中のバッファーから`*scratch*` バッファーを呼びだすために `toggle-scratch` を定義して愛用しています。
 編集中のバッファーとscratchバッファーとをToggle表示します。
 
 ```elisp
