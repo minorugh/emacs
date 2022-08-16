@@ -773,17 +773,21 @@ MELPAにはアップされていないみたいなので el-get で取得して�
   :global-minor-mode t)
 ```
 
-### 5.14 [smartparent.el] 対応する括弧の挿入をアシスト
+### 5.14 [smartparent] 対応する括弧の挿入をアシスト
 
-
-
+```elisp
+(leaf smartparens
+  :ensure t
+  :hook ((after-init-hook . smartparens-global-mode)
+		 (prog-mode-hook . turn-on-smartparens-mode)))
+```
 
 ## 6. 表示サポート
 ```note
 ここでは Emacs の UI を変更するようなものを載せている。
 ```
 
-### 6.1 cleanup-for-spaces
+### 6.1 [whitespace]cleanup-for-spaces
 
 `whitespace` の設定はシンプルに `show-trailing-whitespace` のみとし、不用意に入ってしまったスペースを削除するための関数を設定しました。
 
@@ -809,20 +813,6 @@ MELPAにはアップされていないみたいなので el-get で取得して�
 		(goto-char (point-max))
 		(delete-blank-lines)))))
 
-```
-### 6.2 [volatile-highlight]コピペした領域を強調
-コピペした領域をフラッシングさせます。
-
-```emacs-lisp
-(leaf volatile-highlights :ensure t
-  :config
-  (volatile-highlights-mode)
-  (with-no-warnings
-    (when (fboundp 'pulse-momentary-highlight-region)
-      (defun my-vhl-pulse (beg end &optional _buf face)
-		"Pulse the changes."
-		(pulse-momentary-highlight-region beg end face))
-      (advice-add #'vhl/.make-hl :override #'my-vhl-pulse))))
 ```
 
 ### 6.3 rainbow-mode
@@ -1466,7 +1456,49 @@ Emacs初期化ファイル読み込み中は一瞬白背景になるのが嫌な
 ```
 採用している `doom-dracura-theme` と同じ黒背景をります。
 
+### 12.5 [volatile-highlights] コピペした領域を強調
+コピペ直後の数秒に限定してコピペした領域をフラッシングさせます。
 
+```elisp
+(leaf volatile-highlights
+  :ensure t
+  :hook (after-init-hook . volatile-highlights-mode)
+  :config
+  (when (fboundp 'pulse-momentary-highlight-region)
+	(defun my:vhl-pulse (beg end &optional _buf face)
+	  "Pulse the changes."
+	  (pulse-momentary-highlight-region beg end face))
+	(advice-add #'vhl/.make-hl :override #'my:vhl-pulse)))
+```
+
+### 12.6 rainbow-mode
+`rainbow-mode.el` は `red`, `green` などの色名や `#aabbcc` といったカラーコードから実際の色を表示するマイナーモードです。
+常時表示しているとうざいときもあるので、`global` に設定しないで必要なときだけ使えるようにしています。
+
+```emacs-lisp
+(leaf rainbow-mode
+  :ensure t
+  :bind ("C-c r" . rainbow-mode))
+```
+
+### 12.7 custom-set-face
+色設定が、あちこちに散らばっているとわかりにくので、まとめて設定するようにしています。
+
+```emacs-lisp
+(custom-set-faces
+ '(lsp-face-highlight-read ((t (:background "gray21" :underline t))))
+ '(lsp-face-highlight-write ((t (:background "gray21" :underline t))))
+ '(markdown-code-face ((t (:inherit nil))))
+ '(markdown-pre-face ((t (:inherit font-lock-constant-face))))
+ '(markup-meta-face ((t (:stipple nil :foreground "gray30" :inverse-video nil :box nil
+								  :strike-through nil :overline nil :underline nil :slant normal
+								  :weight normal :height 135 :width normal :foundry "unknown" :family "Monospace"))))
+ '(symbol-overlay-default-face ((t (:background "gray21" :underline t))))
+ '(mozc-cand-posframe-normal-face ((t (:background "#282D43" :foreground "#C7C9D1"))))
+ '(mozc-cand-posframe-focused-face ((t (:background "#393F60" :foreground "#C7C9D1"))))
+ '(mozc-cand-posframe-footer-face ((t (:background "#282D43" :foreground "#454D73")))))
+(put 'dired-find-alternate-file 'disabled nil)
+```
 
 ## 13. ユーティリティー関数
 

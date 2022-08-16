@@ -15,7 +15,6 @@
 
 
 (leaf volatile-highlights
-  :url "http://www.emacswiki.org/emacs/download/volatile-highlights.el"
   :ensure t
   :hook (after-init-hook . volatile-highlights-mode)
   :config
@@ -24,7 +23,6 @@
 	  "Pulse the changes."
 	  (pulse-momentary-highlight-region beg end face))
 	(advice-add #'vhl/.make-hl :override #'my:vhl-pulse)))
-
 
 (leaf whitespace
   :ensure t
