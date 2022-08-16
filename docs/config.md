@@ -822,6 +822,15 @@ MELPAにはアップされていないみたいなので el-get で取得して�
 		 (prog-mode-hook . turn-on-smartparens-mode)))
 ```
 
+### 5.14 [fontawesome] fontawesome utility
+[`fontawesome.el`](https://github.com/emacsorphanage/fontawesome) は、Emacs での `fontawesome` の入力が簡単に出来るユーティリティです。`helm` や `ivy` とも勝手に連携してくれる。
+
+```elisp
+(leaf FontAwesome
+ :ensure t
+ :bind ("s-a" . councel-fontawesome))
+```
+
 ## 6. 表示サポート
 ```note
 ここでは Emacs の UI を変更するようなものを載せている。
@@ -912,6 +921,7 @@ all-the-icons.el を使うと，バッファ内やモードライン，ミニバ
 domtronn/all-the-icons.el: A utility package to collect various Icon Fonts and propertize them within Emacs.
 
 パッケージを使えるようにした後， M-x all-the-icons-install-fonts すると自動的にフォントがインストールされます．必要に応じて fc-cache -f -v を発行すればフォントが使えるようになります．
+
 ### 6.7 [all-the-icons-dired]
 
 ### 6.8 [all-the-icons-ivy-rich]
@@ -922,15 +932,39 @@ domtronn/all-the-icons.el: A utility package to collect various Icon Fonts and p
 
 ### 6.11 [amx]
 
-### 6.12 [imenu-list]
+### 6.12 [imenu-list] サイドバー的にファイル内容の目次要素を表示
+[@takaxpさんの改良版/imenu-list](https://github.com/takaxp/imenu-list) を使ってます。 
 
-### 6.13 [prescient.el]
+![Alt Text](https://live.staticflickr.com/65535/51419973025_01d97fe83b_b.jpg) 
 
-### 6.14 [fontawesome]
+```emacs-lisp
+(leaf imenu-list
+  :ensure t
+  :bind ("<f2>" . imenu-list-smart-toggle)
+  :custom
+  `((imenu-list-size . 30)
+	(imenu-list-position . 'left)
+	(imenu-list-focus-after-activation . t)))
+```
+
+### 6.13 [prescient.el] リスト項目の並び替えとイニシャル入力機能（ivy and company）
+コマンド履歴を保存、コマンドのイニシャル入力を可能にする。
+
+```elisp
+(leaf prescient
+  :ensure t
+  :hook (after-init-hook . prescient-persist-mode)
+  :custom
+  `((prescient-aggressive-file-save . t)
+	(prescient-save-file . "~/.emacs.d/tmp/prescient-save"))
+  :init
+  (with-eval-after-load 'prescient
+	(leaf ivy-prescient :ensure t :global-minor-mode t)
+	(leaf company-prescient :ensure t :global-minor-mode t)))
+```
 
 ### 6.15 [rainbow-mode]
-
-rainbow-mode.el は red, greenなどの色名や #aabbcc といったカラーコードから実際の色を表示するマイナーモードです。
+[`rainbow-mode.el`](https://github.com/emacsmirror/rainbow-mode/blob/master/rainbow-mode.el) は red, greenなどの色名や #aabbcc といったカラーコードから実際の色を表示するマイナーモードです。
 常時表示しているとうざいとケースのあるので、必要なときだけ使えるようにしています。
 
 ```emacs-lisp
@@ -1281,26 +1315,6 @@ which-key.el を導入することで各コマンドのガイドがミニバフ�
 ```
 
 ### F2: imenu-list-smart-toggle
-
-`counsel-css` と併用することで cssファイル編集時に重宝しています。
-
-![Alt Text](https://live.staticflickr.com/65535/51419973025_01d97fe83b_b.jpg) 
-
-```emacs-lisp
-(leaf imenu-list
-  :ensure t
-  :bind ("<f2>" . imenu-list-smart-toggle)
-  :config
-  (setq imenu-list-size 30)
-  (setq imenu-list-position 'left)
-  (setq imenu-list-focus-after-activation t))
-
-(leaf counsel-css
-  :ensure t
-  :config
-  (add-hook 'css-mode-hook #'counsel-css-imenu-setup))
-```
-
 
 ### F3: filer-current-dir-open
 編集中のフィル（または dired）のカレントデレクトリで debianのファルマネージャー `nautilus` を開きます。
