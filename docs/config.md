@@ -1116,7 +1116,7 @@ junkファイルの保存も howmフォルダーに置くことで、howmの検�
 
 Emacsを再起動しても`*scratch*` バッファーの内容が消えないように [`auto-save-buffers-enhanced`](http://emacs.rubikitch.com/auto-save-buffers-enhanced/) の `*scratch*` バッファー自動保存機能を併用しています。専用のパッケージもあるようです。
 
-* [persistent-scratch.el:*scratch*バッファを永続化・自動保存・復元する](http://emacs.rubikitch.com/persistent-scratch/) 
+* [persistent-scratch.el:scratch バッファを永続化・自動保存・復元する](http://emacs.rubikitch.com/persistent-scratch/) 
 
 ```elisp
 (leaf auto-save-buffers-enhanced
