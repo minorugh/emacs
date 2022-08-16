@@ -24,6 +24,7 @@
    ("c" my:make-clean)
    ("<muhenkan>" nil))
   :init
+  (setq compilation-scroll-output t)
   (setq compilation-always-kill t)
   (setq compilation-finish-functions 'compile-autoclose)
 

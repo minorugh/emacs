@@ -236,7 +236,27 @@ If the region is inactive, to kill whole line."
 ```emacs-lisp
 (setq mouse-drag-copy-region t)
 ```
-### 3.5 C-x C-c でEmacsを終了させないようにする
+### 3.5 compilation buffer を自動的に閉じる
+`makefile` を実行させるのに `compile` コマンドをよく使うので実行後は自動で閉じるようにしました。
+
+```elisp
+(setq compilation-always-kill t)
+(setq compilation-finish-functions 'compile-autoclose)
+
+(defun compile-autoclose (buffer string)
+  "Automatically close the compilation buffer."
+  (cond ((string-match "finished" string)
+	     (bury-buffer "*compilation*")
+		 (delete-other-windows)
+		 (message "Build successful."))
+	    (t (message "Compilation exited abnormally: %s" string))))
+```
+また、defaultだと出力が続いてもスクロールされないので自動的にスクロールさせる設定を追加。
+```elisp
+(setq compilation-scroll-output t)
+```
+
+### 3.6 C-x C-c でEmacsを終了させないようにする
 Emacsを終了させることはまずないので、再起動コマンドに変更しています。
 [`restart-emacs`](https://github.com/iqbalansari/restart-emacs) はMELPAからインストールできます。
 ```emacs-lisp
@@ -244,8 +264,22 @@ Emacsを終了させることはまずないので、再起動コマンドに変
   :ensure t
   :bind ("C-x C-c" . restart-emacs))
 ```
+### 3.7 [aggressive-indent.el] 即時バッファー整形
+特定のメジャーモードで、とにかく整形しまくります。
 
-### 3.6 パッケージ管理
+```elisp
+(leaf aggressive-indent
+  :ensure t
+  :hook ((emacs-lisp-mode-hook css-mode-hook) . aggressive-indent-mode))
+```
+### 3.8  [uniquify.el] 同じバッファ名が開かれた場合に区別する
+ビルトインの `uniquify` を使います。モードラインの表示が変わります。
+
+```elisp
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
+```
+
+### 3.9 パッケージ管理
 MELPAをメインに管理しています。MELPAにないものはel-getでGitHubやEmacsWikiからインストールします。
 
 個人用に開発したものは、自分のGitHubリポジトリで管理しel-getで読み込んでいます。
