@@ -987,7 +987,6 @@ magit status の画面は、デフォルトでは `other-window` に表示され
 	(delete-other-windows))
 ```
 
-
 ## 10. メモ環境
 ```note
 私の場合、専門的なプログラミングもやらないし、リタイアした身なのでGTDとかも必要ありません。
