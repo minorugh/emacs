@@ -246,32 +246,34 @@ Mac時代に慣れ親しんだ関係もあり、標準キーバインドの他�
 * `s-c` でコピー   (MacのCmd-c)
 * `s-v` でペースト (Macの Cmd-v)
 
-#### 3.4.1 [Kill-buffer]
-`kill-buffer` は、いちいち確認されるのが煩わしいので、確認なしの `kill-this-buffer` を愛用しています。
+#### 3.4.1 [Kill-this-buffer]
+`kill-buffer` はよく使うコマンドですが、いちいち確認されるのが煩わしいので確認なしの `kill-this-buffer` を愛用しています。
+
 ```emacs-lisp
 (global-set-key (kbd "M-/") 'kill-this-buffer')
 ```
-#### 3.4.2 [kill-region]
-`C-w` は、`region` を選択していないときはカーソル行全体を `kill-ring` するようにしました。
+#### 3.4.2 [my:kill-whoill-ine-or-region]
+`C-w` コマンドの置き換えとして `my:kill-whoileline-or-regoin`を設定しました。
+`region` を選択していないときはカーソル行全体を `kill-ring` します。
 
 ```emacs-lisp
-(defun my:kill-region ()
+(defun my:kill-whoile-ine-or-region ()
   "If the region is active, to kill region.
 If the region is inactive, to kill whole line."
   (interactive)
   (if (use-region-p)
 	  (clipboard-kill-region (region-beginning) (region-end))
     (kill-whole-line)))
-(global-set-key (kbd "C-w") 'my:kill-region')
+(global-set-key (kbd "C-w") 'my:kill-whoie-line-or-region)
 ```
 
-### 3.4 マウスで選択した領域を自動コピー
+### 3.5 マウスで選択した領域を自動コピー
 マウスで選択すると，勝手にペーストボードにデータが流れます．
 
 ```emacs-lisp
 (setq mouse-drag-copy-region t)
 ```
-### 3.5 compilation buffer を自動的に閉じる
+### 3.6 compilation buffer を自動的に閉じる
 `make` を実行させるのに `compile` コマンドをよく使うので実行後は自動で閉じるようにしました。
 
 ```elisp
@@ -291,7 +293,7 @@ If the region is inactive, to kill whole line."
 (setq compilation-scroll-output t)
 ```
 
-### 3.6 C-x C-c でEmacsを終了させないようにする
+### 3.7 C-x C-c でEmacsを終了させないようにする
 Emacsを終了させることはまずないので、再起動コマンドに変更しています。
 [`restart-emacs`](https://github.com/iqbalansari/restart-emacs) はMELPAからインストールできます。
 ```emacs-lisp
@@ -299,7 +301,7 @@ Emacsを終了させることはまずないので、再起動コマンドに変
   :ensure t
   :bind ("C-x C-c" . restart-emacs))
 ```
-### 3.7 [aggressive-indent.el] 即時バッファー整形
+### 3.8 [aggressive-indent.el] 即時バッファー整形
 特定のメジャーモードで、とにかく整形しまくります。
 
 ```elisp
@@ -307,14 +309,14 @@ Emacsを終了させることはまずないので、再起動コマンドに変
   :ensure t
   :hook ((emacs-lisp-mode-hook css-mode-hook) . aggressive-indent-mode))
 ```
-### 3.8  [uniquify.el] 同じバッファ名が開かれた場合に区別する
+### 3.9  [uniquify.el] 同じバッファ名が開かれた場合に区別する
 ビルトインの `uniquify` を使います。モードラインの表示が変わります。
 
 ```elisp
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 ```
 
-### 3.9 [el-get] パッケージ管理
+### 3.10 [el-get] パッケージ管理
 MELPAをメインに管理していますが、MELPAにないものは`el-get` でGitHubやEmacsWikiからインストールします。
 
 個人用に開発したものも、自分のGitHubリポジトリで管理し`el-get` で読み込んでいます。
