@@ -241,7 +241,13 @@ Dropboxに保存された辞書ファイルを複数マシンで同時アクセ�
 Google Driveは大丈夫という情報もありますが試せてません。
 
 ### 3.4 基本キーバインド
-Mac時代に慣れ親しんだ関係もあり、標準キーバインドの他に下記を追加しています。 
+標準キーバインドの他に下記を追加しています。 
+
+| s-c | コピー   (MacのCmd-c)     |
+| s-v | ペースト (Macの Cmd-v)    |
+| M-/ | Kill-this-buffer          |
+| C-w | kill-whoil-line-or-region |
+
 
 * `s-c` でコピー   (MacのCmd-c)
 * `s-v` でペースト (Macの Cmd-v)
