@@ -10,7 +10,7 @@ nav_order: 1
 * ここは [@minoruGH](https://twitter.com/minorugh)  の Emacs設定ファイルの一部を解説しているページです。
 * <https://github.com/minorugh/emacs.d/> から
 jekyll を使ってGithub pages にWebサイトを構築しています。
-* 本ドキュメントは、[@takaxp](https://twitter.com/takaxp)さんが公開されている [takaxp.github.io/](https://takaxp.github.io/init.html) の記事を参考にした模倣版です。
+* 本ドキュメントは、[@takaxp](https://twitter.com/takaxp)さんが公開されている [takaxp.github.io/](https://takaxp.github.io/init.html) の記事を下敷きにした模倣版です。
 * 執筆用途に特化してカスタマイズしていますので、コンセプトやキーバイドなどは極めて邪道思想になっています。
 ```
 ### 1.1 動作確認環境
@@ -20,7 +20,7 @@ jekyll を使ってGithub pages にWebサイトを構築しています。
 * 自分でビルドした Emacs 27.2.50
 
 ### 1.2 デレクトリ構成
-設定ファイルの構成は、下記のとおりです。
+設定ファイルの構成は下記のとおりです。
 
 ```
 ~/.emacs.d
@@ -56,7 +56,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 このファイルはパッケージシステムとGUIの初期化前にロードされるので、フレームの外見やpackage-enable-at-startup、package-load-list、package-user-dirのようなパッケージ初期化プロセスに影響を与える変数をカスタマイズできます。
 
 ### 2.2 [eary-init] 起動時間の短縮を図る
-いままでinit.elに記述していたこれらの設定は、eary-init.elへ移したほうが起動時間を短縮できます。
+`init.el`に記述していたUI関係の設定を、`eary-init.el`へ移すことで起動時間を短縮できます。
 
 ```elisp
 (push '(fullscreen . maximized) default-frame-alist)
@@ -86,6 +86,9 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 ```
 ### 2.4 [leaf.el] でラクラクinit.el整理
 `use-package` から `leaf` に乗り換えました。
+
+`init.el` は、`leaf` を開発された [@conao3](https://qiita.com/conao3) さんの下記Tipsの丸写しです。
+[Emacs入門から始めるleaf.el入門](https://qiita.com/conao3/items/347d7e472afd0c58fbd7)
 
 ### 2.5 [init.el] 起動時間の短縮を図る
 Magic File Name を一時的に無効にすることで、起動時間の短縮を図る設定をしています。
@@ -128,7 +131,8 @@ init-loader を使うことの是非については諸説あるようですが�
 ### 2.7 [mini-init.el] テスト用初期化ファイル
 [`mini-init.el`](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/mini-init.el) は、最小限の emacs を起動させるための設定です。
 
-新しいパッケージや設定をテストしたり、エラー等で Emacsが起動しない場合に使用します。
+新しいパッケージを試したり設定をテストしたり、エラー等で Emacsが起動しない場合などに使用します。
+
 シェルから `eq` と入力することで起動することがでます。
 
 以下を `.zshrc` または `.bashrc` に書き込みます。
@@ -188,7 +192,7 @@ Emacs*useXIM: false
 	  (setq input-method-function input-method-function-save))))
 ```
 
-文章編集中にShellコマンドの [`mozc-tool`](https://www.mk-mode.com/blog/2017/06/27/linux-mozc-tool-command/) を起動して即、単語登録できるようにしておくと機能的です。
+Emacsで文章編集中にShellコマンドの [`mozc-tool`](https://www.mk-mode.com/blog/2017/06/27/linux-mozc-tool-command/) を起動して、Emacsを閉じることなく単語登録できるようにしておくと機能的です。
 
 ```elisp
 (leaf *cus-mozc-tool
@@ -213,12 +217,12 @@ Mac時代に慣れ親しんだ関係もあり、標準キーバインドの他�
 * `s-c` でコピー   (MacのCmd-c)
 * `s-v` でペースト (Macの Cmd-v)
 
-kill-bufferは、いちいち確認されるのが煩わしいので、kill-this-bufferを愛用しています。
+`kill-buffer` は、いちいち確認されるのが煩わしいので、`kill-this-buffer` を愛用しています。
 ```emacs-lisp
 (global-set-key (kbd "M-/") 'my:kill-region')
 ```
 
-`C-w` は、regionを選択していないときはカーソル行全体をkill-ringするようにしました。
+`C-w` は、`region` を選択していないときはカーソル行全体を `kill-ring` するようにしました。
 ```emacs-lisp
 (defun my:kill-region ()
   "If the region is active, to kill region.
@@ -237,7 +241,7 @@ If the region is inactive, to kill whole line."
 (setq mouse-drag-copy-region t)
 ```
 ### 3.5 compilation buffer を自動的に閉じる
-`makefile` を実行させるのに `compile` コマンドをよく使うので実行後は自動で閉じるようにしました。
+`make` を実行させるのに `compile` コマンドをよく使うので実行後は自動で閉じるようにしました。
 
 ```elisp
 (setq compilation-always-kill t)
@@ -280,24 +284,26 @@ Emacsを終了させることはまずないので、再起動コマンドに変
 ```
 
 ### 3.9 [el-get] パッケージ管理
-MELPAをメインに管理していますが、MELPAにないものはel-getでGitHubやEmacsWikiからインストールします。
+MELPAをメインに管理していますが、MELPAにないものは`el-get` でGitHubやEmacsWikiからインストールします。
 
-個人用に開発したものは、自分のGitHubリポジトリで管理しel-getで読み込んでいます。
+個人用に開発したものも、自分のGitHubリポジトリで管理し`el-get` で読み込んでいます。
 
 ## 4. カーソル移動
 ```note
-ブラインドタッチは使わない（使えない）ので、文字移動、行移動、スクロールは、素直に上下左右の矢印キーと`PgUp` `PgDn` を使っています。
+ブラインドタッチは使えないので、文字移動、行移動、スクロールは、素直に上下左右の矢印キーと`PgUp` `PgDn` を使っています。
 ```
 
 ### 4.1 [sequential-command.el] バッファー内のカーソル移動
-[`sequential-command`](https://github.com/HKey/sequential-command) は、バッファーの先頭と最終行への移動を簡単にしてくれます。
+標準の `C-a` `C-e` を拡張し、バッファーの先頭と最終行への移動を簡単にしてくれます。
+
+https://github.com/HKey/sequential-command
 
 * `C-a` を連続で打つことで行頭→ファイルの先頭→元の位置とカーソルが移動
 * `C-e` を連続で打つことで行末→ファイルの最終行→元の位置とカーソルが移動
 
-地味なながら一度使うと便利すぎて止められません。
+地味ながら一度使うと便利すぎて止められません。
 
-MELPAから Installできますが、私は HKey氏の改良版を el-getで使っています。
+MELPAから Installできますが、私は HKey氏の改良版を `el-get` でインストールしました。
 ```emacs-lisp
 (leaf sequential-command
   :doc "https://bre.is/6Xu4fQs6"
