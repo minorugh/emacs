@@ -56,7 +56,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 このファイルはパッケージシステムとGUIの初期化前にロードされるので、フレームの外見やpackage-enable-at-startup、package-load-list、package-user-dirのようなパッケージ初期化プロセスに影響を与える変数をカスタマイズできます。
 
 ### 2.2 [eary-init] 起動時間の短縮を図る
-`init.el`に記述していたUI関係の設定を、`eary-init.el`へ移すことで起動時間を短縮できます。
+UI関係の設定を、`eary-init.el`へ移すことで起動時間を短縮できます。
 
 ```elisp
 (push '(fullscreen . maximized) default-frame-alist)
@@ -88,6 +88,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 `use-package` から `leaf` に乗り換えました。
 
 `init.el` は、`leaf` を開発された [@conao3](https://qiita.com/conao3) さんの下記Tipsの丸写しです。
+
 [Emacs入門から始めるleaf.el入門](https://qiita.com/conao3/items/347d7e472afd0c58fbd7)
 
 ### 2.5 [init.el] 起動時間の短縮を図る
