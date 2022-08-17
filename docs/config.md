@@ -887,7 +887,6 @@ Built-in の `paren.el` が利用できる。
 ```
 
 ### 6.2 [whitespace]cleanup-for-spaces
-
 `whitespace` の設定はシンプルに `show-trailing-whitespace` のみとし、不用意に入ってしまったスペースを削除するための関数を設定しました。
 
 ```emacs-lisp
@@ -922,6 +921,7 @@ Built-in の `paren.el` が利用できる。
   :hook ((after-init-hook . global-diff-hl-mode)
          (after-init-hook . diff-hl-margin-mode)))
 ```
+
 ### 6.4 [japanese-holidays] カレンダーをカラフルにする
 ビルドインの `holidays` と `japanese-holidays.el`を使います。土日祝日に色を着けます。土曜日と日曜祝日で異なる配色にできます。
 
@@ -973,8 +973,6 @@ Built-in の `paren.el` が利用できる。
 
 ### 6.7 [all-the-icons-dired]
 `dired` でファイルのアイコンを表示します。Emacs27以降、MELPA版は白色にしか表示されないので [jtbm37/all-the-icons-dired](https://github.com/jtbm37/all-the-icons-dired) をel-getでインストールしています。
-
-`neotree` の設定は別セクションに記載しています。
 
 ```elisp
 (leaf all-the-icons-dired
@@ -1740,7 +1738,26 @@ $ fc-list | grep Cica
 (custom-set-faces '(default ((t (:background "#282a36")))))
 ```
 
-### 12.4 [volatile-highlights] コピペした領域を強調
+### 12.6 [ivy.el] 選択行をアイコンで強調
+
+```elisp
+  (defun my:ivy-format-function-arrow (cands)
+	"Transform into a string for minibuffer with CANDS."
+	(ivy--format-function-generic
+	 (lambda (str)
+	   (concat (if (display-graphic-p)
+				   (all-the-icons-octicon "chevron-right" :height 0.8 :v-adjust -0.05)
+				 ">")
+			   (propertize " " 'display `(space :align-to 2))
+			   (ivy--add-face str 'ivy-current-match)))
+	 (lambda (str)
+	   (concat (propertize " " 'display `(space :align-to 2)) str))
+	 cands
+	 "\n"))
+(setq ivy-format-functions-alist '((t . my:ivy-format-function-arrow)))
+```
+
+### 12.6 [volatile-highlights] コピペした領域を強調
 コピペ直後の数秒に限定してコピペした領域をフラッシングさせます。
 
 ```elisp
@@ -1755,7 +1772,7 @@ $ fc-list | grep Cica
 	(advice-add #'vhl/.make-hl :override #'my:vhl-pulse)))
 ```
 
-### 12.6 [rainbow-mode.el] 配色のリアルタイム確認
+### 12.7 [rainbow-mode.el] 配色のリアルタイム確認
 `rainbow-mode.el` は `red`, `green` などの色名や `#aabbcc` といったカラーコードから実際の色を表示するマイナーモードです。
 常時表示しているとうざいときもあるので、`global` 設定しないで必要なときだけ使えるようにしています。
 
@@ -1765,7 +1782,7 @@ $ fc-list | grep Cica
   :bind ("C-c r" . rainbow-mode))
 ```
 
-### 12.7 custom-set-face
+### 12.8 custom-set-face
 色設定が、あちこちに散らばっているとわかりにくので、`custom-set-face` で変更したものは、一箇所にまとめて設定するようにしています。
 
 ```emacs-lisp

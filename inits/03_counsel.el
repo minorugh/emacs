@@ -74,15 +74,15 @@
 	;; Make search trigger even with 2 characters
 	(add-to-list 'ivy-more-chars-alist '(counsel-ag . 2)))
 
-  ;; (ivy-add-actions
-  ;;  'counsel-ag
-  ;;  '(("r" my-counsel-ag-in-dir "search in directory")))
+  (ivy-add-actions
+   'counsel-ag
+   '(("r" my-counsel-ag-in-dir "search in directory")))
 
-  ;; (defun my-counsel-ag-in-dir (_arg)
-  ;; 	"Search again with new root directory."
-  ;; 	(let ((current-prefix-arg '(4)))
-  ;;     (counsel-ag ivy-text nil ""))) ;; also disable extra-ag-args)
-  )
+  (defun my-counsel-ag-in-dir (_arg)
+	"Search again with new root directory."
+	(let ((current-prefix-arg '(4)))
+      (counsel-ag ivy-text nil ""))))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Migemo configuration
