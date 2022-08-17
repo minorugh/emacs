@@ -1220,7 +1220,7 @@ magit status の画面は、デフォルトでは `other-window` に表示され
 `gist -o` とすることで結果の URLをブラウザで開いてくれるので便利です。
 
 ```emacs-lisp
-  (defun gist-from-buffer ()
+(defun gist-from-buffer ()
 	"Gist from current buffer, then open chromium."
 	(interactive)
 	(let ((file (buffer-file-name (current-buffer))))
