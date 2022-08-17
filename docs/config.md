@@ -365,7 +365,7 @@ MELPAから Installできますが、私は HKey氏の改良版を `el-get` で�
 (global-set-key (kbd "C-x C-x" 'my:kill-region'))
 ```
 
-### 4.5 [expand-region] カーソル位置を起点に選択範囲を賢く広げる
+### 4.5 [expand-region.el] カーソル位置を起点に選択範囲を賢く広げる
 [`expand-region.el`](https://github.com/magnars/expand-region.el) は、カーソル位置を起点として前後に選択範囲を広げてくれます。
 
 2回以上呼ぶとその回数だけ賢く選択範囲が広がりますが、2回目以降は設定したキーバインドの最後の一文字を連打すれば OKです。その場合、選択範囲を狭める時は - を押し， 0 を押せばリセットされます。
@@ -381,9 +381,9 @@ MELPAから Installできますが、私は HKey氏の改良版を `el-get` で�
 ここにはファイル編集や入力補助の設定をまとめている。
 ```
 ### 5.1 矩形編集/連番入力
-24.4 からは， rectangle-mark-mode が使えるようになり， C-x SPC を押下すると矩形モードに入り直感的に矩形選択ができる。
+24.4 からは、`rectangle-mark-mode` が使えるようになり `C-x SPC` を押下すると矩形モードに入り直感的に矩形選択ができる。
 
-標準の rect.el に以下の機能が実装されている。
+標準の `rect.el` に以下の機能が実装されている。
 
 |矩形切り取り|	C-x r k |
 |矩形削除	 |  C-x r d |
@@ -393,8 +393,6 @@ MELPAから Installできますが、私は HKey氏の改良版を `el-get` で�
 
 ### 5.2 markdownモード
 [`markdown-mode.el`](https://github.com/jrblevin/markdown-mode) は、Markdown形式のテキストを編集するための主要なモードです。
-
-昨今は、`org-mode` の方が人気があるようですが、私の場合は、[Howm](https://howm.osdn.jp/index-j.html) でメモを書き、 [Hugo](https://github.com/gohugoio/hugo)でブログを書くので物書き環境は`markdown-mode` をメインにしています。
 
 ```emacs-lisp
 (leaf markdown-mode
@@ -415,7 +413,7 @@ $ npm install -g livedown
 ```
 
 次にEmacsの設定を書きます。
-MELPAにはないのでel-getでインストールします。
+MELPAにはないので`el-get` でインストールします。
 
 ```emacs-lisp
 (leaf emacs-livedown
