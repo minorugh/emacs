@@ -247,8 +247,8 @@ Google Driveは大丈夫という情報もありますが試せてません。
 |--------------|---------------------------|------|
 | M-w | clipboard-Kill-ring-save |選択領域コピー |
 | C-w | my:kill-whoie-line-or-region |行削除 or 選択領域削除 |
-| s-c | clipboard-kill-ring-save | コピーMacの `Cmd-c` |
-| s-v | clipboard-yank | ペーストMacの `Cmd-v` |
+| s-c | clipboard-kill-ring-save | コピー　Macの `Cmd-c` |
+| s-v | clipboard-yank | ペースト　Macの `Cmd-v` |
 | M-/ | kill-this-buffer | 確認なしの `kill-buffer` |
 
 ```emacs-lisp
