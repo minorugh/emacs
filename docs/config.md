@@ -690,8 +690,9 @@ yes/no確認を聞かれるのが煩わしいので `my:revery-buffer-no-confirm
 ```
 `YaTeX-lpr` は、`dviprint-command-format` を呼び出すコマンドです。
 
-dviファイルから dvipdfmx で PDF作成したあと、ビューアーを起動させて表示させるところまでをバッチファイルに書き、PATHの通ったところに置きます。私は、`/usr/loca/bin` に置きました。
+dviファイルから dvipdfmx で PDF作成したあと、ビューアーを起動させて表示させるところまでをバッチファイルに書き、`chmod +x dvpd.sh ` として実行権限を付与してからPATHの通ったところに置きます。私は、`/usr/loca/bin` に置きました。
 
+##### dvpd.sh
 ```sh
 #!/bin/bash
 name=$1
@@ -699,7 +700,7 @@ dvipdfmx $1 && evince ${name%.*}.pdf
 # Delete unnecessary files
 rm *.au* *.dv* *.lo*
 ```
-上記の例では、ビューアーに Linux の evince を設定していますが、mac でプレビューを使う場合は、下記のようになるかと思います。
+上記の例では、ビューアーに Linux の evince を設定していますが、Mac の場合は、下記のようになるかと思います。
 
 ```sh
 dvipdfmx $1 && open -a Preview.app ${name%.*}.pdf
@@ -725,7 +726,7 @@ dvipdfmx $1 && open -a Preview.app ${name%.*}.pdf
 	(append (if (consp backend) backend (list backend))
     	    '(:with company-yasnippet))))
 (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
-(global-set-key (kbd "C-<tab>" 'company-yasunippets))
+(global-set-key (kbd "C-<tab>") 'company-yasunippets)
 ```
 
 ### 5.8 [iedit] 選択領域を別の文字列に置き換える
