@@ -59,7 +59,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 ### 2.2 [eary-init.el] 起動時間の短縮を図る
 UI関係の設定を、`eary-init.el`へ移すことで起動時間を短縮できます。
 
-```emacs
+```elisp
 (push '(fullscreen . maximized) default-frame-alist)
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
@@ -69,7 +69,7 @@ UI関係の設定を、`eary-init.el`へ移すことで起動時間を短縮で�
 ### 2.3 [eary-init.el] チラツキを抑える
 設定ファイルの読み込み段階で画面がチラチラ変化するのを抑制しています。
 
-```emacs
+```elisp
 ;; Suppress flashing at startup
 (setq inhibit-redisplay t)
 (setq inhibit-message t)
