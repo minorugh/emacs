@@ -634,7 +634,9 @@ HTML編集をするなら[web-mode](https://github.com/fxbois/web-mode) がお�
 [https://github.com/joaotavora/darkroom](https://github.com/joaotavora/darkroom)
 
 [F12] キーで IN/OUT をトグルしています。
-`darkroom-mode` から抜けるときは、`revert-buffer` で再読込してもとに戻しますが yes/noを聞いてくるのが煩わしいので `no-confirm` の関数を作りました。
+`darkroom-mode` から抜けるときは、`revert-buffer` で再読込してもとに戻します。
+
+yes/no確認を聞かれるのが煩わしいので `my:revery-buffer-no-confirm` の関数を作りました。
 
 ```emacs-lisp
 (leaf darkroom
@@ -658,9 +660,9 @@ HTML編集をするなら[web-mode](https://github.com/fxbois/web-mode) がお�
 	(my:linespacing)
 	(darkroom-tentative-mode 0)
 	(display-line-numbers-mode 1)
-	(revert-buffer-no-confirm))
+	(my:revert-buffer-no-confirm))
 
-  (defun revert-buffer-no-confirm ()
+  (defun my:revert-buffer-no-confirm ()
 	"Revert buffer without confirmation."
 	(interactive)
 	(revert-buffer t t)))

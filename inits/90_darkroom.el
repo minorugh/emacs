@@ -27,9 +27,9 @@
 	(my:linespacing)
 	(darkroom-tentative-mode 0)
 	(display-line-numbers-mode 1)
-	(revert-buffer-no-confirm))
+	(my:revert-buffer-no-confirm))
 
-  (defun revert-buffer-no-confirm ()
+  (defun my:revert-buffer-no-confirm ()
 	"Revert buffer without confirmation."
 	(interactive)
 	(revert-buffer t t)))
