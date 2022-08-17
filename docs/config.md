@@ -191,7 +191,7 @@ Emacs*useXIM: false
 	  (setq input-method-function input-method-function-save))))
 ```
 
-Emacsで文章編集中にShellコマンドの [`mozc-tool`](https://www.mk-mode.com/blog/2017/06/27/linux-mozc-tool-command/) を起動して、Emacsを閉じることなく単語登録できるようにしておくと機能的です。
+Emacsで文章編集中にShellコマンドで [`mozc-tool`](https://www.mk-mode.com/blog/2017/06/27/linux-mozc-tool-command/) を起動し、Emacsを閉じることなく単語登録できるようにしています。
 
 ```elisp
 (leaf *cus-mozc-tool
