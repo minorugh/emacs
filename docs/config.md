@@ -436,6 +436,8 @@ MELPAから Installできますが、私は HKey氏の改良版を `el-get` で�
 markdownファイルのプレビューには、[`emacs-livedown`](https://github.com/shime/emacs-livedown) を使っています。
 記事を書きながらライブでプレビュー出来るすぐれものです。
 
+[https://github.com/shime/emacs-livedown](https://github.com/shime/emacs-livedown)
+
 npmがインストールされたnodeが入っていことを確認してからlivedownをインストールします。
 ```shell
 $ npm install -g livedown
@@ -614,9 +616,7 @@ If the region is inactive, to kill whole line."
 ### 5.4 web/htmlモード
 HTML編集をするなら[web-mode](https://github.com/fxbois/web-mode) がお勧めなのですが、私の場合あまり使っていません。
 
-textファイルからコンパイラを通してHTMLを生成したり、markdownで書いてHTMLに変換するというケースが多く、無地のファイルからHTMLタグを書き始めると言うとがないからです。
-
-出来上がったHTMLを部分的に変更したり...という程度の使い方です。
+出来上がったHTMLの内容を確認したり部分的に変更したり...という程度の使い方です。
 
 ```elisp
 (leaf web-mode
@@ -634,7 +634,7 @@ textファイルからコンパイラを通してHTMLを生成したり、markdo
 タイトルバーやモードラインが一時的に削除されてフルスクリーンになり、テキストが拡大され、テキストがウィンドウの中央に配置されるように余白が調整されます。`view-mode, diff-hl-mode, display-line-numbers-mode` をOffにし、行間も少し大きくしてより読みやすくしています。
 
 [F12] キーで IN/OUT をトグルしています。
-darkroom-modeからでるときは、revert-buffer で再読込してもとに戻しますが yes/noを聞いてくるのが煩わしいのでno-confirm の関数を作りました。
+`darkroom-mode` から抜けるときは、`revert-buffer` で再読込してもとに戻しますが yes/noを聞いてくるのが煩わしいので `no-confirm` の関数を作りました。
 
 ```emacs-lisp
 (leaf darkroom
@@ -669,7 +669,8 @@ darkroom-modeからでるときは、revert-buffer で再読込してもとに�
 ### 5.6 [yatex] YaTexで LaTex編集
 [`yatex.el`](https://github.com/emacsmirror/yatex) は、Emacsの上で動作する LaTeX の入力支援環境です。
 
-ごく一般的な設定例ですが、参考になるとしたら [`yatexprc.el`](https://www.yatex.org/gitbucket/yuuji/yatex/blob/c45e2a0187b702c5e817bf3023816dde154f0de9/yatexprc.el) の `M-x YaTeX-lpr` を使って一気に PDF作成まで自動化している点でしょうか。
+ごく一般的な設定例ですが、参考になるとしたら `dviprint-command-format` に `dvpd.sh` というスクリプトを設定して、`YateX.lpr`
+コマンドでPDF作成 → プレビューまでの手順を一気に出来るように自動化している点でしょうか。
 
 ```emacs-lisp
 (leaf yatex
@@ -687,7 +688,7 @@ darkroom-modeからでるときは、revert-buffer で再読込してもとに�
 ```
 `YaTeX-lpr` は、`dviprint-command-format` を呼び出すコマンドです。
 
-dviファイルから dvipdfmx で PDF作成したあと、PDFビューアーを起動させて表示させるところまでをバッチファイルに書き、PATHの通ったところに置きます。私は、`/usr/loca/bin` に置きました。
+dviファイルから dvipdfmx で PDF作成したあと、ビューアーを起動させて表示させるところまでをバッチファイルに書き、PATHの通ったところに置きます。私は、`/usr/loca/bin` に置きました。
 
 ```sh
 #!/bin/bash
