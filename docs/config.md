@@ -243,24 +243,13 @@ Google Driveは大丈夫という情報もありますが試せてません。
 ### 3.4 基本キーバインド
 標準キーバインドの他に下記を追加しています。 
 
-| s-c | コピー   (MacのCmd-c)     |
-| s-v | ペースト (Macの Cmd-v)    |
-| M-/ | Kill-this-buffer          |
-| C-w | kill-whoil-line-or-region |
-
-
-* `s-c` でコピー   (MacのCmd-c)
-* `s-v` でペースト (Macの Cmd-v)
-
-#### 3.4.1 [Kill-this-buffer]
-`kill-buffer` はよく使うコマンドですが、いちいち確認されるのが煩わしいので確認なしの `kill-this-buffer` を愛用しています。
-
-```emacs-lisp
-(global-set-key (kbd "M-/") 'kill-this-buffer')
-```
-#### 3.4.2 [my:kill-whoill-ine-or-region]
-`C-w` コマンドの置き換えとして `my:kill-whoileline-or-regoin`を設定しました。
-`region` を選択していないときはカーソル行全体を `kill-ring` します。
+| キーバインド | コマンド                  | 説明 |
+|--------------|---------------------------|------|
+| M-w | clipboard-Kill-ring-save |clipboard仕様の kill-ring-Save |
+| C-w | my:kill-whoie-line-or-region |行削除 or 選択領域削除 |
+| s-c | clipboard-kill-ring-save | コピーMacのCmd-c |
+| s-v | clipboard-yank | ペーストのCmd-v |
+| M-/ | kill-this-buffer | 確認なしの kill-buffer |
 
 ```emacs-lisp
 (defun my:kill-whoile-ine-or-region ()
