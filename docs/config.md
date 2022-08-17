@@ -245,7 +245,7 @@ Google Driveは大丈夫という情報もありますが試せてません。
 
 | キーバインド | コマンド                  | 説明 |
 |--------------|---------------------------|------|
-| M-w | clipboard-Kill-ring-save |clipboard仕様の kill-ring-Save |
+| M-w | clipboard-Kill-ring-save |選択領域コピー |
 | C-w | my:kill-whoie-line-or-region |行削除 or 選択領域削除 |
 | s-c | clipboard-kill-ring-save | コピーMacのCmd-c |
 | s-v | clipboard-yank | ペーストのCmd-v |
