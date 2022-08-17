@@ -631,7 +631,7 @@ HTML編集をするなら[web-mode](https://github.com/fxbois/web-mode) がお�
 ### 5.5 [darkroom-mode] 執筆モード
 [`darkroom.el`](https://github.com/joaotavora/darkroom)  は、画面の余計な項目を最小限にして、文章の執筆に集中できるようにするパッケージです。
 
-タイトルバーやモードラインが一時的に削除されてフルスクリーンになり、テキストが拡大され、テキストがウィンドウの中央に配置されるように余白が調整されます。`view-mode, diff-hl-mode, display-line-numbers-mode` をOffにし、行間も少し大きくしてより読みやすくしています。
+[https://github.com/joaotavora/darkroom](https://github.com/joaotavora/darkroom)
 
 [F12] キーで IN/OUT をトグルしています。
 `darkroom-mode` から抜けるときは、`revert-buffer` で再読込してもとに戻しますが yes/noを聞いてくるのが煩わしいので `no-confirm` の関数を作りました。
@@ -650,12 +650,12 @@ HTML編集をするなら[web-mode](https://github.com/fxbois/web-mode) がお�
 	(diff-hl-mode 0)
 	(display-line-numbers-mode 0)
 	(darkroom-tentative-mode 1)
-	(setq line-spacing 0.4))
+	(setq-local line-spacing 0.4))
 
   (defun my:darkroom-out ()
 	"Returns from `darkroom-mode' to the previous state."
 	(interactive)
-	(setq line-spacing 0.1)
+	(my:linespacing)
 	(darkroom-tentative-mode 0)
 	(display-line-numbers-mode 1)
 	(revert-buffer-no-confirm))
