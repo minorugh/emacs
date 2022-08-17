@@ -1,9 +1,9 @@
 ---
 layout: default
-title: GNU Emacs configuration
+title: minoru's Emacs configuration
 nav_order: 1
 ---
-# GNU Emacs configuration
+# Emacs configuration
 
 ## 1. はじめに
 ```note
