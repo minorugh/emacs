@@ -246,12 +246,14 @@ Mac時代に慣れ親しんだ関係もあり、標準キーバインドの他�
 * `s-c` でコピー   (MacのCmd-c)
 * `s-v` でペースト (Macの Cmd-v)
 
-`kill-buffer` は、いちいち確認されるのが煩わしいので、`kill-this-buffer` を愛用しています。
+#### 3.4.1 [Kill-buffer]
+`kill-buffer` は、いちいち確認されるのが煩わしいので、確認なしの `kill-this-buffer` を愛用しています。
 ```emacs-lisp
-(global-set-key (kbd "M-/") 'my:kill-region')
+(global-set-key (kbd "M-/") 'kill-this-buffer')
 ```
-
+#### 3.4.2 [kill-region]
 `C-w` は、`region` を選択していないときはカーソル行全体を `kill-ring` するようにしました。
+
 ```emacs-lisp
 (defun my:kill-region ()
   "If the region is active, to kill region.
