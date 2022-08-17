@@ -316,7 +316,7 @@ MELPAから Installできますが、私は HKey氏の改良版を `el-get` で�
 ### 4.2 ウインドウ間のカーソル移動
 `C-c o` でもいいですが，ワンアクションで移動できるほうが楽なので、次のように双方向で使えるように設定しています．
 
-画面分割されていないときは、左右分割して新しいウインドウに移動し、以後は双方向に移動します。
+画面分割されていないときは、左右分割して新しいウインドウに移動します。
 
 ```emacs-lisp
 (defun other-window-or-split ()
@@ -334,8 +334,8 @@ MELPAから Installできますが、私は HKey氏の改良版を `el-get` で�
 * `C-M-SPC` (mark-sexp) は，カーソル位置から順方向に選択．
 * `C-M-U` (backward-up-list) は，一つ外のカッコの先頭にポイントを移す．
 
-上記標準機能は使いにくいので、Vimの `%` の機能を実現させるために `my:jump-brace` を定義しました。
-Toggleで括弧の先頭と最後にポイント移動します。
+上記標準機能は使いにくいので `my:jump-brace` を定義しました。
+括弧の先頭と最後へ交互にポイント移動します。
 ```emacs-lisp
 (defun my:jump-brace ()
  "Jump to the corresponding parenthesis."
@@ -346,7 +346,6 @@ Toggleで括弧の先頭と最後にポイント移動します。
 	 (if (eq (char-syntax p) 41) (backward-list)
        (backward-up-list)))))
 (global-set-key (kbd "C-M-9") 'my:jump-brace)
-(define-key view-mode-map (kbd "%") 'my:jump-brace)
 ```
 
 ### 4.4 マーク箇所を遡る
@@ -356,7 +355,7 @@ Toggleで括弧の先頭と最後にポイント移動します。
 (setq mark-ring-max 32)
 (setq global-mark-ring-max 64)
 ```
-`C-u C-SPC` も使いますが、直前の編集ポイントと現在のポイントとを行き来出来る設定を重宝しています。
+`C-x C-x` は、直前の編集ポイントと現在のポイントとを行き来できる設定です。
 
 ```emacs-lisp
 (defun my:exchange-point-and-mark ()
