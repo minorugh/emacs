@@ -692,7 +692,7 @@ yes/no確認を聞かれるのが煩わしいので `my:revery-buffer-no-confirm
 
 dviファイルから dvipdfmx で PDF作成したあと、ビューアーを起動させて表示させるところまでをバッチファイルに書き、`chmod +x dvpd.sh ` として実行権限を付与してからPATHの通ったところに置きます。私は、`/usr/loca/bin` に置きました。
 
-##### dvpd.sh
+[dvpd.sh]
 ```sh
 #!/bin/bash
 name=$1
