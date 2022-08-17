@@ -212,7 +212,31 @@ Emacsで文章編集中にShellコマンドで [`mozc-tool`](https://www.mk-mode
 	(compile "/usr/lib/mozc/mozc_tool --mode=word_register_dialog")
 	(delete-other-windows)))
 ```
-### 3.3 基本キーバインド
+
+### 3.3 [Mozc] 辞書の共有
+Linux環境でMozcを使うメリットは辞書の共有である。
+
+1. Emacs以外のコンテンツでも同じMozc辞書を使うのでEmacsから単語登録しておけば全てのコンテンツで有効になる。
+2. 辞書ファイルをDropboxなどのクラウドに置くことで複数のマシンで共有できる。
+
+[2.] のやり方は簡単で、まず、`~/.mozc` フォルダーを `~/Dropboc/mozc/` へコピーします。
+つぎに、`~/.mozc` を削除してDropboxにコピーした `.mozc` のシンボリックファイルを `~/`　へ貼り付けます。
+
+一連の作業をmakefileで自動化するなら次のようになるかと思います。
+
+```makefile
+mozc_copy:
+	mkdir -p ~/Dropbox/mozc
+	cp -r ~/.mozc/ ~/Dropbox/mozc/
+	test -L ~/.mozc || rm -rf ~/.mozc
+	ln -vsfn ~/Dropbox/mozc/.mozc ~/.mozc
+```
+
+辞書共有の問題点
+: Dropboxに保存された辞書ファイルを複数マシンで同時アクセスした場合、複製（競合コピー）がいっぱい作られるという問題があります。
+: Google Driveは大丈夫という情報もありますが試せてません。
+
+### 3.4 基本キーバインド
 Mac時代に慣れ親しんだ関係もあり、標準キーバインドの他に下記を追加しています。 
 
 * `s-c` でコピー   (MacのCmd-c)
