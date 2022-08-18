@@ -273,16 +273,21 @@ Dropboxに保存された辞書ファイルを複数マシンで同時アクセ�
 Google Driveは大丈夫という情報もありますが試せてません。
 
 ### 3.4. 基本キーバインド
-標準キーバインドの他に下記を追加しています。 
+* いつでもどこでも使えるキーバインド周りの設定をここにまとめています。 
 
-| キーバインド | コマンド                  | 説明 |
-|--------------|---------------------------|------|
-| M-w | clipboard-Kill-ring-save |選択領域コピー |
-| C-w | my:kill-whoie-line-or-region |行削除 or 選択領域削除 |
-| s-c | clipboard-kill-ring-save | コピー　Macの `Cmd-c` |
-| s-v | clipboard-yank | ペースト　Macの `Cmd-v` |
-| M-/ | kill-this-buffer | 確認なしの `kill-buffer` |
+```elisp
+;; C-h is backspace
+(define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
+(bind-key "M-w" 'clipboard-kill-ring-save)
+(bind-key "C-w" 'my:clipboard-kill-region)
+(bind-key "s-c" 'clipboard-kill-ring-save)	 ;; Like mac
+(bind-key "s-v" 'clipboard-yank)   ;; Like mac
+(bind-key "M-/" 'kill-this-buffer) ;; No inquiry
+(bind-key "C-_" 'undo-fu-only-undo) ;; Use undu-fu.el
+(bind-key "M-_" 'undo-fu-only-redo) ;; Use undo-fu.el
+```
 
+* リージョンが選択されていないときは一行削除
 ```emacs-lisp
 (defun my:kill-whoile-ine-or-region ()
   "If the region is active, to kill region.
@@ -384,7 +389,7 @@ MELPAから Installできますが、私は HKey氏の改良版を `el-get` で�
 	 (follow-mode 1)
 	 (dimmer-mode 1))
    (other-window 1))
-(global-set-key (kbd "C-q") 'other-window-or-split)
+(bind-key "C-q" 'other-window-or-split)
 ```
 
 ### 4.3. 対応する括弧を選択
@@ -402,7 +407,7 @@ MELPAから Installできますが、私は HKey氏の改良版を `el-get` で�
    (if (eq (char-syntax c) 40) (forward-list)
 	 (if (eq (char-syntax p) 41) (backward-list)
        (backward-up-list)))))
-(global-set-key (kbd "C-M-9") 'my:jump-brace)
+(bind-key "C-M-9" 'my:jump-brace)
 ```
 
 ### 4.4. マーク箇所を遡る
@@ -420,7 +425,7 @@ MELPAから Installできますが、私は HKey氏の改良版を `el-get` で�
   (interactive)
   (exchange-point-and-mark)
   (deactivate-mark))		 
-(global-set-key (kbd "C-x C-x" 'my:kill-region'))
+(bind-key "C-x C-x" 'my:exchange-point-and-mark)
 ```
 
 ### 4.5 [expand-region.el] カーソル位置を起点に選択範囲を賢く広げる
@@ -491,8 +496,8 @@ MELPAにはないので`el-get` でインストールします。
   :hook
   (find-file-hook . my:auto-view)
   (server-visit-hook . my:unlock-view-mode)
+  :chord ("::" . view-mode)
   :bind
-  (("S-<return>" . view-mode)
    (:view-mode-map
 	("h" . backward-char)
 	("l" . forward-char)
@@ -527,7 +532,7 @@ MELPAにはないので`el-get` でインストールします。
 	("i" . View-exit-and-edit)
 	("]" . winner-undo)
 	("[" . winner-redo)
-	("," . hydra-view/body)))
+	("," . hydra-view/body))
   :init
   ;; Specific extension / directory
   (defvar my:auto-view-regexp "\\.php\\|\\.pl\\|\\.el.gz?\\|\\.tar.gz?\\'")
@@ -754,7 +759,7 @@ dvipdfmx $1 && open -a Preview.app ${name%.*}.pdf
 	(append (if (consp backend) backend (list backend))
     	    '(:with company-yasnippet))))
 (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
-(global-set-key (kbd "C-<tab>") 'company-yasunippets)
+(bind-key "C-<tab>" 'company-yasunippets)
 ```
 
 ### 5.8. [iedit] 選択領域を別の文字列に置き換える
@@ -889,7 +894,28 @@ MELPAにはアップされていないみたいなので el-get で取得して�
   (smartparens-global-mode t))
 ```
 
-### 5.14. [fontawesome] fontawesome utility
+### 5.14. [key-chord.el] 同時押しでキーバインド
+* 同時押しというキーバインドを提供してくれるやつ
+* 同時押し時の許容時間、その前後で別のキーが押されていたら発動しない判断をする、みたいな設定を入れている。
+
+```elisp
+(leaf key-chord
+  :ensure t
+  :hook (after-init-hook . key-chord-mode)
+  :chord (("df" . counsel-descbinds)
+		  ("l;" . init-loader-show-log)
+		  ("@@" . howm-list-all)
+		  ("jk" . open-junk-file))
+  :custom
+  `((key-chord-two-keys-delay . 0.25)
+	(key-chord-safety-interval-backward . 0.1)
+	(key-chord-safety-interval-forward  . 0.15)))
+```
+キーの同時押し判定は 0.15 秒で、それらのキーが押される直前の 0.1 秒以内、または直後の 0.15 秒に押されていたら発動しない、という設定にしている。
+
+改良版の作者の記事だと、直後判定は 0.25 秒で設定されていたが自分は `Hydra` の起動にも使っている上に、よく使うやつは覚えているので表示を待たずに次のキーを押すので 0.25 秒も待っていられないという事情があった。
+
+### 5.15. [fontawesome] fontawesome utility
 [`fontawesome.el`](https://github.com/emacsorphanage/fontawesome) は、Emacs での `fontawesome` の入力が簡単に出来るユーティリティです。`helm` や `ivy` とも勝手に連携してくれる。
 
 ```elisp
@@ -1411,8 +1437,8 @@ Emacs26以降は、標準添付の `flymake` が使いやすくなったので�
 
 <p><img src="static/screencast.gif" alt="screencast" /></p> 
 
-## 10. メモ環境
-`Org-mode` `howm-mode` `open-junk-file` をTPOで使い分けします。
+### 10. メモ環境
+* TPOで使い分けるメモツール
 
 ### 10.1. Howm Mode
 Howm-menuは使わないので `howm-list-all` を初期画面として使っています。

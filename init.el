@@ -40,6 +40,7 @@
 	:init
 	(leaf hydra :ensure t)
 	(leaf el-get :ensure t)
+	(leaf bind-key :ensure t)
 	:config
 	(leaf-keywords-init)))
 

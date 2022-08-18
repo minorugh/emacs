@@ -104,7 +104,7 @@
 (leaf *user-custom-configuration
   :bind (("C-x C-x" . my:exchange-point-and-mark)
 		 ("M-w" . clipboard-kill-ring-save)
-		 ("C-w" . my:kill-region)
+		 ("C-w" . my:kill-whole-line-or-region)
 		 ("s-c" . clipboard-kill-ring-save)	 ;; Like mac
 		 ("s-v" . clipboard-yank)	 ;; Like mac
 		 ("M-/" . kill-this-buffer)) ;; No inquiry
@@ -125,7 +125,7 @@
   (setq frame-title-format (format "emacs@%s : %%b" (system-name)))
 
   ;; Overwrite `C-w' to the whole-line-or-region
-  (defun my:kill-region ()
+  (defun my:kill-whole-line-or-region ()
 	"If the region is active, to kill region.
   If the region is inactive, to kill whole line."
 	(interactive)

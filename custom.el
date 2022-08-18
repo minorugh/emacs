@@ -35,7 +35,7 @@
  '(delete-by-moving-to-trash t)
  '(dired-dwim-target t)
  '(dired-listing-switches "-lgGhF")
- '(dired-omit-files ".elc" t)
+ '(dired-omit-files ".elc")
  '(dired-recursive-copies 'always)
  '(dired-recursive-deletes 'always)
  '(doom-modeline-icon t)
@@ -104,7 +104,7 @@
 	 ("melpa" . "https://melpa.org/packages/")
 	 ("gnu" . "https://elpa.gnu.org/packages/")))
  '(package-selected-packages
-   '(scratch-pop japanese-holidays yasnippet-snippets company-prescient ivy-prescient posframe selected darkroom google-translate easy-hugo request popup yatex open-junk-file howm viewer markdown-mode neotree package-utils pangu-spacing mozc-cand-posframe mozc rainbow-delimiters smartparens whitespace volatile-highlights dimmer undo-fu web-mode restart-emacs quickrun expand-region iedit popwin imenu-list which-key prescient auto-save-buffers-enhanced key-chord aggressive-indent all-the-icons-ibuffer all-the-icons-ivy-rich all-the-icons nyan-mode doom-modeline doom-themes yasnippet company counsel-tramp counsel-css migemo amx ivy-rich fontawesome counsel browse-at-remote git-timemachine diff-hl magit page-break-lines dashboard exec-path-from-shell init-loader el-get hydra leaf-keywords))
+   '(japanese-holidays yasnippet-snippets company-prescient ivy-prescient posframe selected darkroom google-translate easy-hugo request popup yatex open-junk-file howm viewer markdown-mode neotree package-utils pangu-spacing mozc-cand-posframe mozc rainbow-delimiters smartparens whitespace volatile-highlights dimmer undo-fu web-mode restart-emacs quickrun expand-region iedit popwin which-key prescient auto-save-buffers-enhanced key-chord aggressive-indent all-the-icons-ibuffer all-the-icons-ivy-rich all-the-icons nyan-mode doom-modeline doom-themes yasnippet company counsel-tramp counsel-css migemo amx ivy-rich fontawesome counsel browse-at-remote git-timemachine diff-hl magit page-break-lines dashboard exec-path-from-shell init-loader el-get hydra leaf-keywords))
  '(prescient-aggressive-file-save t)
  '(prescient-save-file "~/.emacs.d/tmp/prescient-save")
  '(read-file-name-completion-ignore-case t)
