@@ -868,7 +868,7 @@ selectedコマンドを選択するときは、IMEをOffにしないといけな
 	   (unless (null my:ime-flag) (my:ime-on)))))
 ```
 
-### 5.12. [swiper-migemo] swiperを migemo化してローマ字入力で日本語を検索
+### 5.12. [swiper-migemo] ローマ字入力で日本語を検索
 [`avy-migemo-e.g.swiper.el`](https://github.com/momomo5717/avy-migemo) を使って出来ていたのですが、２年ほど前から更新が止まってしまっていて動きません。
 
 つい最近、avy-migemo を使わない [`swiper-migemo`](https://github.com/tam17aki/swiper-migemo)を GitHubで見つけたので試した処、機嫌よく動いてくれています。
