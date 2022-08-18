@@ -132,7 +132,9 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
 ```
 
 ### 2.3 [test.el] テスト用初期化ファイル
-[`test.el`](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/test.el) は、最小限の emacs を起動させるための設定です。
+最小限の emacs を起動させるための設定です。
+
+[https://github.com/minorugh/dotfiles/blob/main/.emacs.d/test.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/test.el) は、
 
 新しいパッケージを試したり設定をテストしたり、エラー等で Emacsが起動しない場合などに使用します。
 
