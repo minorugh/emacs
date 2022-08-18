@@ -1714,7 +1714,7 @@ Emacsを再起動しても`*scratch*` バッファーの内容が消えないよ
 ## 12. フォント / 配色関連
 
 ### 12.1 カーソル行に色をつける
-ビルトインの `hl-line` を使います.
+* ビルトインの `hl-line` を使います.
 
 * http://murakan.cocolog-nifty.com/blog/2009/01/emacs-tips-1d45.html 
 * https://www.emacswiki.org/emacs/highlight-current-line.el
@@ -1726,7 +1726,6 @@ Emacsを再起動しても`*scratch*` バッファーの内容が消えないよ
 ```
 
 ### 12.2 カーソルの点滅を制御
-
 以下の例では、入力が止まってから 10 秒後に 0.3 秒間隔で点滅します。次に入力が始まるまで点滅が続きます．
 
 ```elisp
@@ -1736,14 +1735,14 @@ Emacsを再起動しても`*scratch*` バッファーの内容が消えないよ
 (add-hook 'emacs-startup-hook . blink-cursor-mode)
 ```
 ### 12.3 フォント設定
-GUI / CUI 共通で `Cica` を使っています。
+* GUI / CUI 共通で `Cica` を使っています。
 
 Cicaフォントは、Hack、DejaVu Sans Mono、Rounded Mgen+、Noto Emoji等のフォントを組み合わせて調整をした、日本語の等幅フォントです。
 
 * [プログラミング用日本語等幅フォント Cica](https://github.com/miiton/Cica)
 
 #### 12.3.1 Cicaフォントのインストール
-Linux 環境でのインストールの方法です。
+* Linux 環境でのインストールの方法です。
 
 [Cicaダウンロードオフィシャルページ](https://github.com/miiton/Cica/releases/tag/v5.0.3)にある最新の `Cica v5.03` は、
 `page-break-lines` がオーバーフローして折り返されてしまいます。`page-break-line-char` の仕様が微妙に異なるからかもしれません。
