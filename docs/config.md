@@ -41,13 +41,11 @@ nav_order: 1
 ```
 
 ## 2. 起動設定
-```note
 Emacs-27導入にあわせて `early-init.el` を設定しました。 ブートシーケンスは以下のとおり。
 
 1. `early-init.el` の読み込み
 2. `init.el` の読み込み
 3. `inits/` のファイル群を読み込み （init-loader 使用）
-```
 
 ### 2.1 [early-init.el] eary-init.el を使う
 [`early-init.el`](https://ayatakesi.github.io/emacs/28.1/html/Early-Init-File.html) は、Emacs27から導入されました。 
