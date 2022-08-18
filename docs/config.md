@@ -1235,8 +1235,8 @@ howm や org でメモをとるときに、ゴミファイルが残らないよ�
 | F2 | imenu-list-smart-toggle | imenuのサイドバー版 |
 | F3 | filer-current-dir-open | debianのnautilusを開く |
 | F4 | term-current-dir-open | debianのgonome-terminalを開く |
-| F5 | quikuran | 確認なしの `kill-buffer` |
-| F6 | counsel-linux-app | 確認なしの `kill-buffer` |
+| F5 | quikuran | お手軽ビルド |
+| F6 | counsel-linux-app | Linuxアプリランチャー |
 | F7 | calendar-toggle | calendarのトグル表示 |
 | F8 | toggle-menu-bar-mode-from-frame | menu-barのトグル表示 |
 | F9 | display-line-numbers-mode | 行番号のトグル表示 |
