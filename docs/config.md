@@ -281,10 +281,10 @@ Google Driveは大丈夫という情報もありますが試せてません。
 (bind-key "M-w" 'clipboard-kill-ring-save)
 (bind-key "C-w" 'my:clipboard-kill-region)
 (bind-key "s-c" 'clipboard-kill-ring-save)	 ;; Like mac
-(bind-key "s-v" 'clipboard-yank)   ;; Like mac
-(bind-key "M-/" 'kill-this-buffer) ;; No inquiry
+(bind-key "s-v" 'clipboard-yank)    ;; Like mac
+(bind-key "M-/" 'kill-this-buffer)  ;; No inquiry
 (bind-key "C-_" 'undo-fu-only-undo) ;; Use undu-fu.el
-(bind-key "M-_" 'undo-fu-only-redo) ;; Use undo-fu.el
+(bind-key "C-/" 'undo-fu-only-redo) ;; Use undo-fu.el
 ```
 
 ```emacs-lisp
