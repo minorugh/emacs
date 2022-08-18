@@ -1768,7 +1768,7 @@ $ fc-list | grep Cica
 /usr/local/share/fonts/Cica-Regular.ttf: Cica:style=Regular
 ```
 #### 12.3.2 Cicaの設定
-メイン機（Thinkpad E590）とサブ機（Thinkpad X250）とで解像度が違うので表示確認しながらそれぞれに適した値を決めます。
+* メイン機（Thinkpad E590）とサブ機（Thinkpad X250）とでそれぞれに適した値を決めています。
 
 ```emacs-lisp
 (add-to-list 'default-frame-alist '(font . "Cica-18"))
