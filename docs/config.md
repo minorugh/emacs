@@ -1227,7 +1227,7 @@ howm や org でメモをとるときに、ゴミファイルが残らないよ�
 ## 9. 開発サポート
 
 ### 9.1. 便利キーバインド
-やや邪道的ですが、
+便利機能をワンキーアクションで使えるように設定しました。
 
 | キーバインド | コマンド                  | 説明 |
 |--------------|---------------------------|------|
@@ -1247,7 +1247,6 @@ howm や org でメモをとるときに、ゴミファイルが残らないよ�
 | end | toggle-scratch | `scratch`バッファーのトグル表示 |
 | insert | iedit-menu | 確認なしの `kill-buffer` |
 | muhenkan | minibuffer-keyboard-quit | minibufferを閉じる |
-| S-return | view-mode | view-modeのon/offをトグル表示 |
 
 ### 9.2 [magit]
 
