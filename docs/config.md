@@ -161,7 +161,7 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
   (init-loader-load))
 ```
 
-#### 2.2.4 [test.el] 最小初期化ファイル
+#### 2.2.4 [test.el] テスト用の最小初期化ファイル
 最小限の emacs を起動させるための設定です。
 
 [https://github.com/minorugh/dotfiles/blob/main/.emacs.d/test.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/test.el) は、
