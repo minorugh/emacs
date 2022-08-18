@@ -177,9 +177,8 @@ alias eq = 'emacs -q -l ~/.emacs.d/test.el'
 ファイルの PATH は、ご自分の環境に応じて修正が必要です。
 
 ## 3. コア設定
-```note
 Emacs を操作して日本語文書編集するうえで必要な設定。
-```
+
 ### 3.1 言語 / 文字コード
 シンプルにこれだけです。
 
@@ -349,9 +348,7 @@ MELPAをメインに管理していますが、MELPAにないものは`el-get` �
 個人用に開発したものも、自分のGitHubリポジトリで管理し`el-get` で読み込んでいます。
 
 ## 4. カーソル移動
-```note
-ブラインドタッチは使えないので、文字移動、行移動、スクロールは、素直に上下左右の矢印キーと`PgUp` `PgDn` を使っています。
-```
+ブラインドタッチができないので、文字移動、行移動、スクロールは、素直に上下左右の矢印キーと`PgUp` `PgDn` を使っています。
 
 ### 4.1 [sequential-command.el] バッファー内のカーソル移動
 標準の `C-a` `C-e` を拡張し、バッファーの先頭と最終行への移動を簡単にしてくれます。
@@ -438,9 +435,8 @@ MELPAから Installできますが、私は HKey氏の改良版を `el-get` で�
 ```
 
 ## 5. 編集サポート
-```note
-ここにはファイル編集や入力補助の設定をまとめている。
-```
+ファイル編集や入力補助の設定をまとめている。
+
 ### 5.1 矩形編集/連番入力
 24.4 からは、`rectangle-mark-mode` が使えるようになり `C-x SPC` を押下すると矩形モードに入り直感的に矩形選択ができる。
 
@@ -903,9 +899,8 @@ MELPAにはアップされていないみたいなので el-get で取得して�
 ```
 
 ## 6. 表示サポート
-```note
 ここでは Emacs の UI を変更するようなものを載せている。
-```
+
 ### 6.1 対応するカッコをハイライトする
 Built-in の `paren.el` が利用できる。
 
@@ -1128,11 +1123,9 @@ If the region isn't selected, `swiper'."
 ```
 
 ## 7. Hydra / コマンドディスパッチャ
-```note
 [hydra.el](https://github.com/abo-abo/hydra) を使うとよく使う機能をまとめてシンプルなキーバインドを割り当てることができます。
 
 日本では、[smartrep.el](http://sheephead.homelinux.org/2011/12/19/6930/) が有名だったようですが、hydra.elも同様の機能を提供します。
-```
 
 ### 7.1 [hydra-menu] 作業選択メニュー 
 [`hydra-work-menu`](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-menu.el#L57) には、
@@ -1261,9 +1254,8 @@ magit status の画面は、デフォルトでは `other-window` に表示され
 ### 9.4 [eagy-hugo]
 
 ## 10. メモ環境
-```note
-Orgは多機能すぎて馴染めずHowmをメインに使っています。
-```
+`Org-mode` `howm-mode` `open-junk-file` をTPOで使い分けします。
+
 ### 10.1 Howm Mode
 Howm-menuは使わないので `howm-list-all` を初期画面として使っています。
 
