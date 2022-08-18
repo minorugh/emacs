@@ -12,7 +12,7 @@
 		 ("<f6>" . counsel-linux-app)
 		 ("<f8>" . toggle-menu-bar-mode-from-frame)
 		 ("<muhenkan>" . minibuffer-keyboard-quit)
-		 ("S-<return>" . toggle-scratch))
+		 ("<end>" . toggle-scratch))
   :init
   (defun thunar-open ()
 	"Open thunar with current dir."

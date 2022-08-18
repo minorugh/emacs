@@ -41,7 +41,8 @@
 	(leaf hydra :ensure t)
 	(leaf el-get :ensure t)
 	:config
-	(leaf-keywords-init)))
+	(leaf-keywords-init)
+	(setq custom-file (locate-user-emacs-file "~/.emacs.d/tmp/custom.el"))))
 
 
 ;; Load init files
@@ -50,8 +51,7 @@
   :config
   (custom-set-variables
    '(init-loader-show-log-after-init 'error-only))
-  (init-loader-load)
-  (setq custom-file (locate-user-emacs-file "custom.el")))
+  (init-loader-load))
 
 
 (provide 'init)
