@@ -185,7 +185,12 @@ Emacs を操作して日本語文書編集するうえで必要な設定。
 ```
 
 ### 3.2. [emacs-mozc] 日本語入力
-Debian11 にインストールした Emacs上で [`emacs-mozc`](https://wiki.debian.org/JapaneseEnvironment/Mozc) を使っています。
+* Debian11 にインストールした Emacs上で [`emacs-mozc`](https://wiki.debian.org/JapaneseEnvironment/Mozc) を使っています。
+* debian でのインストール手順は以下の通り。
+
+```bash
+sudo apt-get install fcitx-mozc emacs-mozc
+```
 
 Emacsをソースからビルドするときに `--without-xim` しなかったので、インライン XIMでも日本語入力ができてしまいます。
 特に使い分けする必要もなく紛らわしいので `.Xresources` で XIM無効化の設定をしました。
