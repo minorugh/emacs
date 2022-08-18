@@ -1331,7 +1331,7 @@ If region isn't selected, post from the buffer."
 ### 9.4. [eagy-hugo] マルチブログ管理
 [easy-hugo.el](https://github.com/masasam/emacs-easy-hugo) は、Hugoで作成されたブログを書くための Emacs メジャー モードです。
 
-![Alt Text](https://github.com/masasam/emacs-easy-hugo/blob/master/image/screencast.gif) 
+![screencast](https://github.com/masasam/emacs-easy-hugo/blob/master/image/screencast.gif) 
 
 ## 10. メモ環境
 `Org-mode` `howm-mode` `open-junk-file` をTPOで使い分けします。
