@@ -1241,13 +1241,13 @@ howm や org でメモをとるときに、ゴミファイルが残らないよ�
 | F8 | toggle-menu-bar-mode-from-frame | menu-barのトグル表示 |
 | F9 | display-line-numbers-mode | 行番号のトグル表示 |
 | F10 | neotree-toggle | Neotreeのトグル表示 |
-| F11 | トグルフルスクリーン | OS共通の機能 |
+| F11 | トグル・フルスクリーン | OS共通の機能 |
 | F12 | my:darkroom-in/out | darkroom-modeのトグル操作 |
-| <home> | kill-this-buffer | 確認なしの `kill-buffer` |
-| <end> | toggle-scratch | `scratch`バッファーのトグル表示 |
-| <insert> | iedit-menu | 確認なしの `kill-buffer` |
-| <muhenkan> | minibuffer-keyboard-quit | minibufferを閉じる |
-| S-<return> | view-mode | view-modeのon/offをトグル表示 |
+| home | kill-this-buffer | 確認なしの `kill-buffer` |
+| end | toggle-scratch | `scratch`バッファーのトグル表示 |
+| insert | iedit-menu | 確認なしの `kill-buffer` |
+| muhenkan | minibuffer-keyboard-quit | minibufferを閉じる |
+| S-return | view-mode | view-modeのon/offをトグル表示 |
 | F5 | kill-this-buffer | 確認なしの `kill-buffer` |
 | F5 | kill-this-buffer | 確認なしの `kill-buffer` |
 
