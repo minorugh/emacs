@@ -52,9 +52,11 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 ```
 
 ### 2.1 [early-init.el] eary-init を使う
-[`early-init.el`](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el) は、Emacs27から導入されました。 
+[`early-init.el`](https://ayatakesi.github.io/emacs/28.1/html/Early-Init-File.html) は、Emacs27から導入されました。 
 
 `init.el` でパッケージシステムやGUIの初期化が実行される前にロードされるので、UI関係や `package-enable-at-startup` `package-user-dir` のようなパッケージ初期化プロセスに影響を与える変数をカスタマイズできます。
+
+[https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el)
 
 #### 2.1.1 起動時間の短縮を図る
 UI関係の設定を、`eary-init.el`へ移すことで起動時間を短縮できます。
