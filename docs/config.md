@@ -1435,7 +1435,7 @@ Emacs26以降は、標準添付の `flymake` が使いやすくなったので�
 
 <p><img src="static/screencast.gif" alt="screencast" /></p> 
 
-### 10. メモ環境
+## 10. メモ環境
 * TPOで使い分けるメモツール
 
 ### 10.1. Howm Mode
