@@ -1248,8 +1248,6 @@ howm や org でメモをとるときに、ゴミファイルが残らないよ�
 | insert | iedit-menu | 確認なしの `kill-buffer` |
 | muhenkan | minibuffer-keyboard-quit | minibufferを閉じる |
 | S-return | view-mode | view-modeのon/offをトグル表示 |
-| F5 | kill-this-buffer | 確認なしの `kill-buffer` |
-| F5 | kill-this-buffer | 確認なしの `kill-buffer` |
 
 ### 9.2 [magit]
 
