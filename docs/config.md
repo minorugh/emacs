@@ -1333,6 +1333,8 @@ If region isn't selected, post from the buffer."
 
 ![screencast](https://github.com/minorugh/emacs.d/blob/main/docs/screencast.gif) 
 
+<p><img src="screencast.gif" alt="screencast" /></p> 
+
 ## 10. メモ環境
 `Org-mode` `howm-mode` `open-junk-file` をTPOで使い分けします。
 
