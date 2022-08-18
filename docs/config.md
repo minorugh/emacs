@@ -1248,14 +1248,7 @@ howm や org でメモをとるときに、ゴミファイルが残らないよ�
 | insert | iedit-menu | 文字列の置換え |
 | muhenkan | minibuffer-keyboard-quit | minibufferを閉じる |
 
-### 9.2 [magit]
-
-magit status の画面は、デフォルトでは `other-window` に表示されますが、フルフレームで表示されるようにカスタマイズしています。
-
-```emacs-lisp
-(setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
-```
-### 9.3. gist-from-buffer
+### 9.2. Gist インターフェイス
 [`gist.el`](https://github.com/defunkt/gist.el) は、なにげに使いづらく、ローカルで管理する必要も感じないので簡単な関数を作りました。
 
 Emacsから使うためには、`gist` をinstallしておく必要があります。
@@ -1300,6 +1293,8 @@ If region isn't selected, post from the buffer."
 	  (compile (concat "gist -od " (gist-description) " " file)))
 	(delete-other-windows))
 ```
+### 9.3. [flymake] 構文エラー表示
+
 
 ### 9.4. [quickrun.el] お手軽ビルド
 カレントバッファで編集中のソースコードをビルド・実行して別バッファに結果を得ます。
@@ -1309,8 +1304,34 @@ If region isn't selected, post from the buffer."
   :ensure t
   :bind ("<f5>" . quickrun))
 ```
-### 9.4. [eagy-hugo] マルチブログ管理
 
+### 9.5. [magit.el] Gitクライアント
+`magit status` の画面は、デフォルトでは `other-window` に表示されますが、フルフレームで表示されるようにカスタマイズしています。
+
+```emacs-lisp
+(leaf magit
+  :ensure t
+  :bind (("M-g s" . magit-status)
+		 ("M-g b" . magit-blame)
+		 ("M-g t" . git-timemachine-toggle))
+  :hook (magit-post-refresh-hook . diff-hl-magit-post-refresh)
+  :custom (transient-history-file . "~/.emacs.d/tmp/transient-history")
+  :init
+  (leaf diff-hl	:ensure t
+	:hook ((after-init-hook . global-diff-hl-mode)
+		   (after-init-hook . diff-hl-margin-mode)))
+
+  (leaf git-timemachine	:ensure t)
+
+  (leaf browse-at-remote :ensure t
+	:custom (browse-at-remote-prefer-symbolic . nil)))
+(setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+```
+
+### 9.4. [eagy-hugo] マルチブログ管理
+[easy-hugo.el](https://github.com/masasam/emacs-easy-hugo) は、Hugoで作成されたブログを書くための Emacs メジャー モードです。
+
+![Alt Text](https://github.com/masasam/emacs-easy-hugo/blob/master/image/screencast.gif) 
 
 ## 10. メモ環境
 `Org-mode` `howm-mode` `open-junk-file` をTPOで使い分けします。
