@@ -38,9 +38,7 @@
 		 ("C-x 2" . my:split-window-below)
 		 ("C-x 1" . my:delete-other-windows)
 		 ("C-x 0" . my:delete-window)
-		 ("<C-return>" . window-swap-states)
-		 ("<next>" . my:scroll-other-window)
-		 ("<prior>" . my:scroll-other-window-down))
+		 ("<C-return>" . window-swap-states))
   :init
   (defun other-window-or-split ()
 	"With turn on dimmer."
@@ -76,8 +74,13 @@
 	"Kill all other buffers."
 	(interactive)
 	(mapc 'kill-buffer (delq (current-buffer) (buffer-list)))
-	(message "killl-other-buffers!"))
+	(message "killl-other-buffers!")))
 
+
+(leaf *my:scroll-other-window
+  :bind (("<next>" . my:scroll-other-window)
+		 ("<prior>" . my:scroll-other-window-down))
+  :init
   (defun my:scroll-other-window ()
 	"If there are two windows, `scroll-other-window'."
 	(interactive)

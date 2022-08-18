@@ -1054,6 +1054,13 @@ Built-in の `paren.el` が利用できる。
 	(imenu-list-focus-after-activation . t)))
 ```
 
+`counsel-css.el` を導入すると便利です。
+```elisp
+(leaf counsel-css
+  :ensure t
+  :hook (css-mode-hook . counsel-css-imenu-setup))
+```
+
 ### 6.13. [prescient.el] リスト項目の並び替えとイニシャル入力機能（ivy and company）
 コマンド履歴を保存、コマンドのイニシャル入力を可能にする。
 
@@ -1081,6 +1088,13 @@ Built-in の `paren.el` が利用できる。
 ```
 
 ### 6.15. [dimmer.el] 現在のバッファ以外の輝度を落とす
+[takaxp.github.io](https://takaxp.github.io/init.html#org8ba0784e) の設定をそのままパクリました。
+on/off できるのが快適です。
+
+`global` 設定にすると多くのシーンでDisable対策の設定が必要になり面倒です。下記の通り発想転換すれば呪いから逃れることができます。
+
+* 画面分割を発動するときに `dimmer-on`
+* 画面分割を閉じるときに `dimmer-off`
 
 ```elisp
 (leaf dimmer
@@ -1293,10 +1307,53 @@ If region isn't selected, post from the buffer."
 	  (compile (concat "gist -od " (gist-description) " " file)))
 	(delete-other-windows))
 ```
-### 9.3. [flymake] 構文エラー表示
+### 9.3. [company.el] 自動補完機能
+[yasinippets] との連携機能が便利です。
 
+```elisp
+(leaf company
+  :ensure t
+  :hook (after-init-hook . global-company-mode)
+  :bind (("C-<return>" . company-complete)
+		 ("C-<tab>" . company-yasnippet)
+		 (:company-active-map
+		  ("<tab>" . company-complete-common-or-cycle)
+		  ("<backtab>" . company-select-previous)
+		  ("<muhenkan>" . company-abort)))
+  :custom
+  `((company-transformers . '(company-sort-by-backend-importance))
+	(company-idle-delay . 0)
+	(company-require-match . 'never)
+	(company-minimum-prefix-length . 2)
+	(company-selection-wrap-around . t)
+	(completion-ignore-case . t)
+	(company-dabbrev-downcase . nil))
+  :config
+  (defvar company-mode/enable-yas t
+	"Enable yasnippet for all backends.")
+  (defun company-mode/backend-with-yas (backend)
+	(if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+		backend
+	  (append (if (consp backend) backend (list backend))
+			  '(:with company-yasnippet))))
+  (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends)))
+```
 
-### 9.4. [quickrun.el] お手軽ビルド
+### 9.4. [flymake] 構文エラー表示
+Emacs26以降は、標準添付の `flymake` が使いやすくなったので、`flycheck` から移行しました。
+
+```elisp
+(leaf flymake
+  :hook (prog-mode-hook . flymake-mode)
+  :config
+  (remove-hook 'flymake-diagnostic-functions 'flymake-proc-legacy-flymake)
+  (leaf flymake-posframe
+	:el-get Ladicle/flymake-posframe
+	:hook (flymake-mode-hook . flymake-posframe-mode)
+	:custom (flymake-posframe-error-prefix . " ")))
+```
+
+### 9.5. [quickrun.el] お手軽ビルド
 カレントバッファで編集中のソースコードをビルド・実行して別バッファに結果を得ます。
 
 ```emacs-lisp
@@ -1305,7 +1362,7 @@ If region isn't selected, post from the buffer."
   :bind ("<f5>" . quickrun))
 ```
 
-### 9.5. [magit.el] Gitクライアント
+### 9.6. [magit.el] Gitクライアント
 `magit status` は、デフォルトでは `other-window` に表示されますが、フルフレームで表示されるようにしました。
 
 ```emacs-lisp
@@ -1328,7 +1385,27 @@ If region isn't selected, post from the buffer."
 (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
 ```
 
-### 9.4. [eagy-hugo.el] マルチブログ管理
+### 9.7. [counsel-tramp.el] 
+
+```elisp
+(leaf counsel-tramp
+  :ensure t
+  :custom
+  `((tramp-persistency-file-name . ,"~/.emacs.d/tmp/tramp")
+	(tramp-default-method . "scp")
+	(counsel-tramp-custom-connections
+	 . '(/scp:xsrv:/home/minorugh/gospel-haiku.com/public_html/)))
+  :config
+  (defun my:tramp-quit ()
+	"Quit tramp, if tramp connencted."
+	(interactive)
+	(when (get-buffer "*tramp/scp xsrv*")
+	  (tramp-cleanup-all-connections)
+	  (counsel-tramp-quit)
+	  (message "Tramp Quit!"))))
+```
+
+### 9.7. [eagy-hugo.el] マルチブログ管理
 [easy-hugo.el](https://github.com/masasam/emacs-easy-hugo) は、Hugoで作成されたブログを書くための Emacs メジャー モードです。
 
 <p><img src="screencast.gif" alt="screencast" /></p> 
@@ -1508,208 +1585,121 @@ Emacsを再起動しても`*scratch*` バッファーの内容が消えないよ
 
 ### 11.2. 複数フレーム対応
 
-`follow-mode`
+#### 11.2.1. Dimmer-Mode との連携
+* 同じバッファーを分割したときは、`follow-mode` にする。
+* 画面分割したときは、`dimmer-mode-on` にする。
+* 画面分割を閉じたときは、`dimmer-mode-off` にする。
+
+```elisp
+(leaf *sprit-window-configurations
+  :bind (("C-q" . other-window-or-split)
+		 ("C-x 2" . my:split-window-below)
+		 ("C-x 1" . my:delete-other-windows)
+		 ("C-x 0" . my:delete-window)
+		 ("<C-return>" . window-swap-states))
+  :init
+  (defun other-window-or-split ()
+	"With turn on dimmer."
+	(interactive)
+	(when (one-window-p)
+	  (split-window-horizontally)
+	  (follow-mode 1)
+	  (dimmer-mode 1))
+	(other-window 1))
+
+  (defun my:split-window-below ()
+	"With turn on dimmer."
+	(interactive)
+	(split-window-below)
+	(follow-mode 1)
+	(dimmer-mode 1))
+
+  (defun my:delete-window ()
+	"With turn off dimmer."
+	(interactive)
+	(delete-window)
+	(follow-mode -1)
+	(dimmer-mode -1))
+
+  (defun my:delete-other-windows ()
+	"With turn off dimmer."
+	(interactive)
+	(delete-other-windows)
+	(follow-mode -1)
+	(dimmer-mode -1))
+
+  (defun kill-other-buffers ()
+	"Kill all other buffers."
+	(interactive)
+	(mapc 'kill-buffer (delq (current-buffer) (buffer-list)))
+	(message "killl-other-buffers!"))
+```
+#### 11.2.2. Scrool-other-Window
+`deactive` なwindowをスクロールさせるための設定。
+
+一画面のとき `<next>` / `<prior>` は、PgUp / PgDn として使うが、画面分割のときだけ `other-Window` に対応させている。
+標準機能の `C-v: scroll-uo-command` / `M-v: scroll-down-command` を使い分ければ快適に二画面同時閲覧が可能となる。
+
+```elisp
+(leaf *my:scroll-other-window
+  :bind (("<next>" . my:scroll-other-window)
+		 ("<prior>" . my:scroll-other-window-down))
+  :init
+  (defun my:scroll-other-window ()
+	"If there are two windows, `scroll-other-window'."
+	(interactive)
+	(when (one-window-p)
+	  (scroll-up))
+	(scroll-other-window))
+
+  (defun my:scroll-other-window-down ()
+	"If there are two windows, `scroll-other-window-down'."
+	(interactive)
+	(when (one-window-p)
+	  (scroll-down))
+	(scroll-other-window-down)))
+```
 
 ### 11.3. [Winner.el] ウインドウ構成の履歴を辿る
+* ビルトインの `winner.el` を使います．
+
+ウィンドウ分割状況と各ウィンドウで表示していたバッファの履歴を辿ることができます。
+`winner-undo` で直前の状態に戻せます。例えば、誤って `C-x 0` で分割ウィンドウを閉じた時でも即座に元の状態に戻すことが可能です。
 
 ### 11.4. [doom-modeline] モードラインをリッチにする
 
-### 11.5. [popwin.el] ポップアップウィンドウの制御 
-
-
-
-
-### F5: quickrun
-open-junk-fileで作成したショートコードをバッファーで開いた状態で、即試運転できるすぐれものです。
-
-```emacs-lisp
-(leaf quickrun
+```elisp
+(leaf doom-modeline
   :ensure t
-  :bind ("<f5>" . quickrun))
-```
-### F6: select-counsel-command
-
-counselのキーバンドはあまりに多すぎて覚えられません。
-
-`Mx counsel "^counsel "` することでミニバファーに表示される一覧から選ぶと便利です。
-
-![Alt Text](https://live.staticflickr.com/65535/51418255432_9a79b6db79_b.jpg) 
-
-```emacs-lisp
-(defun select-counsel-command ()
-  "Narrow the only counsel-command in `M-x'."
-  (interactive)
-  (counsel-M-x "^counsel "))
-  (bind-key "<f6>" 'select-counsel-command)
-```
-
-### F7: calendar
-作業中にカレンダーをチラ見したいときもあります。
-
-Calfwまでは必要ないので標準機能の calendarを使っています。F7を押すことで、表示/非表示をトグルします。
-`japanese-holidays` を installし [土日、今日] を強調させています。
-
-![Alt Text](https://live.staticflickr.com/65535/48659029836_932b26293e_b.jpg) 
-
-```emacs-lisp
-(eval-after-load "calendar"
-  (leaf japanese-holidays
-	:ensure t :require t
-	:bind (("<f7>" . calendar)
-		   (:calendar-mode-map
-			("<f7>" . quit-window)))
-	:config
-	(setq calendar-holidays
-		  (append japanese-holidays holiday-local-holidays holiday-other-holidays))
-	(setq calendar-mark-holidays-flag t) ; Show holidays on calendar
-	(setq japanese-holiday-weekend '(0 6)     ; Show Saturdays and Sundays as holidays
-		  japanese-holiday-weekend-marker     ; Saturday is displayed in light blue
-		  '(holiday nil nil nil nil nil japanese-holiday-saturday))
-	(add-hook 'calendar-today-visible-hook 'japanese-holiday-mark-weekend)
-	(add-hook 'calendar-today-invisible-hook 'japanese-holiday-mark-weekend)
-	(add-hook 'calendar-today-visible-hook 'calendar-mark-today)))
-```
-
-### F8: google-translate
-
-Emacsの google-translateがときどき動かなくなることが多くなりました。
-
-やむなくプラウザに出力する `google-translate-region` という関数や WEBの翻訳ページを開くための `google-translate-web`  という簡単な関数を作りました。これらのコマンドをミニバッファーの一覧から選べるように `F8` に割り当てました。
-
-![Alt Text](https://live.staticflickr.com/65535/51424994862_f260aa163f_b.jpg) 
-
-
-```emacs-lisp
-(leaf google-translate
-  :ensure t
-  :bind (("C-t" . google-translate-auto)
-		 ("<f8>" . select-google-translate))
+  :hook (after-init-hook . doom-modeline-mode)
+  :custom
+  (doom-modeline-icon . t)
+  (doom-modeline-major-mode-icon . nil)
+  (doom-modeline-minor-modes . nil)
   :config
-  (defun google-translate-auto ()
-	"Automatically recognize and translate Japanese and English."
-	(interactive)
-	(if (use-region-p)
-		(let ((string (buffer-substring-no-properties (region-beginning) (region-end))))
-		  (deactivate-mark)
-		  (if (string-match (format "\\`[%s]+\\'" "[:ascii:]")
-							string)
-			  (google-translate-translate
-			   "en" "ja"
-			   string)
-			(google-translate-translate
-			 "ja" "en"
-			 string)))
-	  (let ((string (read-string "Google Translate: ")))
-		(if (string-match
-			 (format "\\`[%s]+\\'" "[:ascii:]")
-			 string)
-			(google-translate-translate
-			 "en" "ja"
-			 string)
-		  (google-translate-translate
-		   "ja" "en"
-		   string)))))
-
-  ;; Fix error of "Failed to search TKK"
-  (defun google-translate--get-b-d1 ()
-  	"Search TKK."
-  	(list 427110 1469889687))
-
-  (defun google-translate-region ()
-	"Open google translate with chromium."
-	(interactive)
-	(if (use-region-p)
-		(let ((string (buffer-substring-no-properties (region-beginning) (region-end))))
-		  (deactivate-mark)
-		  (if (string-match (format "\\`[%s]+\\'" "[:ascii:]")
-							string)
-			  (browse-url (concat "https://translate.google.com/?source=gtx#en/ja/"
-								  (url-hexify-string string)))
-			(browse-url (concat "https://translate.google.com/?source=gtx#ja/en/"
-								(url-hexify-string string)))))
-	  (let ((string (read-string "Google Translate: ")))
-		(if (string-match
-			 (format "\\`[%s]+\\'" "[:ascii:]")
-			 string)
-			(browse-url
-			 (concat "https://translate.google.com/?source=gtx#en/ja/" (url-hexify-string string)))
-		  (browse-url
-		   (concat "https://translate.google.com/?source=gtx#ja/en/" (url-hexify-string string)))))))
-
-  (defun google-translate-web ()
-	"Open Google-chrome for translate page."
-	(interactive)
-	(browse-url "https://translate.google.co.jp/?hl=ja"))
-
-  (defun select-google-translate ()
-	"Select google translat command."
-	(interactive)
-	(counsel-M-x "google-translate ")))
-```
-
-### F9: display-line-numbers-mode
-行番号表示をトグルします。
-
-```emacs-lisp
-(leaf display-line-numbers
-  :bind ("<f9>" . display-line-numbers-mode)
-  :hook ((prog-mode-hook text-mode-hook) . display-line-numbers-mode))
-```
-### F10: neotree-toggle
-
-neotreeの表示をトグルします。
-
-```emacs-lisp
-(leaf neotree
-  :ensure t
-  :bind (("<f10>" . neotree-find)
-		 (:neotree-mode-map
-		  ("RET" . neotree-enter-hide)
-		  ("a" . neotree-hidden-file-toggle)
-		  ("<left>" . neotree-select-up-node)
-		  ("<right>" . neotree-change-root)
-		  ("<f10>" . neotree-toggle)))
+  (line-number-mode 0)
+  (column-number-mode 0)
+  (doom-modeline-def-modeline 'main
+    '(bar window-number matches buffer-info remote-host buffer-position parrot selection-info)
+    '(misc-info persp-name lsp github debug minor-modes input-method major-mode process vcs checker))
   :init
-  (setq-default neo-keymap-style 'concise)
-  (setq neo-create-file-auto-open t)
-  :config
-  (doom-themes-neotree-config))
+  (leaf nyan-mode
+	:ensure t
+	:config
+	(nyan-mode 1)
+	(nyan-start-animation)))
 ```
-### F11: toggle-frame-fullscreen
-Emacsの標準機能なので、そのまま使います。
 
-普段あまり使いませんが、解像度の小さいサブ機（Thinkpad X250）で作業するときなどには有用です。
+### 11.5. [popwin.el] ポップアップウィンドウの制御 
+`anything` 時代はお世話になりましたが、最近はあまりつかってません。
 
-### F12: my:darkroom-toggle
-
-もっともよく使う執筆モードで、画面表示が以下のように変わります。
-
-* フルスクリーンモード
-* 行番号表示を消す
-* 行間を少し広くする（お好みで…）
-
-![Alt Text](https://live.staticflickr.com/65535/51419995320_384abc0671_b.jpg) 
-
-```emacs-lisp
-(leaf darkroom
+```elisp
+(leaf popwin
   :ensure t
-  :bind ("<f12>" . my:darkroom-mode-in)
-  :config
-  (defun my:darkroom-mode-in ()
-	(interactive)
-	(toggle-frame-fullscreen)
-	(display-line-numbers-mode 0)
-	(setq line-spacing 0.4)
-	(darkroom-mode 1)
-	(bind-key "<f12>" 'my:darkroom-mode-out darkroom-mode-map))
-
-  (defun my:darkroom-mode-out ()
-	(interactive)
-	(darkroom-mode 0)
-	(setq line-spacing 0.1)
-	(display-line-numbers-mode 1)
-	(toggle-frame-fullscreen)))
+  :hook (after-init-hook . popwin-mode))
 ```
+※ `eshell` は使ってました。
+
 ## 12. フォント / 配色関連
 
 ### 12.1 カーソル行に色をつける
