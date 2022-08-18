@@ -1226,11 +1226,30 @@ howm や org でメモをとるときに、ゴミファイルが残らないよ�
 
 ## 9. 開発サポート
 
-### 9.1. dotfiles
-dotfilesとは、ホームディレクトリに置いてあるドット [.] から始まる設定ファイル（.bashrcとか）を管理しているリポジトリのことで、環境再構築に必要なシェルやエディタの設定からアプリケーションの設定まで幅広いものが置かれていて、当然ながら、[.emacs.d] の中身も含まれています。
+### 9.1. 便利キーバインド
+やや邪道的ですが、
 
-<a href="https://minorugh.github.io/docs/dotfiles.html" class="btn">詳細はこちらにまとめました <i class="fa fa-arrow-circle-right"></i></a>
-
+| キーバインド | コマンド                  | 説明 |
+|--------------|---------------------------|------|
+| F1 | emacs help |ivyで提供される便利機能 |
+| F2 | imenu-list-smart-toggle | imenuのサイドバー版 |
+| F3 | filer-current-dir-open | debianのnautilusを開く |
+| F4 | term-current-dir-open | debianのgonome-terminalを開く |
+| F5 | quikuran | 確認なしの `kill-buffer` |
+| F6 | counsel-linux-app | 確認なしの `kill-buffer` |
+| F7 | calendar-toggle | calendarのトグル表示 |
+| F8 | toggle-menu-bar-mode-from-frame | menu-barのトグル表示 |
+| F9 | display-line-numbers-mode | 行番号のトグル表示 |
+| F10 | neotree-toggle | Neotreeのトグル表示 |
+| F11 | トグルフルスクリーン | OS共通の機能 |
+| F12 | my:darkroom-in/out | darkroom-modeのトグル操作 |
+| <home> | kill-this-buffer | 確認なしの `kill-buffer` |
+| <end> | toggle-scratch | `scratch`バッファーのトグル表示 |
+| <insert> | iedit-menu | 確認なしの `kill-buffer` |
+| <muhenkan> | minibuffer-keyboard-quit | minibufferを閉じる |
+| S-<return> | view-mode | view-modeのon/offをトグル表示 |
+| F5 | kill-this-buffer | 確認なしの `kill-buffer` |
+| F5 | kill-this-buffer | 確認なしの `kill-buffer` |
 
 ### 9.2 [magit]
 
