@@ -51,7 +51,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 3. `inits/` のファイル群を読み込み （init-loader 使用）
 ```
 
-### 2.1 [early-init.el] 早期初期化ファイル
+### 2.1 [early-init.el] eary-init を使う
 [`early-init.el`](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el) は、Emacs27から導入されました。 
 
 `init.el` でパッケージシステムやGUIの初期化が実行される前にロードされるので、UI関係や `package-enable-at-startup` `package-user-dir` のようなパッケージ初期化プロセスに影響を与える変数をカスタマイズできます。
