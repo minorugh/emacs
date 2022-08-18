@@ -1745,7 +1745,7 @@ Cicaフォントは、Hack、DejaVu Sans Mono、Rounded Mgen+、Noto Emoji等の
 * Linux 環境でのインストールの方法です。
 
 [Cicaダウンロードオフィシャルページ](https://github.com/miiton/Cica/releases/tag/v5.0.3)にある最新の `Cica v5.03` は、
-`page-break-lines` がオーバーフローして折り返されてしまいます。`page-break-line-char` の仕様が微妙に異なるからかもしれません。
+`page-break-lines` で表示が乱れます。`Cica v5.01` は大丈夫です。
 
 1. [Cica_v5.0.1のダウンロードページ](https://github.com/SSW-SCIENTIFIC/Cica/releases)から、
 ([Cica_v5.0.1.zip](https://github.com/SSW-SCIENTIFIC/Cica/releases/download/v5.0.1-no-glyph-mod/Cica-v5.0.1.zip)) をダウンロードします。
