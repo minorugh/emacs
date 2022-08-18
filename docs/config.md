@@ -42,16 +42,15 @@ nav_order: 1
 
 ## 2. 起動設定
 * Emacs-27導入にあわせて `early-init.el` を設定しました。 
+* ブートシーケンスは以下のとおり。
 
-ブートシーケンスは以下のとおり。
 1. `early-init.el` の読み込み
 2. `init.el` の読み込み
 3. `inits/` のファイル群を読み込み （init-loader 使用）
 
 ### 2.1. [early-init.el] eary-init.el を使う
-[https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el)
-
-[`early-init.el`](https://ayatakesi.github.io/emacs/28.1/html/Early-Init-File.html) は、Emacs27から導入されました。 
+* [`early-init.el`](https://ayatakesi.github.io/emacs/28.1/html/Early-Init-File.html) は、Emacs27から導入されました。 
+* [https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el)
 
 `init.el` でパッケージシステムやGUIの初期化が実行される前にロードされるので、UI関係や `package-enable-at-startup` `package-user-dir` のようなパッケージ初期化プロセスに影響を与える変数をカスタマイズできます。
 
@@ -71,7 +70,7 @@ GC の閾値を最大にしておくことで GC を実質止めることがで�
 ```
 
 #### 2.1.3. 画面のチラつきを抑える
-初期化ファイル読み込みのプロセスで画面がチラつくのを抑制しています。
+* 初期化ファイル読み込みのプロセスで画面がチラつくのを抑制しています。
 
 ```elisp
 ;; Suppress flashing at startup
