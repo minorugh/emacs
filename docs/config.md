@@ -1244,8 +1244,8 @@ howm や org でメモをとるときに、ゴミファイルが残らないよ�
 | F11 | toggle-frame-fullscreen | Emacsの標準機能 |
 | F12 | darkroom-mode | darkroom-modeのトグル操作 |
 | home | open-dashboard | dashboardの再表示 |
-| end | toggle-scratch | `scratch`バッファーのトグル表示 |
-| insert | iedit-menu | 確認なしの `kill-buffer` |
+| end | toggle-scratch | `scratch`のトグル表示 |
+| insert | iedit-menu | 文字列の置き換え |
 | muhenkan | minibuffer-keyboard-quit | minibufferを閉じる |
 
 ### 9.2 [magit]
