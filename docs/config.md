@@ -318,8 +318,9 @@ If the region is inactive, to kill whole line."
 ```
 
 ### 3.7. C-x C-c でEmacsを終了させないようにする
-Emacsを終了させることはまずないので、再起動コマンドに変更しています。
-[`restart-emacs`](https://github.com/iqbalansari/restart-emacs) はMELPAからインストールできます。
+* 終了させることはまずないので、再起動コマンドに変更しています。
+* [`restart-emacs`](https://github.com/iqbalansari/restart-emacs) はMELPAからインストールできます。
+
 ```emacs-lisp
 (leaf restart-emacs
   :ensure t
