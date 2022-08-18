@@ -59,7 +59,7 @@ GC の閾値を最大にしておくことで GC を実質止めることがで�
 ```elisp
 (setq gc-cons-threshold most-positive-fixnum)
 ```
-#### 2.1.2 フレーム設定
+#### 2.1.2 初期フレーム設定
 これらの設定を、`eary-init.el`へ移すことで起動時間を短縮できます。
 
 ```elisp
