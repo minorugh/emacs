@@ -1,11 +1,10 @@
 title: minoruGH
-description: Port of the Read the Docs theme to Jekyll to use with GitHub Pages.
 remote_theme: rundocs/jekyll-rtd-theme
-# remote_theme: carlosperate/jekyll-theme-rtd
 
 # Theme settings:
 site_author: minoru yamada
 repo_url: "https://github.com/minorugh/emacs.d/"
+
 edit_on_github: false
 github_docs_folder: true
 sticky_navigation: true

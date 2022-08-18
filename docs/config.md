@@ -56,7 +56,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 
 `init.el` でパッケージシステムやGUIの初期化が実行される前にロードされるので、UI関係や `package-enable-at-startup` `package-user-dir` のようなパッケージ初期化プロセスに影響を与える変数をカスタマイズできます。
 
-### 2.2 [eary-init.el] 起動時間の短縮を図る
+### 2.1.1 [eary-init.el] 起動時間の短縮を図る
 UI関係の設定を、`eary-init.el`へ移すことで起動時間を短縮できます。
 
 ```elisp
@@ -66,7 +66,7 @@ UI関係の設定を、`eary-init.el`へ移すことで起動時間を短縮で�
 (push '(vertical-scroll-bars) default-frame-alist)
 ```
 
-### 2.3 [eary-init.el] チラツキを抑える
+### 2.1.2 [eary-init.el] チラツキを抑える
 設定ファイルの読み込み段階で画面がチラチラ変化するのを抑制しています。
 
 ```elisp
@@ -85,14 +85,14 @@ UI関係の設定を、`eary-init.el`へ移すことで起動時間を短縮で�
 (setq byte-compile-warnings '(cl-functions))
 (custom-set-faces '(default ((t (:background "#282a36")))))
 ```
-### 2.4 [leaf.el] でラクラクinit.el整理
+### 2.2 [leaf.el] でラクラクinit.el整理
 `use-package` から `leaf` に乗り換えました。
 
 `init.el` は、`leaf` を開発された [@conao3](https://qiita.com/conao3) さんの下記Tipsの丸写しです。
 
 [Emacs入門から始めるleaf.el入門](https://qiita.com/conao3/items/347d7e472afd0c58fbd7)
 
-### 2.5 [init.el] 起動時間の短縮を図る
+### 2.3 [init.el] 起動時間の短縮を図る
 Magic File Name を一時的に無効にすることで、起動時間の短縮を図る設定をしています。
 
 GC設定とともに設定ファイル読み込み後に正常値に戻します。
@@ -116,7 +116,7 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
             (setq gc-cons-threshold 800000)))
 ```
 
-### 2.6 [init-loader] 初期設定ファイルを読み込む
+### 2.4 [init-loader] 初期設定ファイルを読み込む
 [`init-loader.el`](https://github.com/emacs-jp/init-loader/) は、設定ファイル群のローダーです。 指定されたディレクトリから構成ファイルをロードします。これにより、構成を分類して複数のファイルに分けることができます。
 
 `init-loader` には、エラーが出た設定ファイルは読み込まれない...という特徴があり原因究明がしやすくなるというメリットがある。またログの出力機能を備えていることもメリットとして挙げられる。
@@ -132,7 +132,7 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
   (init-loader-load))
 ```
 
-### 2.7 [mini-init.el] テスト用初期化ファイル
+### 2.5 [mini-init.el] テスト用初期化ファイル
 [`mini-init.el`](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/mini-init.el) は、最小限の emacs を起動させるための設定です。
 
 新しいパッケージを試したり設定をテストしたり、エラー等で Emacsが起動しない場合などに使用します。
