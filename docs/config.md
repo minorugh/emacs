@@ -1408,6 +1408,8 @@ Emacs26以降は、標準添付の `flymake` が使いやすくなったので�
 ### 9.7. [eagy-hugo.el] マルチブログ管理
 [easy-hugo.el](https://github.com/masasam/emacs-easy-hugo) は、Hugoで作成されたブログを書くための Emacs メジャー モードです。
 
+[https://github.com/minorugh/emacs.d/blob/main/inits/60_easy-hugo.el](https://github.com/minorugh/emacs.d/blob/main/inits/60_easy-hugo.el)
+
 <p><img src="static/screencast.gif" alt="screencast" /></p> 
 
 ## 10. メモ環境
