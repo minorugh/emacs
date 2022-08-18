@@ -26,7 +26,9 @@
 ;; Gist configuration
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (leaf *gist-configurations
-  :config
+  :bind (("s-g p" . gist-region-or-buffer)
+		 ("s-g c" . my:chromium-gist))
+  :init
   (defun gist-description ()
 	"Add gist description."
 	(shell-quote-argument (read-from-minibuffer "Add gist description: ")))
@@ -55,7 +57,7 @@ If region isn't selected, post from the buffer."
 	  (compile (concat "gist -od " (gist-description) " " file)))
 	(delete-other-windows))
 
-  (defun chromium-gist ()
+  (defun my:chromium-gist ()
 	"Open GitHub Gist page with chromium."
 	(interactive)
 	(browse-url "https://gist.github.com/minorugh")))

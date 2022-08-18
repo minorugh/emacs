@@ -12,13 +12,13 @@ nav_order: 1
 * 本ドキュメントは、[@takaxp](https://twitter.com/takaxp)さんの了解を得て [takaxp.github.io/](https://takaxp.github.io/init.html) の記事を下敷きにした模倣版です。
 ```
 
-### 1.1 動作確認環境
+### 1.1. 動作確認環境
 以下の環境で使用しています。が、動作を保証するものではありません。
 
 * Debian 11.4  86_64 GNU/Linux
 * 自分でビルドした Emacs 27.2.50
 
-### 1.2 デレクトリ構成
+### 1.2. デレクトリ構成
 設定ファイルの構成は下記のとおりです。
 
 ```
@@ -47,19 +47,19 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 2. `init.el` の読み込み
 3. `inits/` のファイル群を読み込み （init-loader 使用）
 
-### 2.1 [early-init.el] eary-init.el を使う
+### 2.1. [early-init.el] eary-init.el を使う
 [https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el)
 
 [`early-init.el`](https://ayatakesi.github.io/emacs/28.1/html/Early-Init-File.html) は、Emacs27から導入されました。 
 
 `init.el` でパッケージシステムやGUIの初期化が実行される前にロードされるので、UI関係や `package-enable-at-startup` `package-user-dir` のようなパッケージ初期化プロセスに影響を与える変数をカスタマイズできます。
 
-#### 2.1.1 GCを減らす
+#### 2.1.1. GCを減らす
 GC の閾値を最大にしておくことで GC を実質止めることができます。これもとりあえず書いておけば速くなる系なのでおすすめです。
 ```elisp
 (setq gc-cons-threshold most-positive-fixnum)
 ```
-#### 2.1.2 初期フレーム設定
+#### 2.1.2. 初期フレーム設定
 これらの設定を、`eary-init.el`へ移すことで起動時間を短縮できます。
 
 ```elisp
@@ -69,7 +69,7 @@ GC の閾値を最大にしておくことで GC を実質止めることがで�
 (push '(vertical-scroll-bars) default-frame-alist)
 ```
 
-#### 2.1.3 画面のチラつきを抑える
+#### 2.1.3. 画面のチラつきを抑える
 初期化ファイル読み込みのプロセスで画面がチラつくのを抑制しています。
 
 ```elisp
@@ -89,12 +89,12 @@ GC の閾値を最大にしておくことで GC を実質止めることがで�
 (custom-set-faces '(default ((t (:background "#282a36")))))
 ```
 
-### 2.2 [init.el] Emacs27に対応
+### 2.2. [init.el] Emacs27に対応
 `early.init.el` とともにEmacs27に対応させました。
 
 [https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el) 
 
-#### 2.2.1 初期フレームの設定
+#### 2.2.1. 初期フレームの設定
 Magic File Name を一時的に無効にすることで、起動時間を短縮できます。
 
 GC設定とともに設定ファイル読み込み後に正常値に戻します。
@@ -118,7 +118,7 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
             (setq gc-cons-threshold 800000)))
 ```
 
-#### 2.2.2 leaf.elを使う
+#### 2.2.2. leaf.elを使う
 `use-pacage.el` を使っていましたが、
 [@conao3](https://qiita.com/conao3) さんの開発された `leaf.el` に触発されて全面的に書き直しました。
 
@@ -145,7 +145,7 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
 ```
 
 
-#### 2.2.3 init-loader を使う
+#### 2.2.3. init-loader を使う
 [`init-loader.el`](https://github.com/emacs-jp/init-loader/) は、設定ファイル群のローダーです。 指定されたディレクトリから構成ファイルをロードします。これにより、構成を分類して複数のファイルに分けることができます。
 
 `init-loader` には、エラーが出た設定ファイルは読み込まれない...という特徴があり原因究明がしやすくなるというメリットがある。またログの出力機能を備えていることもメリットとして挙げられる。
@@ -161,7 +161,7 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
   (init-loader-load))
 ```
 
-#### 2.2.4 [test.el] テスト用の最小初期化ファイル
+#### 2.2.4. [test.el] テスト用の最小初期化ファイル
 最小限の emacs を起動させるための設定です。
 
 [https://github.com/minorugh/dotfiles/blob/main/.emacs.d/test.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/test.el) は、
@@ -179,7 +179,7 @@ alias eq = 'emacs -q -l ~/.emacs.d/test.el'
 ## 3. コア設定
 Emacs を操作して日本語文書編集するうえで必要な設定。
 
-### 3.1 言語 / 文字コード
+### 3.1. 言語 / 文字コード
 シンプルにこれだけです。
 
 ``` emacs-lisp
@@ -187,7 +187,7 @@ Emacs を操作して日本語文書編集するうえで必要な設定。
 (prefer-coding-system 'utf-8)
 ```
 
-### 3.2 [emacs-mozc] 日本語入力
+### 3.2. [emacs-mozc] 日本語入力
 Debian11 にインストールした Emacs上で [`emacs-mozc`](https://wiki.debian.org/JapaneseEnvironment/Mozc) を使っています。
 
 Emacsをソースからビルドするときに `--without-xim` しなかったので、インライン XIMでも日本語入力ができてしまいます。
@@ -244,13 +244,13 @@ Emacsで文章編集中にShellコマンドで [`mozc-tool`](https://www.mk-mode
 	(delete-other-windows)))
 ```
 
-### 3.3 [Mozc] 辞書の共有
+### 3.3. [Mozc] 辞書の共有
 Linux環境でMozcを使うメリットは辞書の共有です。
 
 1. Emacs以外のコンテンツでも同じMozc辞書を使うのでEmacsから単語登録しておけば全てのコンテンツで有効になる。
 2. 辞書ファイルをDropboxなどのクラウドに置くことで複数のマシンで共有できる。
 
-#### 3.3.1 Dropboxで辞書を共有する
+#### 3.3.1. Dropboxで辞書を共有する
 やり方は簡単です。
 
 1. Dropboxに `~/Dropbox/mozc` フォルダを新規作成します。
@@ -267,11 +267,11 @@ mozc_copy:
 	ln -vsfn ~/Dropbox/mozc/.mozc ~/.mozc
 ```
 
-#### 3.3.2 辞書共有の問題点
+#### 3.3.2. 辞書共有の問題点
 Dropboxに保存された辞書ファイルを複数マシンで同時アクセスした場合、複製（競合コピー）がいっぱい作られるという問題があります。
 Google Driveは大丈夫という情報もありますが試せてません。
 
-### 3.4 基本キーバインド
+### 3.4. 基本キーバインド
 標準キーバインドの他に下記を追加しています。 
 
 | キーバインド | コマンド                  | 説明 |
@@ -293,13 +293,13 @@ If the region is inactive, to kill whole line."
 (global-set-key (kbd "C-w") 'my:kill-whoie-line-or-region)
 ```
 
-### 3.5 マウスで選択した領域を自動コピー
+### 3.5. マウスで選択した領域を自動コピー
 マウスで選択すると，勝手にペーストボードにデータが流れます．
 
 ```emacs-lisp
 (setq mouse-drag-copy-region t)
 ```
-### 3.6 compilation buffer を自動的に閉じる
+### 3.6. compilation buffer を自動的に閉じる
 `compile` コマンドをよく使うので実行後は自動で閉じるようにしました。
 
 ```elisp
@@ -319,7 +319,7 @@ If the region is inactive, to kill whole line."
 (setq compilation-scroll-output t)
 ```
 
-### 3.7 C-x C-c でEmacsを終了させないようにする
+### 3.7. C-x C-c でEmacsを終了させないようにする
 Emacsを終了させることはまずないので、再起動コマンドに変更しています。
 [`restart-emacs`](https://github.com/iqbalansari/restart-emacs) はMELPAからインストールできます。
 ```emacs-lisp
@@ -327,7 +327,7 @@ Emacsを終了させることはまずないので、再起動コマンドに変
   :ensure t
   :bind ("C-x C-c" . restart-emacs))
 ```
-### 3.8 [aggressive-indent.el] 即時バッファー整形
+### 3.8. [aggressive-indent.el] 即時バッファー整形
 特定のメジャーモードで、とにかく整形しまくります。
 
 ```elisp
@@ -335,14 +335,14 @@ Emacsを終了させることはまずないので、再起動コマンドに変
   :ensure t
   :hook ((emacs-lisp-mode-hook css-mode-hook) . aggressive-indent-mode))
 ```
-### 3.9  [uniquify.el] 同じバッファ名が開かれた場合に区別する
+### 3.9.  [uniquify.el] 同じバッファ名が開かれた場合に区別する
 ビルトインの `uniquify` を使います。モードラインの表示が変わります。
 
 ```elisp
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 ```
 
-### 3.10 [el-get] パッケージ管理
+### 3.10. [el-get] パッケージ管理
 MELPAをメインに管理していますが、MELPAにないものは`el-get` でGitHubやEmacsWikiからインストールします。
 
 個人用に開発したものも、自分のGitHubリポジトリで管理し`el-get` で読み込んでいます。
@@ -350,7 +350,7 @@ MELPAをメインに管理していますが、MELPAにないものは`el-get` �
 ## 4. カーソル移動
 ブラインドタッチができないので、文字移動、行移動、スクロールは、素直に上下左右の矢印キーと`PgUp` `PgDn` を使っています。
 
-### 4.1 [sequential-command.el] バッファー内のカーソル移動
+### 4.1. [sequential-command.el] バッファー内のカーソル移動
 標準の `C-a` `C-e` を拡張し、バッファーの先頭と最終行への移動を簡単にしてくれます。
 
 [https://github.com/HKey/sequential-command](https://github.com/HKey/sequential-command)
@@ -370,7 +370,7 @@ MELPAから Installできますが、私は HKey氏の改良版を `el-get` で�
 	:hook (emacs-startup-hook . sequential-command-setup-keys)))
 ```
 
-### 4.2 ウインドウ間のカーソル移動
+### 4.2. ウインドウ間のカーソル移動
 `C-c o` でもいいですが，ワンアクションで移動できるほうが楽なので、次のように双方向で使えるように設定しています．
 
 画面分割されていないときは、左右分割して新しいウインドウに移動します。
@@ -387,7 +387,7 @@ MELPAから Installできますが、私は HKey氏の改良版を `el-get` で�
 (global-set-key (kbd "C-q") 'other-window-or-split)
 ```
 
-### 4.3 対応する括弧を選択
+### 4.3. 対応する括弧を選択
 * `C-M-SPC` (mark-sexp) は，カーソル位置から順方向に選択．
 * `C-M-U` (backward-up-list) は，一つ外のカッコの先頭にポイントを移す．
 
@@ -405,7 +405,7 @@ MELPAから Installできますが、私は HKey氏の改良版を `el-get` で�
 (global-set-key (kbd "C-M-9") 'my:jump-brace)
 ```
 
-### 4.4 マーク箇所を遡る
+### 4.4. マーク箇所を遡る
 `C-u C-SPC` で辿れるようになります。
 ```elisp
 (setq set-mark-command-repeat-pop t)
@@ -437,7 +437,7 @@ MELPAから Installできますが、私は HKey氏の改良版を `el-get` で�
 ## 5. 編集サポート
 ファイル編集や入力補助の設定をまとめている。
 
-### 5.1 矩形編集/連番入力
+### 5.1. 矩形編集/連番入力
 24.4 からは、`rectangle-mark-mode` が使えるようになり `C-x SPC` を押下すると矩形モードに入り直感的に矩形選択ができる。
 
 標準の `rect.el` に以下の機能が実装されている。
@@ -448,7 +448,7 @@ MELPAから Installできますが、私は HKey氏の改良版を `el-get` で�
 |矩形先頭に文字を挿入|	C-x r t |
 |矩形を空白に変換する|	C-x r c |
 
-### 5.2 markdownモード
+### 5.2. markdownモード
 [`markdown-mode.el`](https://github.com/jrblevin/markdown-mode) は、Markdown形式のテキストを編集するための主要なモードです。
 
 ```emacs-lisp
@@ -481,7 +481,7 @@ MELPAにはないので`el-get` でインストールします。
         ("C-c C-c k" . livedown-kill)))
 ```
 
-### 5.3 viewモード
+### 5.3. viewモード
 特定の拡張子に対して常に view モードで開きたいときやgzされた elisp ソースを見るときに [view-mode](https://www.emacswiki.org/emacs/ViewMode) を使います。
 
 下記の設定では、`my:auto-view-dirs` に追加したディレクトリのファイルを開くと `view-mode` が常に有効になります．
@@ -641,7 +641,7 @@ If the region is inactive, to kill whole line."
 	  (previous-line))))
 ```
 
-### 5.4 web/htmlモード
+### 5.4. web/htmlモード
 HTML編集をするなら[web-mode](https://github.com/fxbois/web-mode) がお勧めなのですが、私の場合あまり使っていません。
 
 出来上がったHTMLの内容を確認したり部分的に変更したり...という程度の使い方です。
@@ -656,7 +656,7 @@ HTML編集をするなら[web-mode](https://github.com/fxbois/web-mode) がお�
 	(web-mode-code-indent-offset . 2)))
 ```
 
-### 5.5 [darkroom-mode] 執筆モード
+### 5.5. [darkroom-mode] 執筆モード
 [`darkroom.el`](https://github.com/joaotavora/darkroom)  は、画面の余計な項目を最小限にして、文章の執筆に集中できるようにするパッケージです。
 
 [https://github.com/joaotavora/darkroom](https://github.com/joaotavora/darkroom)
@@ -696,7 +696,7 @@ yes/no確認を聞かれるのが煩わしいので `my:revery-buffer-no-confirm
 	(revert-buffer t t)))
 ```
 
-### 5.6 [yatex] YaTexで LaTex編集
+### 5.6. [yatex] YaTexで LaTex編集
 [`yatex.el`](https://github.com/emacsmirror/yatex) は、Emacsの上で動作する LaTeX の入力支援環境です。
 
 ごく一般的な設定例ですが、参考になるとしたら `dviprint-command-format` に `dvpd.sh` というスクリプトを設定して、`YateX.lpr`
@@ -734,7 +734,7 @@ rm *.au* *.dv* *.lo*
 dvipdfmx $1 && open -a Preview.app ${name%.*}.pdf
 ```
 
-### 5.7 [yasunippet] Emacs用のテンプレートシステム
+### 5.7. [yasunippet] Emacs用のテンプレートシステム
 テンプレート挿入機能を提供してくれるやつです。
 ```elisp
 (leaf yasnippet
@@ -757,7 +757,7 @@ dvipdfmx $1 && open -a Preview.app ${name%.*}.pdf
 (global-set-key (kbd "C-<tab>") 'company-yasunippets)
 ```
 
-### 5.8 [iedit] 選択領域を別の文字列に置き換える
+### 5.8. [iedit] 選択領域を別の文字列に置き換える
 [`idet.el`](https://github.com/victorhge/iedit) は、バッファー内の複数箇所を同時に編集するツールです。
 
 同じような機能のものは、複数あるようですが、わたしはこれを愛用しています。
@@ -779,7 +779,7 @@ MELPAからpackage-installするだけで使えます。
   :bind ("<insert>" . iedit-mode))
 ```
 
-### 5.9 [selected] リージョン選択時のアクションを制御
+### 5.9. [selected] リージョン選択時のアクションを制御
 [`selected.el`](https://github.com/Kungsgeten/selected.el) は、選択領域に対するスピードコマンドです。
 
 Emacsバッファーで領域を選択した後、バインドしたワンキーを入力するとコマンドが実行されます。
@@ -800,7 +800,7 @@ Emacsバッファーで領域を選択した後、バインドしたワンキー
 		 ("g" . my:google)))
 ```
 
-### 5.10 [selected] browse-urlで検索サイトで開く
+### 5.10. [selected] browse-urlで検索サイトで開く
 検索結果を browse-url で表示させるユーザーコマンドは、検索 urlのフォーマットとさえわかれば、パッケージツールに頼らずともお好みのマイコマンドを作成できます。
 
 ```emacs-lisp
@@ -829,7 +829,7 @@ Emacsバッファーで領域を選択した後、バインドしたワンキー
 	(buffer-substring-no-properties (region-beginning) (region-end)))
 ```
 
-### 5.11 [selected] IME のオン・オフを自動制御する
+### 5.11. [selected] IME のオン・オフを自動制御する
 selectedコマンドを選択するときは、IMEをOffにしないといけないのですがこれを自動でさせます。
 
 領域を選択し始める時に IMEをオフにして、コマンド発行後に IMEを元に戻すという例が、
@@ -865,7 +865,7 @@ selectedコマンドを選択するときは、IMEをOffにしないといけな
 	   (unless (null my:ime-flag) (my:ime-on)))))
 ```
 
-### 5.12 [swiper-migemo] swiperを migemo化してローマ字入力で日本語を検索
+### 5.12. [swiper-migemo] swiperを migemo化してローマ字入力で日本語を検索
 [`avy-migemo-e.g.swiper.el`](https://github.com/momomo5717/avy-migemo) を使って出来ていたのですが、２年ほど前から更新が止まってしまっていて動きません。
 
 つい最近、avy-migemo を使わない [`swiper-migemo`](https://github.com/tam17aki/swiper-migemo)を GitHubで見つけたので試した処、機嫌よく動いてくれています。
@@ -877,7 +877,7 @@ MELPAにはアップされていないみたいなので el-get で取得して�
   :global-minor-mode t)
 ```
 
-### 5.13 [smartparent] 対応する括弧の挿入をアシスト
+### 5.13. [smartparent] 対応する括弧の挿入をアシスト
 [smartparens.el](https://github.com/Fuco1/smartparens) の設定がいまいちよくわからず、とりあえず次のように設定して今のところ機嫌よく働いている。 
 
 ```elisp
@@ -889,7 +889,7 @@ MELPAにはアップされていないみたいなので el-get で取得して�
   (smartparens-global-mode t))
 ```
 
-### 5.14 [fontawesome] fontawesome utility
+### 5.14. [fontawesome] fontawesome utility
 [`fontawesome.el`](https://github.com/emacsorphanage/fontawesome) は、Emacs での `fontawesome` の入力が簡単に出来るユーティリティです。`helm` や `ivy` とも勝手に連携してくれる。
 
 ```elisp
@@ -901,7 +901,7 @@ MELPAにはアップされていないみたいなので el-get で取得して�
 ## 6. 表示サポート
 ここでは Emacs の UI を変更するようなものを載せている。
 
-### 6.1 対応するカッコをハイライトする
+### 6.1. 対応するカッコをハイライトする
 Built-in の `paren.el` が利用できる。
 
 ```elisp
@@ -913,7 +913,7 @@ Built-in の `paren.el` が利用できる。
 	(show-paren-when-point-in-periphery . t)))
 ```
 
-### 6.2 [whitespace]cleanup-for-spaces
+### 6.2. [whitespace]cleanup-for-spaces
 `whitespace` の設定はシンプルに `show-trailing-whitespace` のみとし、不用意に入ってしまったスペースを削除するための関数を設定しました。
 
 ```emacs-lisp
@@ -939,7 +939,7 @@ Built-in の `paren.el` が利用できる。
 		(delete-blank-lines)))))
 ```
 
-### 6.3 [diff-hl] 編集差分をフレーム端で視覚化
+### 6.3. [diff-hl] 編集差分をフレーム端で視覚化
 編集差分の視覚化は、元々 `git-gutter` が提供している機能です。しかし有効にするとフレームの幅が若干広がってしまうなどの不便さがあったので `diff-hl` に乗り換えました。
 
 ```elisp
@@ -949,7 +949,7 @@ Built-in の `paren.el` が利用できる。
          (after-init-hook . diff-hl-margin-mode)))
 ```
 
-### 6.4 [japanese-holidays] カレンダーをカラフルにする
+### 6.4. [japanese-holidays] カレンダーをカラフルにする
 ビルドインの `holidays` と `japanese-holidays.el`を使います。土日祝日に色を着けます。土曜日と日曜祝日で異なる配色にできます。
 
 ```elisp
@@ -971,7 +971,7 @@ Built-in の `paren.el` が利用できる。
 	(setq calendar-mark-holidays-flag t)))
 ```
 
-### 6.5 [which-key] キーバインドの選択肢をポップアップする
+### 6.5. [which-key] キーバインドの選択肢をポップアップする
 `guide-key.el` の後発、ディスパッチャが見やすく直感的でとても使いやすい。
 
 ```elisp
@@ -981,7 +981,7 @@ Built-in の `paren.el` が利用できる。
   :custom (which-key-max-description-length . 40))
 ```
 
-### 6.6 [all-the-icons.el] フォントでアイコン表示
+### 6.6. [all-the-icons.el] フォントでアイコン表示
 `all-the-icons.el` を使うとバッファ内やモードライン、ミニバッファでアイコンを表示できるようになります。
 
 [domtronn/all-the-icons.el: A utility package to collect various Icon Fonts and propertize them within Emacs.](https://github.com/domtronn/all-the-icons.el)
@@ -998,7 +998,7 @@ Built-in の `paren.el` が利用できる。
 	(all-the-icons-install-fonts t)))
 ```
 
-### 6.7 [all-the-icons-dired]
+### 6.7. [all-the-icons-dired]
 `dired` でファイルのアイコンを表示します。Emacs27以降、MELPA版は白色にしか表示されないので [jtbm37/all-the-icons-dired](https://github.com/jtbm37/all-the-icons-dired) をel-getでインストールしています。
 
 ```elisp
@@ -1008,7 +1008,7 @@ Built-in の `paren.el` が利用できる。
   :hook (dired-mode-hook . all-the-icons-dired-mode))
 ```
 
-### 6.8 [all-the-icons-ivy-rich]
+### 6.8. [all-the-icons-ivy-rich]
 
 ```elisp
 (leaf all-the-icons-ivy-rich
@@ -1016,7 +1016,7 @@ Built-in の `paren.el` が利用できる。
   :hook (after-init-hook . all-the-icons-ivy-rich-mode))
 ```
 
-### 6.9 [all-the-icons-ibuffer]
+### 6.9. [all-the-icons-ibuffer]
 
 ```elisp
 (leaf all-the-icons-ibuffer
@@ -1024,14 +1024,14 @@ Built-in の `paren.el` が利用できる。
   :hook (ibuffer-mode-hook . all-the-icons-ibuffer-mode))
 ```
 
-### 6.10 [ivy-rich]
+### 6.10. [ivy-rich]
 
 ```elisp
 (leaf ivy-rich :ensure t
   :hook (after-init-hook . ivy-rich-mode))
 ```
 
-### 6.11 [amx]
+### 6.11. [amx]
 
 ```elisp
  (leaf amx	:ensure t
@@ -1039,7 +1039,7 @@ Built-in の `paren.el` が利用できる。
 			  (amx-history-length . 20)))
 ```
 
-### 6.12 [imenu-list] サイドバー的にファイル内容の目次要素を表示
+### 6.12. [imenu-list] サイドバー的にファイル内容の目次要素を表示
 [@takaxpさんの改良版/imenu-list](https://github.com/takaxp/imenu-list) を使ってます。 
 
 ![Alt Text](https://live.staticflickr.com/65535/51419973025_01d97fe83b_b.jpg) 
@@ -1054,7 +1054,7 @@ Built-in の `paren.el` が利用できる。
 	(imenu-list-focus-after-activation . t)))
 ```
 
-### 6.13 [prescient.el] リスト項目の並び替えとイニシャル入力機能（ivy and company）
+### 6.13. [prescient.el] リスト項目の並び替えとイニシャル入力機能（ivy and company）
 コマンド履歴を保存、コマンドのイニシャル入力を可能にする。
 
 ```elisp
@@ -1070,7 +1070,7 @@ Built-in の `paren.el` が利用できる。
 	(leaf company-prescient :ensure t :global-minor-mode t)))
 ```
 
-### 6.15 [rainbow-mode]
+### 6.14. [rainbow-mode]
 [`rainbow-mode.el`](https://github.com/emacsmirror/rainbow-mode/blob/master/rainbow-mode.el) は red, greenなどの色名や #aabbcc といったカラーコードから実際の色を表示するマイナーモードです。
 常時表示しているとうざいとケースのあるので、必要なときだけ使えるようにしています。
 
@@ -1080,7 +1080,7 @@ Built-in の `paren.el` が利用できる。
   :bind ("C-c r" . rainbow-mode))
 ```
 
-### 6.16 [dimmer.el] 現在のバッファ以外の輝度を落とす
+### 6.15. [dimmer.el] 現在のバッファ以外の輝度を落とす
 
 ```elisp
 (leaf dimmer
@@ -1107,7 +1107,7 @@ Built-in の `paren.el` が利用できる。
 	  (dimmer-process-all))))
 ```
 
-### 6.17 [swiper.el] 文字列探索とプレビューを同時に行う
+### 6.16. [swiper.el] 文字列探索とプレビューを同時に行う
 `swiper-ting-at-piont` は賢くて便利なのですが、`iserch` の感覚で使うときには迷惑なときもあります。
 
 リージョン選択していないときは、`swiper` として機能するように関数を設定し `C-s` にバインドしています。
@@ -1127,7 +1127,7 @@ If the region isn't selected, `swiper'."
 
 日本では、[smartrep.el](http://sheephead.homelinux.org/2011/12/19/6930/) が有名だったようですが、hydra.elも同様の機能を提供します。
 
-### 7.1 [hydra-menu] 作業選択メニュー 
+### 7.1. [hydra-menu] 作業選択メニュー 
 [`hydra-work-menu`](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-menu.el#L57) には、
 ブログ記事のほかWEB日記や俳句関係のシリーズ記事の追加、編集など、毎日頻繁に開くワークスペースへのショートカットを設定しています。
 
@@ -1141,7 +1141,7 @@ If the region isn't selected, `swiper'."
 
 この２つの hydra は、いわば私の秘書のような役割で、どちらからでも相互にトグルで呼び出せるようにしています。
 
-### 7.2 その他の Hydra 設定
+### 7.2. その他の Hydra 設定
 hydra で工夫するといろんなコマンドのキーバインドを記憶する必要もなく GUI 感覚で操作できるので積極的に使っています。
 
 [hydra-make](https://github.com/minorugh/dotfiles/blob/31fbe8f956d453db9804e60f1a244919c6876689/.emacs.d/inits/20_hydra-make.el#L5) 
@@ -1166,7 +1166,7 @@ Qitta に詳しい記事を書いています。
 
 ## 8. 履歴 / ファイル管理
 
-### 8.1 [auto-save-buffer-enhanced] ファイルの自動保存
+### 8.1. [auto-save-buffer-enhanced] ファイルの自動保存
 
 [auto-save-buffer-enhanced.el](https://github.com/kentaro/auto-save-buffers-enhanced) は、Emacs に本当の自動保存機能を提供します。
 
@@ -1192,7 +1192,7 @@ Tramp-mode と併用すると emacs が固まってしまうことがあるよ�
   (read-scratch-data))
 ```
 
-### 8.2 空になったファイルを自動的に削除
+### 8.2. 空になったファイルを自動的に削除
 
 howm や org でメモをとるときに、ゴミファイルが残らないように時々メンテしています。ファイルを開いて中味を確認してから、一度閉じて dited で削除するというプロセスは手間がかかりすぎます。
 
@@ -1211,7 +1211,7 @@ howm や org でメモをとるときに、ゴミファイルが残らないよ�
 
 ```
 
-### 8.3 [undo-fu] シンプルな undo/redo を提供
+### 8.3. [undo-fu] シンプルな undo/redo を提供
 [undo-fu](https://github.com/emacsmirror/undo-fu)  はシンプルな undo/redo 機能を提供してくれるやつです。
 
 昔はもっと色々できる [undo-tree](https://github.com/apchamberlain/undo-tree.el)  を使っていたけどそっちにバグがあるっぽいので乗り換えました。
@@ -1226,7 +1226,7 @@ howm や org でメモをとるときに、ゴミファイルが残らないよ�
 
 ## 9. 開発サポート
 
-### 9.1 dotfiles
+### 9.1. dotfiles
 dotfilesとは、ホームディレクトリに置いてあるドット [.] から始まる設定ファイル（.bashrcとか）を管理しているリポジトリのことで、環境再構築に必要なシェルやエディタの設定からアプリケーションの設定まで幅広いものが置かれていて、当然ながら、[.emacs.d] の中身も含まれています。
 
 <a href="https://minorugh.github.io/docs/dotfiles.html" class="btn">詳細はこちらにまとめました <i class="fa fa-arrow-circle-right"></i></a>
@@ -1239,24 +1239,67 @@ magit status の画面は、デフォルトでは `other-window` に表示され
 ```emacs-lisp
 (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
 ```
-### 9.3 gist-from-buffer
-ターミナルからコマンドラインで使える `gist` を使って Emacsで開いているバッファーから `gist` できるように関数を作りました。
-`gist -o` とすることで結果の URLをブラウザで開いてくれるので便利です。
+### 9.3. gist-from-buffer
+[`gist.el`](https://github.com/defunkt/gist.el) は、なにげに使いづらく、ローカルで管理する必要も感じないので簡単な関数を作りました。
+
+Emacsから使うためには、`gist` をinstallしておく必要があります。
+
+```sh 
+sudo apt install gist
+```
+`gist -o` とするとポスト後の結果の URLをブラウザで開いてくれるので便利です。
 
 ```emacs-lisp
-(defun gist-from-buffer ()
-	"Gist from current buffer, then open chromium."
+(leaf *gist-configurations
+  :bind ("s-g" . gist-region-or-buffer)
+  :init
+  (defun gist-description ()
+	"Add gist description."
+	(shell-quote-argument (read-from-minibuffer "Add gist description: ")))
+
+  (defun gist-filename ()
+	"The character string entered in minibuffer is used as file-name.
+If enter is pressed without file-name, that's will be buffer-file-neme."
 	(interactive)
-	(let ((file (buffer-file-name (current-buffer))))
-	  (compile (concat "gist -o " file)))
+	(let ((file (file-name-nondirectory (buffer-file-name (current-buffer)))))
+	  (read-from-minibuffer (format "File name (%s): " file) file)))
+
+  (defun gist-region-or-buffer ()
+	"If region is selected, post from the region.
+If region isn't selected, post from the buffer."
+	(interactive)
+	(let ((file (buffer-file-name)))
+	  (if (not (use-region-p))
+		  (compile (concat "gist -od " (gist-description) " " file))
+		(compile (concat "gist -oPd " (gist-description) " -f " (gist-filename)))))
 	(delete-other-windows))
 ```
-### 9.4 [eagy-hugo]
+`dired` からも使えるように設定しておくと便利です。
+
+```elisp
+  (defun dired-do-gist ()
+	"Dired-get-filename do gist and open in browser."
+	(interactive)
+	(let ((file (dired-get-filename nil t)))
+	  (compile (concat "gist -od " (gist-description) " " file)))
+	(delete-other-windows))
+```
+
+### 9.4. [quickrun.el] お手軽ビルド
+カレントバッファで編集中のソースコードをビルド・実行して別バッファに結果を得ます。
+
+```emacs-lisp
+(leaf quickrun
+  :ensure t
+  :bind ("<f5>" . quickrun))
+```
+### 9.4. [eagy-hugo] マルチブログ管理
+
 
 ## 10. メモ環境
 `Org-mode` `howm-mode` `open-junk-file` をTPOで使い分けします。
 
-### 10.1 Howm Mode
+### 10.1. Howm Mode
 Howm-menuは使わないので `howm-list-all` を初期画面として使っています。
 
 この画面からでも [新規(c)] [検索(s)] ほか一連のhowmコマンドは全て使えます。
@@ -1284,7 +1327,7 @@ Howm-menuは使わないので `howm-list-all` を初期画面として使って
 		  ("note:" . (0 'epa-mark)))))
 ```
 
-### 10.2 Org Mode
+### 10.2. Org Mode
 dashboard画面に簡単なタスクを表示させるために `org-agenda` を使っています。
 
 ついでなので `org-capture` からHowm-createを発動できるように`org-capture-template` を作りました。
@@ -1345,7 +1388,7 @@ dashboard画面に簡単なタスクを表示させるために `org-agenda` を
   (add-hook 'org-capture-mode-hook 'delete-other-windows))
 ```
 
-### 10.3 Open-junk-file
+### 10.3. Open-junk-file
 junkファイルの保存も howmフォルダーに置くことで、howmの検索機能が利用できて便利です。
 
 ```emacs-lisp
@@ -1375,7 +1418,7 @@ junkファイルの保存も howmフォルダーに置くことで、howmの検�
 			"*.*.*")))))))
 ```
 
-### 10.4 Scratchを付箋として使う
+### 10.4. Scratchを付箋として使う
 作業中の短期的なメモを気軽に使うために `*scratch*`バッファーを付箋メモに使えるように設定してみた。
 
 Emacsを再起動しても`*scratch*` バッファーの内容が消えないように [`auto-save-buffers-enhanced`](http://emacs.rubikitch.com/auto-save-buffers-enhanced/) の `*scratch*` バッファー自動保存機能を併用しています。専用のパッケージもあるようです。
@@ -1419,59 +1462,24 @@ Emacsを再起動しても`*scratch*` バッファーの内容が消えないよ
 
 ## 11. フレーム / ウインドウ制御
 
-かなり我流かつ邪道的なキーバインドなので参考にはならないかと…。
+### 11.1. 起動時の設定
+`*scratch*` バッファーを表示させるのが標準かと思いますが、私は、`dashboard` にしています。
 
-### F1: emacs help
-Emacs標準の helpキーなのでそのまま使います。
+[https://github.com/minorugh/emacs.d/blob/main/inits/01_dashboard.el](https://github.com/minorugh/emacs.d/blob/main/inits/01_dashboard.el) 
 
-which-key.el を導入することで各コマンドのガイドがミニバファーに表示されるので便利です。
+![dashboard](https://camo.githubusercontent.com/de931cfbad673c47366b2a3cd8d0aa7eede1ae13899512c0d51ba731866d5c40/68747470733a2f2f6c6976652e737461746963666c69636b722e636f6d2f36353533352f35313633313934363035335f623964383438613335375f622e6a7067) 
 
-![Alt Text](https://live.staticflickr.com/65535/51419241903_d99af2153c_b.jpg) 
+### 11.2. 複数フレーム対応
 
-```emacs-lisp
-(leaf which-key
-  :ensure t
-  :config
-  (which-key-mode 1)
-  (setq which-key-max-description-length 40)
-  (setq which-key-use-C-h-commands t))
-```
+`follow-mode`
 
-### F2: imenu-list-smart-toggle
+### 11.3. [Winner.el] ウインドウ構成の履歴を辿る
 
-### F3: filer-current-dir-open
-編集中のフィル（または dired）のカレントデレクトリで debianのファルマネージャー `nautilus` を開きます。
+### 11.4. [doom-modeline] モードラインをリッチにする
 
-```emacs-lisp
-(defun filer-current-dir-open ()
-  "Open filer in current dir."
-  (interactive)
-  (shell-command (concat "nautilus " default-directory)))
-(bind-key "<f3>" 'filer-current-dir-open)
-```
+### 11.5. [popwin.el] ポップアップウィンドウの制御 
 
-### F4: term-current-dir-open
-編集中のフィル（または dired）のカレントデレクトリで debianのターミナル `gonome-terminal` を開きます。
 
-```emacs-lisp
-(defun term-current-dir-open ()
-  "Open terminal application in current dir."
-  (interactive)
-  (let ((dir (directory-file-name default-directory)))
-	(shell-command (concat "gnome-terminal --working-directory " dir))))
-(bind-key "<f4>" 'term-current-dir-open)
-```
-`eshell` も併用していて、同様に自動的にバッファーファイルのカレントで開くようにしています。
-
-```emacs-lisp
-(defun eshell-on-current-buffer ()
-  "Set the eshell directory to the current buffer."
-  (interactive)
-  (let ((path (file-name-directory (or  (buffer-file-name) default-directory))))
-	(with-current-buffer "*eshell*"
-	  (cd path)
-	  (eshell-emit-prompt))))
-```
 
 
 ### F5: quickrun
