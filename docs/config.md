@@ -1701,6 +1701,16 @@ Emacsを再起動しても`*scratch*` バッファーの内容が消えないよ
 ```
 ※ `eshell` は使ってました。
 
+### 11.6 [tempbuf.el]不要なバッファを自動削除する
+
+```elisp
+(leaf tempbuf
+  :el-get minorugh/tempbuf
+  :config
+  (add-hook 'dired-mode-hook 'turn-on-tempbuf-mode)
+  (add-hook 'magit-mode-hook 'turn-on-tempbuf-mode))
+```
+
 ## 12. フォント / 配色関連
 
 ### 12.1 カーソル行に色をつける
@@ -1862,9 +1872,8 @@ $ fc-list | grep Cica
 
 ## 13. ユーティリティー関数
 
-### 13.1 Scratch バッファーを消さない
-
-難しい関数を設定せずとも内蔵コマンドで簡単に実現できます。
+### 13.1. Scratch バッファーを消さない
+難しく関数を設定せずとも内蔵コマンドで簡単に実現できます。
 
 ```emacs-lisp
 ;; Set buffer that can not be killed
@@ -1873,11 +1882,10 @@ $ fc-list | grep Cica
 (with-current-buffer "*Messages*"
   (emacs-lock-mode 'kill))
 ```
-### 13.2 Terminal を Emacsから呼び出す
 
-Emacsで開いているbufferのcurrent-dirでgonome-terminalを開く設定です。
-
-こちらを使うようになってからはeshellを使わななりました。
+### 13.2. Terminal を Emacsから呼び出す
+Emacsで開いている`buffer` の`current-dir` で `gonome-terminal` を起動させるのでとても便利です。
+こちらを使うようになってからは`eshell` を使わななりました。
 
 ```emacs-lisp
 (defun term-current-dir-open ()
@@ -1888,7 +1896,9 @@ Emacsで開いているbufferのcurrent-dirでgonome-terminalを開く設定で�
 (bind-key "<f4>" 'term-current-dir-open)
 ```
 
-### 13.3 Thunar を Emacsから呼び出す
+### 13.3. Thunar を Emacsから呼び出す
+Emacsで開いている`buffer` の`current-dir` で `Debian` の `Thuner` を開くというものです。
+使う機会は少ないと思いますが...
 
 ```emacs-lisp
 (defun filer-current-dir-open ()
@@ -1898,6 +1908,27 @@ Emacsで開いているbufferのcurrent-dirでgonome-terminalを開く設定で�
 (bind-key "<f3>" 'filer-current-dir-open)
 ```
 
+### 13.4. [ps-printer] ps-printer へのファイルの出力
+基本的には Postscript ファイルを打ち出すことのできるPostscript プリンターが必要です。
+
+しかしながら、Postscriptプリンターがない、多少フォントや図が汚くてもとりあえず結果が見えればいい...というのであれば、いくつかソフトがあればできないことはありません。
+
+ここではきれいに印刷する方法について説明します。
+
+```elisp
+(defalias 'ps-mule-header-string-charsets 'ignore)
+(setq ps-multibyte-buffer 'non-latin-printer
+	  ps-paper-type 'a4
+	  ps-font-size 9
+	  ;; ps-font-family 'Helvetica
+	  ps-font-family 'Courier
+	  ps-line-number-font 'Courier
+	  ps-printer-name nil
+	  ps-print-header nil
+	  ps-show-n-of-n t
+	  ps-line-number t
+	  ps-print-footer nil)
+```
 
 ## 14. おわりに
 
