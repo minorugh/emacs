@@ -1,5 +1,9 @@
 ;;; init.el --- Emacs first Configuration. -*- lexical-binding: t; no-byte-compile: t -*-
 ;;; Commentary:
+;;
+;; Compatible with Emacs 27 and later
+;; Aiming for a fancy and fast Emacs configuration
+;;
 ;;; Code:
 ;; (setq debug-on-error t)
 

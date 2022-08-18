@@ -88,13 +88,18 @@ UI関係の設定を、`eary-init.el`へ移すことで起動時間を短縮で�
 (custom-set-faces '(default ((t (:background "#282a36")))))
 ```
 
-### 2.2 [init.el] leaf.el を使う
+### 2.2 [init.el] Emacs27に対応させる
+`early.init.el` とともにEmacs27に対応させました。
+
+[https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el) 
+
+#### 2.2.1 [leaf.el] leaf.elを使う
 [@conao3](https://qiita.com/conao3) さんの開発された `leaf.el` に触発されて全面的に書き直しました。
 
 [Emacs入門から始めるleaf.el入門](https://qiita.com/conao3/items/347d7e472afd0c58fbd7)
 
-#### 2.2.1 起動時間の短縮を図る
-Magic File Name を一時的に無効にすることで、起動時間の短縮を図る設定をしています。
+#### 2.2.2 起動の高速化を図る
+Magic File Name を一時的に無効にすることで、起動時間を短縮できます。
 
 GC設定とともに設定ファイル読み込み後に正常値に戻します。
 
@@ -117,7 +122,7 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
             (setq gc-cons-threshold 800000)))
 ```
 
-#### 2.2.2 init-loader を使う
+#### 2.2.3 init-loader を使う
 [`init-loader.el`](https://github.com/emacs-jp/init-loader/) は、設定ファイル群のローダーです。 指定されたディレクトリから構成ファイルをロードします。これにより、構成を分類して複数のファイルに分けることができます。
 
 `init-loader` には、エラーが出た設定ファイルは読み込まれない...という特徴があり原因究明がしやすくなるというメリットがある。またログの出力機能を備えていることもメリットとして挙げられる。
