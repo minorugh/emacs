@@ -1328,10 +1328,8 @@ If region isn't selected, post from the buffer."
 (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
 ```
 
-### 9.4. [eagy-hugo] マルチブログ管理
+### 9.4. [eagy-hugo.el] マルチブログ管理
 [easy-hugo.el](https://github.com/masasam/emacs-easy-hugo) は、Hugoで作成されたブログを書くための Emacs メジャー モードです。
-
-![screencast](https://github.com/minorugh/emacs.d/blob/main/docs/screencast.gif) 
 
 <p><img src="screencast.gif" alt="screencast" /></p> 
 
