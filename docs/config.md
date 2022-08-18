@@ -1241,9 +1241,9 @@ howm や org でメモをとるときに、ゴミファイルが残らないよ�
 | F8 | toggle-menu-bar-mode-from-frame | menu-barのトグル表示 |
 | F9 | display-line-numbers-mode | 行番号のトグル表示 |
 | F10 | neotree-toggle | Neotreeのトグル表示 |
-| F11 | トグル・フルスクリーン | OS共通の機能 |
-| F12 | my:darkroom-in/out | darkroom-modeのトグル操作 |
-| home | kill-this-buffer | 確認なしの `kill-buffer` |
+| F11 | toggle-frame-fullscreen | Emacsの標準機能 |
+| F12 | darkroom-mode | darkroom-modeのトグル操作 |
+| home | open-dashboard | dashboardの再表示 |
 | end | toggle-scratch | `scratch`バッファーのトグル表示 |
 | insert | iedit-menu | 確認なしの `kill-buffer` |
 | muhenkan | minibuffer-keyboard-quit | minibufferを閉じる |
