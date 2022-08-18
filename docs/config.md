@@ -1908,7 +1908,7 @@ Emacsで開いている`buffer` の`current-dir` で `Debian` の `Thuner` を�
 (bind-key "<f3>" 'filer-current-dir-open)
 ```
 
-### 13.4. [ps-printer] ps-printer へのファイルの出力
+### 13.4. PS-Printer へのファイルの出力
 基本的には Postscript ファイルを打ち出すことのできるPostscript プリンターが必要です。
 
 しかしながら、Postscriptプリンターがない、多少フォントや図が汚くてもとりあえず結果が見えればいい...というのであれば、いくつかソフトがあればできないことはありません。
