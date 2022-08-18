@@ -130,9 +130,18 @@
 ;; automatically kill unnecessary buffers
 (leaf tempbuf
   :el-get minorugh/tempbuf
-  :config
-  (add-hook 'dired-mode-hook 'turn-on-tempbuf-mode)
-  (add-hook 'magit-mode-hook 'turn-on-tempbuf-mode))
+  :hook ((find-file-hook . my:find-file-tempbuf-hook)
+		 (dired-mode-hook . turn-on-tempbuf-mode)
+		 (magit-mode-hook . turn-on-tempbuf-mode) )
+  :init
+  (setq my:tempbuf-ignore-files
+		'("~/Dropbox/org/task.org"
+          "~/Dropbox/org/capture.org"))
+
+  (defun my:find-file-tempbuf-hook ()
+	(let ((ignore-file-names (mapcar 'expand-file-name my:tempbuf-ignore-files)))
+      (unless (member (buffer-file-name) ignore-file-names)
+		(turn-on-tempbuf-mode)))))
 
 
 ;; undo redo
