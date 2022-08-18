@@ -342,18 +342,16 @@ If the region is inactive, to kill whole line."
 ```
 
 ### 3.10. [el-get] パッケージ管理
-MELPAをメインに管理していますが、MELPAにないものは`el-get` でGitHubやEmacsWikiからインストールします。
-
-個人用に開発したものも、自分のGitHubリポジトリで管理し`el-get` で読み込んでいます。
+* MELPAをメインに管理していますが、MELPAにないものは`el-get` でGitHubやEmacsWikiからインストールします。
+* 個人用に開発したものも、自分のGitHubリポジトリで管理し`el-get` で読み込んでいます。
 
 ## 4. カーソル移動
-ブラインドタッチができないので、文字移動、行移動、スクロールは、素直に上下左右の矢印キーと`PgUp` `PgDn` を使っています。
+* 文字移動、行移動、スクロールは、素直に上下左右の矢印キーと`PgUp` `PgDn` を使っています。
 
 ### 4.1. [sequential-command.el] バッファー内のカーソル移動
+* [https://github.com/HKey/sequential-command](https://github.com/HKey/sequential-command)
+
 標準の `C-a` `C-e` を拡張し、バッファーの先頭と最終行への移動を簡単にしてくれます。
-
-[https://github.com/HKey/sequential-command](https://github.com/HKey/sequential-command)
-
 * `C-a` を連続で打つことで行頭→ファイルの先頭→元の位置とカーソルが移動
 * `C-e` を連続で打つことで行末→ファイルの最終行→元の位置とカーソルが移動
 
