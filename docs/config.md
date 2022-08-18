@@ -9,7 +9,7 @@ nav_order: 1
 ```note
 * ここは [@minoruGH](https://twitter.com/minorugh)  の Emacs設定ファイルの一部を解説しているページです。
 * 本ドキュメントは、[@takaxp](https://twitter.com/takaxp)さんが公開されている [takaxp.github.io/](https://takaxp.github.io/init.html) の記事を下敷きにした模倣版です。
-* 執筆用途に特化してカスタマイズしていますので、コンセプトやキーバイドなどは極めて邪道思想になっています。
+* [init.el](https://github.com/minorugh/emacs.d/blob/main/init.el) 本体は、[GitHub](https://github.com/minorugh/emacs.d/blob/main/init.el) に公開しています。
 ```
 
 ### 1.1 動作確認環境
