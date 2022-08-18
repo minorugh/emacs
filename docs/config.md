@@ -41,8 +41,9 @@ nav_order: 1
 ```
 
 ## 2. 起動設定
-Emacs-27導入にあわせて `early-init.el` を設定しました。 ブートシーケンスは以下のとおり。
+* Emacs-27導入にあわせて `early-init.el` を設定しました。 
 
+ブートシーケンスは以下のとおり。
 1. `early-init.el` の読み込み
 2. `init.el` の読み込み
 3. `inits/` のファイル群を読み込み （init-loader 使用）
@@ -90,7 +91,7 @@ GC の閾値を最大にしておくことで GC を実質止めることがで�
 ```
 
 ### 2.2. [init.el] Emacs27に対応
-`early.init.el` とともにEmacs27に対応させました。
+* `early.init.el` とともにEmacs27に対応させました。
 
 [https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el) 
 
@@ -162,7 +163,7 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
 ```
 
 #### 2.2.4. [test.el] テスト用の最小初期化ファイル
-最小限の emacs を起動させるための設定です。
+* 最小限の emacs を起動させるための設定です。
 
 [https://github.com/minorugh/dotfiles/blob/main/.emacs.d/test.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/test.el) は、
 
