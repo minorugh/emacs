@@ -1911,8 +1911,6 @@ Emacsで開いている`buffer` の`current-dir` で `Debian` の `Thuner` を�
 ### 13.4. PS-Printer へのファイルの出力
 基本的には Postscript ファイルを打ち出すことのできるPostscript プリンターが必要です。
 
-Postscriptプリンターがない、多少フォントや図が汚くてもとりあえず結果が見えればいい...というのであれば、いくつかソフトがあればできないことはありませんが、ここではきれいに印刷する方法について説明します。
-
 ```elisp
 (defalias 'ps-mule-header-string-charsets 'ignore)
 (setq ps-multibyte-buffer 'non-latin-printer
