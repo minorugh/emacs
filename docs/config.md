@@ -56,7 +56,7 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 
 `init.el` でパッケージシステムやGUIの初期化が実行される前にロードされるので、UI関係や `package-enable-at-startup` `package-user-dir` のようなパッケージ初期化プロセスに影響を与える変数をカスタマイズできます。
 
-#### 2.1.1 [eary-init.el] 起動時間の短縮を図る
+#### 2.1.1 起動時間の短縮を図る
 UI関係の設定を、`eary-init.el`へ移すことで起動時間を短縮できます。
 
 ```elisp
@@ -66,7 +66,7 @@ UI関係の設定を、`eary-init.el`へ移すことで起動時間を短縮で�
 (push '(vertical-scroll-bars) default-frame-alist)
 ```
 
-#### 2.1.2 [eary-init.el] チラツキを抑える
+#### 2.1.2 チラツキを抑える
 設定ファイルの読み込み段階で画面がチラチラ変化するのを抑制しています。
 
 ```elisp
