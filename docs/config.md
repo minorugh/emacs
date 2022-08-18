@@ -8,7 +8,7 @@ nav_order: 1
 ## 1. はじめに
 ```note
 * ここは [@minoruGH](https://twitter.com/minorugh)  の Emacs設定ファイルの一部を解説しているページです。
-* [init.el](https://github.com/minorugh/emacs.d/blob/main/init.el) 本体は、[GitHub](https://github.com/minorugh/emacs.d) に公開しています。
+* [init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el) 本体は、[GitHub](https://github.com/minorugh/dotfiles/tree/main/.emacs.d) に公開しています。
 * 本ドキュメントは、[@takaxp](https://twitter.com/takaxp)さんの了解を得て [takaxp.github.io/](https://takaxp.github.io/init.html) の記事を下敷きにした模倣版です。
 ```
 
