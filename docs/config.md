@@ -11,7 +11,6 @@ nav_order: 1
 * [init.el](https://github.com/minorugh/emacs.d/blob/main/init.el) 本体は、[GitHub](https://github.com/minorugh/emacs.d) に公開しています。
 * 本ドキュメントは、[@takaxp](https://twitter.com/takaxp)さんの了解を得て [takaxp.github.io/](https://takaxp.github.io/init.html) の記事を下敷きにした模倣版です。
 ```
-{% gist 77c2d87906c43138dc64af92b9f184aa %}
 
 ### 1.1. 動作確認環境
 以下の環境で使用しています。が、動作を保証するものではありません。
