@@ -1306,7 +1306,7 @@ If region isn't selected, post from the buffer."
 ```
 
 ### 9.5. [magit.el] Gitクライアント
-`magit status` の画面は、デフォルトでは `other-window` に表示されますが、フルフレームで表示されるようにカスタマイズしています。
+`magit status` は、デフォルトでは `other-window` に表示されますが、フルフレームで表示されるようにしました。
 
 ```emacs-lisp
 (leaf magit
