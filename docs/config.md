@@ -301,7 +301,7 @@ If the region is inactive, to kill whole line."
 (setq mouse-drag-copy-region t)
 ```
 ### 3.6 compilation buffer を自動的に閉じる
-`make` を実行させるのに `compile` コマンドをよく使うので実行後は自動で閉じるようにしました。
+`compile` コマンドをよく使うので実行後は自動で閉じるようにしました。
 
 ```elisp
 (setq compilation-always-kill t)
