@@ -1233,11 +1233,11 @@ howm や org でメモをとるときに、ゴミファイルが残らないよ�
 |--------------|---------------------------|------|
 | F1 | emacs help |ivyで提供される便利機能 |
 | F2 | imenu-list-smart-toggle | imenuのサイドバー版 |
-| F3 | filer-current-dir-open | debianのnautilusを開く |
-| F4 | term-current-dir-open | debianのgonome-terminalを開く |
+| F3 | filer-current-dir-open | nautilusを開く |
+| F4 | term-current-dir-open | gonome-terminalを開く |
 | F5 | quikuran | お手軽ビルド |
 | F6 | counsel-linux-app | Linuxアプリランチャー |
-| F7 | calendar-toggle | calendarのトグル表示 |
+| F7 | calendar-toggle | カレンダーのトグル表示 |
 | F8 | toggle-menu-bar-mode-from-frame | menu-barのトグル表示 |
 | F9 | display-line-numbers-mode | 行番号のトグル表示 |
 | F10 | neotree-toggle | Neotreeのトグル表示 |
