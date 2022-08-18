@@ -58,8 +58,13 @@ Emacs-27導入にあわせて `early-init.el` を設定しました。 ブート
 
 [https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/early-init.el)
 
-#### 2.1.1 起動時間の短縮を図る
-UI関係の設定を、`eary-init.el`へ移すことで起動時間を短縮できます。
+#### 2.1.1 GCを減らす
+GC の閾値を最大にしておくことで GC を実質止めることができます。これもとりあえず書いておけば速くなる系なのでおすすめです。
+```elisp
+(setq gc-cons-threshold most-positive-fixnum)
+```
+#### 2.1.2 フレーム設定
+これらの設定を、`eary-init.el`へ移すことで起動時間を短縮できます。
 
 ```elisp
 (push '(fullscreen . maximized) default-frame-alist)
@@ -68,8 +73,8 @@ UI関係の設定を、`eary-init.el`へ移すことで起動時間を短縮で�
 (push '(vertical-scroll-bars) default-frame-alist)
 ```
 
-#### 2.1.2 画面のチラツキを抑える
-設定ファイルの読み込み段階で画面がチラチラ変化するのを抑制しています。
+#### 2.1.3 画面のチラツキを抑える
+設定ファイルの読み込みプロセスでが画面がチラチラ変化するのを抑制しています。
 
 ```elisp
 ;; Suppress flashing at startup
@@ -93,13 +98,7 @@ UI関係の設定を、`eary-init.el`へ移すことで起動時間を短縮で�
 
 [https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el) 
 
-#### 2.2.1 leaf.elを使う
-`use-pacage.el` を使っていましたが、
-[@conao3](https://qiita.com/conao3) さんの開発された `leaf.el` に触発されて全面的に書き直しました。
-
-[Emacs入門から始めるleaf.el入門](https://qiita.com/conao3/items/347d7e472afd0c58fbd7)
-
-#### 2.2.2 初期フレームの設定
+#### 2.2.1 初期フレームの設定
 Magic File Name を一時的に無効にすることで、起動時間を短縮できます。
 
 GC設定とともに設定ファイル読み込み後に正常値に戻します。
@@ -123,12 +122,39 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
             (setq gc-cons-threshold 800000)))
 ```
 
+#### 2.2.2 leaf.elを使う
+`use-pacage.el` を使っていましたが、
+[@conao3](https://qiita.com/conao3) さんの開発された `leaf.el` に触発されて全面的に書き直しました。
+
+[Emacs入門から始めるleaf.el入門](https://qiita.com/conao3/items/347d7e472afd0c58fbd7)
+
+```elisp
+(eval-and-compile
+  (customize-set-variable
+   'package-archives '(("org" . "https://orgmode.org/elpa/")
+					   ("melpa" . "https://melpa.org/packages/")
+                       ("gnu" . "https://elpa.gnu.org/packages/")))
+  (package-initialize)
+  (unless (package-installed-p 'leaf)
+	(package-refresh-contents)
+	(package-install 'leaf))
+
+  (leaf leaf-keywords
+	:ensure t
+	:init
+	(leaf hydra :ensure t)
+	(leaf el-get :ensure t)
+	:config
+	(leaf-keywords-init)))
+```
+
+
 #### 2.2.3 init-loader を使う
 [`init-loader.el`](https://github.com/emacs-jp/init-loader/) は、設定ファイル群のローダーです。 指定されたディレクトリから構成ファイルをロードします。これにより、構成を分類して複数のファイルに分けることができます。
 
 `init-loader` には、エラーが出た設定ファイルは読み込まれない...という特徴があり原因究明がしやすくなるというメリットがある。またログの出力機能を備えていることもメリットとして挙げられる。
 
-起動時間は犠牲になるということで敬遠される向きもあるが微々たるもので、恩恵のほうが遥かに大きい。
+起動時間が犠牲になるということで敬遠される向きもあるが微々たるもので、恩恵のほうが遥かに大きい。
 
 ```emacs-lisp
 (leaf init-loader
@@ -139,7 +165,7 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
   (init-loader-load))
 ```
 
-#### 2.2.4 [test.el] テスト用初期化ファイル
+#### 2.2.4 [test.el] 最小初期化ファイル
 最小限の emacs を起動させるための設定です。
 
 [https://github.com/minorugh/dotfiles/blob/main/.emacs.d/test.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/test.el) は、
