@@ -287,7 +287,6 @@ Google Driveは大丈夫という情報もありますが試せてません。
 (bind-key "M-_" 'undo-fu-only-redo) ;; Use undo-fu.el
 ```
 
-* リージョンが選択されていないときは一行削除
 ```emacs-lisp
 (defun my:kill-whoile-ine-or-region ()
   "If the region is active, to kill region.
@@ -296,7 +295,6 @@ If the region is inactive, to kill whole line."
   (if (use-region-p)
 	  (clipboard-kill-region (region-beginning) (region-end))
     (kill-whole-line)))
-(global-set-key (kbd "C-w") 'my:kill-whoie-line-or-region)
 ```
 
 ### 3.5. マウスで選択した領域を自動コピー
@@ -1284,7 +1282,7 @@ howm や org でメモをとるときに、ゴミファイルが残らないよ�
 | F11 | toggle-frame-fullscreen | Emacsの標準機能 |
 | F12 | darkroom-mode | darkroom-modeのトグル操作 |
 | home | open-dashboard | dashboardの再表示 |
-| end | toggle-scratch | `scratch`のトグル表示 |
+| S-RET | toggle-scratch | `scratch`のトグル表示 |
 | insert | iedit-menu | 文字列の置換え |
 | muhenkan | minibuffer-keyboard-quit | minibufferを閉じる |
 
