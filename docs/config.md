@@ -93,7 +93,8 @@ UI関係の設定を、`eary-init.el`へ移すことで起動時間を短縮で�
 
 [https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el) 
 
-#### 2.2.1 [leaf.el] leaf.elを使う
+#### 2.2.1 leaf.elを使う
+`use-pacage.el` を使っていましたが、
 [@conao3](https://qiita.com/conao3) さんの開発された `leaf.el` に触発されて全面的に書き直しました。
 
 [Emacs入門から始めるleaf.el入門](https://qiita.com/conao3/items/347d7e472afd0c58fbd7)
