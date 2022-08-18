@@ -19,7 +19,7 @@ nav_order: 1
 * 自分でビルドした Emacs 27.2.50
 
 ### 1.2. デレクトリ構成
-設定ファイルの構成は下記のとおりです。
+* 設定ファイルの構成は下記のとおりです。
 
 ```
 ~/.emacs.d
@@ -92,13 +92,11 @@ GC の閾値を最大にしておくことで GC を実質止めることがで�
 
 ### 2.2. [init.el] Emacs27に対応
 * `early.init.el` とともにEmacs27に対応させました。
-
-[https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el) 
+* [https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/init.el) 
 
 #### 2.2.1. 初期フレームの設定
-Magic File Name を一時的に無効にすることで、起動時間を短縮できます。
-
-GC設定とともに設定ファイル読み込み後に正常値に戻します。
+* Magic File Name を一時的に無効にすることで、起動時間を短縮できます。
+* GC設定とともに設定ファイル読み込み後に正常値に戻します。
 
 ```emacs-lisp
 (unless (or (daemonp) noninteractive init-file-debug)
@@ -1407,9 +1405,8 @@ Emacs26以降は、標準添付の `flymake` が使いやすくなったので�
 ```
 
 ### 9.7. [eagy-hugo.el] マルチブログ管理
-[easy-hugo.el](https://github.com/masasam/emacs-easy-hugo) は、Hugoで作成されたブログを書くための Emacs メジャー モードです。
-
-[https://github.com/minorugh/emacs.d/blob/main/inits/60_easy-hugo.el](https://github.com/minorugh/emacs.d/blob/main/inits/60_easy-hugo.el)
+* [easy-hugo.el](https://github.com/masasam/emacs-easy-hugo) は、Hugoで作成されたブログを書くための Emacs メジャー モードです。
+* [https://github.com/minorugh/emacs.d/blob/main/inits/60_easy-hugo.el](https://github.com/minorugh/emacs.d/blob/main/inits/60_easy-hugo.el)
 
 <p><img src="static/screencast.gif" alt="screencast" /></p> 
 
