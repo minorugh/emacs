@@ -1,6 +1,6 @@
 ---
-layout: default
-title: minoru's Emacs configuration
+<!-- layout: default -->
+title: minoru's Emacs Configuration
 nav_order: 1
 ---
 # Emacs configuration
