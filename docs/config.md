@@ -85,14 +85,13 @@ UI関係の設定を、`eary-init.el`へ移すことで起動時間を短縮で�
 (setq byte-compile-warnings '(cl-functions))
 (custom-set-faces '(default ((t (:background "#282a36")))))
 ```
-### 2.2 [leaf.el] でラクラクinit.el整理
-`use-package` から `leaf` に乗り換えました。
 
-`init.el` は、`leaf` を開発された [@conao3](https://qiita.com/conao3) さんの下記Tipsの丸写しです。
+### 2.2 [init.el] leaf.el を使う
+[@conao3](https://qiita.com/conao3) さんの開発された `leaf.el` に触発されて全面的に書き直しました。
 
 [Emacs入門から始めるleaf.el入門](https://qiita.com/conao3/items/347d7e472afd0c58fbd7)
 
-### 2.3 [init.el] 起動時間の短縮を図る
+#### 2.2.1 起動時間の短縮を図る
 Magic File Name を一時的に無効にすることで、起動時間の短縮を図る設定をしています。
 
 GC設定とともに設定ファイル読み込み後に正常値に戻します。
@@ -116,7 +115,7 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
             (setq gc-cons-threshold 800000)))
 ```
 
-### 2.4 [init-loader] 初期設定ファイルを読み込む
+#### 2.2.2 [init-loader.el] init-loader を使う
 [`init-loader.el`](https://github.com/emacs-jp/init-loader/) は、設定ファイル群のローダーです。 指定されたディレクトリから構成ファイルをロードします。これにより、構成を分類して複数のファイルに分けることができます。
 
 `init-loader` には、エラーが出た設定ファイルは読み込まれない...という特徴があり原因究明がしやすくなるというメリットがある。またログの出力機能を備えていることもメリットとして挙げられる。
@@ -132,15 +131,15 @@ GC設定とともに設定ファイル読み込み後に正常値に戻します
   (init-loader-load))
 ```
 
-### 2.5 [mini-init.el] テスト用初期化ファイル
-[`mini-init.el`](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/mini-init.el) は、最小限の emacs を起動させるための設定です。
+### 2.3 [test.el] テスト用初期化ファイル
+[`test.el`](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/test.el) は、最小限の emacs を起動させるための設定です。
 
 新しいパッケージを試したり設定をテストしたり、エラー等で Emacsが起動しない場合などに使用します。
 
 以下を `.zshrc` または `.bashrc` に記述し反映させたのち、シェルから `eq` と入力することで起動することがでます。
 
 ```shell
-alias eq = 'emacs -q -l ~/.emacs.d/mini-init.el'
+alias eq = 'emacs -q -l ~/.emacs.d/test.el'
 ```
 
 ファイルの PATH は、ご自分の環境に応じて修正が必要です。
