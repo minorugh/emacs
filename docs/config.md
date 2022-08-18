@@ -1747,26 +1747,29 @@ Cicaフォントは、Hack、DejaVu Sans Mono、Rounded Mgen+、Noto Emoji等の
 [Cicaダウンロードオフィシャルページ](https://github.com/miiton/Cica/releases/tag/v5.0.3)にある最新の `Cica v5.03` は、
 `page-break-lines` がオーバーフローして折り返されてしまいます。`page-break-line-char` の仕様が微妙に異なるからかもしれません。
 
-[Cica_v5.0.1のダウンロードページ](https://github.com/SSW-SCIENTIFIC/Cica/releases)から、
+1. [Cica_v5.0.1のダウンロードページ](https://github.com/SSW-SCIENTIFIC/Cica/releases)から、
 ([Cica_v5.0.1.zip](https://github.com/SSW-SCIENTIFIC/Cica/releases/download/v5.0.1-no-glyph-mod/Cica-v5.0.1.zip)) をダウンロードします。
-
-zipファイルを展開します。
+2. zipファイルを展開します。
 
 ```shell
 $ unzip Cica_v5.0.1_with_emoji.zip
 ```
-LICENSE.txtを確認し、ファイルを `/usr/local/share/fonts/` または `~/.fonts/` にコピーします。
-ここでは `/usr/local/share/fonts/` にコピーし、フォントキャッシュを反映させます。
+3. LICENSE.txtを確認し、ファイルを `/usr/local/share/fonts/` または `~/.fonts/` にコピーします。
 
 ```shell
-$ sudo cp Cica-{Bold,BoldItalic,Regular,RegularItalic}.ttf /usr/local/share/fonts/
+$ sudo cp Cica-{Bold,BoldItalic,Regular,RegularItalic}.ttf ~/.fonts/
 $ sudo fc-cache -vf
 $ fc-list | grep Cica
-/usr/local/share/fonts/Cica-Bold.ttf: Cica:style=Bold
-/usr/local/share/fonts/Cica-RegularItalic.ttf: Cica:style=Italic
-/usr/local/share/fonts/Cica-BoldItalic.ttf: Cica:style=Bold Italic
-/usr/local/share/fonts/Cica-Regular.ttf: Cica:style=Regular
+/home/minoru/.fonts/Cica-v5.0.1/Cica-Regular.ttf: Cica:style=Regular
+/home/minoru/.fonts/Cica-v5.0.1/noemoji/Cica-Regular.ttf: Cica:style=Regular
+/home/minoru/.fonts/Cica-v5.0.1/noemoji/Cica-RegularItalic.ttf: Cica:style=Italic
+/home/minoru/.fonts/Cica-v5.0.1/noemoji/Cica-Bold.ttf: Cica:style=Bold
+/home/minoru/.fonts/Cica-v5.0.1/Cica-BoldItalic.ttf: Cica:style=Bold Italic
+/home/minoru/.fonts/Cica-v5.0.1/Cica-Bold.ttf: Cica:style=Bold
+/home/minoru/.fonts/Cica-v5.0.1/noemoji/Cica-BoldItalic.ttf: Cica:style=Bold Italic
+/home/minoru/.fonts/Cica-v5.0.1/Cica-RegularItalic.ttf: Cica:style=Italic
 ```
+
 #### 12.3.2 Cicaの設定
 * メイン機（Thinkpad E590）とサブ機（Thinkpad X250）とでそれぞれに適した値を決めています。
 
