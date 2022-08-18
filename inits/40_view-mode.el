@@ -39,13 +39,13 @@
 		 ("2" . my:split-window-below)
 		 ("+" . text-scale-increase)
 		 ("-" . text-scale-decrease)
-		 ("." . (lambda ()(interactive)(text-scale-set 0)))
+		 ("/" . (lambda ()(interactive)(text-scale-set 0)))
 		 ("_" . kill-other-buffers)
 		 (":" . View-exit-and-edit)
 		 ("i" . View-exit-and-edit)
 		 ("]" . winner-undo)
 		 ("[" . winner-redo)
-		 ("," . hydra-view/body))
+		 ("." . hydra-view/body))
   :init
   ;; Specific extension / directory
   (defvar my:auto-view-regexp "\\.php\\|\\.pl\\|\\.el.gz?\\|\\.tar.gz?\\'")
@@ -166,7 +166,7 @@ If the region is inactive, to kill whole line."
    "
    View mode
   -----------------------^^^^^^^^^^^^^^^^^^^^^^^^^^------------------------------------------------------------
-  _x_:del-chra   _u_:undo   winner:_[__]_   _s_wiper   :_o_._0_._1_._2_   _%_:paren   _-__.__+_   help_,_
+  _x_:del-chra   _u_:undo   winner:_[__]_   _s_wiper   :_o_._0_._1_._2_   _%_:paren   _-__\/__+_   help_._
   _d_:del-line   _y_:yank   x_r_ef🐾_RET_   _g_oogle   _w_:for-word^^^^^^   _@_:point   _m_agit^^^^   ex_i_t_:_
 "
    ("r" xref-find-references)
@@ -193,8 +193,8 @@ If the region is inactive, to kill whole line."
    ("2" my:split-window-below)
    ("+" text-scale-increase)
    ("-" text-scale-decrease)
-   ("." (text-scale-set 0))
-   ("," nil :cokor blue)))
+   ("/" (text-scale-set 0))
+   ("." nil :cokor blue)))
 
 
 (provide '40_view-mode)

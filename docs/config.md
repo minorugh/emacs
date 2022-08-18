@@ -524,13 +524,13 @@ MELPAにはないので`el-get` でインストールします。
 	("2" . my:split-window-below)
 	("+" . text-scale-increase)
 	("-" . text-scale-decrease)
-	("." . (lambda ()(interactive)(text-scale-set 0)))
+	("/" . (lambda ()(interactive)(text-scale-set 0)))
 	("_" . kill-other-buffers)
 	(":" . View-exit-and-edit)
 	("i" . View-exit-and-edit)
 	("]" . winner-undo)
 	("[" . winner-redo)
-	("," . hydra-view/body))
+	("." . hydra-view/body))
   :init
   ;; Specific extension / directory
   (defvar my:auto-view-regexp "\\.php\\|\\.pl\\|\\.el.gz?\\|\\.tar.gz?\\'")
