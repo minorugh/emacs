@@ -162,8 +162,7 @@ GC の閾値を最大にしておくことで GC を実質止めることがで�
 #### 2.2.4. [test.el] テスト用の最小初期化ファイル
 * 最小限の emacs を起動させるための設定です。
 
-[https://github.com/minorugh/dotfiles/blob/main/.emacs.d/test.el](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/test.el) は、
-
+[`test.el`](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/test.el) は、
 新しいパッケージを試したり設定をテストしたり、エラー等で Emacsが起動しない場合などに使用します。
 
 以下を `.zshrc` または `.bashrc` に記述し反映させたのち、シェルから `eq` と入力することで起動することがでます。
