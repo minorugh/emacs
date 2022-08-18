@@ -1792,13 +1792,12 @@ Cicaフォントは、Hack、DejaVu Sans Mono、Rounded Mgen+、Noto Emoji等の
 
 1. [Cica-v5.0.1のダウンロードページ](https://github.com/SSW-SCIENTIFIC/Cica/releases)から、
 ([Cica-v5.0.1.zip](https://github.com/SSW-SCIENTIFIC/Cica/releases/download/v5.0.1-no-glyph-mod/Cica-v5.0.1.zip)) をダウンロードします。
-2. 上記ページの存続が怪しいのでこちらにも置いておきます。→ [Cica-v5..1.zip](https://github.com/minorugh/emacs.d/blob/main/docs/static/Cica-v5.0.1.zip) 
-3. zipファイルを展開します。
+2. zipファイルを展開します。
 
 ```shell
-$ unzip Cica_v5.0.1_with_emoji.zip
+$ unzip Cica-v5.0.1.zip
 ```
-4. LICENSE.txtを確認し、ファイルを `/usr/local/share/fonts/` または `~/.fonts/` にコピーします。
+3. LICENSE.txtを確認し、ファイルを `/usr/local/share/fonts/` または `~/.fonts/` にコピーします。
 
 ```shell
 $ sudo cp Cica-{Bold,BoldItalic,Regular,RegularItalic}.ttf ~/.fonts/
