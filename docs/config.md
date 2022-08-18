@@ -199,7 +199,6 @@ Emacsをソースからビルドするときに `--without-xim` しなかった�
 ! ~/.Xresources
 ! Emacs XIMを無効化
 Emacs*useXIM: false
-
 ```
 
 句読点などを入力したとき、わざわざ mozcに変換してもらう必要はないので以下を設定しておくことでワンアクションスピーディーになります。
