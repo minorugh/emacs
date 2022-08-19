@@ -62,7 +62,7 @@ GC の閾値を最大にしておくことで GC を実質止めることがで�
 #### 2.1.2. 初期フレーム設定
 これらの設定を、`eary-init.el`へ移すことで起動時間を短縮できます。
 
-```
+```lisp
 (push '(fullscreen . maximized) default-frame-alist)
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
