@@ -57,13 +57,13 @@ nav_order: 1
 #### 2.1.1. GCを減らす
 GC の閾値を最大にしておくことで GC を実質止めることができます。これもとりあえず書いておけば速くなる系なのでおすすめです。
 
-```elisp
+```code
 (setq gc-cons-threshold most-positive-fixnum)
 ```
 #### 2.1.2. 初期フレーム設定
 これらの設定を、`eary-init.el`へ移すことで起動時間を短縮できます。
 
-```elisp
+```code
 (push '(fullscreen . maximized) default-frame-alist)
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
