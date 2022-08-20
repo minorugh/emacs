@@ -98,7 +98,7 @@ GC の閾値を最大にしておくことで GC を実質止めることがで�
 * Magic File Name を一時的に無効にすることで、起動時間を短縮できます。
 * GC設定とともに設定ファイル読み込み後に正常値に戻します。
 
-```emacs-lisp
+```code
 (unless (or (daemonp) noninteractive init-file-debug)
   (let ((old-file-name-handler-alist file-name-handler-alist))
     (setq file-name-handler-alist nil)
@@ -123,7 +123,7 @@ GC の閾値を最大にしておくことで GC を実質止めることがで�
 
 [Emacs入門から始めるleaf.el入門](https://qiita.com/conao3/items/347d7e472afd0c58fbd7)
 
-```elisp
+```code
 (eval-and-compile
   (customize-set-variable
    'package-archives '(("org" . "https://orgmode.org/elpa/")
