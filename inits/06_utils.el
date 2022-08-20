@@ -94,9 +94,11 @@
 
 
 ;; Edit multiple regions
+;; (el-get-bundle iedit)
 (leaf iedit
   :ensure t
   :bind ("<insert>" . iedit-mode))
+;; (bind-key "<insert>" 'iedit-mode)
 
 
 ;; Extension for region
