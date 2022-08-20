@@ -2,18 +2,60 @@ title: minoru's Emacs Configuration
 remote_theme: rundocs/jekyll-rtd-theme
 
 # Theme settings:
-site_author: minoru yamada
-repo_url: "https://github.com/minorugh/emacs.d/"
 
-markdown_extensions:
-    # コードハイライトの設定
-    - codehilite:
-        pygments_style: vim
+title: ...
+# email: 'dev.yakuza@gmail.com'
+description: ...
+# baseurl: ...
+url: https://github.com/minorugh/emacs.d/
+# twitter_username: ...
+# github_username: ...
+author: dev.yakuza@gmail.com
 
-extra_css:
-    - "//fonts.googleapis.com/earlyaccess/notosansjp.css"
-    - "//fonts.googleapis.com/css?family=Open+Sans:600,800"
-	- "css/custom.css"
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-paginate-v2
+  - jekyll-polyglot
+  - jekyll-seo-tag
+
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+
+# pagination
+permalink: /:year/:month/
+pagination:
+  enabled: true
+  per_page: 12
+  sort_reverse: true
+  limit: 0
+  sort_field: 'date'
+  permalink: '/page/:num/'
+  title: ':title'
+  trail:
+    before: 2
+    after: 2
+
+# multilang
+languages: ['ja', 'ko', 'en']
+default_lang: 'ja'
+exclude_from_localization: ['javascript', 'images', 'css']
+parallel_localization: false
+
+
+# site_author: minoru yamada
+# repo_url: "https://github.com/minorugh/emacs.d/"
+
+# markdown_extensions:
+#     # コードハイライトの設定
+#     - codehilite:
+#         pygments_style: vim
+
+# extra_css:
+#     - "//fonts.googleapis.com/earlyaccess/notosansjp.css"
+#     - "//fonts.googleapis.com/css?family=Open+Sans:600,800"
+# 	- "css/custom.css"
 
 
 # edit_on_github: false
