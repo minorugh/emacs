@@ -194,7 +194,7 @@ Emacs を操作して日本語文書編集するうえで必要な設定。
 * debian でのインストール手順は以下の通り。
 
 ```code
-sudo apt-get install fcitx-mozc emacs-mozc
+$ sudo apt-get install fcitx-mozc emacs-mozc
 ```
 
 Emacsをソースからビルドするときに `--without-xim` しなかったので、インライン XIMでも日本語入力ができてしまいます。

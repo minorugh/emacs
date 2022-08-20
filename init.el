@@ -1,4 +1,4 @@
-;;; init.el --- Emacs first Configuration. -*- lexical-binding: t; no-byte-compile: t -*-
+;;; init.el --- Emacs first Configuration. -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;
 ;; Compatible with Emacs 27 and later

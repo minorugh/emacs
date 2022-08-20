@@ -70,11 +70,11 @@
 ;; Show line numbers
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (leaf display-line-numbers
-  :hook (lisp-interaction-mode-hook . my:disable-modes)
+  :hook ((after-init-hook . global-display-line-numbers-mode)
+		 (lisp-interaction-mode-hook dired-mode-hook). my:disable-modes)
   :bind ("<f9>" . display-line-numbers-mode)
-  :hook ((prog-mode-hook text-mode-hook) . display-line-numbers-mode)
+  :custom (display-line-numbers-width-start . t)
   :init
-  (setq display-line-numbers-width-start t)
   (defun my:disable-modes ()
 	"Disable modes in scrtch buffer."
 	(interactive)
