@@ -6,8 +6,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Basic configurations
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(leaf *basic-configurations
-  :hook (after-init-hook . my:default-mode-hook)
+(leaf cus-start
   :custom
   `(;; Faster rendering by not corresponding to right-to-left language
     (bidi-display-reordering . nil)
@@ -47,18 +46,13 @@
 	;; It keeps going steadily the global mark ... C-x C-SPC C-SPC
 	(set-mark-command-repeat-pop . t)
 	;; Use the X11 clipboard
-	(select-enable-clipboard  . t))
-  :init
-  (defun my:linespacing ()
-	(unless (minibufferp)
-      (setq-local line-spacing 0.1)))
-  (add-hook 'buffer-list-update-hook #'my:linespacing)
-  ;; defalias
-  (defalias 'exit 'save-buffers-kill-emacs)
-  (defalias 'yes-or-no-p 'y-or-n-p)
+	(select-enable-clipboard  . t)))
 
-  ;; Set default modes for startup hook
-  (defun my:default-mode-hook ()
+;; Set default modes for startup hook
+(leaf cus-default-modes
+  :hook (after-init-hook . my:default-modes)
+  :init
+  (defun my:default-modes ()
 	(interactive)
 	(recentf-mode 1)
 	(save-place-mode 1)
@@ -67,17 +61,20 @@
 	(global-auto-revert-mode 1)
 	(global-font-lock-mode 1)
 	(global-hl-line-mode 1)
-	(global-visual-line-mode 1))
+	(global-visual-line-mode 1)))
 
-  ;; Save the file specified code with basic utf-8 if it exists
-  (set-language-environment "Japanese")
-  (prefer-coding-system 'utf-8)
+;; Display buffer name in title bar
+(setq frame-title-format (format "emacs@%s : %%b" (system-name)))
 
-  ;; Font
-  (if (string-match "e590" (shell-command-to-string "uname -n"))
-	  (add-to-list 'default-frame-alist '(font . "Cica-19.5"))
-	;; For submachine
-	(add-to-list 'default-frame-alist '(font . "Cica-15"))))
+;; Save the file specified code with basic utf-8 if it exists
+(set-language-environment "Japanese")
+(prefer-coding-system 'utf-8)
+
+;; Font
+(if (string-match "e590" (shell-command-to-string "uname -n"))
+	(add-to-list 'default-frame-alist '(font . "Cica-19.5"))
+  ;; For submachine
+  (add-to-list 'default-frame-alist '(font . "Cica-15")))
 
 ;; Server start for emacs-client
 (leaf server
@@ -95,58 +92,71 @@
 
 ;; recentf
 (leaf recentf
-  :custom
-  `((recentf-auto-cleanup . 'never)
-    (recentf-exclude
-     . '("\\.howm-keys" "Dropbox/backup" ".emacs.d/tmp/" ".emacs.d/elpa/" "/scp:"))))
+  :custom `((recentf-auto-cleanup . 'never)
+			(recentf-exclude
+			 . '("\\.howm-keys" "Dropbox/backup" ".emacs.d/tmp/" ".emacs.d/elpa/" "/scp:"))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Custom configurations
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(leaf *user-custom-configuration
+;; Set linespacing
+(leaf cus-linespacing
+  :hook (buffer-list-update-hook . my:linespacing)
+  :init
+  (defun my:linespacing ()
+    (unless (minibufferp)
+      (setq-local line-spacing 0.1))))
+
+;; Control cursor blinking
+(leaf cus-blink-cursor
+  :hook (emacs-startup-hook . blink-cursor-mode)
+  :custom `((blink-cursor-blinks . 0)
+			(blink-cursor-interval . 0.3)
+			(blink-cursor-delay . 10)))
+
+;; defalias
+(defalias 'exit 'save-buffers-kill-emacs)
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; change-default-file-location
+(leaf change-default-file-location
+  :custom `((recentf-save-file . "~/.emacs.d/tmp/recentf")
+			(save-place-file . "~/.emacs.d/tmp/places")
+			(savehist-file . "~/.emacs.d/tmp/history")
+			(url-configuration-directory . "~/.emacs.d/tmp/url")
+			(bookmark-file . "~/.emacs.d/tmp/bookmarks")))
+
+;; Change global key bind
+(leaf cus-global-keybind
   :bind (("C-x C-x" . my:exchange-point-and-mark)
 		 ("M-w" . clipboard-kill-ring-save)
 		 ("C-w" . my:kill-whole-line-or-region)
-		 ("s-c" . clipboard-kill-ring-save)	 ;; Like mac
-		 ("s-v" . clipboard-yank)	 ;; Like mac
-		 ("M-/" . kill-this-buffer)) ;; No inquiry
-  :custom
-  ;; change-default-file-location
-  `((recentf-save-file . "~/.emacs.d/tmp/recentf")
-	(save-place-file . "~/.emacs.d/tmp/places")
-	(savehist-file . "~/.emacs.d/tmp/history")
-	(url-configuration-directory . "~/.emacs.d/tmp/url")
-	(bookmark-file . "~/.emacs.d/tmp/bookmarks"))
-  :init
-  ;; Control cursor blinking
-  (setq blink-cursor-blinks 0)
-  (setq blink-cursor-interval 0.3)
-  (setq blink-cursor-delay 10)
-  (add-hook 'emacs-startup-hook 'blink-cursor-mode)
-  ;; Display buffer name in title bar
-  (setq frame-title-format (format "emacs@%s : %%b" (system-name)))
+		 ("s-c" . clipboard-kill-ring-save)
+		 ("s-v" . clipboard-yank)
+		 ("M-/" . kill-this-buffer)))
 
-  ;; Overwrite `C-w' to the whole-line-or-region
-  (defun my:kill-whole-line-or-region ()
-	"If the region is active, to kill region.
-  If the region is inactive, to kill whole line."
-	(interactive)
-	(if (use-region-p)
-		(clipboard-kill-region (region-beginning) (region-end))
-      (kill-whole-line)))
+;; Overwrite `C-w' to the whole-line-or-region
+(defun my:kill-whole-line-or-region ()
+  "If the region is active, to kill region.
+If the region is inactive, to kill whole line."
+  (interactive)
+  (if (use-region-p)
+	  (clipboard-kill-region (region-beginning) (region-end))
+    (kill-whole-line)))
 
-  (defun my:exchange-point-and-mark ()
-	"No mark active `exchange-point-and-mark'."
-	(interactive)
-	(exchange-point-and-mark)
-	(deactivate-mark))
+;; Return to last edit point
+(defun my:exchange-point-and-mark ()
+  "No mark active `exchange-point-and-mark'."
+  (interactive)
+  (exchange-point-and-mark)
+  (deactivate-mark))
 
-  ;; Set buffer that can not be killed
-  (with-current-buffer "*scratch*"
-	(emacs-lock-mode 'kill))
-  (with-current-buffer "*Messages*"
-	(emacs-lock-mode 'kill)))
+;; Set buffer that can not be killed
+(with-current-buffer "*scratch*"
+  (emacs-lock-mode 'kill))
+(with-current-buffer "*Messages*"
+  (emacs-lock-mode 'kill))
 
 
 (provide '00_base)

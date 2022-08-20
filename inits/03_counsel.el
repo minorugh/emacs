@@ -27,20 +27,10 @@
 			(enable-recursive-minibuffers . t)
 			(counsel-find-file-ignore-regexp . (regexp-opt completion-ignored-extensions))
 			(ivy-format-functions-alist . '((t . my:ivy-format-function-arrow))))
-  :init
-  (leaf fontawesome	:ensure t)
-
-  (leaf ivy-rich :ensure t
-	:hook (after-init-hook . ivy-rich-mode))
-
-  (leaf amx	:ensure t
-	:custom	`((amx-save-file . ,"~/.emacs.d/tmp/amx-items")
-			  (amx-history-length . 20)))
-
   :config
   (defun swiper-region ()
 	"If region is selected, `swiper-thing-at-point'.
-  If the region isn't selected, `swiper'."
+If the region isn't selected, `swiper'."
 	(interactive)
 	(if (not (use-region-p))
 		(swiper)
@@ -81,7 +71,14 @@
   (defun my-counsel-ag-in-dir (_arg)
 	"Search again with new root directory."
 	(let ((current-prefix-arg '(4)))
-      (counsel-ag ivy-text nil ""))))
+      (counsel-ag ivy-text nil "")))
+  :init
+  (leaf ivy-rich :ensure t
+	:hook (after-init-hook . ivy-rich-mode))
+
+  (leaf amx	:ensure t
+	:custom	`((amx-save-file . ,"~/.emacs.d/tmp/amx-items")
+			  (amx-history-length . 20))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -110,7 +107,7 @@
 ;; counsel related misc
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Font-awesom
-;; (leaf fontawesome :ensure t)
+(leaf fontawesome :ensure t)
 
 ;; CSS
 (leaf counsel-css

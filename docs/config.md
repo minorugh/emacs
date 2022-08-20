@@ -164,7 +164,7 @@ GC の閾値を最大にしておくことで GC を実質止めることがで�
   (init-loader-load))
 ```
 
-#### 2.2.4. [test.el] テスト用の最小初期化ファイル
+#### 2.3. [test.el] テスト用の最小初期化ファイル
 * 最小限の emacs を起動させるための設定です。
 
 [`test.el`](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/test.el) は、
@@ -177,6 +177,21 @@ alias eq = 'emacs -q -l ~/.emacs.d/test.el'
 ```
 
 ファイルの PATH は、ご自分の環境に応じて修正が必要です。
+
+#### 2.4 [exec-path-from-shell.el] 設定をシェルから継承する
+
+* [purcell/exec-path-from-shell: Make Emacs use the $PATH set up by the user's shell](https://github.com/purcell/exec-path-from-shell) 
+
+外部プログラムのサポートを得て動くパッケージは、設定の過程で「プログラムが見つからない」と怒られることがしばしばあります。 `exec-path-from-shell` は、シェルに設定した `PATH` の情報を継承して `exec-path` や `PATH` を設定してくれます。自分は、`shell-commad` や `compile-command` をよく使うので必須のパッケージです。
+
+```Code
+(leaf exec-path-from-shell
+  :ensure t
+  :when (memq window-system '(mac ns x))
+  :hook (after-init-hook . exec-path-from-shell-initialize)
+  :custom (exec-path-from-shell-check-startup-files . nil))
+```
+  
 
 ## 3. コア設定
 Emacs を操作して日本語文書編集するうえで必要な設定。

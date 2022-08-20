@@ -36,7 +36,9 @@
 	:hook (after-init-hook . mozc-cursor-color-setup))
 
   (leaf mozc-cand-posframe
-	:ensure t :after mozc :require t
+	:ensure t
+	:after mozc
+	:require t
 	:custom	(mozc-candidate-style . 'posframe)
 	:init
 	(leaf posframe :ensure t)))
@@ -44,7 +46,8 @@
 
 ;; Add space between full-width and half-width
 (leaf pangu-spacing
-  :ensure t :after mozc
+  :ensure t
+  :after mozc
   :hook ((markdown-mode-hook text-mode-hook) . pangu-spacing-mode)
   :config
   (setq pangu-spacing-include-regexp
@@ -59,7 +62,6 @@
 (leaf *cus-mozc-tool
   :bind (("s-t" . my:mozc-dictionary-tool)
 		 ("s-d" . my:mozc-word-regist)
-		 ;; ("s-h" . my:mozc-hand-writing)
 		 ("s-h" . chromium-tegaki))
   :init
   (defun select-mozc-tool ()

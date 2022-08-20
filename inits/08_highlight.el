@@ -8,10 +8,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (leaf paren
   :hook (after-init-hook . show-paren-mode)
-  :custom
-  `((show-paren-style . 'parenthesis)
-	(show-paren-when-point-inside-paren . t)
-	(show-paren-when-point-in-periphery . t)))
+  :custom `((show-paren-style . 'parenthesis)
+			(show-paren-when-point-inside-paren . t)
+			(show-paren-when-point-in-periphery . t)))
 
 
 (leaf volatile-highlights
@@ -23,6 +22,7 @@
 	  "Pulse the changes."
 	  (pulse-momentary-highlight-region beg end face))
 	(advice-add #'vhl/.make-hl :override #'my:vhl-pulse)))
+
 
 (leaf whitespace
   :ensure t
@@ -46,10 +46,9 @@
 
 (leaf smartparens
   :ensure t
-  :require smartparens-config
-  :hook (prog-mode-hook . turn-on-smartparens-mode)
-  :config
-  (smartparens-global-mode t))
+  :hook ((after-init-hook . smartparens-global-mode)
+		 (prog-mode-hook . turn-on-smartparens-mode))
+  :config (require 'smartparens-config))
 
 
 (leaf rainbow-delimiters
