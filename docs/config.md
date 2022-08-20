@@ -1912,8 +1912,8 @@ $ fc-list | grep Cica
  '(markdown-code-face ((t (:inherit nil))))
  '(markdown-pre-face ((t (:inherit font-lock-constant-face))))
  '(markup-meta-face ((t (:stipple nil :foreground "gray30" :inverse-video nil :box nil
-								  :strike-through nil :overline nil :underline nil :slant normal
-								  :weight normal :height 135 :width normal :foundry "unknown" :family "Monospace"))))
+	                     :strike-through nil :overline nil :underline nil :slant normal
+						 :weight normal :height 135 :width normal :foundry "unknown" :family "Monospace"))))
  '(symbol-overlay-default-face ((t (:background "gray21" :underline t))))
  '(mozc-cand-posframe-normal-face ((t (:background "#282D43" :foreground "#C7C9D1"))))
  '(mozc-cand-posframe-focused-face ((t (:background "#393F60" :foreground "#C7C9D1"))))
