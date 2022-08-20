@@ -56,7 +56,8 @@ nav_order: 1
 
 #### 2.1.1. GCを減らす
 GC の閾値を最大にしておくことで GC を実質止めることができます。これもとりあえず書いておけば速くなる系なのでおすすめです。
-```elisp
+
+```shellsession
 (setq gc-cons-threshold most-positive-fixnum)
 ```
 #### 2.1.2. 初期フレーム設定
