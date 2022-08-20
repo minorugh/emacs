@@ -178,7 +178,7 @@ alias eq = 'emacs -q -l ~/.emacs.d/test.el'
 
 ファイルの PATH は、ご自分の環境に応じて修正が必要です。
 
-### 2.4. [server.el]
+### 2.4. [server.el] Server機能を使う
 
 ```code
 ;; Server start for emacs-client
