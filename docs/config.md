@@ -1620,7 +1620,7 @@ Emacsを再起動しても`*scratch*` バッファーの内容が消えないよ
 * 画面分割したときは、`dimmer-mode-on` にする。
 * 画面分割を閉じたときは、`dimmer-mode-off` にする。
 
-```code
+```pre
 (leaf *sprit-window-configurations
   :bind (("C-q" . other-window-or-split)
 		 ("C-x 2" . my:split-window-below)
