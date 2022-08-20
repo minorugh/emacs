@@ -178,7 +178,18 @@ alias eq = 'emacs -q -l ~/.emacs.d/test.el'
 
 ファイルの PATH は、ご自分の環境に応じて修正が必要です。
 
-#### 2.4 [exec-path-from-shell.el] 設定をシェルから継承する
+#### 2.4 [server.el]
+
+```code
+;; Server start for emacs-client
+(leaf server
+  :require t
+  :config
+  (unless (server-running-p)
+    (server-start)))
+```
+
+#### 2.5 [exec-path-from-shell.el] 設定をシェルから継承する
 
 * [purcell/exec-path-from-shell: Make Emacs use the $PATH set up by the user's shell](https://github.com/purcell/exec-path-from-shell) 
 
