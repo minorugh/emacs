@@ -5,6 +5,11 @@ remote_theme: rundocs/jekyll-rtd-theme
 site_author: minoru yamada
 repo_url: "https://github.com/minorugh/emacs.d/"
 
+markdown_extensions:
+    # コードハイライトの設定
+    - codehilite:
+        pygments_style: vim
+
 edit_on_github: false
 github_docs_folder: true
 sticky_navigation: true
