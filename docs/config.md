@@ -21,7 +21,7 @@ nav_order: 1
 ### 1.2. デレクトリ構成
 * 設定ファイルの構成は下記のとおりです。
 
-```
+```shellsession
 ~/.emacs.d
 │
 ├── el-get/
@@ -62,7 +62,7 @@ GC の閾値を最大にしておくことで GC を実質止めることがで�
 #### 2.1.2. 初期フレーム設定
 これらの設定を、`eary-init.el`へ移すことで起動時間を短縮できます。
 
-```elisp
+```shellsession
 (push '(fullscreen . maximized) default-frame-alist)
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
@@ -72,7 +72,7 @@ GC の閾値を最大にしておくことで GC を実質止めることがで�
 #### 2.1.3. 画面のチラつきを抑える
 * 初期化ファイル読み込みのプロセスで画面がチラつくのを抑制しています。
 
-```elisp
+```shellsession
 ;; Suppress flashing at startup
 (setq inhibit-redisplay t)
 (setq inhibit-message t)
