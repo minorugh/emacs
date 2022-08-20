@@ -164,7 +164,7 @@ GC の閾値を最大にしておくことで GC を実質止めることがで�
   (init-loader-load))
 ```
 
-#### 2.3. [test.el] テスト用の最小初期化ファイル
+### 2.3. [test.el] テスト用の最小初期化ファイル
 * 最小限の emacs を起動させるための設定です。
 
 [`test.el`](https://github.com/minorugh/dotfiles/blob/main/.emacs.d/test.el) は、
@@ -178,7 +178,7 @@ alias eq = 'emacs -q -l ~/.emacs.d/test.el'
 
 ファイルの PATH は、ご自分の環境に応じて修正が必要です。
 
-#### 2.4 [server.el]
+### 2.4 [server.el]
 
 ```code
 ;; Server start for emacs-client
@@ -189,7 +189,7 @@ alias eq = 'emacs -q -l ~/.emacs.d/test.el'
     (server-start)))
 ```
 
-#### 2.5 [exec-path-from-shell.el] 設定をシェルから継承する
+### 2.5 [exec-path-from-shell.el] 設定をシェルから継承する
 
 * [purcell/exec-path-from-shell: Make Emacs use the $PATH set up by the user's shell](https://github.com/purcell/exec-path-from-shell) 
 
