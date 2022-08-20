@@ -10,9 +10,15 @@ markdown_extensions:
     - codehilite:
         pygments_style: vim
 
-edit_on_github: false
-github_docs_folder: true
-sticky_navigation: true
-prev_next_buttons_location: bottom
-search_enabled: false
-hljs_style: github-gist
+extra_css:
+    - "//fonts.googleapis.com/earlyaccess/notosansjp.css"
+    - "//fonts.googleapis.com/css?family=Open+Sans:600,800"
+	- "css/custom.css"
+
+
+# edit_on_github: false
+# github_docs_folder: true
+# sticky_navigation: true
+# prev_next_buttons_location: bottom
+# search_enabled: false
+# hljs_style: github-gist
