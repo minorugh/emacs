@@ -1,5 +1,6 @@
 title: minoru's Emacs Configuration
 description: Just another documentation theme compatible with GitHub Pages
+url: https://minorugh.github.io/emacs.d/
 remote_theme: rundocs/jekyll-rtd-theme
 
 # Theme settings:
