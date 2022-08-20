@@ -149,7 +149,10 @@ GC の閾値を最大にしておくことで GC を実質止めることがで�
 
 
 #### 2.2.3. init-loader を使う
-[`init-loader.el`](https://github.com/emacs-jp/init-loader/) は、設定ファイル群のローダーです。 指定されたディレクトリから構成ファイルをロードします。これにより、構成を分類して複数のファイルに分けることができます。
+
+* [emacs-jp/init-loader:Loader of configuration files.](https://github.com/emacs-jp/init-loader/) 
+
+`init-loader.el` は、設定ファイル群のローダーです。 指定されたディレクトリから構成ファイルをロードします。これにより、構成を分類して複数のファイルに分けることができます。
 
 `init-loader` には、エラーが出た設定ファイルは読み込まれない...という特徴があり原因究明がしやすくなるというメリットがある。またログの出力機能を備えていることもメリットとして挙げられる。
 
