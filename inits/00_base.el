@@ -43,6 +43,9 @@
 	(uniquify-buffer-name-style . 'post-forward-angle-brackets)
 	;; Don't clear kill-ring when restart emacs
 	(savehist-additional-variables . '(kill-ring))
+	;; It keeps going steadily the local mark ...  C-u C-SPC C-SPC
+	;; It keeps going steadily the global mark ... C-x C-SPC C-SPC
+	(set-mark-command-repeat-pop . t)
 	;; Use the X11 clipboard
 	(select-enable-clipboard  . t))
   :init
